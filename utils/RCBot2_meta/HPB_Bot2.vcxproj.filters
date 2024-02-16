@@ -44,9 +44,6 @@
     <ClCompile Include="bot_coop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="bot_css_bot.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="bot_dod_bot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -159,9 +156,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="bot_synergy_mod.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="bot_css_mod.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\sm_ext\bot_sm_ext.cpp">

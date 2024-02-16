@@ -26,7 +26,7 @@ ambuild
 License
 -------
 
-Affero GPL 3.0 (and BSD Zero Clause for `rcbot/logging.cpp` and `rcbot/logging.h`) because RCBot 3 is Affero GPL 3.0 (and BSD Zero Clause for `rcbot/logging.cpp` and `rcbot/logging.h`).
+Affero GPL 3.0 (and BSD Zero Clause for `rcbot/logging.cpp` and `rcbot/logging.h`) because RCBot2 is Affero GPL 3.0 (and BSD Zero Clause for `rcbot/logging.cpp` and `rcbot/logging.h`).
 
 
 ## Information:-
