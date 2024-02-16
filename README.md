@@ -1,5 +1,34 @@
 # RCBot2 for Windows and Linux (TF2, HL2:DM, DOD:S)
 
+Getting started
+---------------
+
+Clone and get the submodules.
+```
+git clone https://github.com/tschumann/dirtbot
+git submodule init
+git submodule update
+```
+
+
+Compiling
+---------
+
+```
+mkdir build/
+cd build/
+python ../configure.py -s hl2dm --mms_path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/metamod-source/ --hl2sdk-root C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/
+python ../configure.py -s tf2 --mms_path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/metamod-source/ --hl2sdk-root C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/
+ambuild
+```
+
+
+License
+-------
+
+Affero GPL 3.0 (and BSD Zero Clause for `rcbot/logging.cpp` and `rcbot/logging.h`) because RCBot 3 is Affero GPL 3.0 (and BSD Zero Clause for `rcbot/logging.cpp` and `rcbot/logging.h`).
+
+
 ## Information:-
 
 This is a fork of [the official RCBot2 plugin][rcbot2] written by Cheeseh.
