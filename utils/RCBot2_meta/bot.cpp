@@ -3171,8 +3171,6 @@ void CBots :: init ()
 		case BOTTYPE_DOD:
 			m_Bots[i] = new CDODBot();
 			break;
-		case BOTTYPE_CSS:
-			m_Bots[i] = new CCSSBot();
 			break;
 		case BOTTYPE_HL2DM:
 			m_Bots[i] = new CHLDMBot();

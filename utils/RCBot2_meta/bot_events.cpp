@@ -235,14 +235,10 @@ private:
 void CRoundStartEvent :: execute ( IBotEventInterface *pEvent )
 {
 	CBots::roundStart();
-	#if SOURCE_ENGINE == SE_CSS
-	CCounterStrikeSourceMod::onRoundStart();
-	#endif
 }
 
 void CRoundFreezeEndEvent :: execute ( IBotEventInterface *pEvent )
 {
-	CCounterStrikeSourceMod::onFreezeTimeEnd();
 }
 
 void CPlayerHurtEvent :: execute ( IBotEventInterface *pEvent )
@@ -407,7 +403,6 @@ void CBombDroppedEvent :: execute ( IBotEventInterface *pEvent )
 
 void CCSSBombPlantedEvent :: execute ( IBotEventInterface *pEvent )
 {
-	CCounterStrikeSourceMod::onBombPlanted();
 }
 
 void CWeaponFireEvent :: execute ( IBotEventInterface *pEvent )

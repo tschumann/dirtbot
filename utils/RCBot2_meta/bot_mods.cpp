@@ -134,11 +134,6 @@ void CBotMods::parseFile()
 				modtype = MOD_CUSTOM;
 				curmod = new CBotMod();
 			}
-			else if (!strcmpi("CSS", val))
-			{
-				modtype = MOD_CSS;
-				curmod = new CCounterStrikeSourceMod();
-			}
 			else if (!strcmpi("HL1DM", val))
 			{
 				modtype = MOD_HL1DMSRC;
@@ -235,8 +230,6 @@ void CBotMods::readMods()
 	m_Mods.emplace_back(new CTeamFortress2Mod());
 #elif SOURCE_ENGINE == SE_DODS
 	m_Mods.emplace_back(new CDODMod());
-#elif SOURCE_ENGINE == SE_CSS
-	m_Mods.emplace_back(new CCounterStrikeSourceMod());
 #elif SOURCE_ENGINE == SE_HL2DM
 	m_Mods.emplace_back(new CHalfLifeDeathmatchMod());
 #elif SOURCE_ENGINE == SE_SDK2013

@@ -3828,8 +3828,6 @@ void CCSSPerformBuyTask::execute(CBot *pBot,CBotSchedule *pSchedule)
 			fail(); // outside buy zone
 			return;
 		}
-		CCSSBot *pCSSBot = static_cast<CCSSBot*>(pBot);
-		pCSSBot->runBuy();
 		complete();
 	}
 	else
@@ -3850,13 +3848,6 @@ void CCSSPlantTheBombTask::execute(CBot *pBot,CBotSchedule *pSchedule)
 	pBot->setMoveLookPriority(MOVELOOK_OVERRIDE);
 	pBot->setLookAtTask(LOOK_AROUND);
 	pBot->setMoveLookPriority(MOVELOOK_TASK);
-
-	if(!CCounterStrikeSourceMod::isBombCarrier(pBot))
-	{
-		complete();
-		pBot->letGoOfButton(IN_ATTACK);
-		return;
-	}
 
 	if(CClassInterface::isCSPlayerInBombZone(pBot->getEdict()))
 	{
@@ -3955,11 +3946,6 @@ void CCSSDefuseTheBombTask::execute(CBot *pBot, CBotSchedule *pSchedule)
 	}
 
 	pBot->use();
-
-	if(CCounterStrikeSourceMod::isBombDefused())
-	{
-		complete();
-	}
 }
 
 void CCSSGuardTask::execute(CBot *pBot, CBotSchedule *pSchedule)
@@ -4047,7 +4033,7 @@ void CCSSGuardTask::execute(CBot *pBot, CBotSchedule *pSchedule)
 			complete();
 		}
 
-		if( pCurrentWeapon->isZoomable() && !CCounterStrikeSourceMod::isScoped(pBot) )
+		if( pCurrentWeapon->isZoomable() )
 		{
 			pBot->secondaryAttack(false);
 		}
@@ -5740,18 +5726,6 @@ bool CBotCSSRoamInterrupt::isInterrupted(CBot *pBot, bool *bFailed, bool *bCompl
 {
 	if(pBot->hasEnemy())
 		return true;
-
-	if(CCounterStrikeSourceMod::isMapType(CS_MAP_BOMBDEFUSAL))
-	{
-		if(pBot->getTeam() == CS_TEAM_TERRORIST && CCounterStrikeSourceMod::isBombDropped())
-		{
-			return true;
-		}
-		if(pBot->getTeam() == CS_TEAM_COUNTERTERRORIST && CCounterStrikeSourceMod::isBombPlanted())
-		{
-			return true;
-		}
-	}
 
 	return false;
 }
