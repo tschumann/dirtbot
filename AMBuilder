@@ -60,25 +60,6 @@ include_paths = [
 
 compiler_defines = []
 
-# Build with SourceMod extension support if --sm-path was specified
-if builder.options.sm_path:
-  include_paths += [
-    os.path.join(builder.options.sm_path, 'sourcepawn', 'include'),
-    os.path.join(builder.options.sm_path, 'public', 'amtl'),
-    os.path.join(builder.options.sm_path, 'public', 'amtl', 'amtl'),
-    os.path.join(builder.options.sm_path, 'public', 'extensions'),
-    os.path.join(builder.options.sm_path, 'public'),
-    os.path.join(builder.currentSourcePath, 'sm_ext'),
-  ]
-
-  sourceFiles += [
-    os.path.join(builder.currentSourcePath, 'sm_ext', 'smsdk_config.cpp'),
-    os.path.join(builder.currentSourcePath, 'sm_ext', 'bot_sm_ext.cpp'),
-    os.path.join(builder.currentSourcePath, 'sm_ext', 'bot_sm_natives.cpp'),
-  ]
-  
-  compiler_defines += [ 'SM_EXT', ]
-
 # List of SDK names that require hooks on runcmd
 mods_requiring_runcmd_overrides = [
   # hack: DOD:S uses `Bot_Think`, which forces all `bot`-spawned entities to use Valve's

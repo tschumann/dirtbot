@@ -29,7 +29,3 @@
 [submodule "alliedmodders/metamod-source"]
 	path = alliedmodders/metamod-source
 	url = https://github.com/alliedmodders/metamod-source
-
-[submodule "alliedmodders/sourcemod"]
-	path = alliedmodders/sourcemod
-	url = https://github.com/alliedmodders/sourcemod

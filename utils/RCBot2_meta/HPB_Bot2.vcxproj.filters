@@ -9,9 +9,6 @@
       <UniqueIdentifier>{16586188-ff32-4199-a515-f5a8fb020e68}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
-    <Filter Include="Source Files\sm_ext">
-      <UniqueIdentifier>{5df9d7b3-aea9-4a2c-8469-bb75515290ae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\rcbot_subcmds">
       <UniqueIdentifier>{e6487d5d-1015-4df5-8b5f-038779fe57e8}</UniqueIdentifier>
     </Filter>
@@ -157,15 +154,6 @@
     </ClCompile>
     <ClCompile Include="bot_synergy_mod.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\sm_ext\bot_sm_ext.cpp">
-      <Filter>Source Files\sm_ext</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\sm_ext\bot_sm_natives.cpp">
-      <Filter>Source Files\sm_ext</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\sm_ext\smsdk_config.cpp">
-      <Filter>Source Files\sm_ext</Filter>
     </ClCompile>
     <ClCompile Include="..\..\rcbot_subcmds\config.cpp">
       <Filter>Source Files\rcbot_subcmds</Filter>
@@ -354,15 +342,6 @@
     </ClInclude>
     <ClInclude Include="bot_synergy.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\sm_ext\bot_sm_ext.h">
-      <Filter>Source Files\sm_ext</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\sm_ext\bot_sm_natives.h">
-      <Filter>Source Files\sm_ext</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\sm_ext\smsdk_config.h">
-      <Filter>Source Files\sm_ext</Filter>
     </ClInclude>
     <ClInclude Include="..\..\rcbot\entprops.h">
       <Filter>Source Files\rcbot</Filter>

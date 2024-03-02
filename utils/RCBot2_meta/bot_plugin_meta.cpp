@@ -550,11 +550,7 @@ bool RCBotPluginMeta::FireGameEvent(IGameEvent * pevent, bool bDontBroadcast)
 }
 
 bool RCBotPluginMeta::Unload(char *error, size_t maxlen)
-{
-#if defined SM_EXT
-	SM_UnloadExtension();
-#endif
-	
+{	
 	//CBots::kickRandomBot(RCBOT_MAXPLAYERS); //breaks the bot quota system? [APG]RoboCop[CL]
 	
 	SH_REMOVE_HOOK_MEMFUNC(IServerGameDLL, LevelInit, server, this, &RCBotPluginMeta::Hook_LevelInit, true);
@@ -617,24 +613,7 @@ void RCBotPluginMeta::AllPluginsLoaded()
 	/* This is where we'd do stuff that relies on the mod or other plugins 
 	 * being initialized (for example, cvars added and events registered).
 	 */
-#if defined SM_EXT
-	BindToSourcemod();
-#endif
 }
-
-#if defined SM_EXT
-void* RCBotPluginMeta::OnMetamodQuery(const char* iface, int *ret) {
-	if (std::strcmp(iface, SOURCEMOD_NOTICE_EXTENSIONS) == 0) {
-		BindToSourcemod();
-	}
-	
-	if (ret != NULL) {
-		*ret = IFACE_OK;
-	}
-	
-	return NULL;
-}
-#endif
 
 void RCBotPluginMeta::Hook_ClientActive(edict_t *pEntity, bool bLoadGame)
 {
@@ -1017,15 +996,3 @@ const char *RCBotPluginMeta::GetURL()
 {
 	return build_info::url;
 }
-
-#if defined SM_EXT
-void RCBotPluginMeta::BindToSourcemod()
-{
-	char error[256];
-	if (!SM_LoadExtension(error, sizeof(error))) {
-		char message[512];
-		snprintf(message, sizeof(message), "Could not load as a SourceMod extension: %s\n", error);
-		engine->LogPrint(message);
-	}
-}
-#endif
