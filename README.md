@@ -23,6 +23,14 @@ ambuild
 ```
 
 
+Updating MetaMod: Source
+------------------------
+
+Download the latest MetaMod: Source from https://www.sourcemm.net/downloads.php?branch=stable
+
+Copy the `addons` directory from the .zip and paste it in `release/dirtbot/Half-Life 2 Deathmatch/hl2mp/`
+
+
 License
 -------
 
@@ -60,8 +68,6 @@ steamdir.
 plugins (namely [tf2attributes][] and [TF2Items][], where the implementation was ported from)
 are better-suited and maintained to handle that stuff; this plugin should only deal with bots
 themselves.
-- The Metamod:Source plugin can now optionally expose natives to SourceMod, adding some
-functionality to control the RCBot2 plugin from SourcePawn.
 
 [AMBuild]: https://wiki.alliedmods.net/AMBuild
 [tf2attributes]: https://github.com/FlaminSarge/tf2attributes
@@ -94,17 +100,14 @@ passing in `--depth 1` or a few to avoid retrieving the files that were removed 
 
 ### Compiling on Windows / Linux
 
-1. [Install the prerequisites for building SourceMod for your OS.][Building SourceMod]
+1. [Install the prerequisites for building SourceMod for your OS.]
 2. Create a `build/` subdirectory, then run `configure.py`.
 	- Use the following options (where `${MOD}` is only TF2):
 	`python ../configure.py -s ${MOD} --mms_path ${MMS_PATH} --hl2sdk-root ${HL2SDK_ROOT}`
-	- Specifying an `--sm-path` argument enables linking to SourceMod.
 	- Note that the automatic versioning system requires an installation of `git` and a
 	relatively modern version of Python 3. Python version 2 is now depreciated.
 3. Run `ambuild`.  MetaMod:Source plugin is built and the base install files will be available
 in `build/package`.
-
-[Building SourceMod]: https://wiki.alliedmods.net/Building_SourceMod
 
 ## License:-
 
