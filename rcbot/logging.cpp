@@ -135,9 +135,6 @@ void CBotLogger::Log(LogLevel level, const char* fmt, ...) {
 			break;
 		#endif
 		case Colorize_ClientConsole:
-			extern ICvar *icvar;
-			icvar->ConsoleColorPrintf(LOGLEVEL_CONSOLE_COLORS[level], "[RCBot] %s: %s\n", LOGLEVEL_STRINGS[level], buf);
-			break;
 		case Colorize_None:
 		default:
 			if (level <= LogLevel::WARN) {

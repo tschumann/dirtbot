@@ -19,6 +19,7 @@ mkdir build/
 cd build/
 python ../configure.py -s hl2dm --mms_path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/metamod-source/ --hl2sdk-root C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/
 python ../configure.py -s tf2 --mms_path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/metamod-source/ --hl2sdk-root C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/
+python ../configure.py -s episode1 --mms_path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/metamod-source/ --hl2sdk-root C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/
 ambuild
 ```
 

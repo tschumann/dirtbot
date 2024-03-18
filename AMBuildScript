@@ -320,8 +320,13 @@ class MMSConfig(object):
 
     if sdk.name == 'episode1' or sdk.name == 'darkm':
       paths.append(['public', 'dlls'])
-      compiler.cxxincludes.append(os.path.join(builder.options.mms_path, 'core-legacy'))
-      compiler.cxxincludes.append(os.path.join(builder.options.mms_path, 'core-legacy', 'sourcehook'))
+      paths.append(['public', 'tier1'])
+      paths.append(['dlls'])
+      compiler.cxxincludes.append(os.path.join(builder.options.mms_path, 'core'))
+      compiler.cxxincludes.append(os.path.join(builder.options.mms_path, 'core', 'sourcehook'))
+      # defined in game/shared/shareddefs.h for Orange Box and later
+      compiler.defines += ['MAX_CONTROL_POINTS=8']
+      compiler.defines += ['MAX_PREVIOUS_POINTS=3']
     else:
       paths.append(['public', 'game', 'server'])
       compiler.cxxincludes.append(os.path.join(builder.options.mms_path, 'core'))
@@ -478,12 +483,5 @@ BuildScripts = [
 ] # add sub-modules here
 if getattr(builder.options, 'enable_tests', False):
     BuildScripts += [] # add tests here
-
-import os
-
-if builder.backend == 'amb2':
-  BuildScripts += [
-    'PackageScript',
-  ]
 
 builder.Build(BuildScripts, { 'MMS': MMS })

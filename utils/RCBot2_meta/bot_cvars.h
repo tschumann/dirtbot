@@ -96,22 +96,23 @@ extern ConVar rcbot_util_learning;
 extern ConVar rcbot_runplayercmd_syn;
 extern ConVar rcbot_syn_use_search_range;
 
-// Counter-Strike: Source Cvars
-extern ConVar rcbot_css_economy_eco_limit;
-
 /** Additional convars by pongo1231 **/
 extern ConVar rcbot_show_welcome_msg;
 extern ConVar rcbot_force_class;
 
+#if SOURCE_ENGINE <= SE_DARKMESSIAH
+extern ConVar *sv_gravity;
+extern ConVar *mp_teamplay;
+extern ConVar *sv_tags;
+extern ConVar *mp_friendlyfire;
+extern ConVar *mp_stalemate_enable;
+#else
 extern ConVarRef sv_gravity;
 extern ConVarRef mp_teamplay;
 extern ConVarRef sv_tags;
 extern ConVarRef mp_friendlyfire;
 extern ConVarRef mp_stalemate_enable;
-
-// For CS:S
-extern ConVarRef mp_roundtime;
-extern ConVarRef mp_c4timer;
+#endif
 
 void RCBOT2_Cvar_setup (ICvar *cvar);
 

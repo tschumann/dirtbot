@@ -2555,6 +2555,7 @@ bool CBotTF2 :: canGotoWaypoint (Vector vPrevWaypoint, CWaypoint *pWaypoint, CWa
 				Vector vMax = vSentry+pSentry->GetCollideable()->OBBMaxs();
 				Vector vMin = vSentry+pSentry->GetCollideable()->OBBMins();
 
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 				if ( vSentry.WithinAABox(vWptMin,vWptMax) )
 				{
 					Vector vSentryComp = vSentry - vPrevWaypoint;
@@ -2573,6 +2574,7 @@ bool CBotTF2 :: canGotoWaypoint (Vector vPrevWaypoint, CWaypoint *pWaypoint, CWa
 							return false;
 					//}
 				}
+#endif
 
 			// check if waypoint goes through sentry (can't walk through)
 						
@@ -2593,6 +2595,7 @@ bool CBotTF2 :: canGotoWaypoint (Vector vPrevWaypoint, CWaypoint *pWaypoint, CWa
 				Vector vMax = vSentry+Vector(32,32,32);
 				Vector vMin = vSentry-Vector(32,32,32);
 
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 				if ( vSentry.WithinAABox(vWptMin,vWptMax) )
 				{
 					Vector vSentryComp = vSentry - vPrevWaypoint;
@@ -2611,10 +2614,12 @@ bool CBotTF2 :: canGotoWaypoint (Vector vPrevWaypoint, CWaypoint *pWaypoint, CWa
 							return false;
 					//}
 				}
+#endif
 			}
 
 			if ( m_pBluePayloadBomb.get() != nullptr)
 			{
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 				edict_t *pSentry = m_pBluePayloadBomb.get();
 				Vector vWaypoint = pWaypoint->getOrigin();
 				Vector vWptMin = vWaypoint.Min(vPrevWaypoint) - Vector(32,32,32);
@@ -2642,6 +2647,7 @@ bool CBotTF2 :: canGotoWaypoint (Vector vPrevWaypoint, CWaypoint *pWaypoint, CWa
 							return false;
 					//}
 				}
+#endif
 			}
 		}
 
@@ -6678,8 +6684,13 @@ void CBotTF2 :: modAim ( edict_t *pEntity, Vector &v_origin, Vector *v_desired_o
 					else
 						*v_desired_offset = *v_desired_offset + ((vVelocity*fTime)*m_pProfile->m_fAimSkill);
 
+#if SOURCE_ENGINE > SE_EPISODEONE
 					if (sv_gravity.IsValid())
 						v_desired_offset->z += ((std::pow(2, fTime) - 1.0f)*(sv_gravity.GetFloat()*0.1f));// - (getOrigin().z - v_origin.z);
+#else
+					if (sv_gravity != nullptr)
+						v_desired_offset->z += ((std::pow(2, fTime) - 1.0f) * (sv_gravity->GetFloat() * 0.1f));
+#endif
 
 					v_desired_offset->z *= 0.6f;
 				}
@@ -6757,8 +6768,13 @@ void CBotTF2 :: modAim ( edict_t *pEntity, Vector &v_origin, Vector *v_desired_o
 							else
 								*v_desired_offset = *v_desired_offset + ((vVelocity*fTime)*m_pProfile->m_fAimSkill );
 						
+#if SOURCE_ENGINE > SE_EPISODEONE
 							if ( (sv_gravity.IsValid()) && (pWp->getID() == TF2_WEAPON_GRENADELAUNCHER) )
 								v_desired_offset->z += ((std::pow(2,fTime)-1.0f)*(sv_gravity.GetFloat()*0.1f));// - (getOrigin().z - v_origin.z);
+#else
+							if ((sv_gravity != nullptr) && (pWp->getID() == TF2_WEAPON_GRENADELAUNCHER))
+								v_desired_offset->z += ((std::pow(2, fTime) - 1.0f) * (sv_gravity->GetFloat() * 0.1f));
+#endif
 
 							if ((pWp->getID() == TF2_WEAPON_GRENADELAUNCHER) && hasSomeConditions(CONDITION_SEE_ENEMY_GROUND))
 								v_desired_offset->z -= randomFloat(8.0f,32.0f); // aim for ground - with grenade launcher
@@ -7682,8 +7698,8 @@ void CBotTF2 :: enemyAtIntel ( Vector vPos, int type, int iArea )
 		{
 			//caxanga334: SDK 2013 doesn't like to create a Vector from an int
 			//TODO: Proper fix
-			#if SOURCE_ENGINE == SE_SDK2013 || SOURCE_ENGINE == SE_BMS
-			const Vector vCapAttacking = Vector(CTeamFortress2Mod::m_ObjectiveResource.getControlPointWaypoint(capindex));
+			#if SOURCE_ENGINE == SE_SDK2013 || SOURCE_ENGINE == SE_BMS || SOURCE_ENGINE == SE_EPISODEONE
+			const Vector vCapAttacking = Vector(CTeamFortress2Mod::m_ObjectiveResource.getControlPointWaypoint(capindex), 0, 0);
 			#else
 			const Vector vCapAttacking = CTeamFortress2Mod::m_ObjectiveResource.getControlPointWaypoint(capindex);
 			#endif

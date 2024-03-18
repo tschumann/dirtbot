@@ -1014,7 +1014,7 @@ bool CWaypointNavigator :: workRoute ( Vector vFrom,
 
 				if ( !engine->IsDedicatedServer() && (pListenEdict = CClients::getListenServerClient())!= nullptr)
 				{
-					debugoverlay->AddLineOverlayAlpha(succWpt->getOrigin(),currWpt->getOrigin(),255,0,0,255,false,5.0f);
+					debugoverlay->AddLineOverlay(succWpt->getOrigin(),currWpt->getOrigin(),255,0,0,false,5.0f);
 				}
 			}
 #endif
@@ -1161,7 +1161,7 @@ bool CWaypointNavigator :: workRoute ( Vector vFrom,
 
 			if ( !engine->IsDedicatedServer() && (pListenEdict = CClients::getListenServerClient())!= nullptr)
 			{
-				debugoverlay->AddLineOverlayAlpha(CWaypoints::getWaypoint(iCurrentNode)->getOrigin()+Vector(0,0,8.0f),CWaypoints::getWaypoint(iParent)->getOrigin()+Vector(0,0,8.0f),255,255,255,255,false,5.0f);
+				debugoverlay->AddLineOverlay(CWaypoints::getWaypoint(iCurrentNode)->getOrigin()+Vector(0,0,8.0f),CWaypoints::getWaypoint(iParent)->getOrigin()+Vector(0,0,8.0f),255,255,255,false,5.0f);
 			}
 		}
 #endif

@@ -191,7 +191,11 @@ bool CDODBot :: setVisible ( edict_t *pEntity, bool bVisible )
 
 	static bool bFriendlyFire;
 
+#if SOURCE_ENGINE > SE_EPISODEONE
 	bFriendlyFire = mp_friendlyfire.IsValid()? mp_friendlyfire.GetBool() : false;
+#else
+	bFriendlyFire = (mp_friendlyfire != nullptr) ? mp_friendlyfire->GetBool() : false;
+#endif
 
 	bValid = CBot::setVisible(pEntity,bVisible);
 
@@ -1486,7 +1490,11 @@ void CDODBot :: hearVoiceCommand ( edict_t *pPlayer, byte cmd )
 	case DOD_VC_CEASEFIRE:
 		IF_WANT_TO_LISTEN
 		{
+#if SOURCE_ENGINE > SE_EPISODEONE
 			if ( mp_friendlyfire.IsValid() && mp_friendlyfire.GetBool() )
+#else
+			if ( mp_friendlyfire != nullptr && mp_friendlyfire->GetBool() )
+#endif
 			{
 				wantToShoot(false);  // don't shoot this frame
 				m_pButtons->letGo(IN_ATTACK);
@@ -3075,8 +3083,8 @@ void CDODBot :: getTasks (unsigned int iIgnore)
 		{
 			//caxanga334: SDK 2013 doesn't like to create a Vector from an int
 			//TODO: Proper fix
-			#if SOURCE_ENGINE == SE_SDK2013 || SOURCE_ENGINE == SE_BMS
-			iFlagID = CDODMod::m_Flags.findNearestObjective(Vector(m_pSquad->GetFormationPosition(m_pEdict)));
+			#if SOURCE_ENGINE == SE_SDK2013 || SOURCE_ENGINE == SE_BMS || SOURCE_ENGINE == SE_EPISODEONE
+			iFlagID = CDODMod::m_Flags.findNearestObjective(Vector(m_pSquad->GetFormationPosition(m_pEdict), 0, 0));
 			#else
 			iFlagID = CDODMod::m_Flags.findNearestObjective(m_pSquad->GetFormationPosition(m_pEdict));
 			#endif
@@ -3473,11 +3481,19 @@ void CDODBot :: modAim ( edict_t *pEntity, Vector &v_origin,
 				*v_desired_offset = *v_desired_offset - Vector(0,0,randomFloat(16.0f,32.0f));
 			}
 
+#if SOURCE_ENGINE > SE_EPISODEONE
 			if ( pWp->getProjectileSpeed() > 0 && sv_gravity.IsValid() )
+#else
+			if (pWp->getProjectileSpeed() > 0 && sv_gravity != nullptr)
+#endif
 				{
 					const float fTime = fDist2D/pWp->getProjectileSpeed();
 				//TODO: Improve on the floating point precision conversion [APG]RoboCop[CL]
+#if SOURCE_ENGINE > SE_EPISODEONE
 				v_desired_offset->z = std::pow(2, fTime) * (sv_gravity.GetFloat() * rcbot_projectile_tweak.GetFloat());// - (getOrigin().z - v_origin.z);
+#else
+					v_desired_offset->z = std::pow(2, fTime) * (sv_gravity->GetFloat() * rcbot_projectile_tweak.GetFloat());
+#endif
 			}
 			//v_desired_offset->z += (distanceFrom(pEntity) * (randomFloat(0.05,0.15)*m_pProfile->m_fAimSkill));
 		}

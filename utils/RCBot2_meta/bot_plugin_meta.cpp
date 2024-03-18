@@ -28,6 +28,10 @@
 
 #include "bot_cvars.h"
 
+#if SOURCE_ENGINE <= SE_DARKMESSIAH
+#include "tier1/bitbuf.h"
+#endif
+
 #ifdef _WIN32
 	#include <ctime>
 #endif
@@ -106,6 +110,9 @@ static ConVar rcbot2_ver_cvar("rcbot_ver", build_info::long_version, FCVAR_REPLI
 
 CON_COMMAND(rcbotd, "access the bot commands on a server")
 {
+#if SOURCE_ENGINE <= SE_DARKMESSIAH
+	CCommand args;
+#endif
 	if (!engine->IsDedicatedServer() || !CBotGlobals::IsMapRunning())
 	{
 		logger->Log(LogLevel::ERROR, "Error, no map running or not dedicated server");
@@ -380,7 +387,7 @@ bool RCBotPluginMeta::Load(PluginId id, ISmmAPI *ismm, char *error, size_t maxle
 	ConCommandBaseMgr::OneTimeInit(&s_BaseAccessor);
 #endif
 
-#if SOURCE_ENGINE!=SE_DARKMESSIAH
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 	// read loglevel from startup param for early logging
 	ConVarRef rcbot_loglevel("rcbot_loglevel");
 	rcbot_loglevel.SetValue(CommandLine()->ParmValue("+rcbot_loglevel", rcbot_loglevel.GetInt()));
@@ -492,7 +499,9 @@ bool RCBotPluginMeta::Load(PluginId id, ISmmAPI *ismm, char *error, size_t maxle
 
 	CClassInterface::init();
 
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 	RCBOT2_Cvar_setup(g_pCVar);
+#endif
 
 	// Bot Quota Settings
 	char bq_line[128];
@@ -589,7 +598,9 @@ bool RCBotPluginMeta::Unload(char *error, size_t maxlen)
 	//if ( gameevents )
 	//	gameevents->RemoveListener(this);
 
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 	ConVar_Unregister( );
+#endif
 
 	return true;
 }
@@ -899,11 +910,18 @@ bool RCBotPluginMeta::Hook_LevelInit(const char *pMapName,
 
 	CBotGlobals::setMapRunning(true);
 	CBotConfigFile::reset();
-	
+
+#if SOURCE_ENGINE <= SE_DARKMESSIAH
+	if (mp_teamplay != nullptr)
+		CBotGlobals::setTeamplay(mp_teamplay->GetBool());
+	else
+		CBotGlobals::setTeamplay(false);
+#else
 	if ( mp_teamplay.IsValid() )
 		CBotGlobals::setTeamplay(mp_teamplay.GetBool());
 	else
 		CBotGlobals::setTeamplay(false);
+#endif
 
 	CBotEvents::setupEvents();
 

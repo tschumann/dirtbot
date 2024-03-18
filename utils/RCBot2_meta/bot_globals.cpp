@@ -226,7 +226,11 @@ float CBotGlobals :: grenadeWillLand (const Vector& vOrigin, const Vector& vEnem
 
 	v_comp = v_comp/fDistance;
 
+#if SOURCE_ENGINE <= SE_DARKMESSIAH
+	g = (sv_gravity != nullptr) ? sv_gravity->GetFloat() : 800.f;
+#else
 	g = sv_gravity.IsValid()? sv_gravity.GetFloat() : 800.f;
+#endif
 
 	if ( fAngle == nullptr)
 	{

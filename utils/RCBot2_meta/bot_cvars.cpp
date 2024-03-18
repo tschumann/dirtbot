@@ -108,39 +108,39 @@ ConVar rcbot_force_class("rcbot_force_class", "0", 0, "Force bots to choose spec
 ConVar rcbot_runplayercmd_syn("rcbot_runplayer_cmd_syn","424",0,"offset of the Synergy PlayerRunCommand function");
 ConVar rcbot_syn_use_search_range("rcbot_syn_use_search_range", "256", 0, "Sets the maximum button search range.", true, 150.0f, true, 1024.0f);
 
-// Counter-Strike:Source Cvars
-ConVar rcbot_css_economy_eco_limit("rcbot_css_economy_eco_limit", "2000", 0, "If the bot money is less than this, it won't purchase anything.");
-
+#if SOURCE_ENGINE <= SE_DARKMESSIAH
+ConVar *sv_gravity;
+ConVar *mp_teamplay;
+ConVar *sv_tags;
+ConVar *mp_friendlyfire;
+ConVar *mp_stalemate_enable;
+#else
 ConVarRef sv_gravity("sv_gravity");
 ConVarRef mp_teamplay("mp_teamplay");
 ConVarRef sv_tags("sv_tags");
 ConVarRef mp_friendlyfire("mp_friendlyfire");
 ConVarRef mp_stalemate_enable("mp_stalemate_enable");
-ConVarRef mp_stalemate_meleeonly("mp_stalemate_meleeonly");
-
-// For CS:S
-ConVarRef mp_roundtime("mp_roundtime");
-ConVarRef mp_c4timer("mp_c4timer");
+#endif
 
 void RCBOT2_Cvar_setup (ICvar *cvar)
 {
-	if ( sv_tags.IsValid() )
-	{
-		char sv_tags_str[512];
+	//if ( sv_tags.IsValid() )
+	//{
+	//	char sv_tags_str[512];
 
-		std::strcpy(sv_tags_str,sv_tags.GetString());
+	//	std::strcpy(sv_tags_str,sv_tags.GetString());
 
 		// fix
-		if ( std::strstr(sv_tags_str,"rcbot2") == nullptr)
-		{
+	//	if ( std::strstr(sv_tags_str,"rcbot2") == nullptr)
+	//	{
 
-			if ( sv_tags_str[0] == 0 )
-				std::strcat(sv_tags_str,"rcbot2");
-			else
-				std::strcat(sv_tags_str,",rcbot2");
+	//		if ( sv_tags_str[0] == 0 )
+	//			std::strcat(sv_tags_str,"rcbot2");
+	//		else
+	//			std::strcat(sv_tags_str,",rcbot2");
 
-			sv_tags.SetValue(sv_tags_str);
+	//		sv_tags.SetValue(sv_tags_str);
 
-		}
-	}
+	//	}
+	//}
 }
