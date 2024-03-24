@@ -150,14 +150,28 @@ bool CBotHelper::isBrushEntity( edict_t *pEntity )
 
 int CBotHelper::FindEntityByClassname(int start,const char *classname)
 {
-	CBaseEntity *pEntity = servertools->FindEntityByClassname(GetEntity(start), classname);
-	return sm_gamehelpers->EntityToBCompatRef(pEntity);
+	if (servertools)
+	{
+		CBaseEntity *pEntity = servertools->FindEntityByClassname(GetEntity(start), classname);
+		return sm_gamehelpers->EntityToBCompatRef(pEntity);
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 int CBotHelper::FindEntityInSphere(int start, Vector center, float radius)
 {
-	CBaseEntity *pEntity = servertools->FindEntityInSphere(GetEntity(start), center, radius);
-	return sm_gamehelpers->EntityToBCompatRef(pEntity);
+	if (servertools)
+	{
+		CBaseEntity *pEntity = servertools->FindEntityInSphere(GetEntity(start), center, radius);
+		return sm_gamehelpers->EntityToBCompatRef(pEntity);
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 int CBotHelper::FindEntityByNetClass(int start, const char *classname)

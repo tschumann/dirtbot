@@ -89,6 +89,7 @@ typedef enum
 	BOTTYPE_NS2,
 	BOTTYPE_SYN,
 	BOTTYPE_BMS,
+	BOTTYPE_INSURGENCY,
 	BOTTYPE_MAX
 }eBotType;
 
@@ -681,6 +682,15 @@ public:
 	CHLDMSourceMod()
 	{
 		setup("hl1mp",MOD_HL1DMSRC,BOTTYPE_HL1DM,"HLDMSRC");
+	}
+};
+
+class CInsurgencyMod : public CBotMod
+{
+public:
+	CInsurgencyMod()
+	{
+		setup("insurgency", MOD_INSURGENCY, BOTTYPE_HL1DM, "INSURGENCY");
 	}
 };
 

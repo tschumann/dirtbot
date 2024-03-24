@@ -239,6 +239,7 @@ void CBotMods::readMods()
 	m_Mods.emplace_back(new CFortressForeverMod());
 
 	m_Mods.emplace_back(new CHLDMSourceMod());
+	m_Mods.emplace_back(new CInsurgencyMod());
 
 	// Look for extra MODs
 
@@ -315,8 +316,9 @@ CBotMod* CBotMods::getMod(char* szModFolder)
 void CBotMod::initMod()
 {
 	m_bPlayerHasSpawned = false;
-
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 	CWeapons::loadWeapons(m_szWeaponListName, nullptr);
+#endif
 }
 
 void CBotMod::mapInit()

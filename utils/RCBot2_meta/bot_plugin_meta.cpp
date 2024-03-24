@@ -348,7 +348,9 @@ bool RCBotPluginMeta::Load(PluginId id, ISmmAPI *ismm, char *error, size_t maxle
 
 	GET_V_IFACE_ANY(GetServerFactory, g_pEffects, IEffects, IEFFECTS_INTERFACE_VERSION);
 	GET_V_IFACE_ANY(GetServerFactory, g_pBotManager, IBotManager, INTERFACEVERSION_PLAYERBOTMANAGER);
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 	GET_V_IFACE_ANY(GetServerFactory, servertools, IServerTools, VSERVERTOOLS_INTERFACE_VERSION);
+#endif
 
 #ifndef __linux__
 	GET_V_IFACE_CURRENT(GetEngineFactory,debugoverlay, IVDebugOverlay, VDEBUG_OVERLAY_INTERFACE_VERSION);
@@ -367,7 +369,7 @@ bool RCBotPluginMeta::Load(PluginId id, ISmmAPI *ismm, char *error, size_t maxle
 		ismm->EnableVSPListener();
 	}
 
-	
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 	SH_ADD_HOOK_MEMFUNC(IServerGameDLL, LevelInit, server, this, &RCBotPluginMeta::Hook_LevelInit, true);
 	SH_ADD_HOOK_MEMFUNC(IServerGameDLL, ServerActivate, server, this, &RCBotPluginMeta::Hook_ServerActivate, true);
 	SH_ADD_HOOK_MEMFUNC(IServerGameDLL, GameFrame, server, this, &RCBotPluginMeta::Hook_GameFrame, true);
@@ -376,9 +378,12 @@ bool RCBotPluginMeta::Load(PluginId id, ISmmAPI *ismm, char *error, size_t maxle
 	SH_ADD_HOOK_MEMFUNC(IServerGameClients, ClientDisconnect, gameclients, this, &RCBotPluginMeta::Hook_ClientDisconnect, true);
 	SH_ADD_HOOK_MEMFUNC(IServerGameClients, ClientPutInServer, gameclients, this, &RCBotPluginMeta::Hook_ClientPutInServer, true);
 	SH_ADD_HOOK_MEMFUNC(IServerGameClients, ClientConnect, gameclients, this, &RCBotPluginMeta::Hook_ClientConnect, false);
+#endif
 	SH_ADD_HOOK_MEMFUNC(IServerGameClients, ClientCommand, gameclients, this, &RCBotPluginMeta::Hook_ClientCommand, false);
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 	//Hook FireEvent to our function - unstable for TF2? [APG]RoboCop[CL]
 	SH_ADD_HOOK_MEMFUNC(IGameEventManager2, FireEvent, gameevents, this, &RCBotPluginMeta::FireGameEvent, false);
+#endif
 
 #if SOURCE_ENGINE >= SE_ORANGEBOX
 	g_pCVar = icvar;
@@ -395,7 +400,9 @@ bool RCBotPluginMeta::Load(PluginId id, ISmmAPI *ismm, char *error, size_t maxle
 
 	// Read Signatures and Offsets
 	CBotGlobals::initModFolder();
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 	CBotGlobals::readRCBotFolder();
+#endif
 
 	char filename[512];
 	// Load RCBOT2 hook data
@@ -469,7 +476,7 @@ bool RCBotPluginMeta::Load(PluginId id, ISmmAPI *ismm, char *error, size_t maxle
 	
 	const char *rcbot2path;
 	logger->Log(LogLevel::INFO, "Reading rcbot2 path from VDF...");
-	
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 	mainkv->LoadFromFile(filesystem, "addons/metamod/rcbot2.vdf", "MOD");
 	
 	mainkv = mainkv->FindKey("Metamod Plugin");
@@ -479,10 +486,9 @@ bool RCBotPluginMeta::Load(PluginId id, ISmmAPI *ismm, char *error, size_t maxle
 
 	mainkv->deleteThis(); //mainkv possible redundant? [APG]RoboCop[CL]
 	//eventListener2 = new CRCBotEventListener();
-
+#endif
 	// Initialize bot variables
 	CBotProfiles::setupProfiles();
-
 
 	//CBotEvents::setupEvents();
 	CWaypointTypes::setup();
@@ -544,8 +550,8 @@ bool RCBotPluginMeta::Load(PluginId id, ISmmAPI *ismm, char *error, size_t maxle
 
 				m_iTargetBots[human_count] = bot_count;
 				logger->Log(LogLevel::INFO, "Bot Quota - Humans: %d, Bots: %d", human_count, bot_count);
+			}
 		}
-	}
 	}
 
 	return true;
