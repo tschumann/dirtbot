@@ -192,7 +192,15 @@ class MMSConfig(object):
         '-fPIC',
         '-fno-exceptions',
         '-fno-rtti',
+	'-mmmx',
+	'-msse',
         '-msse2',
+	'-msse3',
+	'-mssse3',
+	'-msse4',
+	'-msse4a',
+	'-msse4.1',
+	'-msse4.2',
         '-fno-strict-aliasing',
       ]
 
@@ -201,7 +209,6 @@ class MMSConfig(object):
           '-fvisibility=hidden',
           '-fvisibility-inlines-hidden',
           '-std=c++14',
-          '-w',
           '-D__linux__',
         ]
       # apple clang <-> llvm clang version correspondence is just a guess as there is no way to figure it out for real
@@ -232,13 +239,13 @@ class MMSConfig(object):
       ]
       cxx.cflags += [
         '/W3',
-		'/std:c++14',
       ]
       cxx.cxxflags += [
         '/EHsc',
         '/GR-',
         '/TP',
-        '/arch:SSE2',
+	'/std:c++14',
+        '/arch:AVX2',
       ]
       cxx.linkflags += [
         '/MACHINE:X86',
