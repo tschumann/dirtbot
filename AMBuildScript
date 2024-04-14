@@ -373,7 +373,6 @@ class MMSConfig(object):
         '-compatibility_version', '1.0.0',
         '-current_version', self.productVersion
       ]
-    binary.compiler.sourcedeps += MMS.generated_headers
 
     return binary
 
@@ -474,8 +473,6 @@ MMS = MMSConfig()
 MMS.detectProductVersion()
 MMS.detectSDKs()
 MMS.configure()
-
-MMS.generated_headers = builder.Build('versioning/AMBuildScript', { 'MMS': MMS })
 
 BuildScripts = [
   'AMBuilder',

@@ -60,8 +60,6 @@
 
 #include <cstring>
 
-#include <build_info.h>
-
 SH_DECL_HOOK6(IServerGameDLL, LevelInit, SH_NOATTRIB, 0, bool, char const *, char const *, char const *, char const *, bool, bool);
 SH_DECL_HOOK3_void(IServerGameDLL, ServerActivate, SH_NOATTRIB, 0, edict_t *, int, int);
 SH_DECL_HOOK1_void(IServerGameDLL, GameFrame, SH_NOATTRIB, 0, bool);
@@ -106,7 +104,7 @@ RCBotPluginMeta g_RCBotPluginMeta;
 
 PLUGIN_EXPOSE(RCBotPluginMeta, g_RCBotPluginMeta);
 
-static ConVar rcbot2_ver_cvar("rcbot_ver", build_info::long_version, FCVAR_REPLICATED, "RCbot version");
+static ConVar rcbot2_ver_cvar("dirtbot_ver", "0.1", FCVAR_REPLICATED, "Dirtbot version");
 
 CON_COMMAND(rcbotd, "access the bot commands on a server")
 {
@@ -984,12 +982,12 @@ const char *RCBotPluginMeta::GetLicense()
 
 const char *RCBotPluginMeta::GetVersion()
 {
-	return build_info::short_version;
+	return "0.1";
 }
 
 const char *RCBotPluginMeta::GetDate()
 {
-	return build_info::date;
+	return __DATE__;
 }
 
 const char *RCBotPluginMeta::GetLogTag()
@@ -999,7 +997,7 @@ const char *RCBotPluginMeta::GetLogTag()
 
 const char *RCBotPluginMeta::GetAuthor()
 {
-	return build_info::authors;
+	return "cheeseh, APGRoboCop, tschumann";
 }
 
 const char *RCBotPluginMeta::GetDescription()
@@ -1014,5 +1012,5 @@ const char *RCBotPluginMeta::GetName()
 
 const char *RCBotPluginMeta::GetURL()
 {
-	return build_info::url;
+	return "http://www.teamsandpit.com/";
 }
