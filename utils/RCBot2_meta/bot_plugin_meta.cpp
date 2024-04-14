@@ -977,7 +977,7 @@ bool RCBotPluginMeta::Unpause(char *error, size_t maxlen)
 
 const char *RCBotPluginMeta::GetLicense()
 {
-	return "GPL General Public License";
+	return "Affero GPL 3.0";
 }
 
 const char *RCBotPluginMeta::GetVersion()
@@ -992,7 +992,7 @@ const char *RCBotPluginMeta::GetDate()
 
 const char *RCBotPluginMeta::GetLogTag()
 {
-	return "RCBOT2";
+	return "DIRTBOT";
 }
 
 const char *RCBotPluginMeta::GetAuthor()
@@ -1007,7 +1007,7 @@ const char *RCBotPluginMeta::GetDescription()
 
 const char *RCBotPluginMeta::GetName()
 {
-	return "RCBot2";
+	return "Dirtbot";
 }
 
 const char *RCBotPluginMeta::GetURL()
