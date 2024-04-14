@@ -637,45 +637,6 @@ protected:
 	static float fAttackProbLookUp[MAX_DOD_FLAGS+1][MAX_DOD_FLAGS+1];
 };
 
-class CTimCoopMod : public CBotMod
-{
-public:
-	CTimCoopMod()
-	{
-		setup("SourceMods",MOD_TIMCOOP,BOTTYPE_COOP,"HL2DM");
-	}
-
-	//void initMod ();
-
-	//void mapInit ();
-
-	//void entitySpawn ( edict_t *pEntity );
-};
-
-class CSvenCoop2Mod : public CBotMod
-{
-public:
-	CSvenCoop2Mod()
-	{
-		setup("SourceMods",MOD_SVENCOOP2,BOTTYPE_COOP,"SVENCOOP2");
-	}
-
-	//void initMod ();
-
-	//void mapInit ();
-
-	//void entitySpawn ( edict_t *pEntity );
-};
-
-class CFortressForeverMod : public CBotMod
-{
-public:
-	CFortressForeverMod()
-	{
-		setup("FortressForever", MOD_FF, BOTTYPE_FF, "FF");
-	}
-};
-
 class CHLDMSourceMod : public CBotMod
 {
 public:
@@ -692,31 +653,6 @@ public:
 	{
 		setup("insurgency", MOD_INSURGENCY, BOTTYPE_HL1DM, "INSURGENCY");
 	}
-};
-
-class CSynergyMod : public CBotMod
-{
-public:
-	CSynergyMod()
-	{
-		setup("synergy",MOD_SYNERGY,BOTTYPE_SYN,"SYNERGY");
-	}
-
-	void initMod () override;
-	void mapInit () override;
-
-	const char *getPlayerClass () override
-	{
-		return "CSynergyPlayer";
-	}
-
-	//void entitySpawn ( edict_t *pEntity );
-
-	static bool IsEntityLocked(edict_t *pEntity);
-	static bool IsCombineMinePlayerPlaced(edict_t *pMine);
-	static bool IsCombineMineDisarmed(edict_t *pMine);
-	static bool IsCombineMineArmed(edict_t *pMine);
-	static bool IsCombineMineHeldByPhysgun(edict_t *pMine);
 };
 
 #define NEWENUM typedef enum {

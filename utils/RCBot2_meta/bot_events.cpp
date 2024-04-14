@@ -388,21 +388,9 @@ void CPlayerDeathEvent :: execute ( IBotEventInterface *pEvent )
 	}
 }
 
-void CBombPickupEvent :: execute ( IBotEventInterface *pEvent )
-{
-}
-
 void CPlayerFootstepEvent :: execute ( IBotEventInterface *pEvent )
 {
 	
-}
-
-void CBombDroppedEvent :: execute ( IBotEventInterface *pEvent )
-{
-}
-
-void CCSSBombPlantedEvent :: execute ( IBotEventInterface *pEvent )
-{
 }
 
 void CWeaponFireEvent :: execute ( IBotEventInterface *pEvent )
@@ -1181,10 +1169,7 @@ void CBotEvents :: setupEvents ()
 	addEvent(new CRoundFreezeEndEvent());
 	addEvent(new CPlayerHurtEvent());
 	addEvent(new CPlayerDeathEvent());
-	addEvent(new CBombPickupEvent());
-	addEvent(new CCSSBombPlantedEvent());
 	addEvent(new CPlayerFootstepEvent());
-	addEvent(new CBombDroppedEvent());
 	addEvent(new CWeaponFireEvent());
 	addEvent(new CBulletImpactEvent());
 	addEvent(new CFlagEvent());

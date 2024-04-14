@@ -103,7 +103,6 @@ public:
 	CRoundStartEvent()
 	{
 		setType("round_start");
-		setMod(MOD_CSS);
 	}
 
 	void execute ( IBotEventInterface *pEvent ) override;
@@ -115,7 +114,6 @@ public:
 	CRoundFreezeEndEvent()
 	{
 		setType("round_freeze_end");
-		setMod(MOD_CSS);
 	}
 
 	void execute ( IBotEventInterface *pEvent ) override;
@@ -167,30 +165,6 @@ public:
 	void execute ( IBotEventInterface *pEvent ) override;
 };
 
-class CBombPickupEvent : public CBotEvent
-{
-public:
-	CBombPickupEvent()
-	{
-		setType("bomb_pickup");
-		setMod(MOD_CSS);
-	}
-
-	void execute ( IBotEventInterface *pEvent ) override;
-};
-
-class CCSSBombPlantedEvent : public CBotEvent
-{
-public:
-	CCSSBombPlantedEvent()
-	{
-		setType("bomb_planted");
-		setMod(MOD_CSS);
-	}
-
-	void execute ( IBotEventInterface *pEvent ) override;
-};
-
 class CPlayerFootstepEvent : public CBotEvent
 {
 public:
@@ -211,18 +185,6 @@ public:
 		setMod(MOD_ANY);
 	}
 	
-	void execute ( IBotEventInterface *pEvent ) override;
-};
-
-class CBombDroppedEvent : public CBotEvent
-{
-public:
-	CBombDroppedEvent()
-	{
-		setType("bomb_dropped");
-		setMod(MOD_CSS);
-	}
-
 	void execute ( IBotEventInterface *pEvent ) override;
 };
 

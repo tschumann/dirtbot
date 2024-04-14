@@ -50,7 +50,6 @@
 #include "bot_dod_bot.h"
 #include "bot_squads.h"
 #include "bot_waypoint_visibility.h"
-#include "bot_synergy.h"
 
 #ifdef WIN32
 #undef min
@@ -5491,11 +5490,6 @@ void CBotSynDisarmMineTask::execute(CBot *pBot,CBotSchedule *pSchedule)
 		return;
 	}
 
-	//if(CSynergyMod::IsCombineMinePlayerPlaced(m_pMine.get()))
-	//{
-	//	fail();
-	//}
-
 	m_vMinePos = CBotGlobals::entityOrigin(m_pMine.get());
 	m_fDist = pBot->distanceFrom(m_pMine.get());
 
@@ -5521,12 +5515,6 @@ void CBotSynDisarmMineTask::execute(CBot *pBot,CBotSchedule *pSchedule)
 	if(m_fDist <= 250.0f)
 	{
 		pBot->stopMoving();
-		
-		if(!m_bTimeSet && CSynergyMod::IsCombineMineHeldByPhysgun(m_pMine.get()))
-		{
-			m_ftime = engine->Time() + 2.0f;
-			m_bTimeSet = true;
-		}
 
 		if(m_bTimeSet && m_ftime < engine->Time())
 		{
@@ -5642,8 +5630,6 @@ void CBotSynUseCharger::execute(CBot *pBot, CBotSchedule *pSchedule)
 
 	if(m_iType == CHARGER_HEALTH && pBot->getHealthPercent() >= 0.99f)
 		complete();
-	else if(m_iType == CHARGER_ARMOR && static_cast<CBotSynergy*>(pBot)->getArmorPercent() >= 0.99f)
-		complete();
 
 	pBot->setMoveLookPriority(MOVELOOK_OVERRIDE);
 	pBot->setLookVector(m_vPos);
@@ -5726,35 +5712,6 @@ bool CBotTF2EngineerInterrupt :: isInterrupted ( CBot *pBot, bool *bFailed, bool
 
 			m_fPrevSentryHealth = m_fCurrentHealth;
 		}
-	}
-
-	return false;
-}
-
-/**
- * CSS: Task interruption for when the bot is walking around
- **/
-bool CBotCSSRoamInterrupt::isInterrupted(CBot *pBot, bool *bFailed, bool *bCompleted)
-{
-	if(pBot->hasEnemy())
-		return true;
-
-	return false;
-}
-
-// Task interruption for synergy's roaming tasks
-bool CBotSYNRoamInterrupt::isInterrupted(CBot *pBot, bool *bFailed, bool *bCompleted)
-{
-	CBotSynergy *pBotSyn = static_cast<CBotSynergy*>(pBot);
-
-	// Can be interrupted?
-	if(pBotSyn->getInterruptionTimer() <= engine->Time())
-	{
-		if(pBotSyn->needHealth())
-			return true;
-
-		if(pBotSyn->needAmmo())
-			return true;
 	}
 
 	return false;

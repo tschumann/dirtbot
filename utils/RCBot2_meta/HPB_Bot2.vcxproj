@@ -258,8 +258,6 @@
     <ClCompile Include="bot_som.cpp" />
     <ClCompile Include="bot_squads.cpp" />
     <ClCompile Include="bot_strings.cpp" />
-    <ClCompile Include="bot_synergy.cpp" />
-    <ClCompile Include="bot_synergy_mod.cpp" />
     <ClCompile Include="bot_task.cpp" />
     <ClCompile Include="bot_tf2_mod.cpp" />
     <ClCompile Include="bot_tf2_points.cpp" />
@@ -318,7 +316,6 @@
     <ClInclude Include="bot_som.h" />
     <ClInclude Include="bot_squads.h" />
     <ClInclude Include="bot_strings.h" />
-    <ClInclude Include="bot_synergy.h" />
     <ClInclude Include="bot_task.h" />
     <ClInclude Include="bot_tf2_points.h" />
     <ClInclude Include="bot_utility.h" />

@@ -144,35 +144,15 @@ void CBotMods::parseFile()
 				modtype = MOD_HLDM2;
 				curmod = new CHalfLifeDeathmatchMod();
 			}
-			else if (!strcmpi("FF", val))
-			{
-				modtype = MOD_FF;
-				curmod = new CFortressForeverMod();
-			}
 			else if (!strcmpi("TF2", val))
 			{
 				modtype = MOD_TF2;
 				curmod = new CTeamFortress2Mod();
 			}
-			else if (!strcmpi("SVENCOOP2", val))
-			{
-				modtype = MOD_SVENCOOP2;
-				curmod = new CBotMod();
-			}
-			else if (!strcmpi("TIMCOOP", val))
-			{
-				modtype = MOD_TIMCOOP;
-				curmod = new CBotMod();
-			}
 			else if (!strcmpi("NS2", val))
 			{
 				modtype = MOD_NS2;
 				curmod = new CBotMod();
-			}
-			else if (!strcmpi("SYNERGY", val))
-			{
-				modtype = MOD_SYNERGY;
-				curmod = new CSynergyMod();
 			}
 			else if (!strcmpi("DOD", val))
 			{
@@ -232,11 +212,7 @@ void CBotMods::readMods()
 	m_Mods.emplace_back(new CDODMod());
 #elif SOURCE_ENGINE == SE_HL2DM
 	m_Mods.emplace_back(new CHalfLifeDeathmatchMod());
-#elif SOURCE_ENGINE == SE_SDK2013
-	m_Mods.emplace_back(new CSynergyMod());
 #else
-	
-	m_Mods.emplace_back(new CFortressForeverMod());
 
 	m_Mods.emplace_back(new CHLDMSourceMod());
 	m_Mods.emplace_back(new CInsurgencyMod());
