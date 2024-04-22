@@ -192,15 +192,15 @@ class MMSConfig(object):
         '-fPIC',
         '-fno-exceptions',
         '-fno-rtti',
-	'-mmmx',
-	'-msse',
+		'-mmmx',
+		'-msse',
         '-msse2',
-	'-msse3',
-	'-mssse3',
-	'-msse4',
-	'-msse4a',
-	'-msse4.1',
-	'-msse4.2',
+		'-msse3',
+		'-mssse3',
+		'-msse4',
+		'-msse4a',
+		'-msse4.1',
+		'-msse4.2',
         '-fno-strict-aliasing',
       ]
 
@@ -238,14 +238,14 @@ class MMSConfig(object):
         '_WINDOWS'
       ]
       cxx.cflags += [
-        '/W3',
+        '/W4',
       ]
       cxx.cxxflags += [
         '/EHsc',
         '/GR-',
         '/TP',
-	'/std:c++14',
-        '/arch:AVX2',
+		'/std:c++14',
+        '/arch:SSE2',
       ]
       cxx.linkflags += [
         '/MACHINE:X86',
