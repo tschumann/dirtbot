@@ -372,7 +372,7 @@ bool CTeamFortress2Mod :: TF2_IsPlayerKrits(edict_t *pPlayer)
 	const int pcond = CClassInterface :: getTF2Conditions(pPlayer);
 	return (pcond & TF2_PLAYER_KRITS) == TF2_PLAYER_KRITS;
 
-	return false; //Unreachable? [APG]RoboCop[CL]
+	//return false; //Unreachable? [APG]RoboCop[CL]
 }
 
 bool CTeamFortress2Mod :: TF2_IsPlayerInvuln(edict_t *pPlayer)

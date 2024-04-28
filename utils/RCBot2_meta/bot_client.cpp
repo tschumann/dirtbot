@@ -888,7 +888,7 @@ void CClient :: think ()
 					m_vLastAutoWaypointPlacePos = vPlacePosition;
 					bool bCanStand;
 
-					trace_t *tr;
+					//trace_t *tr;
 					
 					Vector v_src = vPlacePosition;
 

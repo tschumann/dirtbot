@@ -1711,7 +1711,7 @@ void CBotDefendTask :: execute (CBot *pBot,CBotSchedule *pSchedule)
 					if ( CTeamFortress2Mod::getFlagLocation(TF2_TEAM_BLUE,&vFlag) )
 					{
 						// FOR DEBUGGING
-						const float fDist = (vFlag - m_vOrigin).Length();
+						fDist = (vFlag - m_vOrigin).Length();
 						const float fWaitTime = 90.0f - fDist/45; // MAX Dist 4050
 						//
 						m_fTime = engine->Time() + fWaitTime;

@@ -92,7 +92,7 @@ CBotCommandInline AddBotCommand("addbot", CMD_ACCESS_BOT | CMD_ACCESS_DEDICATED,
 
 	edict_t *pEntity = nullptr;
 
-	if ( pClient )
+	if (pClient)
 		pEntity = pClient->getPlayer();
 
 	// That breaks the bot quota system? [APG]RoboCop[CL]
@@ -108,10 +108,13 @@ CBotCommandInline AddBotCommand("addbot", CMD_ACCESS_BOT | CMD_ACCESS_DEDICATED,
 		//else
 		//bOkay = CBots::createBot();
 
-		if ( CBots::createBot(args[0],args[1],args[2]) )
-			CBotGlobals::botMessage(pEntity,0,"bot adding...");
-		else
-			CBotGlobals::botMessage(pEntity,0,"error: couldn't create bot! (Check maxplayers)");
+	if (CBots::createBot(args[0], args[1], args[2])) {
+		CBotGlobals::botMessage(pEntity, 0, "bot adding...");
+	}
+	else {
+		CBotGlobals::botMessage(pEntity, 0, "error: couldn't create bot! (Check maxplayers)");
+	}
+
 	//}
 	//else
 	//	CBotGlobals::botMessage(pEntity,0,"error: sv_cheats must be 1 to add bots");

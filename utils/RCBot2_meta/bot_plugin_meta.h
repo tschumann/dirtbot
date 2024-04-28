@@ -131,7 +131,7 @@ private:
 
 	// Bot Quota
 	float m_fBotQuotaTimer = 0.0f;
-	int m_iTargetBots[RCBOT_MAXPLAYERS];
+	int m_iTargetBots[RCBOT_MAXPLAYERS] = {};
 
 	void BotQuotaCheck();
 };

@@ -166,7 +166,7 @@ public:
 		m_iMaxCount = 0;
 
 		for (int i = 0; i < RCBOT_MAXPLAYERS; ++i) {
-			const CClient* client = CClients::get(i);
+			CClient* client = CClients::get(i);
 
 			if (client->isUsed()) {
 				IPlayerInfo *p = playerinfomanager->GetPlayerInfo(client->getPlayer());
@@ -844,7 +844,7 @@ void RCBotPluginMeta::BotQuotaCheck() {
 		m_fBotQuotaTimer = engine->Time();
 
 		// Target Bot Count
-		int bot_target = 0; //not used? [APG]RoboCop[CL]
+		int bot_target; 
 
 		// Change Notification
 		bool notify = false;

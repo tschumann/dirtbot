@@ -999,7 +999,7 @@ public:
 	{
 		datamap_t* pDataMap = CBaseEntity_GetDataDescMap(pEntity);
 		const int offset = UTIL_FindInDataMap(pDataMap, "m_iHealth");
-		int offset2 = UTIL_FindInDataMap(pDataMap, "m_iMaxHealth");
+		//int offset2 = UTIL_FindInDataMap(pDataMap, "m_iMaxHealth"); //unused? [APG]RoboCop[CL]
 		const int iHealth = *reinterpret_cast<int*>(reinterpret_cast<char*>(pEntity) + offset);
 		const int iMaxHealth = *reinterpret_cast<int*>(reinterpret_cast<char*>(pEntity) + offset);
 		return static_cast<float>(iHealth / iMaxHealth);

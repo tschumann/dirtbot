@@ -1396,15 +1396,16 @@ void CBotFortress :: modThink ()
 	else
 		removeCondition(CONDITION_NEED_HEALTH);
 
-	if ( needAmmo() )
+	if (needAmmo()) {
 		updateCondition(CONDITION_NEED_AMMO);
-	else
+	}
+	else {
 		removeCondition(CONDITION_NEED_AMMO);
-
-	//if ( !hasSomeConditions(CONDITION_PUSH) )
-	///{
-		if ( CTeamFortress2Mod::TF2_IsPlayerInvuln(m_pEdict) || CTeamFortress2Mod::TF2_IsPlayerKrits(m_pEdict) )
-			updateCondition(CONDITION_PUSH);
+	}
+	//if (!hasSomeConditions(CONDITION_PUSH)) {
+	if (CTeamFortress2Mod::TF2_IsPlayerInvuln(m_pEdict) || CTeamFortress2Mod::TF2_IsPlayerKrits(m_pEdict)) {
+		updateCondition(CONDITION_PUSH);
+	}
 	//}
 
 	if ( m_fCallMedic < engine->Time() )
@@ -2006,10 +2007,10 @@ void CBotTF2 :: updateCarrying ()
 	}
 	else
 	{
-		m_bIsCarryingTeleExit = NULL;
-		m_bIsCarryingSentry = NULL;
-		m_bIsCarryingDisp = NULL;
-		m_bIsCarryingTeleEnt = NULL;
+		m_bIsCarryingTeleExit = false;
+		m_bIsCarryingSentry = false;
+		m_bIsCarryingDisp = false;
+		m_bIsCarryingTeleEnt = false;
 	}
 }
 

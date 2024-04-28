@@ -1073,7 +1073,7 @@ void CDODBot :: chooseClass ( bool bIsChangingClass )
 	}
 	else
 	{
-		float fClassFitness[6]; // 6 classes
+		float fClassFitness[7]; // 6 classes
 		float fTotalFitness = 0;
 
 		const int iTeam = getTeam();
@@ -1086,9 +1086,9 @@ void CDODBot :: chooseClass ( bool bIsChangingClass )
 		fClassFitness[DOD_CLASS_MACHINEGUNNER] *= 0.8f;
 		fClassFitness[DOD_CLASS_ROCKET] *= 0.5f;
 
-		for (float& fClassFitnes : fClassFitness)
+		for (float& fClassFit : fClassFitness)
 		{
-			fClassFitnes = 1.0f;
+			fClassFit = 1.0f;
 		}
 
 		if (bIsChangingClass && ((m_iClass >= 0) && (m_iClass < 6)))
@@ -1107,8 +1107,8 @@ void CDODBot :: chooseClass ( bool bIsChangingClass )
 			}
 		}
 
-		for (int i = 0; i < 6; i++)
-			fTotalFitness += fClassFitness[i];
+		for (float fClassFit : fClassFitness)
+			fTotalFitness += fClassFit;
 
 		const float fRandom = randomFloat(0, fTotalFitness);
 
