@@ -92,7 +92,7 @@ typedef enum
 typedef struct
 {
 	eDODVoiceCMD id;
-	char *pcmd;
+	const char *pcmd;
 }eDODVoiceCommand_t;
 
 typedef enum
