@@ -192,12 +192,12 @@ public:
 		m_preoffset = 0;
 	}
 
-	CClassInterfaceValue ( char *key, char *value, unsigned int preoffset )
+	CClassInterfaceValue (const char *key, const char *value, unsigned int preoffset )
 	{
 		init(key,value,preoffset);
 	}
 
-	void init (const char* key, char* value, unsigned preoffset = 0);
+	void init (const char* key, const char* value, unsigned preoffset = 0);
 
 	void findOffset ( );
 

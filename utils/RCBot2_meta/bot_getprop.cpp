@@ -252,7 +252,7 @@ edict_t *CClassInterfaceValue :: getEntity ( edict_t *edict )
 	return nullptr;
 }
 
-void CClassInterfaceValue :: init (const char* key, char* value, unsigned preoffset)
+void CClassInterfaceValue :: init (const char* key, const char* value, unsigned preoffset)
 {
 	m_class = CStrings::getString(key);
 	m_value = CStrings::getString(value);

@@ -494,7 +494,7 @@ public:
 class CBossSummonedEvent : public CBotEvent
 {
 public:
-	CBossSummonedEvent(char *psztype)
+	CBossSummonedEvent(const char *psztype)
 	{
 		setType(psztype);
 	}
@@ -505,7 +505,7 @@ public:
 class CBossKilledEvent : public CBotEvent
 {
 public:
-	CBossKilledEvent(char *psztype)
+	CBossKilledEvent(const char *psztype)
 	{
 		setType(psztype);
 	}

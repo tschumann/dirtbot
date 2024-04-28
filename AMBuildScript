@@ -11,6 +11,7 @@ proj_c_flags = [
   '-Wno-unknown-attributes',
   '-Wno-logical-op-parentheses',
   '-Wno-return-stack-address',
+  '-Wno-implicit-const-int-float-conversion'
 ]
 proj_c_flags_opt = [
   '-O2',
