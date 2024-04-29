@@ -813,7 +813,7 @@ CBotCommandInline DebugMstrOffsetSearch("mstr_offset_search", CMD_ACCESS_DEBUG, 
 
 	CBaseEntity *pMasterEntity = servergameents->EdictToBaseEntity(pMaster);
 
-	//local variable is initialized but not referenced - [APG]RoboCop[CL]
+	//`full_size` is initialized but not referenced - [APG]RoboCop[CL]
 	unsigned long full_size = sizeof(pMasterEntity);
 	unsigned long offset = 800;
 

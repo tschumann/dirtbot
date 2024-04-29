@@ -96,10 +96,10 @@ void CProfileTimer :: Start()
 void CProfileTimer :: Stop()
 {
 #ifdef _WIN32
-	unsigned __int64 end_cycle;
+	//unsigned __int64 end_cycle;
 	QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&end_cycle));
 #else
-	unsigned long long end_cycle;
+	//unsigned long long end_cycle;
 	end_cycle = rdtsc();
 #endif
 
@@ -129,7 +129,7 @@ void CProfileTimer :: print (const double* high)
 
 		const double percent = static_cast<double>(m_overall) / *high * 100.0;
 		
-		std::sprintf(str,"%17s|%13lld|%10lld|%10lld|%10lld|%6.1f",m_szFunction,m_overall,m_min,m_max,m_average,percent);			
+		snprintf(str, 256, "%17s|%13lld|%10lld|%10lld|%10lld|%6.1f", m_szFunction, m_overall, m_min, m_max, m_average, percent);
 
 		CClients::clientDebugMsg(BOT_DEBUG_PROFILE,str);
 

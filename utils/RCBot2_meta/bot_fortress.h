@@ -537,7 +537,7 @@ public:
 
 	virtual TF_Class getClass () { return TF_CLASS_UNDEFINED; }
 
-	virtual void updateClass () { };
+	virtual void updateClass () {}
 
 	void currentlyDead () override;
 

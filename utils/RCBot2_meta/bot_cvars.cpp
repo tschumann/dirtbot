@@ -122,7 +122,7 @@ ConVarRef mp_stalemate_meleeonly("mp_stalemate_meleeonly");
 ConVarRef mp_roundtime("mp_roundtime");
 ConVarRef mp_c4timer("mp_c4timer");
 
-void RCBOT2_Cvar_setup (ICvar *cvar)
+void RCBOT2_Cvar_setup (ICvar *cvar) //'cvar' hides global declaration from /public/icvar.h [APG]RoboCop[CL]
 {
 	if ( sv_tags.IsValid() )
 	{

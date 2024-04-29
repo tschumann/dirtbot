@@ -774,7 +774,7 @@ void RCBotPluginMeta::Hook_ClientPutInServer(edict_t *pEntity, char const *playe
 
 void RCBotPluginMeta::Hook_ClientDisconnect(edict_t *pEntity)
 {
-	CBaseEntity *pEnt = servergameents->EdictToBaseEntity(pEntity); //Unused? [APG]RoboCop[CL]
+	CBaseEntity *pEnt = servergameents->EdictToBaseEntity(pEntity); //`*pEnt` Unused? [APG]RoboCop[CL]
 
 #ifdef OVERRIDE_RUNCMD
 	if ( pEnt )

@@ -21,6 +21,9 @@
     <Filter Include="Source Files\rcbot\tf2">
       <UniqueIdentifier>{6884231c-53d4-4673-9b74-c1811a727656}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\loader">
+      <UniqueIdentifier>{64422f0c-16cb-4913-acca-78f7f22042de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bot.cpp">
@@ -208,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="..\..\rcbot\propvar.cpp">
       <Filter>Source Files\rcbot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\loader\loader.cpp">
+      <Filter>Source Files\loader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

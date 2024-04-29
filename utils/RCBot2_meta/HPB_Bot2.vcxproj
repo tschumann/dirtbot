@@ -217,6 +217,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\loader\loader.cpp" />
     <ClCompile Include="..\..\rcbot\entprops.cpp" />
     <ClCompile Include="..\..\rcbot\helper.cpp" />
     <ClCompile Include="..\..\rcbot\logging.cpp" />

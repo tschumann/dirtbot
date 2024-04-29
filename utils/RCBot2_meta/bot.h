@@ -484,7 +484,7 @@ public:
 		return m_bLookAtIsValid;
 	}
 
-    Vector getMoveTo ()
+	Vector getMoveTo() const
 	{
 		return m_vMoveTo;
 	}
@@ -687,11 +687,11 @@ public:
 
     void setAiming (const Vector& aiming) { m_vWaypointAim = aiming; }
 
-    Vector getAiming () { return m_vWaypointAim; }
+	Vector getAiming() const { return m_vWaypointAim; }
 
     void setLookVector (const Vector& vLook) { m_vLookVector = vLook; }
 
-    Vector getLookVector () { return m_vLookVector; }
+	Vector getLookVector() const { return m_vLookVector; }
 
     void resetLookAroundTime () { m_fLookAroundTime = 0.0f; }
 
