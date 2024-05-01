@@ -95,10 +95,10 @@ static void seed(unsigned long); // seed with 32 bit integer
 protected: // used by derived classes, otherwise not accessible; use the ()-operator
   unsigned long rand_int32(); // generate 32 bit random integer
 private:
-  static const int n = 624, m = 397; // compile time constants
+  static constexpr int n = 624, m = 397; // compile time constants
 // the variables below are static (no duplicates can exist)
   static unsigned long state[n]; // state vector array
-  static int p; // position in state array
+  static size_t p; // position in state array
   static bool init; // true if init function is called
 // private functions used to generate the pseudo random numbers
 static unsigned long twiddle(unsigned long, unsigned long); // used by gen_state()

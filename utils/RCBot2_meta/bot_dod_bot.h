@@ -210,7 +210,7 @@ public:
 	CBotWeapon *getSniperRifle () const;
 	bool hasSniperRifle () const;
 
-	void voiceCommand ( int cmd ) override;
+	void voiceCommand (int cmd) override;
 
 	unsigned int maxEntityIndex ( ) override { return gpGlobals->maxEntities; }
 

@@ -79,7 +79,7 @@
 
 // initialization of static private members
 unsigned long MTRand_int32::state[n] = {0x0UL};
-int MTRand_int32::p = 0;
+size_t MTRand_int32::p = 0;
 bool MTRand_int32::init = false;
 
 static unsigned long init[4] = {0x123, 0x234, 0x345, 0x456}, length = 4;

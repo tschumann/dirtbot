@@ -26,7 +26,7 @@ class CTFGameRulesProxy
 {
 	MyEHandle m_Resource;
 
-	float m_flCapturePointEnableTime;
+	float m_flCapturePointEnableTime = 0.0f;
 };
 
 

@@ -683,14 +683,14 @@ void CCSSBot::getTasks(unsigned int iIgnore)
 		{
 			if(CCounterStrikeSourceMod::isMapType(CS_MAP_BOMBDEFUSAL))
 			{
-				ADD_UTILITY(BOT_UTIL_DEFEND_BOMB, !CCounterStrikeSourceMod::isBombPlanted() && bot_defrate.GetFloat() <= randomFloat(0.0f, 1.0f), 0.80f);
-				ADD_UTILITY(BOT_UTIL_SEARCH_FOR_BOMB, !CCounterStrikeSourceMod::wasBombFound() && CCounterStrikeSourceMod::isBombPlanted(), 0.81f);
-				ADD_UTILITY(BOT_UTIL_DEFUSE_BOMB, CCounterStrikeSourceMod::wasBombFound(), 0.85f);
+				ADD_UTILITY(BOT_UTIL_DEFEND_BOMB, !CCounterStrikeSourceMod::isBombPlanted() && bot_defrate.GetFloat() <= randomFloat(0.0f, 1.0f), 0.80f)
+				ADD_UTILITY(BOT_UTIL_SEARCH_FOR_BOMB, !CCounterStrikeSourceMod::wasBombFound() && CCounterStrikeSourceMod::isBombPlanted(), 0.81f)
+				ADD_UTILITY(BOT_UTIL_DEFUSE_BOMB, CCounterStrikeSourceMod::wasBombFound(), 0.85f)
 			}
 			else if(CCounterStrikeSourceMod::isMapType(CS_MAP_HOSTAGERESCUE))
 			{
-				ADD_UTILITY(BOT_UTIL_GET_HOSTAGE, CCounterStrikeSourceMod::canRescueHostages(), 0.85f);
-				ADD_UTILITY(BOT_UTIL_RESCUE, IsLeadingHostage(), 0.84f);
+				ADD_UTILITY(BOT_UTIL_GET_HOSTAGE, CCounterStrikeSourceMod::canRescueHostages(), 0.85f)
+				ADD_UTILITY(BOT_UTIL_RESCUE, IsLeadingHostage(), 0.84f)
 			}
 			break;
 		}
@@ -698,28 +698,28 @@ void CCSSBot::getTasks(unsigned int iIgnore)
 		{
 			if(CCounterStrikeSourceMod::isMapType(CS_MAP_BOMBDEFUSAL))
 			{
-				ADD_UTILITY(BOT_UTIL_PLANT_BOMB, CCounterStrikeSourceMod::isBombCarrier(this), 0.80f);
-				ADD_UTILITY(BOT_UTIL_PICKUP_BOMB, CCounterStrikeSourceMod::isBombDropped(), 0.80f);
-				ADD_UTILITY(BOT_UTIL_DEFEND_NEAREST_BOMB, CCounterStrikeSourceMod::isBombPlanted(), 0.85f);
+				ADD_UTILITY(BOT_UTIL_PLANT_BOMB, CCounterStrikeSourceMod::isBombCarrier(this), 0.80f)
+				ADD_UTILITY(BOT_UTIL_PICKUP_BOMB, CCounterStrikeSourceMod::isBombDropped(), 0.80f)
+				ADD_UTILITY(BOT_UTIL_DEFEND_NEAREST_BOMB, CCounterStrikeSourceMod::isBombPlanted(), 0.85f)
 			}
 			else if (CCounterStrikeSourceMod::isMapType(CS_MAP_HOSTAGERESCUE))
 			{
-				ADD_UTILITY(BOT_UTIL_GUARD_RESCUE_ZONE, CCounterStrikeSourceMod::canRescueHostages(), 0.70f);
+				ADD_UTILITY(BOT_UTIL_GUARD_RESCUE_ZONE, CCounterStrikeSourceMod::canRescueHostages(), 0.70f)
 			}
 			break;
 		}
 	}
 
-	ADD_UTILITY(BOT_UTIL_SNIPE, IsSniper(), randomFloat(0.7900f, 0.8200f));
+	ADD_UTILITY(BOT_UTIL_SNIPE, IsSniper(), randomFloat(0.7900f, 0.8200f))
 
 	// Combat Utilities
-	ADD_UTILITY(BOT_UTIL_ENGAGE_ENEMY, hasSomeConditions(CONDITION_SEE_CUR_ENEMY) && !hasSomeConditions(CONDITION_OUT_OF_AMMO), 1.00f);
-	ADD_UTILITY(BOT_UTIL_WAIT_LAST_ENEMY, hasSomeConditions(CONDITION_ENEMY_OBSCURED), 0.95f);
-	ADD_UTILITY(BOT_UTIL_HIDE_FROM_ENEMY, hasSomeConditions(CONDITION_SEE_CUR_ENEMY) && hasSomeConditions(CONDITION_OUT_OF_AMMO), 0.98f);
+	ADD_UTILITY(BOT_UTIL_ENGAGE_ENEMY, hasSomeConditions(CONDITION_SEE_CUR_ENEMY) && !hasSomeConditions(CONDITION_OUT_OF_AMMO), 1.00f)
+	ADD_UTILITY(BOT_UTIL_WAIT_LAST_ENEMY, hasSomeConditions(CONDITION_ENEMY_OBSCURED), 0.95f)
+	ADD_UTILITY(BOT_UTIL_HIDE_FROM_ENEMY, hasSomeConditions(CONDITION_SEE_CUR_ENEMY) && hasSomeConditions(CONDITION_OUT_OF_AMMO), 0.98f)
 
 	// Generic Utilities
-	ADD_UTILITY(BOT_UTIL_BUY, m_pBuyManager->wantsToBuy(), 1.0f); // Buy weapons
-	ADD_UTILITY(BOT_UTIL_ROAM, true, 0.001f); // Roam around
+	ADD_UTILITY(BOT_UTIL_BUY, m_pBuyManager->wantsToBuy(), 1.0f) // Buy weapons
+	ADD_UTILITY(BOT_UTIL_ROAM, true, 0.001f) // Roam around
 
 	utils.execute();
 

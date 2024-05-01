@@ -417,8 +417,7 @@ bool CBotSynergy::setVisible(edict_t* pEntity, bool bVisible)
 		}
 		else if (std::strncmp(szclassname, "weapon_", 7) == 0 && (!m_pNearbyWeapon.get() || fDist < distanceFrom(m_pNearbyWeapon.get())))
 		{
-			const CBotWeapon* pWeapon = nullptr;
-			pWeapon = m_pWeapons->getWeapon(CWeapons::getWeapon(szclassname));
+			const CBotWeapon* pWeapon = m_pWeapons->getWeapon(CWeapons::getWeapon(szclassname));
 			if (pWeapon && pWeapon->hasWeapon())
 			{
 				m_pNearbyWeapon = nullptr; // bot already has this weapon

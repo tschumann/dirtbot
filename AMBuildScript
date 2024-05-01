@@ -248,7 +248,7 @@ class MMSConfig(object):
         '_WINDOWS'
       ]
       cxx.cflags += [
-        '/W4',
+        '/W3',
       ]
       cxx.cxxflags += [
         '/EHsc',

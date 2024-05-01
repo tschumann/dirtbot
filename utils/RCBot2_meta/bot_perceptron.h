@@ -77,11 +77,11 @@ public:
 
 	ga_nn_value getWeight ( unsigned short int i ) const { return m_weights[i]; }
 
-	ga_nn_value execute ();
+	virtual ga_nn_value execute ();
 
 	bool fired (); //TODO: not implemented? [APG]RoboCop[CL]
 
-	ga_nn_value getOutput () const { return m_output; }
+	virtual ga_nn_value getOutput () const { return m_output; }
 
 protected:
 	
@@ -105,11 +105,11 @@ public:
 
 	void setWeights (const ga_nn_value* weights) const;
 
-	ga_nn_value execute ();
+	ga_nn_value execute () override;
 
 	bool fired () const;
 
-	ga_nn_value getOutput () const;
+	ga_nn_value getOutput () const override;
 
 	void train ( ga_nn_value expectedOutput );
 
@@ -133,11 +133,11 @@ public:
 
 	void train ();/// ITransfer *transferFunction, bool usebias = true );
 
-	ga_nn_value execute ();//, bool usebias = true );
+	ga_nn_value execute () override;//, bool usebias = true );
 
 	void setError ( ga_nn_value err ) { m_error = err; }
 	void addError ( ga_nn_value err ) { m_error += err; }
-	void divError ( unsigned short int samples ) { m_error /= samples; }
+	void divError ( ga_nn_value samples ) { m_error /= samples; }
 
 	ga_nn_value getError ( unsigned short int w ) const { return m_error * m_weights[w]; }
 	ga_nn_value getMSE () const { return m_error; }

@@ -39,6 +39,8 @@
 class CVisibleFunc
 {
 public:
+	virtual ~CVisibleFunc() = default;
+
 	virtual void execute ( edict_t *pEntity ) {
 	}
 };

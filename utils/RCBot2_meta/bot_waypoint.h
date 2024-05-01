@@ -347,7 +347,7 @@ public:
 	//bool touched ( edict_t *pEdict );
 	bool touched (const Vector& vOrigin, const Vector& vOffset, float fTouchDist, bool onground = true );
 
-	void botTouch ( CBot *pBot ); // TODO: Needs implemented properly [APG]RoboCop[CL]
+	static void botTouch ( CBot *pBot ); // TODO: Needs implemented properly [APG]RoboCop[CL]
 
 	void freeMapMemory ()
 	{
@@ -361,9 +361,9 @@ public:
 
 	void drawPathBeam ( CWaypoint *to, unsigned short int iDrawType ) const;
 
-	void setUsed ( bool bUsed ){	m_bUsed = bUsed;}
+	void setUsed ( bool bUsed ) { m_bUsed = bUsed; }
 
-	inline void clearPaths ();//TODO: Not implemented yet [APG]RoboCop[CL]
+	inline void clearPaths ();
 
 	float distanceFrom ( CWaypoint *other ) const
 	{

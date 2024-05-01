@@ -634,7 +634,7 @@ void CTF2UpgradeObjectEvent :: execute ( IBotEventInterface *pEvent )
 	{
 		const eEngiBuild object = static_cast<eEngiBuild>(pEvent->getInt("object", 0));
 		const bool isbuilder = pEvent->getInt("isbuilder")>0;
-		const short index = pEvent->getInt("index");
+		const int index = pEvent->getInt("index");
 	
 		if ( !isbuilder )
 		{

@@ -234,7 +234,7 @@ public:
 		}
 	}
 
-	int getNumFlags () const { return m_iNumControlPoints; }
+	short int getNumFlags () const { return m_iNumControlPoints; }
 	int getNumFlagsOwned (int iTeam) const
 	{
 		int count = 0;
@@ -1196,7 +1196,7 @@ public:
 	
 	static void addCapper ( int cp, int capper )
 	{
-		if (capper && (cp < MAX_CAP_POINTS))
+		if (capper > 0 && cp >= 0 && cp < MAX_CAP_POINTS)
 			m_Cappers[cp] |= 1 << (capper - 1);
 	}
 

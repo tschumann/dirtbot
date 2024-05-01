@@ -752,9 +752,9 @@ public:
 
 	virtual void grenadeThrown ();
 
-	virtual void voiceCommand ( int cmd );
+	virtual void voiceCommand (int cmd);
 
-	void addVoiceCommand ( int cmd );
+	void addVoiceCommand (int cmd);
 
 	void letGoOfButton ( int button ) const;
 

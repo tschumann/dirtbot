@@ -254,7 +254,7 @@ bool CWaypointNavigator :: randomDangerPath (Vector *vec)
 	if ( !m_currentRoute.empty() )
 	{
 		const int head = m_currentRoute.top();
-		static CWaypoint *pW;
+		static CWaypoint *pW; //Unused? [APG]RoboCop[CL]
 
 		if (head != -1)
 		{
@@ -616,7 +616,7 @@ void CWaypointNavigator :: beliefOne ( int iWptIndex, BotBelief iBeliefType, flo
 void CWaypointNavigator :: belief ( Vector vOrigin, Vector vOther, float fBelief, 
 								   float fStrength, BotBelief iType )
 {
-	static float factor;
+	static float factor; //Unused? [APG]RoboCop[CL]
 	static float fEDist;
 	static int iWptIndex;
 	CWaypoint *pWpt;
@@ -1503,6 +1503,12 @@ bool CWaypoint :: touched (const Vector& vOrigin, const Vector& vOffset, float f
 
 	return false;
 }
+
+// TODO: Needs implemented properly [APG]RoboCop[CL]
+void CWaypoint::botTouch(CBot* pBot)
+{
+}
+
 // get the colour of this waypoint in WptColor format
 WptColor CWaypointTypes ::getColour ( int iFlags )
 {
@@ -1565,7 +1571,7 @@ void CWaypoint :: draw ( edict_t *pEdict, bool bDrawPaths, unsigned short int iD
 
 				if ( pClient )
 				{
-					edict_t *pEdict = pClient->getDebugBot();
+					pEdict = pClient->getDebugBot();
 					const CBot *pBot = CBots::getBotPointer(pEdict);
 
 					if ( pBot )
@@ -1607,7 +1613,7 @@ void CWaypoint :: draw ( edict_t *pEdict, bool bDrawPaths, unsigned short int iD
 
 					if ( pClient )
 					{
-						edict_t *pEdict = pClient->getDebugBot();
+						pEdict = pClient->getDebugBot();
 						const CBot *pBot = CBots::getBotPointer(pEdict);
 
 						if ( pBot )
@@ -2412,6 +2418,12 @@ int CWaypoints :: numWaypoints ()
 	return m_iNumWaypoints;
 }
 
+// TODO: Needs implemented properly [APG]RoboCop[CL]
+bool CWaypoints::checkReachable(CWaypoint* pWaypoint, int iStart)
+{
+	return false;
+}
+
 ///////////
 
 int CWaypoints::nearestWaypointGoal(int iFlags, const Vector& origin, float fDist, int iTeam)
@@ -2771,7 +2783,7 @@ CWaypoint* CWaypoints::randomWaypointGoalBetweenArea(int iFlags, int iTeam, int 
 				if ( bForceArea && pWpt->getArea() != iArea )
 					continue;
 
-				float fCost = 0.0f;
+				float fCost;
 
 				node = new AStarNode();
 

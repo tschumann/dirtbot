@@ -482,7 +482,7 @@ public:
 
 	virtual void engineerBuild ( eEngiBuild iBuilding, eEngiCmd iEngiCmd ) {}
 
-	virtual void spyDisguise ( int iTeam, int iClass ) {}
+	virtual void spyDisguise (int iTeam, unsigned int iClass) {}
 
 	virtual bool lookAfterBuildings (float *fTime) { return false; }
 
@@ -878,7 +878,7 @@ public:
 
 	void engineerBuild ( eEngiBuild iBuilding, eEngiCmd iEngiCmd ) override;
 
-	void spyDisguise ( int iTeam, int iClass ) override;
+	void spyDisguise (int iTeam, unsigned int iClass) override;
 
 	bool hasEngineerBuilt ( eEngiBuild iBuilding ) override;
 
@@ -931,7 +931,7 @@ public:
 	void seeFriendlyDie ( edict_t *pDied, edict_t *pKiller, CWeapon *pWeapon ) override;
 	void seeFriendlyKill ( edict_t *pTeamMate, edict_t *pDied, CWeapon *pWeapon ) override;
 
-	void voiceCommand ( int cmd ) override;
+	void voiceCommand (int cmd) override;
 
 	void handleWeapons () override;
 
