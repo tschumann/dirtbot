@@ -29,35 +29,38 @@
  *
  */
 
-CBotCommandInline PathWaypointOnCommand("on", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline PathWaypointOnCommand("on", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs& args)
 {
 	pClient->setPathWaypoint(true);
 	pClient->giveMessage("Pathwaypoints visible");
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline PathWaypointOffCommand("off", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline PathWaypointOffCommand("off", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs& args)
 {
 	pClient->setPathWaypoint(false);
 	pClient->giveMessage("Pathwaypoints hidden");
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline PathWaypointAutoOnCommand("enable", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline PathWaypointAutoOnCommand("enable", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs&
+                                                                              args)
 {
 	if ( pClient )
 		pClient->setAutoPath(true);
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline PathWaypointAutoOffCommand("disable", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline PathWaypointAutoOffCommand("disable", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs&
+                                             args)
 {
 	if ( pClient )
 		pClient->setAutoPath(false);
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline PathWaypointCreate1Command("create1", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline PathWaypointCreate1Command("create1", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs&
+                                             args)
 {
 	if ( !pClient )
 		return COMMAND_ERROR;
@@ -78,7 +81,8 @@ CBotCommandInline PathWaypointCreate1Command("create1", CMD_ACCESS_WAYPOINT, [](
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline PathWaypointCreate2Command("create2", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline PathWaypointCreate2Command("create2", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs&
+                                             args)
 {
 	pClient->updateCurrentWaypoint();
 	pClient->setPathTo(pClient->currentWaypoint());
@@ -97,7 +101,8 @@ CBotCommandInline PathWaypointCreate2Command("create2", CMD_ACCESS_WAYPOINT, [](
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline PathWaypointRemove1Command("remove1", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline PathWaypointRemove1Command("remove1", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs&
+                                             args)
 {
 	pClient->updateCurrentWaypoint();
 
@@ -112,7 +117,8 @@ CBotCommandInline PathWaypointRemove1Command("remove1", CMD_ACCESS_WAYPOINT, [](
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline PathWaypointRemove2Command("remove2", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline PathWaypointRemove2Command("remove2", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs&
+                                             args)
 {
 	pClient->updateCurrentWaypoint();
 	pClient->setPathTo(pClient->currentWaypoint());
@@ -132,7 +138,7 @@ CBotCommandInline PathWaypointRemove2Command("remove2", CMD_ACCESS_WAYPOINT, [](
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline PathWaypointDeleteToCommand("deleteto", 0, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline PathWaypointDeleteToCommand("deleteto", 0, [](CClient *pClient, const BotCommandArgs& args)
 {
 	pClient->updateCurrentWaypoint();
 
@@ -144,7 +150,7 @@ CBotCommandInline PathWaypointDeleteToCommand("deleteto", 0, [](CClient *pClient
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline PathWaypointDeleteFromCommand("deletefrom", 0, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline PathWaypointDeleteFromCommand("deletefrom", 0, [](CClient *pClient, const BotCommandArgs& args)
 {
 	pClient->updateCurrentWaypoint();
 
@@ -156,7 +162,8 @@ CBotCommandInline PathWaypointDeleteFromCommand("deletefrom", 0, [](CClient *pCl
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline PathWaypointCreateFromToCommand("createfromto", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline PathWaypointCreateFromToCommand("createfromto", CMD_ACCESS_WAYPOINT, [](CClient *pClient,
+                                                  const BotCommandArgs& args)
 {
 	if ( pClient && args[0] && *args[0] && args[1] && *args[1] )
 	{
@@ -195,7 +202,8 @@ CBotCommandInline PathWaypointCreateFromToCommand("createfromto", CMD_ACCESS_WAY
 	return COMMAND_ERROR;
 });
 
-CBotCommandInline PathWaypointRemoveFromToCommand("removefromto", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline PathWaypointRemoveFromToCommand("removefromto", CMD_ACCESS_WAYPOINT, [](CClient *pClient,
+                                                  const BotCommandArgs& args)
 {
 	if ( pClient && args[0] && *args[0] && args[1] && *args[1] )
 	{

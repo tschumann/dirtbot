@@ -28,7 +28,7 @@
  *    version.
  */
 
-CBotCommandInline SearchCommand("search", CMD_ACCESS_UTIL, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline SearchCommand("search", CMD_ACCESS_UTIL, [](CClient *pClient, const BotCommandArgs& args)
 {
 	edict_t *pPlayer = pClient->getPlayer();
 	float fDistance;
@@ -66,7 +66,8 @@ CBotCommandInline SearchCommand("search", CMD_ACCESS_UTIL, [](CClient *pClient, 
 
 });
 
-CBotCommandInline SetTeleportUtilCommand("set_teleport", CMD_ACCESS_UTIL, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline SetTeleportUtilCommand("set_teleport", CMD_ACCESS_UTIL, [](CClient *pClient, const BotCommandArgs&
+                                                                             args)
 {
 	if ( pClient )
 	{
@@ -78,7 +79,7 @@ CBotCommandInline SetTeleportUtilCommand("set_teleport", CMD_ACCESS_UTIL, [](CCl
 	return COMMAND_ERROR;
 }, "usage: remembers where you want to teleport");
 
-CBotCommandInline TeleportUtilCommand("teleport", CMD_ACCESS_UTIL, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline TeleportUtilCommand("teleport", CMD_ACCESS_UTIL, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient )
 	{
@@ -97,7 +98,7 @@ CBotCommandInline TeleportUtilCommand("teleport", CMD_ACCESS_UTIL, [](CClient *p
 	return COMMAND_ERROR;
 }, "usage: first use set_teleport, then this command to go there");
 
-CBotCommandInline NoClipCommand("noclip", CMD_ACCESS_UTIL, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline NoClipCommand("noclip", CMD_ACCESS_UTIL, [](CClient *pClient, const BotCommandArgs& args)
 {
 
 	edict_t *pEntity = nullptr;
@@ -132,7 +133,7 @@ CBotCommandInline NoClipCommand("noclip", CMD_ACCESS_UTIL, [](CClient *pClient, 
 	return COMMAND_ERROR;
 }, "fly through walls , yeah!");
 
-CBotCommandInline GodModeUtilCommand("god", CMD_ACCESS_UTIL, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline GodModeUtilCommand("god", CMD_ACCESS_UTIL, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient )
 	{
@@ -165,7 +166,7 @@ CBotCommandInline GodModeUtilCommand("god", CMD_ACCESS_UTIL, [](CClient *pClient
 	return COMMAND_ERROR;
 }, "usage: toggle for invulnerability!");
 
-CBotCommandInline NoTouchCommand("notouch", CMD_ACCESS_UTIL, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline NoTouchCommand("notouch", CMD_ACCESS_UTIL, [](CClient *pClient, const BotCommandArgs& args)
 {
 
 	if ( pClient )

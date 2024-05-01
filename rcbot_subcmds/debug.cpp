@@ -31,7 +31,7 @@
 
 #include <cmath>
 
-CBotCommandInline DebugGameEventCommand("gameevent", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugGameEventCommand("gameevent", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if (!args[0] || !*args[0]) {
 		return COMMAND_ERROR;
@@ -40,7 +40,7 @@ CBotCommandInline DebugGameEventCommand("gameevent", CMD_ACCESS_DEBUG, [](CClien
 	return COMMAND_ACCESSED;
 }, "usage \"gameevent 1 or 0, 1 on, 0 off\" : shows event output");
 
-CBotCommandInline DebugBotCommand("bot", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugBotCommand("bot", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if (!args[0] || !*args[0]) {
 		extern IServerGameEnts *servergameents;
@@ -96,7 +96,7 @@ CBotCommandInline DebugBotCommand("bot", CMD_ACCESS_DEBUG, [](CClient *pClient, 
 	return COMMAND_ACCESSED;
 }, "usage \"bot <partial bot name>, or just bot to switch off : shows bot debug output on listen server");
 
-CBotCommandInline DebugNavCommand("nav", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugNavCommand("nav", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( !args[0] || !*args[0] )
 		return COMMAND_ERROR;
@@ -106,7 +106,7 @@ CBotCommandInline DebugNavCommand("nav", CMD_ACCESS_DEBUG, [](CClient *pClient, 
 	return COMMAND_ACCESSED;
 }, "usage \"nav 1 or 0, 1 on, 0 off\" : shows navigation output");
 
-CBotCommandInline DebugVisCommand("vis", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugVisCommand("vis", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( !args[0] || !*args[0] )
 		return COMMAND_ERROR;
@@ -116,7 +116,7 @@ CBotCommandInline DebugVisCommand("vis", CMD_ACCESS_DEBUG, [](CClient *pClient, 
 	return COMMAND_ACCESSED;
 }, "usage \"vis 1 or 0, 1 on, 0 off\" : shows bot visibility output");
 
-CBotCommandInline DebugThinkCommand("think", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugThinkCommand("think", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( !args[0] || !*args[0] )
 		return COMMAND_ERROR;
@@ -126,7 +126,7 @@ CBotCommandInline DebugThinkCommand("think", CMD_ACCESS_DEBUG, [](CClient *pClie
 	return COMMAND_ACCESSED;
 }, "usage \"think 1 or 0, 1 on, 0 off\" : shows bot thinking output");
 
-CBotCommandInline DebugLookCommand("look", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugLookCommand("look", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( !args[0] || !*args[0] )
 		return COMMAND_ERROR;
@@ -136,7 +136,7 @@ CBotCommandInline DebugLookCommand("look", CMD_ACCESS_DEBUG, [](CClient *pClient
 	return COMMAND_ACCESSED;
 }, "usage \"look 1 or 0, 1 on, 0 off\" : shows bot look output");
 
-CBotCommandInline DebugHudCommand("hud", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugHudCommand("hud", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( !args[0] || !*args[0] )
 		return COMMAND_ERROR;
@@ -146,7 +146,7 @@ CBotCommandInline DebugHudCommand("hud", CMD_ACCESS_DEBUG, [](CClient *pClient, 
 	return COMMAND_ACCESSED;
 }, "usage \"hud 1 or 0, 1 on, 0 off\" : displays most important info about bot on the hud");
 
-CBotCommandInline DebugAimCommand("aim", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugAimCommand("aim", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( !args[0] || !*args[0] )
 		return COMMAND_ERROR;
@@ -156,7 +156,7 @@ CBotCommandInline DebugAimCommand("aim", CMD_ACCESS_DEBUG, [](CClient *pClient, 
 	return COMMAND_ACCESSED;
 }, "usage \"aim 1 or 0, 1 on, 0 off\" : displays aiming accuracy info on the hud");
 
-CBotCommandInline DebugChatCommand("chat", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugChatCommand("chat", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( !args[0] || !*args[0] )
 		return COMMAND_ERROR;
@@ -166,7 +166,7 @@ CBotCommandInline DebugChatCommand("chat", CMD_ACCESS_DEBUG, [](CClient *pClient
 	return COMMAND_ACCESSED;
 }, "usage \"chat 1 or 0, 1 on, 0 off\" : displays logs in chat");
 
-CBotCommandInline BotGoto("bot_goto", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline BotGoto("bot_goto", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient && pClient->getDebugBot()!= nullptr)
 	{
@@ -195,7 +195,7 @@ CBotCommandInline BotGoto("bot_goto", CMD_ACCESS_DEBUG, [](CClient *pClient, Bot
 	return COMMAND_ACCESSED;
 }, "set a debug bot first and then stand near a waypoint to force your bot to go there");
 
-CBotCommandInline BotFlush("bot_flush", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline BotFlush("bot_flush", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient && pClient->getDebugBot()!= nullptr)
 	{
@@ -212,7 +212,7 @@ CBotCommandInline BotFlush("bot_flush", CMD_ACCESS_DEBUG, [](CClient *pClient, B
 	return COMMAND_ACCESSED;
 }, "flush bot tasks");
 
-CBotCommandInline DebugTaskCommand("task", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugTaskCommand("task", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( !args[0] || !*args[0] )
 		return COMMAND_ERROR;
@@ -222,7 +222,7 @@ CBotCommandInline DebugTaskCommand("task", CMD_ACCESS_DEBUG, [](CClient *pClient
 	return COMMAND_ACCESSED;
 }, "usage \"nav 1 or 0, 1 on, 0 off\" : shows navigation output");
 
-CBotCommandInline BotTaskCommand("givetask", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline BotTaskCommand("givetask", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 #ifndef __linux__
 
@@ -314,7 +314,7 @@ CBotCommandInline BotTaskCommand("givetask", CMD_ACCESS_DEBUG, [](CClient *pClie
 	return COMMAND_ACCESSED;
 }, "gives a bot a task : usage <id> <entity name - for reference>");
 
-CBotCommandInline DebugButtonsCommand("buttons", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugButtonsCommand("buttons", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( !args[0] || !*args[0] )
 		return COMMAND_ERROR;
@@ -324,7 +324,7 @@ CBotCommandInline DebugButtonsCommand("buttons", CMD_ACCESS_DEBUG, [](CClient *p
 	return COMMAND_ACCESSED;
 }, "usage \"buttons 1 or 0, 1 on, 0 off\" : shows buttons bitmask");
 
-CBotCommandInline DebugSpeedCommand("speed", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugSpeedCommand("speed", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( !args[0] || !*args[0] )
 		return COMMAND_ERROR;
@@ -334,7 +334,7 @@ CBotCommandInline DebugSpeedCommand("speed", CMD_ACCESS_DEBUG, [](CClient *pClie
 	return COMMAND_ACCESSED;
 }, "usage \"speed 1 or 0, 1 on, 0 off\" : shows speed");
 
-CBotCommandInline DebugUsercmdCommand("usercmd", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugUsercmdCommand("usercmd", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( !args[0] || !*args[0] )
 		return COMMAND_ERROR;
@@ -344,7 +344,7 @@ CBotCommandInline DebugUsercmdCommand("usercmd", CMD_ACCESS_DEBUG, [](CClient *p
 	return COMMAND_ACCESSED;
 }, "usage \"usercmd 1 or 0, 1 on, 0 off\" : shows last user command output");
 
-CBotCommandInline DebugUtilCommand("util", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugUtilCommand("util", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( !args[0] || !*args[0] )
 		return COMMAND_ERROR;
@@ -354,7 +354,7 @@ CBotCommandInline DebugUtilCommand("util", CMD_ACCESS_DEBUG, [](CClient *pClient
 	return COMMAND_ACCESSED;
 }, "usage \"util 1 or 0, 1 on, 0 off\" : shows utility/action output");
 
-CBotCommandInline DebugProfilingCommand("profiling", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugProfilingCommand("profiling", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( !args[0] || !*args[0] )
 		return COMMAND_ERROR;
@@ -364,7 +364,7 @@ CBotCommandInline DebugProfilingCommand("profiling", CMD_ACCESS_DEBUG, [](CClien
 	return COMMAND_ACCESSED;
 }, "usage \"profiling 1 or 0, 1 on, 0 off\" : shows performance profiling");
 
-CBotCommandInline DebugEdictsCommand("edicts", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugEdictsCommand("edicts", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( !args[0] || !*args[0] )
 		return COMMAND_ERROR;
@@ -374,7 +374,7 @@ CBotCommandInline DebugEdictsCommand("edicts", CMD_ACCESS_DEBUG, [](CClient *pCl
 	return COMMAND_ACCESSED;
 }, "usage \"edicts 1 or 0, 1 on, 0 off\" : shows allocated/freed edicts");
 
-CBotCommandInline PrintProps("printprops", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline PrintProps("printprops", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient )
 	{
@@ -400,7 +400,7 @@ CBotCommandInline PrintProps("printprops", CMD_ACCESS_DEBUG, [](CClient *pClient
 	return COMMAND_ERROR;
 });
 
-CBotCommandInline SetProp("setprop", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline SetProp("setprop", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	
 	
@@ -421,8 +421,6 @@ CBotCommandInline SetProp("setprop", CMD_ACCESS_DEBUG, [](CClient *pClient, BotC
 
 			if ( pNearest )
 			{
-				void *data = nullptr;
-
 				extern bool g_PrintProps;
 				unsigned int m_offset = 0;
 
@@ -442,7 +440,7 @@ CBotCommandInline SetProp("setprop", CMD_ACCESS_DEBUG, [](CClient *pClient, BotC
 					 
 						pEntity = pUnknown->GetBaseEntity();
 
-						data = static_cast<void*>(reinterpret_cast<char*>(pEntity) + m_offset);
+						void* data = reinterpret_cast<char*>(pEntity) + m_offset;
 
 						if ( data )
 						{
@@ -479,7 +477,7 @@ CBotCommandInline SetProp("setprop", CMD_ACCESS_DEBUG, [](CClient *pClient, BotC
 	return COMMAND_ERROR;
 });
 
-CBotCommandInline GetProp("getprop", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline GetProp("getprop", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient )
 	{
@@ -497,8 +495,6 @@ CBotCommandInline GetProp("getprop", CMD_ACCESS_DEBUG, [](CClient *pClient, BotC
 
 			if ( pNearest )
 			{
-				void *data = nullptr;
-
 				extern bool g_PrintProps;
 				unsigned int m_offset = 0;
 
@@ -524,7 +520,7 @@ CBotCommandInline GetProp("getprop", CMD_ACCESS_DEBUG, [](CClient *pClient, BotC
 							preoffs = std::atoi(args[2]);	
 						}
 
-						data = static_cast<void*>(reinterpret_cast<char*>(pEntity) + m_offset);
+						void* data = reinterpret_cast<char*>(pEntity) + m_offset;
 
 						if ( data )
 						{
@@ -554,7 +550,7 @@ CBotCommandInline GetProp("getprop", CMD_ACCESS_DEBUG, [](CClient *pClient, BotC
 	return COMMAND_ERROR;
 });
 
-CBotCommandInline FindClass("findclass", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline FindClass("findclass", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient )
 	{
@@ -571,7 +567,7 @@ CBotCommandInline FindClass("findclass", CMD_ACCESS_DEBUG, [](CClient *pClient, 
 	return COMMAND_ERROR;
 });
 
-CBotCommandInline FindClassname("findclassname", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline FindClassname("findclassname", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient )
 	{
@@ -593,7 +589,7 @@ CBotCommandInline FindClassname("findclassname", CMD_ACCESS_DEBUG, [](CClient *p
 	return COMMAND_ERROR;
 });
 
-CBotCommandInline FindProp("findprop", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline FindProp("findprop", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( args[0] && *args[0] )
 	{
@@ -626,7 +622,7 @@ typedef union
 static u_MEMSEARCH stored_offsets[MAX_MEM_SEARCH];
 static unsigned int m_size;
 
-CBotCommandInline DebugMemoryScanCommand("memoryscan", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugMemoryScanCommand("memoryscan", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs& args)
 {
 	//args[0] = classname
 	// args[1] = value
@@ -730,7 +726,8 @@ CBotCommandInline DebugMemoryScanCommand("memoryscan", CMD_ACCESS_DEBUG, [](CCli
 	return COMMAND_ACCESSED;
 }, "usage \"memoryscan <classname> <value> <type = 'bool/int/byte/float'> [store last = 1]\"");
 
-CBotCommandInline DebugMemoryCheckCommand("memorycheck", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugMemoryCheckCommand("memorycheck", CMD_ACCESS_DEBUG, [](CClient *pClient, const BotCommandArgs&
+                                                                              args)
 {
 	// args[0] = classname
 	// args[1] = offset
@@ -793,7 +790,8 @@ CBotCommandInline DebugMemoryCheckCommand("memorycheck", CMD_ACCESS_DEBUG, [](CC
 	return COMMAND_ACCESSED;
 }, "usage \"memorycheck <classname> <offset> <type>\"");
 
-CBotCommandInline DebugMstrOffsetSearch("mstr_offset_search", CMD_ACCESS_DEBUG, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline DebugMstrOffsetSearch("mstr_offset_search", CMD_ACCESS_DEBUG, [](CClient *pClient,
+                                        const BotCommandArgs& args)
 {
 	if (strcmp("cp_dustbowl", STRING(gpGlobals->mapname)) != 0)
 	{

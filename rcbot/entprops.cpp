@@ -1661,7 +1661,7 @@ Vector *CBotEntProp::GetEntPropVectorPointer(int entity, PropType proptype, char
 /// @param value Vector to set.
 /// @param element Element # (starting from 0) if property is an array.
 /// @return true if the value was changed, false if an error occurred
-bool CBotEntProp::SetEntPropVector(int entity, PropType proptype, char *prop, Vector value, int element)
+bool CBotEntProp::SetEntPropVector(int entity, PropType proptype, char *prop, const Vector& value, int element)
 {
 	edict_t *pEdict;
 	CBaseEntity *pEntity;
@@ -2301,7 +2301,7 @@ Vector CBotEntProp::GetEntDataVector(int entity, int offset)
 /// @param value Vector to set.
 /// @param changeState If true, change will be sent over the network.
 /// @return true on success, false on failure
-bool CBotEntProp::SetEntDataVector(int entity, int offset, Vector value, bool changeState)
+bool CBotEntProp::SetEntDataVector(int entity, int offset, const Vector& value, bool changeState)
 {
 	CBaseEntity *pEntity;
 	edict_t *pEdict;

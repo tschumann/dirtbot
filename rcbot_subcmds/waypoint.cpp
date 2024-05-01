@@ -28,7 +28,7 @@
  *    version.
  */
 
-CBotCommandInline WaypointOnCommand("on", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointOnCommand("on", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient )
 	{
@@ -39,7 +39,7 @@ CBotCommandInline WaypointOnCommand("on", CMD_ACCESS_WAYPOINT, [](CClient *pClie
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline WaypointOffCommand("off", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointOffCommand("off", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs& args)
 {
 	pClient->setWaypointOn(false);
 	pClient->giveMessage("Waypoints Off");
@@ -48,14 +48,14 @@ CBotCommandInline WaypointOffCommand("off", CMD_ACCESS_WAYPOINT, [](CClient *pCl
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline WaypointAddCommand("add", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointAddCommand("add", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs& args)
 {
 	CWaypoints::addWaypoint(pClient,args[0],args[1],args[2],args[3]);
 
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline WaypointDeleteCommand("delete", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointDeleteCommand("delete", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs& args)
 {	
 	if ( pClient )
 	{
@@ -122,7 +122,7 @@ CBotCommandInline WaypointDeleteCommand("delete", CMD_ACCESS_WAYPOINT, [](CClien
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline WaypointInfoCommand("info", 0, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointInfoCommand("info", 0, [](CClient *pClient, const BotCommandArgs& args)
 {
 	pClient->updateCurrentWaypoint();
 
@@ -134,7 +134,7 @@ CBotCommandInline WaypointInfoCommand("info", 0, [](CClient *pClient, BotCommand
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline WaypointSaveCommand("save", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointSaveCommand("save", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( CWaypoints::save(false,(pClient!= nullptr)?pClient->getPlayer(): nullptr,((args[0]!= nullptr) && (*args[0]!=0))?args[0]: nullptr,((args[1]!= nullptr) && (*args[1]!=0))?args[1]: nullptr) )
 	{
@@ -148,7 +148,7 @@ CBotCommandInline WaypointSaveCommand("save", CMD_ACCESS_WAYPOINT, [](CClient *p
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline WaypointLoadCommand("load", CMD_ACCESS_WAYPOINT, [](CClient* pClient, BotCommandArgs args)
+CBotCommandInline WaypointLoadCommand("load", CMD_ACCESS_WAYPOINT, [](CClient* pClient, const BotCommandArgs& args)
 {
 	char* szMapName = CBotGlobals::getMapName();
 	bool bLoadOK;
@@ -173,7 +173,7 @@ CBotCommandInline WaypointLoadCommand("load", CMD_ACCESS_WAYPOINT, [](CClient* p
 });
 
 
-CBotCommandInline WaypointClearCommand("clear", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointClearCommand("clear", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs& args)
 {
 	CWaypoints::init();
 	CBotGlobals::botMessage(pClient->getPlayer(),0,"waypoints cleared");
@@ -181,7 +181,8 @@ CBotCommandInline WaypointClearCommand("clear", CMD_ACCESS_WAYPOINT, [](CClient 
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline WaypointGiveTypeCommand("givetype", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointGiveTypeCommand("givetype", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs&
+                                                                              args)
 {
 	edict_t *pEntity = pClient->getPlayer();
 
@@ -255,7 +256,8 @@ CBotCommandInline WaypointGiveTypeCommand("givetype", CMD_ACCESS_WAYPOINT, [](CC
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline WaypointDrawTypeCommand("drawtype", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointDrawTypeCommand("drawtype", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs&
+                                                                              args)
 {
 	if ( pClient )
 	{
@@ -268,7 +270,7 @@ CBotCommandInline WaypointDrawTypeCommand("drawtype", CMD_ACCESS_WAYPOINT, [](CC
 	return COMMAND_ERROR;
 }, "0: for effects engine (maximum limit of beams)\n1: for debug overlay (no limit of beams) [LISTEN SERVER CLIENT ONLY]");
 
-CBotCommandInline WaypointAngleCommand("angle", 0, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointAngleCommand("angle", 0, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient && pClient->getPlayer() )
 	{
@@ -287,7 +289,7 @@ CBotCommandInline WaypointAngleCommand("angle", 0, [](CClient *pClient, BotComma
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline WaypointSetAngleCommand("updateyaw", 0, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointSetAngleCommand("updateyaw", 0, [](CClient *pClient, const BotCommandArgs& args)
 {
 	pClient->updateCurrentWaypoint();
 
@@ -301,7 +303,7 @@ CBotCommandInline WaypointSetAngleCommand("updateyaw", 0, [](CClient *pClient, B
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline WaypointSetAreaCommand("setarea", 0, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointSetAreaCommand("setarea", 0, [](CClient *pClient, const BotCommandArgs& args)
 {
 	pClient->updateCurrentWaypoint();
 
@@ -317,7 +319,7 @@ CBotCommandInline WaypointSetAreaCommand("setarea", 0, [](CClient *pClient, BotC
 	return COMMAND_ACCESSED;
 }, "Go to a waypoint, use setarea <areaid>");
 
-CBotCommandInline WaypointSetRadiusCommand("setradius", 0, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointSetRadiusCommand("setradius", 0, [](CClient *pClient, const BotCommandArgs& args)
 {
 	pClient->updateCurrentWaypoint();
 
@@ -333,7 +335,7 @@ CBotCommandInline WaypointSetRadiusCommand("setradius", 0, [](CClient *pClient, 
 	return COMMAND_ACCESSED;
 }, "Go to a waypoint, use setradius <radius>");
 
-CBotCommandInline WaypointMenuCommand("menu", 0, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointMenuCommand("menu", 0, [](CClient *pClient, const BotCommandArgs& args)
 {
 	pClient->setCurrentMenu(CBotMenuList::getMenu(BOT_MENU_WPT));
 
@@ -432,7 +434,7 @@ CBotCommandInline WaypointMenuCommand("menu", 0, [](CClient *pClient, BotCommand
 	return COMMAND_ERROR;*/
 });
 
-CBotCommandInline WaypointCut("cut", 0, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointCut("cut", 0, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient )
 	{
@@ -452,7 +454,7 @@ CBotCommandInline WaypointCut("cut", 0, [](CClient *pClient, BotCommandArgs args
 	return COMMAND_ERROR;
 }, "allows you to move a waypoint by cutting it and pasting it");
 
-CBotCommandInline WaypointCopy("copy", 0, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointCopy("copy", 0, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient )
 	{
@@ -470,7 +472,7 @@ CBotCommandInline WaypointCopy("copy", 0, [](CClient *pClient, BotCommandArgs ar
 	return COMMAND_ERROR;
 }, "Go to a waypoint, and copy to hold its properties, then use paste to make a new waypoint with the same properties");
 
-CBotCommandInline WaypointPaste("paste", 0, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointPaste("paste", 0, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient )
 	{
@@ -481,7 +483,7 @@ CBotCommandInline WaypointPaste("paste", 0, [](CClient *pClient, BotCommandArgs 
 	return COMMAND_ERROR;
 }, "first copy a waypoint using the copy command and then use paste to make a new waypoint with the same properties");
 
-CBotCommandInline WaypointShiftAreas("shiftareas", 0, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointShiftAreas("shiftareas", 0, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient )
 	{
@@ -509,7 +511,7 @@ CBotCommandInline WaypointShiftAreas("shiftareas", 0, [](CClient *pClient, BotCo
 	return COMMAND_ERROR;
 }, "shift the areas of flagged waypoints to a different area/only use this once");
 
-CBotCommandInline WaypointTeleportCommand("teleport", 0, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointTeleportCommand("teleport", 0, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient && args[0] && *args[0] )
 	{
@@ -542,7 +544,7 @@ CBotCommandInline WaypointTeleportCommand("teleport", 0, [](CClient *pClient, Bo
 	return COMMAND_ERROR;
 });
 
-CBotCommandInline WaypointAreaSetToNearest("setareatonearest", 0, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointAreaSetToNearest("setareatonearest", 0, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient )
 	{
@@ -587,7 +589,7 @@ CBotCommandInline WaypointAreaSetToNearest("setareatonearest", 0, [](CClient *pC
 	return COMMAND_ERROR;
 });
 
-CBotCommandInline WaypointShowCommand("show", 0, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointShowCommand("show", 0, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient )
 	{
@@ -612,7 +614,7 @@ CBotCommandInline WaypointShowCommand("show", 0, [](CClient *pClient, BotCommand
 	return COMMAND_ERROR;
 }, "show <waypoint ID>, shows you to this waypoint");
 
-CBotCommandInline WaypointCheckCommand("check", 0, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointCheckCommand("check", 0, [](CClient *pClient, const BotCommandArgs& args)
 {
 	// loop through every waypoint and check the areas are not outside the number of control points
 
@@ -621,7 +623,7 @@ CBotCommandInline WaypointCheckCommand("check", 0, [](CClient *pClient, BotComma
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline WaypointShowVisCommand("showvis", 0, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointShowVisCommand("showvis", 0, [](CClient *pClient, const BotCommandArgs& args)
 {
 #ifndef __linux__
 	pClient->updateCurrentWaypoint();
@@ -660,7 +662,8 @@ CBotCommandInline WaypointShowVisCommand("showvis", 0, [](CClient *pClient, BotC
 	return COMMAND_ACCESSED;
 }, "Go to a waypoint, use showvis to see visibility");
 
-CBotCommandInline WaypointAutoWaypointCommand("autowaypoint", CMD_ACCESS_WAYPOINT, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointAutoWaypointCommand("autowaypoint", CMD_ACCESS_WAYPOINT, [](CClient *pClient,
+                                              const BotCommandArgs& args)
 {
 	if ( pClient )
 	{
@@ -671,7 +674,7 @@ CBotCommandInline WaypointAutoWaypointCommand("autowaypoint", CMD_ACCESS_WAYPOIN
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline WaypointAutoFix("autofix", 0, [](CClient *pClient, BotCommandArgs args)
+CBotCommandInline WaypointAutoFix("autofix", 0, [](CClient *pClient, const BotCommandArgs& args)
 {
 	bool bFixSentry_Sniper_Defend_TeleExtWpts = false;
 

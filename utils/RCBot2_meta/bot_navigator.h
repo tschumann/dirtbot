@@ -145,7 +145,7 @@ public:
 	virtual bool wantToSaveBelief () { return false; }
 	float getGoalDistance () const { return m_fGoalDistance; }
 
-	static const int MAX_PATH_TICKS = 200;
+	static constexpr int MAX_PATH_TICKS = 200;
 
 protected:
 	Vector m_vGoal;
