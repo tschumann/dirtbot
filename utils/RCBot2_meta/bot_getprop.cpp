@@ -578,10 +578,10 @@ void CClassInterface:: init ()
 		DEFINE_GETPROP(GETPROP_PLAYER_FOV, "CBasePlayer", "m_iFOV", 0);
 		DEFINE_GETPROP(GETPROP_PLAYER_LIFESTATE, "CBasePlayer", "m_lifeState", 0);
 
-		for ( unsigned int i = 0; i < GET_PROPDATA_MAX; i ++ )
+		for (CClassInterfaceValue& g_GetProp : g_GetProps)
 		{
 			//if ( g_GetProps[i]
-			g_GetProps[i].findOffset();
+			g_GetProp.findOffset();
 		}
 }
 

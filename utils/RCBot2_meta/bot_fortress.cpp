@@ -7870,8 +7870,8 @@ CBotTF2::CBotTF2()
 	m_iTeleEntranceArea = 0;
 	m_iTeleExitArea = 0;
 
-	for ( unsigned int i = 0; i < 10; i ++ )
-		m_fClassDisguiseFitness[i] = 1.0f;
+	for (float& m_fClassDisguiseFit : m_fClassDisguiseFitness)
+		m_fClassDisguiseFit = 1.0f;
 
 	std::memset(m_fClassDisguiseTime,0,sizeof(float)*10);
 }

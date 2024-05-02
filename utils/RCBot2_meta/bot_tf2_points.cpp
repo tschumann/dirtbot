@@ -577,12 +577,12 @@ bool CTFObjectiveResource :: updateDefendPoints ( int team )
 			int iNumPrevPointsAvail = 0;
 
 			// Check this points prevous points
-			for ( int j = 0; j < MAX_PREVIOUS_POINTS; j ++ )
+			for (int j : arr[i].iPrev)
 			{
-				if ( arr[i].iPrev[j] != -1 )
+				if (j != -1 )
 				{
 					// the previous point is not valid
-					if ( arr[arr[i].iPrev[j]].bValid )
+					if ( arr[j].bValid )
 						iNumPrevPointsAvail++;
 				}
 			}
@@ -616,9 +616,9 @@ bool CTFObjectiveResource :: updateDefendPoints ( int team )
 
 				if ( arr[j].bPrev )
 				{
-					for ( int k = 0; k < MAX_PREVIOUS_POINTS; k ++ )
+					for (int k : arr[j].iPrev)
 					{
-						if ( arr[j].iPrev[k] == i )
+						if (k == i )
 						{
 							bfound = true;
 							break;
@@ -935,9 +935,9 @@ bool CTFObjectiveResource :: updateAttackPoints ( int team )
 
 				if ( arr[j].bPrev )
 				{
-					for ( int k = 0; k < MAX_PREVIOUS_POINTS; k ++ )
+					for (int k : arr[j].iPrev)
 					{
-						if ( arr[j].iPrev[k] == i )
+						if (k == i )
 						{
 							bfound = true;
 							break;

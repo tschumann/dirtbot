@@ -1896,7 +1896,7 @@ bool CBotEntProp::SetEntPropString(int entity, PropType proptype, char *prop, ch
 	logger->Log(LogLevel::ERROR, "SetEntPropString is not supported for now");
 	return false;
 
-#if 0 // Not supported for now
+#if false // Not supported for now
 
 	edict_t *pEdict;
 	CBaseEntity *pEntity;

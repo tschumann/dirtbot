@@ -281,12 +281,12 @@ public:
 
 		for (const auto& m_ValidPoint : m_ValidPoints)
 		{
-			for ( int j = 0; j < 2; j ++ )
+			for (const TF2PointProb_t (&j)[8] : m_ValidPoint)
 			{
 				for ( int k = 0; k < MAX_CONTROL_POINTS; k ++ )
 				{
 					// OR
-					m_ValidAreas[k] = m_ValidAreas[k] || m_ValidPoint[j][k].bValid;
+					m_ValidAreas[k] = m_ValidAreas[k] || j[k].bValid;
 				}
 			}
 		}
@@ -419,9 +419,9 @@ public:
 			iszOverlay = NULL_STRING;
 			iPlayersRequired = 0;
 			iTimedPoints = 0;
-			for ( int i = 0; i < MAX_PREVIOUS_POINTS; i++ )
+			for (string_t& i : iszPreviousPoint)
 			{
-				iszPreviousPoint[i] = NULL_STRING;
+				i = NULL_STRING;
 			}
 			iTeamPoseParam = 0;
 		}

@@ -443,7 +443,7 @@ public:
 		return nullptr;
 	}
 
-	static void initall () { for ( int i = 0; i < RCBOT_MAXPLAYERS; i ++ ) { m_Clients[i].init(); } }
+	static void initall () { for (CClient& m_Client : m_Clients) { m_Client.init(); } }
 	static void giveMessage (const char* msg, float fTime = 0.1f, edict_t* pPlayer = nullptr);// NULL to everyone
 private:
 	static CClient m_Clients[RCBOT_MAXPLAYERS];

@@ -228,9 +228,9 @@ public:
 		memset(m_pFlags,0,sizeof(edict_t*)*MAX_DOD_FLAGS);
 		memset(m_pBombs,0,sizeof(edict_t*)*MAX_DOD_FLAGS*2);
 
-		for ( short int i = 0; i < MAX_DOD_FLAGS; i ++ )
+		for (int& i : m_iWaypoint)
 		{
-			m_iWaypoint[i] = -1;
+			i = -1;
 		}
 	}
 
@@ -1142,10 +1142,10 @@ public:
 
 	static bool isSentrySapped ( edict_t *pSentry )
 	{
-		for ( unsigned int i = 0; i < RCBOT_MAXPLAYERS; i ++ )
+		for (tf_sentry_t& m_SentryGun : m_SentryGuns)
 		{
-			if ( m_SentryGuns[i].sentry.get() == pSentry )
-				return m_SentryGuns[i].sapper.get()!= nullptr;
+			if (m_SentryGun.sentry.get() == pSentry )
+				return m_SentryGun.sapper.get()!= nullptr;
 		}
 
 		return false;
@@ -1153,10 +1153,10 @@ public:
 
 	static bool isTeleporterSapped ( edict_t *pTele )
 	{
-		for ( unsigned int i = 0; i < RCBOT_MAXPLAYERS; i ++ )
+		for (tf_tele_t& m_Teleporter : m_Teleporters)
 		{
-			if ( m_Teleporters[i].entrance.get() == pTele || m_Teleporters[i].exit.get() == pTele )
-				return m_Teleporters[i].sapper.get()!= nullptr;
+			if (m_Teleporter.entrance.get() == pTele || m_Teleporter.exit.get() == pTele )
+				return m_Teleporter.sapper.get()!= nullptr;
 		}
 
 		return false;
@@ -1164,10 +1164,10 @@ public:
 
 	static bool isDispenserSapped ( edict_t *pDisp )
 	{
-		for ( unsigned int i = 0; i < RCBOT_MAXPLAYERS; i ++ )
+		for (tf_disp_t& m_Dispenser : m_Dispensers)
 		{
-			if ( m_Dispensers[i].disp.get() == pDisp )
-				return m_Dispensers[i].sapper.get()!= nullptr;
+			if (m_Dispenser.disp.get() == pDisp )
+				return m_Dispenser.sapper.get()!= nullptr;
 		}
 
 		return false;

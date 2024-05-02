@@ -656,9 +656,9 @@ void CClient :: think ()
 				m_fCanPlaceLadder = 0.0f;
 
 				// need to unset every check point when going on ladder first time
-				for ( int i = 0; i < MAX_STORED_AUTOWAYPOINT; i ++ )
+				for (CAutoWaypointCheck& m_vLastAutoWaypointCheckP : m_vLastAutoWaypointCheckPos)
 				{
-						m_vLastAutoWaypointCheckPos[i].UnSetPoint();					
+					m_vLastAutoWaypointCheckP.UnSetPoint();					
 				}
 			}
 			else if ( iMoveType != MOVETYPE_FLY && m_iLastMoveType == MOVETYPE_FLY )
@@ -1101,9 +1101,9 @@ void CClients :: clientThink ()
 
 	m_bClientsDebugging = false;
 
-	for ( int i = 0; i < RCBOT_MAXPLAYERS; i ++ )
+	for (CClient& m_Client : m_Clients)
 	{
-		pClient = &m_Clients[i];
+		pClient = &m_Client;
 
 		if ( !pClient->isUsed() )
 			continue;
@@ -1119,9 +1119,9 @@ void CClients :: clientThink ()
 
 CClient *CClients :: findClientBySteamID (const char* szSteamID)
 {
-	for ( int i = 0; i < RCBOT_MAXPLAYERS; i ++ )
+	for (CClient& m_Client : m_Clients)
 	{
-		CClient* pClient = &m_Clients[i];
+		CClient* pClient = &m_Client;
 
 		if ( pClient->isUsed() )
 		{
@@ -1167,9 +1167,9 @@ const char *g_szDebugTags[15] =
 
 void CClients :: clientDebugMsg ( int iLev, const char *szMsg, CBot *pBot )
 {
-	for ( int i = 0; i < RCBOT_MAXPLAYERS; i ++ )
+	for (CClient& m_Client : m_Clients)
 	{
-		CClient* pClient = &m_Clients[i];
+		CClient* pClient = &m_Client;
 
 		if ( !pClient->isUsed() )
 			continue;

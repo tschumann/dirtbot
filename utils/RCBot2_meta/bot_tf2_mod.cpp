@@ -326,10 +326,10 @@ void CTeamFortress2Mod :: mapInit ()
 
 int CTeamFortress2Mod :: getTeleporterWaypoint ( edict_t *pTele )
 {
-	for ( int i = 0; i < RCBOT_MAXPLAYERS; i ++ )
+	for (tf_tele_t& m_Teleporter : m_Teleporters)
 	{
-		if ( m_Teleporters[i].exit.get() == pTele )
-			return m_Teleporters[i].m_iWaypoint; 
+		if (m_Teleporter.exit.get() == pTele )
+			return m_Teleporter.m_iWaypoint; 
 	}
 
 	return -1;
@@ -669,11 +669,11 @@ edict_t *CTeamFortress2Mod :: getTeleporterExit ( edict_t *pTele )
 {
 	edict_t *pExit;
 
-	for ( int i = 0; i < RCBOT_MAXPLAYERS; i ++ )
+	for (tf_tele_t& m_Teleporter : m_Teleporters)
 	{
-		if ( m_Teleporters[i].entrance.get() == pTele )
+		if (m_Teleporter.entrance.get() == pTele )
 		{
-			if ( (pExit = m_Teleporters[i].exit.get()) != nullptr)
+			if ( (pExit = m_Teleporter.exit.get()) != nullptr)
 			{
 				return pExit;
 			}
@@ -1084,10 +1084,10 @@ edict_t *CTeamFortress2Mod :: nearestDispenser (const Vector& vOrigin, int team)
 	edict_t *pNearest = nullptr;
 	float fNearest = bot_use_disp_dist.GetFloat();
 
-	for ( unsigned int i = 0; i < RCBOT_MAXPLAYERS; i ++ )
+	for (tf_disp_t& m_Dispenser : m_Dispensers)
 	{
 		//m_Dispensers[i]
-		edict_t* pDisp = m_Dispensers[i].disp.get();
+		edict_t* pDisp = m_Dispenser.disp.get();
 
 		if ( pDisp )
 		{

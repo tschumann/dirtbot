@@ -45,19 +45,19 @@ CStrings :: CStrings ()
 void CStrings :: freeAllMemory()
 {
 	// clear strings 
-	for ( int i = 0; i < MAX_STRINGS_HASH; i ++ )
+	for (std::vector<char*>& m_String : m_Strings)
 	{
-		for ( unsigned int j = 0; j < m_Strings[i].size(); j ++ )
+		for (char*& j : m_String)
 		{
-			const char* pszFree = m_Strings[i][j];
+			const char* pszFree = j;
 
 			//if ( pszFree )
 				delete pszFree;
 
-			m_Strings[i][j] = nullptr;
+			j = nullptr;
 		}
 
-		m_Strings[i].clear();
+		m_String.clear();
 	}
 }
 

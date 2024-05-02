@@ -669,7 +669,7 @@ CBotCommandInline DebugMemoryScanCommand("memoryscan", CMD_ACCESS_DEBUG, [](CCli
 	const int ivalue = (std::atoi(args[1]));
 	const float fvalue = (atof(args[1]));
 
-	for ( int i = 0; i < MAX_MEM_SEARCH; i ++ ) // 2KB search
+	for (u_MEMSEARCH& stored_offset : stored_offsets) // 2KB search
 	{
 		bool bfound = false;
 
@@ -701,13 +701,13 @@ CBotCommandInline DebugMemoryScanCommand("memoryscan", CMD_ACCESS_DEBUG, [](CCli
 
 		if ( bfound )
 		{
-			if ( !stored_offsets[i].b1.searched )					
-				stored_offsets[i].b1.found = 1;				
+			if ( !stored_offset.b1.searched )
+				stored_offset.b1.found = 1;				
 		}
-		else if ( stored_offsets[i].b1.searched )
-			stored_offsets[i].b1.found = 0;
+		else if (stored_offset.b1.searched )
+			stored_offset.b1.found = 0;
 
-		stored_offsets[i].b1.searched = 1;
+		stored_offset.b1.searched = 1;
 
 		mempoint++;
 	}

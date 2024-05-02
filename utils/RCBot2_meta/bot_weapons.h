@@ -808,14 +808,14 @@ public:
 
 	CBotWeapon *getGrenade ()
 	{
-		for ( int i = 0; i < MAX_WEAPONS; i ++ )
+		for (CBotWeapon& m_theWeapon : m_theWeapons)
 		{
-			if ( m_theWeapons[i].hasWeapon() )
+			if (m_theWeapon.hasWeapon() )
 			{
-				if ( m_theWeapons[i].getWeaponInfo() )
+				if (m_theWeapon.getWeaponInfo() )
 				{
-					if ( m_theWeapons[i].getWeaponInfo()->isGrenade() )
-						return &m_theWeapons[i];
+					if (m_theWeapon.getWeaponInfo()->isGrenade() )
+						return &m_theWeapon;
 				}
 			}
 		}

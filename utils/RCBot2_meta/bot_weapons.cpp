@@ -348,9 +348,9 @@ int CBotWeapon::getAmmo(CBot* pBot, int type) const
 
 bool CBotWeapons::hasExplosives() const
 {
-	for (int i = 0; i < MAX_WEAPONS; i++)
+	for (const CBotWeapon& m_theWeapon : m_theWeapons)
 	{
-		const CBotWeapon* pWeapon = &m_theWeapons[i];
+		const CBotWeapon* pWeapon = &m_theWeapon;
 		// find weapon info from weapon id
 		if (pWeapon->hasWeapon() && pWeapon->isExplosive())
 		{
@@ -364,13 +364,13 @@ bool CBotWeapons::hasExplosives() const
 
 bool CBotWeapons::hasWeapon(int id) const
 {
-	for (int i = 0; i < MAX_WEAPONS; i++)
+	for (const CBotWeapon& m_theWeapon : m_theWeapons)
 	{
-		if (m_theWeapons[i].getWeaponInfo() == nullptr)
+		if (m_theWeapon.getWeaponInfo() == nullptr)
 			continue;
-		if (m_theWeapons[i].hasWeapon() == false)
+		if (m_theWeapon.hasWeapon() == false)
 			continue;
-		if (m_theWeapons[i].getID() == id)
+		if (m_theWeapon.getID() == id)
 			// find weapon info from weapon id
 		{
 			return true;
@@ -578,9 +578,9 @@ CBotWeapon* CBotWeapons::getBestWeapon(edict_t* pEnemy, bool bAllowMelee, bool b
 	if (pEnemy)
 		flDist = m_pBot->distanceFrom(vEnemyOrigin);
 
-	for (unsigned int i = 0; i < MAX_WEAPONS; i++)
+	for (CBotWeapon& m_theWeapon : m_theWeapons)
 	{
-		CBotWeapon* pWeapon = &m_theWeapons[i];
+		CBotWeapon* pWeapon = &m_theWeapon;
 
 		if (!pWeapon)
 			continue;
@@ -737,10 +737,10 @@ return;
 
 CBotWeapon* CBotWeapons::getWeapon(CWeapon* pWeapon)
 {
-	for (unsigned int i = 0; i < MAX_WEAPONS; i++)
+	for (CBotWeapon& m_theWeapon : m_theWeapons)
 	{
-		if (m_theWeapons[i].getWeaponInfo() == pWeapon)
-			return &m_theWeapons[i];
+		if (m_theWeapon.getWeaponInfo() == pWeapon)
+			return &m_theWeapon;
 	}
 
 	return nullptr;
@@ -748,10 +748,10 @@ CBotWeapon* CBotWeapons::getWeapon(CWeapon* pWeapon)
 
 CBotWeapon* CBotWeapons::getCurrentWeaponInSlot(int iSlot)
 {
-	for (unsigned int i = 0; i < MAX_WEAPONS; i++)
+	for (CBotWeapon& m_theWeapon : m_theWeapons)
 	{
-		if (m_theWeapons[i].hasWeapon() && m_theWeapons[i].getWeaponInfo() && m_theWeapons[i].getWeaponInfo()->getSlot() == iSlot)
-			return &m_theWeapons[i];
+		if (m_theWeapon.hasWeapon() && m_theWeapon.getWeaponInfo() && m_theWeapon.getWeaponInfo()->getSlot() == iSlot)
+			return &m_theWeapon;
 	}
 
 	return nullptr;
@@ -869,9 +869,9 @@ void CWeapons::loadWeapons(const char* szWeaponListName, WeaponsData_t* pDefault
 
 void CBotWeapons::clearWeapons()
 {
-	for (unsigned short i = 0; i < MAX_WEAPONS; i++)
+	for (CBotWeapon& m_theWeapon : m_theWeapons)
 	{
-		std::memset(&m_theWeapons[i], 0, sizeof(CBotWeapon));
+		std::memset(&m_theWeapon, 0, sizeof(CBotWeapon));
 		//m_theWeapons[i].setHasWeapon(false);
 	}
 }
@@ -881,9 +881,9 @@ CBotWeapon* CBotWeapons::getPrimaryWeapon()
 {
 	CBotWeapon* pBest = nullptr;
 
-	for (unsigned short i = 0; i < MAX_WEAPONS; i++)
+	for (CBotWeapon& m_theWeapon : m_theWeapons)
 	{
-		CBotWeapon* pWeap = &m_theWeapons[i];
+		CBotWeapon* pWeap = &m_theWeapon;
 
 		if (!pWeap->hasWeapon())
 			continue;
@@ -907,16 +907,16 @@ CBotWeapon* CBotWeapons::getActiveWeapon(const char* szWeaponName, edict_t* pWea
 
 		if (pWeapon)
 		{
-			for (unsigned short int i = 0; i < MAX_WEAPONS; i++)
+			for (CBotWeapon& m_theWeapon : m_theWeapons)
 			{
-				const CWeapon* p = m_theWeapons[i].getWeaponInfo();
+				const CWeapon* p = m_theWeapon.getWeaponInfo();
 
 				if (!p)
 					continue;
 
 				if (std::strcmp(p->getWeaponName(), szWeaponName) == 0)
 				{
-					toReturn = &m_theWeapons[i];
+					toReturn = &m_theWeapon;
 					break;
 				}
 			}

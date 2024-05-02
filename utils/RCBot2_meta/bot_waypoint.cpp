@@ -2068,8 +2068,8 @@ void CWaypoints :: init (const char *pszAuthor, const char *pszModifiedBy)
 	m_iNumWaypoints = 0;
 	m_fNextDrawWaypoints = 0;
 
-	for ( int i = 0; i < MAX_WAYPOINTS; i ++ )
-		m_theWaypoints[i].init();
+	for (CWaypoint& m_theWaypoint : m_theWaypoints)
+		m_theWaypoint.init();
 
 	Q_memset(m_theWaypoints,0,sizeof(CWaypoint)*MAX_WAYPOINTS);	
 
