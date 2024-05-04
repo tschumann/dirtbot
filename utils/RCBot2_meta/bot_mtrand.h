@@ -98,7 +98,7 @@ private:
   static constexpr int n = 624, m = 397; // compile time constants
 // the variables below are static (no duplicates can exist)
   static unsigned long state[n]; // state vector array
-  static size_t p; // position in state array
+  static int p; // position in state array
   static bool init; // true if init function is called
 // private functions used to generate the pseudo random numbers
 static unsigned long twiddle(unsigned long, unsigned long); // used by gen_state()
