@@ -46,6 +46,9 @@ CProfileTimer("updateVisibles()") // BOT_VISION_TIMER
 // initialise update time
 float CProfileTimers::m_fNextUpdate = 0;
 
+// Nuke this on x64
+#if !defined(PLATFORM_64BITS)
+
 // if windows USE THE QUERYPERFORMANCECOUNTER
 #ifdef _WIN32
 inline unsigned __int64 RDTSC()
@@ -69,6 +72,8 @@ inline unsigned __int64 RDTSC()
    }
 #endif
 
+#endif
+
 CProfileTimer :: CProfileTimer (const char *szFunction)
 {
 	m_szFunction = CStrings::getString(szFunction);
@@ -85,16 +90,23 @@ CProfileTimer :: CProfileTimer (const char *szFunction)
 // "Begin" Timer i.e. update time
 void CProfileTimer :: Start()
 {
+// TODO: Proper x64 fix
+#if !defined(PLATFORM_64BITS)
+
 #ifdef _WIN32
 	QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&start_cycle));
 #else
 		start_cycle = rdtsc();
 #endif
 
+#endif
+
 }
 // Stop Timer, work out min/max values and set invoked
 void CProfileTimer :: Stop()
 {
+#if !defined(PLATFORM_64BITS)
+
 #ifdef _WIN32
 	//unsigned __int64 end_cycle;
 	QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&end_cycle));
@@ -113,6 +125,8 @@ void CProfileTimer :: Stop()
 	m_overall = m_overall + m_last;
 
 	m_iInvoked ++;
+
+#endif
 }
 
 
