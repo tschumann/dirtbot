@@ -76,7 +76,7 @@ void CRCBotKeyValueList::parseFile(std::fstream& fp)
 
 CRCBotKeyValueList :: ~CRCBotKeyValueList()
 {
-	for (auto& m_KV : m_KVs)
+	for (CRCBotKeyValue*& m_KV : m_KVs)
 	{
 		delete m_KV;
 		m_KV = nullptr;
@@ -87,7 +87,7 @@ CRCBotKeyValueList :: ~CRCBotKeyValueList()
 
 CRCBotKeyValue *CRCBotKeyValueList :: getKV ( const char *key ) const
 {
-	for (const auto m_KV : m_KVs)
+	for (CRCBotKeyValue* const m_KV : m_KVs)
 	{
 		if ( FStrEq(m_KV->getKey(),key) )
 			return m_KV;

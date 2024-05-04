@@ -1154,7 +1154,7 @@ void CBotGravGunPickup :: execute(CBot *pBot,CBotSchedule *pSchedule)
 
 	if ( m_fTime < engine->Time() )
 	{
-		const auto HL2DMBot = static_cast<CHLDMBot*>(pBot);
+		CHLDMBot* const HL2DMBot = static_cast<CHLDMBot*>(pBot);
 
 		if (HL2DMBot->getFailedObject() && HL2DMBot->distanceFrom(HL2DMBot->getFailedObject())<=pBot->distanceFrom(m_Prop)+48 )
 			pBot->primaryAttack();
@@ -1604,7 +1604,8 @@ void CBotBackstab ::execute (CBot *pBot,CBotSchedule *pSchedule)
 	}
 
 	AngleVectors(CBotGlobals::entityEyeAngles(pEnemy),&vangles);
-	const Vector vrear = CBotGlobals::entityOrigin(pEnemy) - vangles * 45 + Vector(0, 0, 32);
+	constexpr int Z_OFFSET = 32;
+	const Vector vrear = CBotGlobals::entityOrigin(pEnemy) - vangles * 45 + Vector(0, 0, Z_OFFSET);
 
 	pTF2Bot->resetAttackingEnemy();
 

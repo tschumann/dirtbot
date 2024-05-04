@@ -221,7 +221,7 @@ public:
 	// remove the first schedule in the queue matching this schedule identifier
 	void removeSchedule ( eBotSchedule iSchedule )
 	{
-		for (auto it = m_Schedules.begin(); it != m_Schedules.end(); ) {
+		for (std::deque<CBotSchedule*>::iterator it = m_Schedules.begin(); it != m_Schedules.end(); ) {
 			if ((*it)->isID(iSchedule)) {
 				m_Schedules.erase(it);
 				return;

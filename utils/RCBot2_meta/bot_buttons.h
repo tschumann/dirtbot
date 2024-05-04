@@ -87,7 +87,7 @@ public:
 
 	void freeMemory ()
 	{
-		for (const auto& m_theButton : m_theButtons)
+		for (CBotButton* const& m_theButton : m_theButtons)
 		{			
 			delete m_theButton;
 		}

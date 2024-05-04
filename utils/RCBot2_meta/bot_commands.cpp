@@ -160,7 +160,7 @@ eBotCommandResult CBotSubcommands::execute(CClient *pClient, BotCommandArgs args
 	const char* subcmd = args[0];
 	args.pop_front();
 	
-	for (const auto cmd : m_theCommands) {
+	for (CBotCommand* const cmd : m_theCommands) {
 		if (!cmd->isCommand(subcmd)) {
 			continue;
 		}
@@ -206,7 +206,7 @@ void CBotSubcommands::printCommand(edict_t *pPrintTo, int indent)
 	else
 		CBotGlobals::botMessage(pPrintTo,0,"[%s]",m_szCommand);
 
-	for (const auto& m_theCommand : m_theCommands)
+	for (CBotCommand* const& m_theCommand : m_theCommands)
 	{
 		m_theCommand->printCommand(pPrintTo,indent+1);
 	}

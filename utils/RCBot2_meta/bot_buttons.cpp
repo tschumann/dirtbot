@@ -73,7 +73,7 @@ CBotButtons :: CBotButtons()
 
 void CBotButtons :: holdButton ( int iButtonId, float fFrom, float fFor, float fLetGoTime ) const
 {
-	for (const auto m_theButton : m_theButtons)
+	for (CBotButton* const m_theButton : m_theButtons)
 	{			
 		if (m_theButton->getID() == iButtonId )
 		{
@@ -85,7 +85,7 @@ void CBotButtons :: holdButton ( int iButtonId, float fFrom, float fFor, float f
 
 void CBotButtons :: letGo (int iButtonId) const
 {
-	for (const auto m_theButton : m_theButtons)
+	for (CBotButton* const m_theButton : m_theButtons)
 	{			
 		if (m_theButton->getID() == iButtonId )
 		{
@@ -103,7 +103,7 @@ int CBotButtons :: getBitMask () const
 
 	const float fTime = engine->Time();
 
-	for (const auto m_theButton : m_theButtons)
+	for (CBotButton* const m_theButton : m_theButtons)
 	{
 		if (m_theButton->held(fTime) )
 		{
@@ -117,7 +117,7 @@ int CBotButtons :: getBitMask () const
 
 bool CBotButtons :: canPressButton ( int iButtonId ) const
 {
-	for (const auto m_theButton : m_theButtons)
+	for (CBotButton* const m_theButton : m_theButtons)
 	{			
 		if (m_theButton->getID() == iButtonId )
 			return m_theButton->canPress(engine->Time());
@@ -132,7 +132,7 @@ void CBotButtons :: add ( CBotButton *theButton )
 
 bool CBotButtons :: holdingButton ( int iButtonId ) const
 {
-	for (const auto m_theButton : m_theButtons)
+	for (CBotButton* const m_theButton : m_theButtons)
 	{
 		if (m_theButton->getID() == iButtonId )
 			return m_theButton->held(engine->Time());
@@ -143,7 +143,7 @@ bool CBotButtons :: holdingButton ( int iButtonId ) const
 
 void CBotButtons :: tap ( int iButtonId ) const
 {
-	for (const auto m_theButton : m_theButtons)
+	for (CBotButton* const m_theButton : m_theButtons)
 	{
 		if (m_theButton->getID() == iButtonId )
 		{

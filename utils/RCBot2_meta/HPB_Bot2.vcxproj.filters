@@ -185,12 +185,6 @@
     <ClCompile Include="..\..\rcbot_subcmds\pathwaypoint.cpp">
       <Filter>Source Files\rcbot_subcmds</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\rcbot_subcmds\users.cpp">
-      <Filter>Source Files\rcbot_subcmds</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\rcbot_subcmds\util.cpp">
-      <Filter>Source Files\rcbot_subcmds</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\rcbot_subcmds\waypoint.cpp">
       <Filter>Source Files\rcbot_subcmds</Filter>
     </ClCompile>
@@ -214,6 +208,12 @@
     </ClCompile>
     <ClCompile Include="..\..\loader\loader.cpp">
       <Filter>Source Files\loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\rcbot_subcmds\users.cpp">
+      <Filter>Source Files\rcbot_subcmds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\rcbot_subcmds\util.cpp">
+      <Filter>Source Files\rcbot_subcmds</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

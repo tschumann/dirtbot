@@ -337,16 +337,16 @@ public:
 		return !strcmp(szWeaponName,getWeaponName());
 	}
 
-	bool isShortWeaponName ( const char *szWeaponName ) const
+	bool isShortWeaponName(const char* szWeaponName) const
 	{
-		static int start;
-		
+		static ptrdiff_t start;
+
 		start = strlen(m_szWeaponName) - strlen(szWeaponName);
-		
-		if ( start < 0 )
+
+		if (start < 0)
 			return false;
 
-		return !strcmp(&m_szWeaponName[start],szWeaponName);
+		return !strcmp(&m_szWeaponName[start], szWeaponName);
 	}
 
 	bool canDestroyPipeBombs() const

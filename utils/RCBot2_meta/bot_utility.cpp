@@ -182,7 +182,7 @@ void CBotUtilities::execute()
 {
 	m_pBest.head = nullptr;
 
-	for (auto& m_Utility : m_Utilities)
+	for (CBotUtility& m_Utility : m_Utilities)
 	{
 		CBotUtility* pUtil = &m_Utility;
 		const float fUtil = pUtil->getUtility();

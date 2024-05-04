@@ -1111,7 +1111,9 @@ void CBotGlobals :: buildFileName ( char *szOutput, const char *szFile, const ch
 	else
 		std::strcpy(szOutput, m_szRCBotFolder);
 
-	if ( szOutput[std::strlen(szOutput)-1] != '\\' && szOutput[std::strlen(szOutput)-1] != '/' )
+	const size_t len = std::strlen(szOutput);
+
+	if (len > 0 && szOutput[len - 1] != '\\' && szOutput[len - 1] != '/')
 		addDirectoryDelimiter(szOutput);
 
 	if ( szFolder )

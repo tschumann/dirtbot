@@ -1262,7 +1262,7 @@ void CBotEvents :: addEvent ( CBotEvent *pEvent )
 
 void CBotEvents :: freeMemory ()
 {
-	for (auto& m_theEvent : m_theEvents)
+	for (CBotEvent*& m_theEvent : m_theEvents)
 	{
 		delete m_theEvent;
 		m_theEvent = nullptr;	
@@ -1287,7 +1287,7 @@ void CBotEvents :: executeEvent( void *pEvent, eBotEventType iType )
 	if ( iType != TYPE_IGAMEEVENT )
 		iEventId = pInterface->getInt("eventid");
 
-	for (const auto pFound : m_theEvents)
+	for (CBotEvent* const pFound : m_theEvents)
 	{
 		// if it has an pEvent id stored just check that
 		//if ( ( iType != TYPE_IGAMEEVENT ) && pFound->hasEventId() )

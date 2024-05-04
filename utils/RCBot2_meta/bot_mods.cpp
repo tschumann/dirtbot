@@ -296,7 +296,7 @@ std::vector<CBotMod*> CBotMods::m_Mods;
 
 void CBotMods::freeMemory()
 {
-	for (auto& m_Mod : m_Mods)
+	for (CBotMod*& m_Mod : m_Mods)
 	{
 		m_Mod->freeMemory();
 		delete m_Mod;
@@ -308,7 +308,7 @@ void CBotMods::freeMemory()
 
 CBotMod* CBotMods::getMod(char* szModFolder)
 {
-	for (const auto& m_Mod : m_Mods)
+	for (CBotMod* const& m_Mod : m_Mods)
 	{
 		if (m_Mod->isModFolder(szModFolder))
 		{

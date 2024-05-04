@@ -100,6 +100,7 @@
       <CompileAs>Default</CompileAs>
       <AdditionalOptions>/D SE_EPISODEONE=1 /D SE_DARKMESSIAH=2 /D SE_ORANGEBOX=3 /D SE_ORANGEBOXVALVE=4 /D SE_LEFT4DEAD=5 /D SE_LEFT4DEAD2=6 /D SE_ALIENSWARM=7 /FS</AdditionalOptions>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -150,7 +151,7 @@
       <OmitDefaultLibName>false</OmitDefaultLibName>
       <AdditionalOptions>/D SE_EPISODEONE=1 /D SE_DARKMESSIAH=2 /D SE_ORANGEBOX=3 /D SE_ORANGEBOXVALVE=4 /D SE_LEFT4DEAD=5 /D SE_LEFT4DEAD2=6 /D SE_ALIENSWARM=7</AdditionalOptions>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -196,7 +197,7 @@
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <DisableSpecificWarnings>4005;4028;4058;4061;4062;4242;4265;4365;4464;4471;4625;4710;4820;4996;5045;5204;5219;5220;5264;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard_C>Default</LanguageStandard_C>
-      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <WarningLevel>Level4</WarningLevel>
     </ClCompile>
     <ResourceCompile>

@@ -582,7 +582,7 @@ public:
 
 	static CWaypoint *getBombWaypoint ( edict_t *pBomb )
 	{
-		for (auto& m_BombWaypoint : m_BombWaypoints)
+		for (edict_wpt_pair_t& m_BombWaypoint : m_BombWaypoints)
 		{
 			if (m_BombWaypoint.pEdict == pBomb )
 				return m_BombWaypoint.pWaypoint;
@@ -593,7 +593,7 @@ public:
 
 	static bool isPathBomb ( edict_t *pBomb )
 	{
-		for (auto& m_BombWaypoint : m_BombWaypoints)
+		for (edict_wpt_pair_t& m_BombWaypoint : m_BombWaypoints)
 		{
 			if (m_BombWaypoint.pEdict == pBomb )
 				return true;
@@ -1357,7 +1357,7 @@ public:
 
 	static edict_t *getButtonAtWaypoint ( CWaypoint *pWaypoint )
 	{
-		for (auto& m_LiftWaypoint : m_LiftWaypoints)
+		for (edict_wpt_pair_t& m_LiftWaypoint : m_LiftWaypoints)
 		{
 			if (m_LiftWaypoint.pWaypoint == pWaypoint )
 				return m_LiftWaypoint.pEdict;

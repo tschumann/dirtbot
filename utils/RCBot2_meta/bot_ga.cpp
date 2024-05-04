@@ -56,7 +56,7 @@ void CPopulation::add(IIndividual* individual)
 
 void CPopulation::freeMemory()
 {
-	for (const auto& m_theIndividual : m_theIndividuals)
+	for (IIndividual* const& m_theIndividual : m_theIndividuals)
 		delete m_theIndividual;
 
 	m_theIndividuals.clear();
@@ -81,7 +81,7 @@ ga_nn_value CPopulation::totalFitness() const
 
 ga_nn_value CPopulation::bestFitness() const
 {
-	BOOL gotBestFitness = false;
+	bool gotBestFitness = false;
 	float fBestFitness = 0.0f;
 
 	for (unsigned int i = 0; i < size(); i++)

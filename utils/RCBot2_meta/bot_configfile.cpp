@@ -117,11 +117,11 @@ void CBotConfigFile :: executeCommands ()
 
 void CRCBotTF2UtilFile :: init()
 {
-	for (auto& m_fUtil : m_fUtils)
+	for (bot_util_t (&m_fUtil)[112][9] : m_fUtils)
 	{
-		for (auto& j : m_fUtil)
+		for (bot_util_t (&j)[9] : m_fUtil)
 		{
-			for (auto& k : j)
+			for (bot_util_t& k : j)
 			{
 				k.min = 0;
 				k.max = 0;

@@ -85,7 +85,7 @@ void CAccessClients :: showUsers ( edict_t *pEntity )
 	if ( m_Clients.empty() )
 		logger->Log(LogLevel::DEBUG, "showUsers() : No users to show");
 
-	for (const auto pPlayer : m_Clients)
+	for (CAccessClient* const pPlayer : m_Clients)
 	{
 		const CClient* pClient = CClients::findClientBySteamID(pPlayer->getSteamID());
 		
@@ -99,7 +99,7 @@ void CAccessClients :: showUsers ( edict_t *pEntity )
 
 void CAccessClients :: freeMemory ()
 {
-	for (auto& m_Client : m_Clients)
+	for (CAccessClient*& m_Client : m_Clients)
 	{
 		delete m_Client;
 		m_Client = nullptr;
@@ -198,7 +198,7 @@ void CAccessClients :: save ()
 
 	if ( fp )
 	{
-		for (const auto& m_Client : m_Clients)
+		for (CAccessClient* const& m_Client : m_Clients)
 		{
 			m_Client->save(fp);
 		}
@@ -211,7 +211,7 @@ void CAccessClients :: save ()
 
 void CAccessClients :: checkClientAccess ( CClient *pClient )
 {
-	for (const auto pAC : m_Clients)
+	for (CAccessClient* const pAC : m_Clients)
 	{
 		if ( pAC->isForSteamID(pClient->getSteamID()) )
 			pAC->giveAccessToClient(pClient);

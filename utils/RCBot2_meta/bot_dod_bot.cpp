@@ -2067,22 +2067,23 @@ bool CDODBot :: executeAction ( CBotUtility *util )
 	int id = -1;
 	Vector vGoal;
 	edict_t *pBombTarget = nullptr;
+	uintptr_t intData = static_cast<uintptr_t>(util->getIntData());
 
 	switch ( util->getId() )
 	{
 	case  BOT_UTIL_INVESTIGATE_POINT:
 		m_pSchedules->removeSchedule(SCHED_INVESTIGATE_NOISE);
 		m_pSchedules->addFront(new CBotInvestigateNoiseSched(
-			CBotGlobals::entityOrigin(reinterpret_cast<edict_t*>(util->getIntData())), util->getVectorData()));
+			CBotGlobals::entityOrigin(reinterpret_cast<edict_t*>(intData)), util->getVectorData()));
 		return true;
 	case BOT_UTIL_COVER_POINT:
 		m_pSchedules->removeSchedule(SCHED_CROUCH_AND_HIDE);
-		m_pSchedules->addFront(new CCrouchHideSched(reinterpret_cast<edict_t*>(util->getIntData())));
+		m_pSchedules->addFront(new CCrouchHideSched(reinterpret_cast<edict_t*>(intData)));
 		return true;
 	case BOT_UTIL_SNIPE_POINT:
 		// find sniper point facing the enemy
 		{
-			edict_t *pEnemy = reinterpret_cast<edict_t*>(util->getIntData());
+			edict_t* pEnemy = reinterpret_cast<edict_t*>(intData);
 
 			Vector vEnemyOrigin = CBotGlobals::entityOrigin(pEnemy);
 
@@ -3074,7 +3075,7 @@ void CDODBot :: getTasks (unsigned int iIgnore)
 		{
 			//caxanga334: SDK 2013 doesn't like to create a Vector from an int
 			//TODO: Proper fix
-			#if SOURCE_ENGINE == SE_SDK2013 || SOURCE_ENGINE == SE_BMS
+			#if SOURCE_ENGINE == SE_SDK2013 || SOURCE_ENGINE == SE_BMS || SOURCE_ENGINE == SE_TF2
 			iFlagID = CDODMod::m_Flags.findNearestObjective(Vector(m_pSquad->GetFormationPosition(m_pEdict)));
 			#else
 			iFlagID = CDODMod::m_Flags.findNearestObjective(m_pSquad->GetFormationPosition(m_pEdict));

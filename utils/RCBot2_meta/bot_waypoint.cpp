@@ -361,7 +361,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBeliefBetweenAreas ( const std::v
 			float fBelief = 0.0f;
 			AStarNode *node;
 
-			for (const auto goal : goals)
+			for (AStarNode* const goal : goals)
 			{
 				node = goal;
 
@@ -382,7 +382,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBeliefBetweenAreas ( const std::v
 
 			fBelief = 0.0f;
 			
-			for (const auto goal : goals)
+			for (AStarNode* const goal : goals)
 			{
 				node = goal;
 
@@ -1516,7 +1516,7 @@ WptColor CWaypointTypes ::getColour ( int iFlags )
 
 	bool bNoColour = true;
 
-	for (const auto& m_Type : m_Types)
+	for (CWaypointType* const& m_Type : m_Types)
 	{
 		if (m_Type->isBitsInFlags(iFlags) )
 		{
@@ -2822,7 +2822,7 @@ CWaypoint* CWaypoints::randomWaypointGoalBetweenArea(int iFlags, int iTeam, int 
 		//pWpt = goals.Random();
 	}
 
-	for (const auto& goal : goals)
+	for (AStarNode* const& goal : goals)
 	{
 		node = goal;
 		delete node;
@@ -2944,7 +2944,7 @@ int CWaypoint :: getPath ( int i ) const
 
 bool CWaypoint :: isPathOpened (const Vector& vPath)
 {
-	for (auto& info : m_OpensLaterInfo)
+	for (wpt_opens_later_t& info : m_OpensLaterInfo)
 	{
 		if ( info.vOrigin == vPath )
 		{
@@ -3050,7 +3050,7 @@ bool CWaypoint ::isAiming() const
 
 CWaypointType *CWaypointTypes :: getType( const char *szType )
 {
-	for (const auto& m_Type : m_Types)
+	for (CWaypointType* const& m_Type : m_Types)
 	{
 		if ( FStrEq(m_Type->getName(),szType) )
 			return m_Type;
@@ -3065,7 +3065,7 @@ void CWaypointTypes :: showTypesOnConsole ( edict_t *pPrintTo )
 
 	CBotGlobals::botMessage(pPrintTo,0,"Available waypoint types");
 
-	for (const auto& m_Type : m_Types)
+	for (CWaypointType* const& m_Type : m_Types)
 	{
 		const char *name = m_Type->getName();
 		const char *description = m_Type->getDescription();
@@ -3093,7 +3093,7 @@ CWaypointType *CWaypointTypes :: getTypeByFlags ( int iFlags )
 {
 	const CBotMod *pMod = CBotGlobals::getCurrentMod();
 
-	for (const auto& m_Type : m_Types)
+	for (CWaypointType* const& m_Type : m_Types)
 	{
 		if ( !m_Type->forMod(pMod->getModId()) )
 			continue;
@@ -3105,7 +3105,7 @@ CWaypointType *CWaypointTypes :: getTypeByFlags ( int iFlags )
 	return nullptr;
 }
 
-unsigned int CWaypointTypes :: getNumTypes ()
+std::size_t CWaypointTypes::getNumTypes()
 {
 	return m_Types.size();
 }
@@ -3172,7 +3172,7 @@ void CWaypointTypes :: setup ()
 
 void CWaypointTypes :: freeMemory ()
 {
-	for (auto& m_Type : m_Types)
+	for (CWaypointType*& m_Type : m_Types)
 	{
 		delete m_Type;
 		m_Type = nullptr;
@@ -3192,7 +3192,7 @@ void CWaypointTypes:: printInfo ( CWaypoint *pWpt, edict_t *pPrintTo, float dura
 	{
 		bool bComma = false;
 
-		for (const auto& m_Type : m_Types)
+		for (CWaypointType* const& m_Type : m_Types)
 		{
 			if (m_Type->forMod(pCurrentMod->getModId()) && m_Type->isBitsInFlags(pWpt->getFlags()) )
 			{

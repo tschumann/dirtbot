@@ -829,7 +829,7 @@ void CDODMod ::roundStart()
 // find it and add it as a waypoint offset
 Vector CDODMod :: getGround ( CWaypoint *pWaypoint )
 {
-	for (auto& m_BombWaypoint : m_BombWaypoints)
+	for (edict_wpt_pair_t& m_BombWaypoint : m_BombWaypoints)
 	{
 		if (m_BombWaypoint.pWaypoint == pWaypoint )
 		{
@@ -933,7 +933,7 @@ bool CDODMod :: isBreakableRegistered ( edict_t *pBreakable, int iTeam )
 {
 	static CWaypoint *pWpt;
 
-	for (auto& m_BreakableWaypoint : m_BreakableWaypoints)
+	for (edict_wpt_pair_t& m_BreakableWaypoint : m_BreakableWaypoints)
 	{
 		if (m_BreakableWaypoint.pEdict == pBreakable )
 		{

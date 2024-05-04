@@ -432,7 +432,7 @@ public:
 		if ( pWpt == nullptr)
 			return -1;
 
-		return (reinterpret_cast<int>(pWpt) - reinterpret_cast<int>(m_theWaypoints))/sizeof(CWaypoint);
+		return (reinterpret_cast<intptr_t>(pWpt) - reinterpret_cast<intptr_t>(m_theWaypoints))/sizeof(CWaypoint);
 	}
 
 	static void autoFix ( bool bAutoFixNonArea );

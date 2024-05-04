@@ -139,7 +139,7 @@ bool CSignatureFunction::getLibraryInfo(const void *libPtr, DynLibInfo &lib)
 	}
 
 	//Finally, we can do this
-	lib.memorySize = opt->SizeOfImage;
+	lib.memorySize = static_cast<size_t>(opt->SizeOfImage);
 
 #else
 	Dl_info info;

@@ -279,7 +279,7 @@ public:
 	{
 		resetValidWaypointAreas();
 
-		for (const auto& m_ValidPoint : m_ValidPoints)
+		for (const TF2PointProb_t (&m_ValidPoint)[2][8] : m_ValidPoints)
 		{
 			for (const TF2PointProb_t (&j)[8] : m_ValidPoint)
 			{

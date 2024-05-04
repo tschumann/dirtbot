@@ -3453,6 +3453,13 @@ void CBots :: kickRandomBot (size_t count)
 
 	std::shuffle( botList.begin(), botList.end(), std::mt19937(std::random_device()()));
 
+	// std::random_shuffle was removed in C++17
+	// std::random_shuffle ( botList.begin(), botList.end() );
+
+	//std::random_device rd;
+	//std::mt19937 g(rd());
+	//std::shuffle(botList.begin(), botList.end(), g);
+
 	size_t numBotsKicked = 0;
 	while (numBotsKicked < count && !botList.empty()) {
 		char szCommand[512];

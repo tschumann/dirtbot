@@ -118,7 +118,7 @@ CON_COMMAND(rcbotd, "access the bot commands on a server")
 	// shift args and call subcommand
 	BotCommandArgs argList;
 	for (size_t i = 1; i <= static_cast<size_t>(args.ArgC()); i++) {
-		argList.emplace_back(args.Arg(i));
+		argList.emplace_back(args.Arg(static_cast<int>(i)));
 	}
 	const eBotCommandResult iResult = CBotGlobals::m_pCommands->execute(nullptr, argList);
 
@@ -678,7 +678,7 @@ void RCBotPluginMeta::Hook_ClientCommand(edict_t *pEntity)
 		// create shifted command list
 		BotCommandArgs argList;
 		for (size_t i = 1; i <= static_cast<size_t>(args.ArgC()); i++) {
-			argList.emplace_back(args.Arg(i));
+			argList.emplace_back(args.Arg(static_cast<int>(i)));
 		}
 		const eBotCommandResult iResult = CBotGlobals::m_pCommands->execute(pClient, argList);
 
@@ -884,9 +884,10 @@ void RCBotPluginMeta::BotQuotaCheck() {
 
 		// Change Bot Quota
 		if (bot_count > bot_target) {
-			CBots::kickRandomBot(bot_count - bot_target);
+			CBots::kickRandomBot(static_cast<size_t>(bot_count - bot_target));
 			notify = true;
-		} else if (bot_target > bot_count) {
+		}
+		else if (bot_target > bot_count) {
 			const int bot_diff = bot_target - bot_count;
 
 			// ReSharper disable once CppUnreachableCode

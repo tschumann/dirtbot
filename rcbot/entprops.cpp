@@ -411,7 +411,7 @@ int CBotEntProp::GetEntProp(int entity, PropType proptype, char *prop, int size,
 
 		if (td->fieldType == FIELD_CUSTOM && (td->flags & FTYPEDESC_OUTPUT) == FTYPEDESC_OUTPUT)
 		{
-			const auto *pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
+			const variant_t* pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
 			if ((bit_count = MatchTypeDescAsInteger(pVariant->fieldType, 0)) == 0)
 			{
 				logger->Log(LogLevel::ERROR, "Variant value for %s is not an integer (%d)", prop, pVariant->fieldType);
@@ -538,7 +538,7 @@ int *CBotEntProp::GetEntPropPointer(int entity, PropType proptype, char *prop, i
 
 		if (td->fieldType == FIELD_CUSTOM && (td->flags & FTYPEDESC_OUTPUT) == FTYPEDESC_OUTPUT)
 		{
-			const auto *pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
+			const variant_t* pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
 			if ((bit_count = MatchTypeDescAsInteger(pVariant->fieldType, 0)) == 0)
 			{
 				logger->Log(LogLevel::ERROR, "Variant value for %s is not an integer (%d)", prop, pVariant->fieldType);
@@ -677,7 +677,7 @@ bool *CBotEntProp::GetEntPropBoolPointer(int entity, PropType proptype, char *pr
 
 		if (td->fieldType == FIELD_CUSTOM && (td->flags & FTYPEDESC_OUTPUT) == FTYPEDESC_OUTPUT)
 		{
-			const auto *pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
+			const variant_t* pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
 			if ((bit_count = MatchTypeDescAsInteger(pVariant->fieldType, 0)) == 0)
 			{
 				logger->Log(LogLevel::ERROR, "Variant value for %s is not an integer (%d)", prop, pVariant->fieldType);
@@ -790,7 +790,7 @@ bool CBotEntProp::SetEntProp(int entity, PropType proptype, char *prop, int valu
 
 		if (td->fieldType == FIELD_CUSTOM && (td->flags & FTYPEDESC_OUTPUT) == FTYPEDESC_OUTPUT)
 		{
-			auto *pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
+			variant_t* pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
 			// These are the only three int-ish types that variants support. If set to valid one that isn't
 			// (32-bit) integer, leave it alone. It's probably the intended type.
 			if (pVariant->fieldType != FIELD_COLOR32 && pVariant->fieldType != FIELD_BOOLEAN)
@@ -1273,7 +1273,7 @@ int CBotEntProp::GetEntPropEnt(int entity, PropType proptype, char *prop, int el
 			}
 			else // PropEnt_Variant
 			{
-				auto *pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
+				variant_t* pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
 				hndl = &pVariant->eVal;
 			}
 
@@ -1422,7 +1422,7 @@ bool CBotEntProp::SetEntPropEnt(int entity, PropType proptype, char *prop, int o
 			}
 			else // PropEnt_Variant
 			{
-				auto *pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
+				variant_t* pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
 				hndl = &pVariant->eVal;
 			}
 
@@ -1525,7 +1525,7 @@ Vector CBotEntProp::GetEntPropVector(int entity, PropType proptype, char *prop, 
 
 		if (td->fieldType == FIELD_CUSTOM && (td->flags & FTYPEDESC_OUTPUT) == FTYPEDESC_OUTPUT)
 		{
-			const auto *pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
+			const variant_t* pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
 			if (pVariant->fieldType != FIELD_VECTOR && pVariant->fieldType != FIELD_POSITION_VECTOR)
 			{
 				logger->Log(LogLevel::ERROR, "Variant value for %s is not vector (%d)", prop, pVariant->fieldType);
@@ -1617,7 +1617,7 @@ Vector *CBotEntProp::GetEntPropVectorPointer(int entity, PropType proptype, char
 
 		if (td->fieldType == FIELD_CUSTOM && (td->flags & FTYPEDESC_OUTPUT) == FTYPEDESC_OUTPUT)
 		{
-			const auto *pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
+			const variant_t* pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
 			if (pVariant->fieldType != FIELD_VECTOR && pVariant->fieldType != FIELD_POSITION_VECTOR)
 			{
 				logger->Log(LogLevel::ERROR, "Variant value for %s is not vector (%d)", prop, pVariant->fieldType);
@@ -1710,7 +1710,7 @@ bool CBotEntProp::SetEntPropVector(int entity, PropType proptype, char *prop, co
 
 		if (td->fieldType == FIELD_CUSTOM && (td->flags & FTYPEDESC_OUTPUT) == FTYPEDESC_OUTPUT)
 		{
-			auto *pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
+			variant_t* pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
 			// Both of these are supported and we don't know which is intended. But, if it's already
 			// a pos vector, we probably want to keep that.
 			if (pVariant->fieldType != FIELD_POSITION_VECTOR)

@@ -82,7 +82,7 @@ public:
 		return Vector(static_cast<float>(m_x),static_cast<float>(m_y),static_cast<float>(m_z));
 	}
 
-	BOOL IsVectorSet () const
+	bool IsVectorSet () const
 	{
 		return m_bVectorSet;
 	}
@@ -94,7 +94,7 @@ public:
 protected:
 	T m_x,m_y,m_z;
 
-	BOOL m_bVectorSet;
+	bool m_bVectorSet;
 };
 
 class CAutoWaypointCheck : public CTypeVector<vec_t>

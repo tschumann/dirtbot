@@ -426,7 +426,7 @@ bool CBotWeapons::update(bool bOverrideAllFromEngine)
 	{
 		// create a 'hash' of current weapons
 		pWeapon = m_Weapon_iter == nullptr ? nullptr : INDEXENT(m_Weapon_iter->GetEntryIndex());
-		iWeaponsSignature += reinterpret_cast<unsigned>(pWeapon) + (pWeapon == nullptr ? 0 : static_cast<unsigned>(CClassInterface::getWeaponState(pWeapon)));
+		iWeaponsSignature += reinterpret_cast<uintptr_t>(pWeapon) + (pWeapon == nullptr ? 0 : static_cast<unsigned>(CClassInterface::getWeaponState(pWeapon)));
 		if (m_Weapon_iter != nullptr) {
 		m_Weapon_iter++;
 		}
@@ -1062,7 +1062,7 @@ CWeapon* CWeapons::getWeaponByShortName(const char* szWeapon)
 
 void CWeapons::eachWeapon(IWeaponFunc* pFunc)
 {
-	for (const auto& m_theWeapon : m_theWeapons)
+	for (CWeapon* const& m_theWeapon : m_theWeapons)
 	{
 		pFunc->execute(m_theWeapon);
 	}
@@ -1070,7 +1070,7 @@ void CWeapons::eachWeapon(IWeaponFunc* pFunc)
 
 void CWeapons::freeMemory()
 {
-	for (auto& m_theWeapon : m_theWeapons)
+	for (CWeapon*& m_theWeapon : m_theWeapons)
 	{
 		delete m_theWeapon;
 		m_theWeapon = nullptr;

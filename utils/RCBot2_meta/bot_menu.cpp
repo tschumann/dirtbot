@@ -291,11 +291,11 @@ void CWaypointCutMenuItem::activate(CClient* pClient)
 {
 	pClient->updateCurrentWaypoint();
 
-	CWaypoint* pwpt = CWaypoints::getWaypoint(pClient->currentWaypoint());
+	CWaypoint* pWpt = CWaypoints::getWaypoint(pClient->currentWaypoint());
 
-	if (pwpt)
+	if (pWpt)
 	{
-		pClient->setWaypointCut(pwpt);
+		pClient->setWaypointCut(pWpt);
 		CWaypoints::deleteWaypoint(pClient->currentWaypoint());
 	}
 }
@@ -312,11 +312,11 @@ void CWaypointCopyMenuItem::activate(CClient* pClient)
 {
 	pClient->updateCurrentWaypoint();
 
-	CWaypoint* pwpt = CWaypoints::getWaypoint(pClient->currentWaypoint());
+	CWaypoint* pWpt = CWaypoints::getWaypoint(pClient->currentWaypoint());
 
-	if (pwpt)
+	if (pWpt)
 	{
-		pClient->setWaypointCopy(pwpt);
+		pClient->setWaypointCopy(pWpt);
 	}
 }
 
