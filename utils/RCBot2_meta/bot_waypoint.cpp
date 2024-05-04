@@ -933,6 +933,7 @@ bool CWaypointNavigator :: workRoute ( Vector vFrom,
 ///////////////////////////////
 
 	int iLoops = 0;
+	//int iMaxLoops = this->m_pBot->getProfile()->getPathTicks(); // bot_pathrevs.GetInt(); //IBotNavigator::MAX_PATH_TICKS; - DNA.styx
 	int iMaxLoops = bot_pathrevs.GetInt(); //this->m_pBot->getProfile()->getPathTicks();//IBotNavigator::MAX_PATH_TICKS;
 
 	if ( iMaxLoops <= 0 )
