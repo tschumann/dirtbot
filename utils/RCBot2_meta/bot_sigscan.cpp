@@ -3,9 +3,9 @@
 #else
 
 #include <cstdint>
-#define byte uint8_t
+//#define byte uint8_t
 
-#include "shake.h" //bir3yk
+//#include "shake.h" //bir3yk
 #include "elf.h"
 
 #define PAGE_SIZE 4096
@@ -23,7 +23,7 @@
 #include "engine/iserverplugin.h"
 #include "tier2/tier2.h"
 #ifdef __linux__
-#include "shake.h"    //bir3yk
+//#include "shake.h"    //bir3yk
 #endif
 #include "eiface.h"
 #include "bot_const.h"
