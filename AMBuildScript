@@ -202,15 +202,15 @@ class MMSConfig(object):
         '-fPIC',
         '-fno-exceptions',
         '-fno-rtti',
-	'-mmmx',
-	'-msse',
+        '-mmmx',
+        '-msse',
         '-msse2',
-	'-msse3',
-	'-mssse3',
-	'-msse4',
-	'-msse4a',
-	'-msse4.1',
-	'-msse4.2',
+        '-msse3',
+        '-mssse3',
+        '-msse4',
+        '-msse4a',
+        '-msse4.1',
+        '-msse4.2',
         '-fno-strict-aliasing',
       ]
 
@@ -249,12 +249,15 @@ class MMSConfig(object):
       ]
       cxx.cflags += [
         '/W3',
+        '/we4267', # treat loss of data from type to type conversion as an error
+        '/we4311', # 'type cast': pointer truncation 
+        '/we4302', # 'type cast': truncation from 
       ]
       cxx.cxxflags += [
         '/EHsc',
         '/GR-',
         '/TP',
-	'/std:c++14',
+        '/std:c++14',
         '/arch:SSE2',
       ]
       cxx.linkflags += [
