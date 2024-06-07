@@ -1,5 +1,43 @@
 # RCBot2 for Windows and Linux (TF2, HL2:DM, DOD:S)
 
+Getting started
+---------------
+
+Clone and get the submodules.
+```
+git clone https://github.com/tschumann/dirtbot
+git submodule init
+git submodule update --init --recursive
+```
+
+
+Compiling
+---------
+
+```
+mkdir build/
+cd build/
+python ../configure.py -s hl2dm --mms-path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/metamod-source/ --sm-path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/sourcemod/ --hl2sdk-root C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/
+python ../configure.py -s tf2 --mms-path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/metamod-source/ --sm-path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/sourcemod/ --hl2sdk-root C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/
+python ../configure.py -s episode1 --mms-path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/metamod-source/ --hl2sdk-root C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/
+ambuild
+```
+
+
+Updating MetaMod: Source
+------------------------
+
+Download the latest MetaMod: Source from https://www.sourcemm.net/downloads.php?branch=stable
+
+Copy the `addons` directory from the .zip and paste it in `release/dirtbot/Half-Life 2 Deathmatch/hl2mp/`
+
+
+License
+-------
+
+Affero GPL 3.0 (and BSD Zero Clause for `rcbot/logging.cpp` and `rcbot/logging.h`) because RCBot2 is Affero GPL 3.0 (and BSD Zero Clause for `rcbot/logging.cpp` and `rcbot/logging.h`).
+
+
 ## Information:-
 
 This is a fork of [the official RCBot2 plugin][rcbot2] written by Cheeseh.
