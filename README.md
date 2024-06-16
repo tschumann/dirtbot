@@ -24,6 +24,14 @@ ambuild
 ```
 
 
+Testing
+-------
+
+```
+powershell ./test.ps1
+```
+
+
 Updating MetaMod: Source
 ------------------------
 

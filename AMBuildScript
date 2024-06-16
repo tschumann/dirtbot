@@ -405,6 +405,98 @@ class MMSConfig(object):
     SetArchFlags(compiler, arch, builder.target.platform)
     return self.LibraryBuilder(compiler, name, arch)
 
+  def Program(self, context, name):
+    # builder.options.sdks contains what is passed to configure.py with -s
+    sdk = PossibleSDKs[builder.options.sdks]
+    arch = builder.target.arch
+
+    # TODO: most of this is duplicated from HL2Library
+    compiler = self.HL2Compiler(context, sdk, arch)
+
+    SetArchFlags(compiler, arch, builder.target.platform)
+
+    if builder.target.platform == 'linux':
+      if sdk.name == 'episode1':
+        lib_folder = os.path.join(sdk.path, 'linux_sdk')
+      elif sdk.name in ['sdk2013', 'bms']:
+        lib_folder = os.path.join(sdk.path, 'lib', 'public', 'linux32')
+      elif arch == 'x64':
+        lib_folder = os.path.join(sdk.path, 'lib', 'linux64')
+      else:
+        lib_folder = os.path.join(sdk.path, 'lib', 'linux')
+    elif builder.target.platform == 'mac':
+      if sdk.name in ['sdk2013', 'bms']:
+        lib_folder = os.path.join(sdk.path, 'lib', 'public', 'osx32')
+      elif arch == 'x64':
+        lib_folder = os.path.join(sdk.path, 'lib', 'osx64')
+      else:
+        lib_folder = os.path.join(sdk.path, 'lib', 'mac')
+
+    if builder.target.platform in ['linux', 'mac']:
+      if sdk.name in ['sdk2013', 'bms'] or arch == 'x64':
+        compiler.postlink += [compiler.Dep(os.path.join(lib_folder, 'tier1.a'))]
+      else:
+        compiler.postlink += [compiler.Dep(os.path.join(lib_folder, 'tier1_i486.a'))]
+
+      if sdk.name in ['blade', 'insurgency', 'doi', 'csgo', 'dota']:
+        if arch == 'x64':
+          compiler.postlink += [compiler.Dep(os.path.join(lib_folder, 'interfaces.a'))]
+        else:
+          compiler.postlink += [compiler.Dep(os.path.join(lib_folder, 'interfaces_i486.a'))]
+
+      if sdk.name == 'bms':
+        compiler.postlink += [compiler.Dep(os.path.join(lib_folder, 'mathlib.a'))]
+
+    binary = compiler.Program(name)
+
+    dynamic_libs = [] # todo: this whole section is slightly different, but I imagine it is "more correct"
+    if builder.target.platform == 'linux':
+      compiler.linkflags[0:0] = ['-lm', '-ldl'] # todo: do we need -ldl?
+      if sdk.name in ['css', 'hl2dm', 'dods', 'tf2', 'sdk2013', 'bms', 'nucleardawn', 'l4d2', 'insurgency', 'doi']:
+        dynamic_libs = ['libtier0_srv.so', 'libvstdlib_srv.so']
+      elif arch == 'x64' and sdk.name == 'csgo':
+        dynamic_libs = ['libtier0_client.so', 'libvstdlib_client.so']
+      elif sdk.name in ['l4d', 'blade', 'insurgency', 'doi', 'csgo', 'dota']:
+        dynamic_libs = ['libtier0.so', 'libvstdlib.so']
+      else:
+        dynamic_libs = ['tier0_i486.so', 'vstdlib_i486.so']
+    elif builder.target.platform == 'mac':
+      binary.compiler.linkflags.append('-liconv')
+      dynamic_libs = ['libtier0.dylib', 'libvstdlib.dylib']
+    elif builder.target.platform == 'windows':
+      # todo: verify this for MSVC support
+      libs = ['tier0', 'tier1', 'vstdlib', 'mathlib']
+      if sdk.name in ['swarm', 'blade', 'insurgency', 'doi', 'csgo', 'dota']:
+        libs.append('interfaces')
+      if sdk.name == 'bms':
+        libs.append('mathlib')
+      for lib in libs:
+        if arch == 'x86':
+          lib_path = os.path.join(sdk.path, 'lib', 'public', lib) + '.lib'
+        elif arch == 'x64':
+          lib_path = os.path.join(sdk.path, 'lib', 'public', 'win64', lib) + '.lib'
+        binary.compiler.linkflags.append(binary.Dep(lib_path))
+
+    for library in dynamic_libs:
+      source_path = os.path.join(lib_folder, library)
+      output_path = os.path.join(binary.localFolder, library)
+
+      def make_linker(source_path, output_path):
+        def link(context, binary):
+          cmd_node, (output,) = context.AddSymlink(source_path, output_path)
+          return output
+        return link
+
+      linker = make_linker(source_path, output_path)
+      binary.compiler.linkflags[0:0] = [binary.Dep(library, linker)]
+
+    return binary
+
+  def StaticLibrary(self, context, name):
+    compiler = context.cxx.clone()
+    binary = compiler.StaticLibrary(name)
+    return binary
+
   def HL2Library(self, context, name, sdk, arch):
     compiler = self.HL2Compiler(context, sdk, arch)
 
@@ -499,7 +591,10 @@ BuildScripts = [
   'loader/AMBuilder'
 ] # add sub-modules here
 if getattr(builder.options, 'enable_tests', False):
-    BuildScripts += [] # add tests here
+	# add tests here
+    BuildScripts += [
+		'tests/AMBuild.tests'
+	]
 
 import os
 

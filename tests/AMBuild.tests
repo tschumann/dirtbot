@@ -1,0 +1,134 @@
+# vim: set ts=8 sts=2 sw=2 tw=99 et ft=python: 
+# 
+# Copyright (C) 2004-2012 David Anderson
+# 
+# This file is part of SourcePawn.
+# 
+# SourcePawn is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation, either version 3 of the License, or (at your option)
+# any later version.
+# 
+# SourcePawn is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License along with
+# SourcePawn. If not, see http://www.gnu.org/licenses/.
+#
+
+# TODO: there is a bit of duplication from AMBuilder - can they be combined? or can one inherit from the other?
+
+import os
+
+binary = MMS.StaticLibrary(builder, 'libgtest')
+binary.compiler.includes += [
+  os.path.join(builder.sourcePath, 'googletest', 'googletest', 'include'),
+  os.path.join(builder.sourcePath, 'googletest', 'googletest'),
+]
+binary.sources += [
+  os.path.join('..', 'googletest', 'googletest', 'src', 'gtest-all.cc'),
+]
+libgtest = builder.Add(binary)
+
+binary = MMS.Program(builder, 'testrunner')
+compiler = binary.compiler
+compiler.includes += [
+  os.path.join(builder.sourcePath),
+  os.path.join(builder.sourcePath, 'versioning'),
+  os.path.join(builder.sourcePath, 'utils', 'RCBot2_meta'),
+  os.path.join(builder.sourcePath, 'googletest', 'googletest', 'include'),
+]
+
+# Build with SourceMod extension support if --sm-path was specified
+if builder.options.sm_path:
+  compiler.includes += [
+    os.path.join(builder.options.sm_path, 'sourcepawn', 'include'),
+    os.path.join(builder.options.sm_path, 'public', 'amtl'),
+    os.path.join(builder.options.sm_path, 'public', 'amtl', 'amtl'),
+    os.path.join(builder.options.sm_path, 'public', 'extensions'),
+    os.path.join(builder.options.sm_path, 'public'),
+    os.path.join(builder.sourcePath, 'sm_ext'),
+  ]
+
+  binary.sources += [
+    os.path.join('..', 'sm_ext', 'smsdk_config.cpp'),
+    os.path.join('..', 'sm_ext', 'bot_sm_ext.cpp'),
+    os.path.join('..', 'sm_ext', 'bot_sm_natives.cpp'),
+  ]
+
+  compiler.defines += [ 'SM_EXT', ]
+
+compiler.defines += ['RCBOT_MAXPLAYERS=32']
+
+if compiler.like('msvc'):
+  compiler.linkflags.append('/SUBSYSTEM:CONSOLE')
+if builder.target.platform == 'linux':
+  compiler.linkflags.append('-ldl')
+compiler.linkflags.append(libgtest.binary)
+# compiler.linkflags.append(MMS.libamtl)
+
+binary.sources += [
+  'main.cpp',
+  'test_bot_waypoint.cpp',
+
+  "../utils/RCBot2_meta/bot.cpp",
+  "../utils/RCBot2_meta/bot_accessclient.cpp",
+  "../utils/RCBot2_meta/bot_buttons.cpp",
+  "../utils/RCBot2_meta/bot_client.cpp",
+  "../utils/RCBot2_meta/bot_commands.cpp",
+  "../utils/RCBot2_meta/bot_configfile.cpp",
+  "../utils/RCBot2_meta/bot_coop.cpp",
+  "../utils/RCBot2_meta/bot_css_bot.cpp",
+  "../utils/RCBot2_meta/bot_css_buying.cpp",
+  "../utils/RCBot2_meta/bot_css_mod.cpp",
+  "../utils/RCBot2_meta/bot_dod_bot.cpp",
+  "../utils/RCBot2_meta/bot_dod_mod.cpp",
+  "../utils/RCBot2_meta/bot_events.cpp",
+  "../utils/RCBot2_meta/bot_fortress.cpp",
+  "../utils/RCBot2_meta/bot_ga.cpp",
+  "../utils/RCBot2_meta/bot_ga_ind.cpp",
+  "../utils/RCBot2_meta/bot_getprop.cpp",
+  "../utils/RCBot2_meta/bot_globals.cpp",
+  "../utils/RCBot2_meta/bot_hl1dmsrc.cpp",
+  "../utils/RCBot2_meta/bot_hldm_bot.cpp",
+  "../utils/RCBot2_meta/bot_kv.cpp",
+  "../utils/RCBot2_meta/bot_menu.cpp",
+  "../utils/RCBot2_meta/bot_mods.cpp",
+  "../utils/RCBot2_meta/bot_mtrand.cpp",
+  "../utils/RCBot2_meta/bot_navmesh.cpp",
+  "../utils/RCBot2_meta/bot_perceptron.cpp",
+  "../utils/RCBot2_meta/bot_profile.cpp",
+  "../utils/RCBot2_meta/bot_profiling.cpp",
+  "../utils/RCBot2_meta/bot_schedule.cpp",
+  "../utils/RCBot2_meta/bot_tf2_points.cpp",
+  "../utils/RCBot2_meta/bot_som.cpp",
+  "../utils/RCBot2_meta/bot_squads.cpp",
+  "../utils/RCBot2_meta/bot_strings.cpp",
+  "../utils/RCBot2_meta/bot_synergy.cpp",
+  "../utils/RCBot2_meta/bot_synergy_mod.cpp",
+  "../utils/RCBot2_meta/bot_task.cpp",
+  "../utils/RCBot2_meta/bot_tf2_mod.cpp",
+  "../utils/RCBot2_meta/bot_utility.cpp",
+  "../utils/RCBot2_meta/bot_visibles.cpp",
+  "../utils/RCBot2_meta/bot_waypoint.cpp",
+  "../utils/RCBot2_meta/bot_waypoint_locations.cpp",
+  "../utils/RCBot2_meta/bot_waypoint_visibility.cpp",
+  "../utils/RCBot2_meta/bot_weapons.cpp",
+  "../utils/RCBot2_meta/bot_wpt_dist.cpp",
+  "../utils/RCBot2_meta/bot_zombie.cpp",
+  "../utils/RCBot2_meta/bot_sigscan.cpp",
+  "../utils/RCBot2_meta/bot_cvars.cpp",
+  "../utils/RCBot2_meta/bot_plugin_meta.cpp",
+
+  "../rcbot/logging.cpp",
+  "../rcbot/helper.cpp",
+  "../rcbot/entprops.cpp",
+  "../rcbot/propvar.cpp",
+  "../rcbot/math_fix.cpp",
+  "../rcbot/tf2/conditions.cpp",
+
+  # "../versioning/build_info.cpp",
+]
+
+node = builder.Add(binary)
