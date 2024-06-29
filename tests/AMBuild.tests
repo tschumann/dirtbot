@@ -70,6 +70,11 @@ compiler.linkflags.append(libgtest.binary)
 
 binary.sources += [
   'main.cpp',
+
+  'outsourced.cpp',
+
+  'test_bot.cpp',
+  'test_bot_mtrand.cpp',
   'test_bot_waypoint.cpp',
 
   "../utils/RCBot2_meta/bot.cpp",
