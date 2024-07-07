@@ -153,16 +153,24 @@ bool CBotHelper::isBrushEntity( edict_t *pEntity )
 /// @return Entity index/reference or INVALID_EHANDLE_INDEX if none is found
 int CBotHelper::FindEntityByClassname(int start,const char *classname)
 {
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 	CBaseEntity *pEntity = servertools->FindEntityByClassname(GetEntity(start), classname);
 	return sm_gamehelpers->EntityToBCompatRef(pEntity);
+#else
+	return 0;
+#endif
 }
 
 /// @brief Searches for entities in a sphere
 /// @return Entity index/reference or INVALID_EHANDLE_INDEX if none is found
 int CBotHelper::FindEntityInSphere(int start, const Vector& center, float radius)
 {
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 	CBaseEntity *pEntity = servertools->FindEntityInSphere(GetEntity(start), center, radius);
 	return sm_gamehelpers->EntityToBCompatRef(pEntity);
+#else
+	return 0;
+#endif
 }
 
 /// @brief Searches for entities by their networkable class

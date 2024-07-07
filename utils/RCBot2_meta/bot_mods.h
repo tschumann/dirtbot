@@ -89,6 +89,7 @@ typedef enum
 	BOTTYPE_NS2,
 	BOTTYPE_SYN,
 	BOTTYPE_BMS,
+	BOTTYPE_INSURGENCY,
 	BOTTYPE_MAX
 }eBotType;
 
@@ -668,12 +669,20 @@ public:
 
 	static float getRemainingRoundTime()
 	{
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 		return m_fRoundStartTime + mp_roundtime.GetFloat() * 60.0f - engine->Time();
+#else
+		return m_fRoundStartTime + mp_roundtime->GetFloat() * 60.0f - engine->Time();
+#endif
 	}
 
 	static float getRemainingBombTime()
 	{
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 		return m_fBombPlantedTime + mp_c4timer.GetFloat() - engine->Time();
+#else
+		return m_fBombPlantedTime + mp_c4timer->GetFloat() - engine->Time();
+#endif
 	}
 
 	static bool isBombPlanted()
@@ -763,6 +772,15 @@ public:
 	CHLDMSourceMod()
 	{
 		setup("hl1mp",MOD_HL1DMSRC,BOTTYPE_HL1DM,"HLDMSRC");
+	}
+};
+
+class CInsurgencyMod : public CBotMod
+{
+public:
+	CInsurgencyMod()
+	{
+		setup("insurgency", MOD_INSURGENCY, BOTTYPE_INSURGENCY, "INSURGENCY");
 	}
 };
 

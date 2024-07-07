@@ -103,6 +103,7 @@ extern ConVar rcbot_css_economy_eco_limit;
 extern ConVar rcbot_show_welcome_msg;
 extern ConVar rcbot_force_class;
 
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 extern ConVarRef sv_gravity;
 extern ConVarRef mp_teamplay;
 extern ConVarRef sv_tags;
@@ -112,6 +113,16 @@ extern ConVarRef mp_stalemate_enable;
 // For CS:S
 extern ConVarRef mp_roundtime;
 extern ConVarRef mp_c4timer;
+#else
+extern ConVar *sv_gravity;
+extern ConVar *mp_teamplay;
+extern ConVar *sv_tags;
+extern ConVar *mp_friendlyfire;
+extern ConVar *mp_stalemate_enable;
+
+extern ConVar *mp_roundtime;
+extern ConVar *mp_c4timer;
+#endif
 
 void RCBOT2_Cvar_setup (ICvar *cvar);
 

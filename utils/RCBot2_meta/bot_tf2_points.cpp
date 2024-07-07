@@ -271,6 +271,7 @@ bool CTeamControlPointRound :: isPointInRound ( edict_t *point_pent )
 
 CTeamControlPointRound *CTeamControlPointMaster:: getCurrentRound ( )
 {
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 	if ( m_iCurrentRoundIndex == -1 )
 		return nullptr;
 
@@ -287,6 +288,9 @@ CTeamControlPointRound *CTeamControlPointMaster:: getCurrentRound ( )
 	const size_t baseEntityOffset = servertools->GetEntityFactoryDictionary()->FindFactory("simple_physics_brush")->GetEntitySize();
 
 	return reinterpret_cast<CTeamControlPointRound*>(reinterpret_cast<uintptr_t>(pent) + baseEntityOffset);
+#else
+	return nullptr;
+#endif
 }
 
 //////////////////

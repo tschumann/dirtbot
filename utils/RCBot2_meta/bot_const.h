@@ -44,7 +44,9 @@
 #define __to_lower(a) (((a)>='A')&&((a)<='Z'))?('a'+((a)-'A')):(a)
 #define __strlow(str) { char *__strx = str; while ( __strx && *__strx ) { *__strx = __to_lower(*__strx); __strx++; } }
 //#define strlow(str) { unsigned short int len = strlen(str); unsigned short int i;	for ( i = 0; i < len; i ++ ) { str[i] = to_lower(str[i]); } }
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 #define __round(a) ((((a)-(int)(a)) >= 0.5) ? ((int)(a)+1) : ((int)(a)))
+#endif
 
 //#define RANDOM_INT(min,max) (min + round(((float)rand()/RAND_MAX)*(float)(max-min)))
 //#define RANDOM_FLOAT(min,max) (min + ((float)rand()/RAND_MAX)*(float)(max-min))
@@ -180,6 +182,7 @@ typedef enum
 	MOD_NS2,
 	MOD_SYNERGY,
 	MOD_DOD,
+	MOD_INSURGENCY,
 	MOD_CUSTOM,
 	MOD_ANY,
 	MOD_MAX

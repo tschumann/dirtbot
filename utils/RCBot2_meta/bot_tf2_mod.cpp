@@ -121,6 +121,7 @@ Vector CTeamFortress2Mod::m_vNearestTankLocation = Vector(0, 0, 0);
 
 bool CTeamFortress2Mod::isSuddenDeath()
 {
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 	// Bot weapon Randomizer -- leonardo
 	if (!mp_stalemate_enable.IsValid() || !mp_stalemate_enable.GetBool() || isMapType(TF_MAP_ARENA))
 		return false;
@@ -133,6 +134,7 @@ bool CTeamFortress2Mod::isSuddenDeath()
 		 
 		return iRoundState == RoundState_Stalemate;
 	}
+#endif
 
 	return false;
 }
@@ -1185,6 +1187,7 @@ void CTeamFortress2Mod::sapperDestroyed(edict_t *pOwner,eEngiBuild type, edict_t
 
 void CTeamFortress2Mod::updatePointMaster()
 {
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 	if ( m_PointMasterResource.get() == nullptr)
 	{
 		edict_t *pMaster = CClassInterface::FindEntityByClassnameNearest(Vector(0,0,0),"team_control_point_master",65535);
@@ -1258,6 +1261,7 @@ void CTeamFortress2Mod::updatePointMaster()
 	{
 		m_pCurrentRound =  m_PointMaster->getCurrentRound();
 	}
+#endif
 }
 
 edict_t *CTeamFortress2Mod :: getPayloadBomb ( int team )

@@ -111,6 +111,7 @@ ConVar rcbot_syn_use_search_range("rcbot_syn_use_search_range", "256", 0, "Sets 
 // Counter-Strike:Source Cvars
 ConVar rcbot_css_economy_eco_limit("rcbot_css_economy_eco_limit", "2000", 0, "If the bot money is less than this, it won't purchase anything.");
 
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 ConVarRef sv_gravity("sv_gravity");
 ConVarRef mp_teamplay("mp_teamplay");
 ConVarRef sv_tags("sv_tags");
@@ -121,9 +122,20 @@ ConVarRef mp_stalemate_meleeonly("mp_stalemate_meleeonly");
 // For CS:S
 ConVarRef mp_roundtime("mp_roundtime");
 ConVarRef mp_c4timer("mp_c4timer");
+#else
+ConVar *sv_gravity;
+ConVar *mp_teamplay;
+ConVar *sv_tags;
+ConVar *mp_friendlyfire;
+ConVar *mp_stalemate_enable;
+
+ConVar *mp_roundtime;
+ConVar *mp_c4timer;
+#endif
 
 void RCBOT2_Cvar_setup (ICvar *cvar) //'cvar' hides global declaration from /public/icvar.h [APG]RoboCop[CL]
 {
+#if SOURCE_ENGINE > SE_DARKMESSIAH
 	if ( sv_tags.IsValid() )
 	{
 		char sv_tags_str[512];
@@ -143,4 +155,5 @@ void RCBOT2_Cvar_setup (ICvar *cvar) //'cvar' hides global declaration from /pub
 
 		}
 	}
+#endif
 }

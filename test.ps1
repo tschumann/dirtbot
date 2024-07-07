@@ -17,3 +17,14 @@ ambuild
 # TODO: get rid of hard-coded paths
 $env:Path += ";C:\Program Files (x86)\Steam\steamapps\common\Half-Life 2 Deathmatch\bin"
 tests/testrunner/testrunner.exe
+
+# TODO: why isn't tests/testrunner/testrunner.exe being deleted?
+Remove-Item -Path tests -Recurse -Force
+
+# build the project with tests
+# TODO: get rid of hard-coded paths
+# TODO: build the project with tests
+python ../configure.py -s episode1 --mms-path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/metamod-source/ --sm-path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/sourcemod/ --hl2sdk-root C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/
+ambuild
+
+# TODO: update outsourced to compile with episode1

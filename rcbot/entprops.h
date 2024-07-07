@@ -34,6 +34,7 @@
 #include <dt_send.h>
 #include <IGameHelpers.h>
 #include <server_class.h>
+#include "datamap.h"
 
 enum
 {
