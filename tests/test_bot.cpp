@@ -1,22 +1,26 @@
+//========= Copyright © 2008-2024, Team Sandpit, All rights reserved. ============
+//
+// Purpose: Bot tests
+//
+// $NoKeywords: $
+//================================================================================
+
 #include <gtest/gtest.h>
+#include <memory>
 
-// TODO: something in gtest sets these macros which breaks inline assembly in the Source SDK
-#undef and
-#undef or
-
+#include "base_test.h"
 #include "bot.h"
 #include "outsourced.h"
 
 TEST(CBot, kill) {
-	helpers = new outsourced::MockServerPluginHelpers();
-	engine = new outsourced::MockEngine();
+	helpers = new outsourced::FakeServerPluginHelpers();
+	engine = new outsourced::FakeVEngineServer();
 	
-    CBot *pBot = new CBot();
+    std::unique_ptr<CBot> pBot = std::make_unique<CBot>();
 	pBot->kill();
 
-    EXPECT_TRUE(pBot != nullptr);
+	EXPECT_STREQ("kill\n", outsourced::gEngine.clientCommands.back().c_str());
 
 	delete engine;
 	delete helpers;
-	delete pBot;
 }

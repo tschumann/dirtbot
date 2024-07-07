@@ -1,9 +1,13 @@
+//========= Copyright © 2008-2024, Team Sandpit, All rights reserved. ============
+//
+// Purpose: Bot mtrand tests
+//
+// $NoKeywords: $
+//================================================================================
+
 #include <gtest/gtest.h>
 
-// TODO: something in gtest sets these macros which breaks inline assembly in the Source SDK
-#undef and
-#undef or
-
+#include "base_test.h"
 #include "bot_waypoint.h"
 #include "bot_wpt_color.h"
 
