@@ -38,6 +38,7 @@ compiler.includes += [
   os.path.join(builder.sourcePath, 'versioning'),
   os.path.join(builder.sourcePath, 'utils', 'RCBot2_meta'),
   os.path.join(builder.sourcePath, 'googletest', 'googletest', 'include'),
+  os.path.join(builder.sourcePath, 'outsourced'),
 ]
 
 # Build with SourceMod extension support if --sm-path was specified
@@ -71,7 +72,7 @@ compiler.linkflags.append(libgtest.binary)
 binary.sources += [
   'main.cpp',
 
-  'outsourced.cpp',
+  '../outsourced/outsourced.cpp',
 
   'test_bot.cpp',
   'test_bot_mtrand.cpp',
