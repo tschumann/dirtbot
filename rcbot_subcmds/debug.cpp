@@ -487,11 +487,10 @@ CBotCommandInline GetProp("getprop", CMD_ACCESS_DEBUG, [](CClient *pClient, cons
 
 			edict_t *pPlayer = pClient->getPlayer();
 //			edict_t *pEdict;
-			edict_t *pNearest = nullptr;
 //			float fDistance;
 //			float fNearest = 400.0f;
 
-			pNearest = CClassInterface::FindEntityByNetClassNearest(pClient->getOrigin(),args[0]);
+			edict_t* pNearest = CClassInterface::FindEntityByNetClassNearest(pClient->getOrigin(), args[0]);
 
 			if ( pNearest )
 			{
@@ -513,7 +512,7 @@ CBotCommandInline GetProp("getprop", CMD_ACCESS_DEBUG, [](CClient *pClient, cons
 					 
 						pEntity = pUnknown->GetBaseEntity();
 
-						int preoffs;
+						int preoffs = NULL;
 
 						if ( (args[2] && *args[2]) )
 						{

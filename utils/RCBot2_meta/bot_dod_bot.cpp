@@ -1107,7 +1107,7 @@ void CDODBot :: chooseClass ( bool bIsChangingClass )
 			}
 		}
 
-		for (float fClassFit : fClassFitness)
+		for (const float fClassFit : fClassFitness)
 			fTotalFitness += fClassFit;
 
 		const float fRandom = randomFloat(0, fTotalFitness);
@@ -3477,7 +3477,7 @@ void CDODBot :: modAim ( edict_t *pEntity, Vector &v_origin,
 				{
 					const float fTime = fDist2D/pWp->getProjectileSpeed();
 				//TODO: Improve on the floating point precision conversion [APG]RoboCop[CL]
-				v_desired_offset->z = std::pow(2, fTime) * (sv_gravity.GetFloat() * rcbot_projectile_tweak.GetFloat());// - (getOrigin().z - v_origin.z);
+					v_desired_offset->z = static_cast<float>(std::pow(2, fTime)) * (sv_gravity.GetFloat() * rcbot_projectile_tweak.GetFloat());// - (getOrigin().z - v_origin.z);
 			}
 			//v_desired_offset->z += (distanceFrom(pEntity) * (randomFloat(0.05,0.15)*m_pProfile->m_fAimSkill));
 		}
@@ -3486,7 +3486,7 @@ void CDODBot :: modAim ( edict_t *pEntity, Vector &v_origin,
 	// if I know the enemy is near a smoke grenade i'll fire randomly into the cloud
 	if ( m_pNearestSmokeToEnemy )
 	{
-		static short int iSlot;
+		static int iSlot;
 		iSlot = ENTINDEX(pEntity)-1;
 
 		if (( iSlot >= 0 ) && ( iSlot < RCBOT_MAXPLAYERS ))

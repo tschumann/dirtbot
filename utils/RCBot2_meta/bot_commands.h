@@ -36,7 +36,7 @@
 
 class CClient;
 
-typedef enum
+typedef enum : std::uint8_t
 {
 	COMMAND_NOT_FOUND,     // command not found
 	COMMAND_ACCESSED,      // okay
@@ -46,7 +46,7 @@ typedef enum
 
 #define NEED_ARG(x) if ( !(x) || !*(x) ) return COMMAND_ERROR;
 
-enum
+enum : std::uint8_t
 {
 	CMD_ACCESS_NONE = 0,
 	CMD_ACCESS_WAYPOINT = 1<<0,

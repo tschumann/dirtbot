@@ -34,13 +34,14 @@
 #include <dt_send.h>
 #include <IGameHelpers.h>
 #include <server_class.h>
+#include <cstdint>
 
-enum
+enum : std::uint32_t
 {
 	INVALID_ENT_REFERENCE = 0xFFFFFFFF
 };
 
-enum PropType
+enum PropType : std::uint8_t
 {
 	Prop_Send = 0,
 	Prop_Data

@@ -72,7 +72,7 @@
 
 extern IVDebugOverlay *debugoverlay;
 
-enum
+enum : std::uint8_t
 {
 	TF2_SPY_CLOAK_BELIEF = 40,
 	TF2_HWGUY_REV_BELIEF = 60
@@ -6705,7 +6705,7 @@ void CBotTF2 :: modAim ( edict_t *pEntity, Vector &v_origin, Vector *v_desired_o
 						*v_desired_offset = *v_desired_offset + ((vVelocity*fTime)*m_pProfile->m_fAimSkill);
 
 					if (sv_gravity.IsValid())
-						v_desired_offset->z += ((std::pow(2, fTime) - 1.0f)*(sv_gravity.GetFloat()*0.1f));// - (getOrigin().z - v_origin.z);
+						v_desired_offset->z += (static_cast<float>(std::pow(2, fTime)) - 1.0f) * (sv_gravity.GetFloat() * 0.1f);// - (getOrigin().z - v_origin.z);
 
 					v_desired_offset->z *= 0.6f;
 				}
@@ -6783,8 +6783,8 @@ void CBotTF2 :: modAim ( edict_t *pEntity, Vector &v_origin, Vector *v_desired_o
 							else
 								*v_desired_offset = *v_desired_offset + ((vVelocity*fTime)*m_pProfile->m_fAimSkill );
 						
-							if ( (sv_gravity.IsValid()) && (pWp->getID() == TF2_WEAPON_GRENADELAUNCHER) )
-								v_desired_offset->z += ((std::pow(2,fTime)-1.0f)*(sv_gravity.GetFloat()*0.1f));// - (getOrigin().z - v_origin.z);
+							if ((sv_gravity.IsValid()) && (pWp->getID() == TF2_WEAPON_GRENADELAUNCHER))
+								v_desired_offset->z += (static_cast<float>(std::pow(2, fTime)) - 1.0f) * (sv_gravity.GetFloat() * 0.1f);// - (getOrigin().z - v_origin.z);
 
 							if ((pWp->getID() == TF2_WEAPON_GRENADELAUNCHER) && hasSomeConditions(CONDITION_SEE_ENEMY_GROUND))
 								v_desired_offset->z -= randomFloat(8.0f,32.0f); // aim for ground - with grenade launcher
@@ -7317,7 +7317,7 @@ void CBotTF2::pointCaptured(int iPoint, int iTeam, const char *szPointName)
 // take a pEdict entity to check if its an enemy
 // return TRUE to "OPEN FIRE" (Attack)
 // return FALSE to ignore
-enum
+enum : std::int8_t
 {
 	RCBOT_ISENEMY_UNDEF = (-1),
 	RCBOT_ISENEMY_TRUE = 1,

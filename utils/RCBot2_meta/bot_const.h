@@ -32,6 +32,7 @@
 #define __BOT_CONST_H__
 
 #include "shareddefs.h"
+#include <cstdint>
 
 #ifndef __linux__
 #define BOT_WELCOME_MESSAGE "Welcome to RCBot by Cheeseh"
@@ -51,17 +52,17 @@
 
 #define DEFAULT_BOT_NAME "RCBot"
 
-enum
+enum : std::uint8_t
 {
 	BOT_CONVAR_FLAGS_OFFSET = 20
 };
 
-enum
+enum : std::uint8_t
 {
 	BOT_WPT_TOUCH_DIST = 72 // distance for bot to touch waypoint
 };
 
-enum
+enum : std::uint8_t
 {
 	BOT_DEBUG_GAME_EVENT = 0,
 	BOT_DEBUG_NAV = 1,
@@ -81,7 +82,7 @@ enum
 };
 
 // from sourcemod
-enum RoundState 
+enum RoundState : std::uint8_t
 {
 	// initialize the game, create teams
 	RoundState_Init,
@@ -108,7 +109,7 @@ enum RoundState
 	RoundState_BetweenRounds,
 };
 
-typedef enum
+typedef enum : std::uint8_t
 {
 	LOOK_NONE = 0,
 	LOOK_VECTOR,
@@ -167,7 +168,7 @@ typedef struct player_info_s
 	unsigned char	filesDownloaded;
 } player_info_t;*/
 
-typedef enum
+typedef enum : std::uint8_t
 {
 	MOD_UNSUPPORTED = 0,
 	MOD_HLDM2,
@@ -187,7 +188,7 @@ typedef enum
 
 #define BITS_MOD_ALL ~(1<<MOD_MAX)
 
-enum
+enum : std::uint8_t
 {
 	BOT_JUMP_HEIGHT = 45,
 	MIN_COVER_MOVE_DIST = 128
@@ -201,7 +202,7 @@ enum
 
 #define BOT_FOLDER "rcbot2"
 
-typedef enum
+typedef enum : std::uint8_t
 {
 	BOT_FUNC_FAIL = 0,
     BOT_FUNC_CONTINUE,
@@ -247,7 +248,7 @@ typedef enum
 ////////////////////////
 #define BLAST_RADIUS 200
 ///////////////////////
-typedef enum 
+typedef enum : std::uint8_t
 {
 	STATE_IDLE = 0,
 	STATE_RUNNING,

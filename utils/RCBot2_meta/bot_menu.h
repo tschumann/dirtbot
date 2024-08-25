@@ -55,7 +55,7 @@ class CBotMenuItem;
 class WptColor;
 
 // menu types
-typedef enum
+typedef enum : std::uint8_t
 {
 	BOT_MENU_NONE = 0,
 	BOT_MENU_WAYPOINT_MAIN,
@@ -82,7 +82,7 @@ typedef enum
 	BOT_MENU_MAX_ITEMS
 }eBotMenus;
 
-enum
+enum : std::uint8_t
 {
 	MAX_MENU_CAPTION_LENGTH = 64
 };
@@ -459,7 +459,7 @@ public:
 	const char *getCaption(CClient *pClient,WptColor &color );
 };*/
 
-enum 
+enum : std::uint8_t
 {
 	BOT_MENU_WPT = 0,
 	//BOT_MENU_BOT = 1,

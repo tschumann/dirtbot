@@ -94,7 +94,7 @@ private:
 	int m_iInvoked; 
 };
 
-enum
+enum : std::uint8_t
 {
 	BOTS_THINK_TIMER = 0,
 	BOT_THINK_TIMER = 1,

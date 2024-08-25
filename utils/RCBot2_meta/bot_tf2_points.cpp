@@ -577,7 +577,7 @@ bool CTFObjectiveResource :: updateDefendPoints ( int team )
 			int iNumPrevPointsAvail = 0;
 
 			// Check this points prevous points
-			for (int j : arr[i].iPrev)
+			for (const int j : arr[i].iPrev)
 			{
 				if (j != -1 )
 				{
@@ -616,7 +616,7 @@ bool CTFObjectiveResource :: updateDefendPoints ( int team )
 
 				if ( arr[j].bPrev )
 				{
-					for (int k : arr[j].iPrev)
+					for (const int k : arr[j].iPrev)
 					{
 						if (k == i )
 						{
@@ -935,7 +935,7 @@ bool CTFObjectiveResource :: updateAttackPoints ( int team )
 
 				if ( arr[j].bPrev )
 				{
-					for (int k : arr[j].iPrev)
+					for (const int k : arr[j].iPrev)
 					{
 						if (k == i )
 						{

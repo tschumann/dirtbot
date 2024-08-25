@@ -208,7 +208,7 @@ int CDODMod::getHighestScore ()
 
 	int highest = 0;
 
-	for ( short int i = 1; i <= gpGlobals->maxClients; i ++ )
+	for ( int i = 1; i <= gpGlobals->maxClients; i ++ )
 	{
 		edict_t* edict = INDEXENT(i);
 
@@ -399,7 +399,7 @@ bool CDODFlags::getRandomBombToDefuse  ( Vector *position, int iTeam, edict_t **
 	for ( short int i = 0; i < m_iNumControlPoints; i ++ )
 	{
 		if ( m_iOwner[i] == iTeam && isBombPlanted(i) && !isBombBeingDefused(i) && m_pBombs[i][0] != nullptr)
-			for ( short int j = 0; j < getNumBombsRequired(i); j ++ ) { iPossible.emplace_back(i); }
+			for ( int j = 0; j < getNumBombsRequired(i); j ++ ) { iPossible.emplace_back(i); }
 	}
 
 	if (!iPossible.empty())
@@ -437,7 +437,7 @@ bool CDODFlags:: getRandomBombToDefend ( CBot *pBot, Vector *position, int iTeam
 	for ( short int i = 0; i < m_iNumControlPoints; i ++ )
 	{
 		if ( m_iOwner[i] != iTeam && isBombPlanted(i) && m_pBombs[i][0] != nullptr)
-			for ( short int j = 0; j < getNumBombsRequired(i); j ++ ) { iPossible.emplace_back(i); }
+			for ( int j = 0; j < getNumBombsRequired(i); j ++ ) { iPossible.emplace_back(i); }
 	}
 
 	if (!iPossible.empty())

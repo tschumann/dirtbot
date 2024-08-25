@@ -3,15 +3,15 @@
 
 #include <engine_wrappers.h>
 
-typedef enum
+typedef enum : std::uint8_t
 {
 	TELE_ENTRANCE = 0,
 	TELE_EXIT
 }eTeleMode;
 
-typedef enum
+typedef enum : std::int16_t
 {
-	GETPROP_UNDEF = -1,
+	GETPROP_UNDEF = (-1),
 	GETPROP_TF2SCORE = 0,
 	GETPROP_ENTITY_FLAGS,
 	GETPROP_TEAM,

@@ -5,7 +5,7 @@
 #include "bot_profile.h"
 #include "bot_waypoint.h"
 
-enum RCBotProfileVar {
+enum RCBotProfileVar : std::uint8_t {
 	RCBotProfile_iVisionTicks,
 	RCBotProfile_iPathTicks,
 	RCBotProfile_iVisionTicksClients,

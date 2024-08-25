@@ -44,7 +44,7 @@
 #include <cctype>
 #endif
 
-enum
+enum : std::uint16_t
 {
 	MAX_MAP_STRING_LEN = 64,
 	MAX_PATH_LEN = 512,

@@ -299,7 +299,7 @@ private:
 	float m_fNextAttack;
 };
 
-enum
+enum : std::uint8_t
 {
 	TASK_TF2_DEMO_STATE_LAY_BOMB = 0,
 	TASK_TF2_DEMO_STATE_RUN_UP = 1
@@ -437,7 +437,7 @@ private:
 
 };
 
-enum
+enum : std::uint8_t
 {
 	CHARGER_HEALTH = 0,
 	CHARGER_ARMOR = 1

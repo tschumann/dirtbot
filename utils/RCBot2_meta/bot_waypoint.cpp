@@ -3013,9 +3013,9 @@ bool CWaypoint :: addPathTo ( int iWaypointIndex )
 Vector CWaypoint :: applyRadius () const
 {
 	if ( m_fRadius > 0 )
-		return Vector(randomFloat(-m_fRadius,m_fRadius),randomFloat(m_fRadius,m_fRadius),0);
+		return {randomFloat(-m_fRadius,m_fRadius),randomFloat(m_fRadius,m_fRadius),0};
 
-	return Vector(0,0,0);
+	return {0,0,0};
 }
 
 void CWaypoint :: removePathTo ( int iWaypointIndex )

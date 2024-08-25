@@ -39,7 +39,7 @@
 class CBot;
 class CBotWeapon;
 
-typedef enum
+typedef enum : std::uint8_t
 {
  BOT_UTIL_BUILDSENTRY = 0,
  BOT_UTIL_BUILDDISP,

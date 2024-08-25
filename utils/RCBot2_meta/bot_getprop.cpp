@@ -712,7 +712,7 @@ edict_t *CClassInterface::FindEntityByNetClassNearest(const Vector& vstart, cons
 	edict_t *pfound = nullptr;
 	float fMindist = 8192.0f;
 
-	for (short int i = 0; i < gpGlobals->maxEntities; i++)
+	for (int i = 0; i < gpGlobals->maxEntities; i++)
 	{
 		edict_t* current = engine->PEntityOfEntIndex(i);
 		if (current == nullptr)

@@ -54,7 +54,7 @@ typedef struct
 	float m_fProjSpeed;
 }WeaponsData_t;
 
-enum 
+enum : std::uint8_t
 {
 	TF2_WEAPON_BAT = 0,
 	TF2_WEAPON_BOTTLE, //1
@@ -147,7 +147,7 @@ enum
 	TF2_WEAPON_MAX
 };
 */
-enum
+enum : std::uint8_t
 {
 	HL2DM_WEAPON_PISTOL = 0,
 	HL2DM_WEAPON_CROWBAR,
@@ -164,7 +164,7 @@ enum
 	HL2DM_WEAPON_MAX
 };
 
-enum
+enum : std::uint8_t
 {
 	DOD_WEAPON_AMERKNIFE = 0,
 	DOD_WEAPON_SPADE,
@@ -194,7 +194,7 @@ enum
 	DOD_WEAPON_MAX
 };
 
-enum
+enum : std::uint8_t
 {
 	SYN_WEAPON_PISTOL = 0,
 	SYN_WEAPON_CROWBAR,
@@ -216,7 +216,7 @@ enum
 	SYN_WEAPON_MAX
 };
 
-enum
+enum : std::uint8_t
 {
 	CS_WEAPON_KNIFE = 0,
 	CS_WEAPON_USP,
@@ -583,7 +583,7 @@ private:
 	static std::vector<CWeapon*> m_theWeapons;
 };
 
-enum
+enum : std::uint8_t
 {
 	AMMO_PRIM = 1,
 	AMMO_SEC = 2

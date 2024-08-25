@@ -37,7 +37,7 @@
 
 #include <vector>
 
-typedef enum
+typedef enum : std::uint8_t
 {
 	BOT_ATT_UTIL = 0,
 	BOT_NORM_UTIL,

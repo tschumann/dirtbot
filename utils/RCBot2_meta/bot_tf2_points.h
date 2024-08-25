@@ -32,7 +32,7 @@ class CTFGameRulesProxy
 
 #define TEAM_ARRAY( index, team )		((index) + ((team) * MAX_CONTROL_POINTS))
 
-typedef enum ePointAttackDefend_s
+typedef enum ePointAttackDefend_s : std::uint8_t
 {
 	TF2_POINT_DEFEND = 0,
 	TF2_POINT_ATTACK

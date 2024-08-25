@@ -41,19 +41,19 @@
 #include "bot_tf2_points.h"
 #include "bot_cvars.h"
 
-enum
+enum : std::uint8_t
 {
 	MAX_CAP_POINTS = 32
 };
 
-enum
+enum : std::uint8_t
 {
 	DOD_MAPTYPE_UNKNOWN = 0,
 	DOD_MAPTYPE_FLAG = 1,
 	DOD_MAPTYPE_BOMB = 2
 };
 
-enum
+enum : std::uint8_t
 {
 	BOT_ADD_METHOD_DEFAULT = 0,
 	BOT_ADD_METHOD_PUPPET = 1
@@ -75,7 +75,7 @@ class CBotNeuralNet;
 		COOP
 		ZOMBIE
 */
-typedef enum
+typedef enum : std::uint8_t
 {
 	BOTTYPE_GENERIC = 0,
 	BOTTYPE_CSS,
@@ -195,7 +195,7 @@ private:
 	int m_iId;
 };
 */
-enum
+enum : std::uint8_t
 {
 	MAX_DOD_FLAGS = 8
 };
@@ -636,7 +636,7 @@ protected:
 	static float fAttackProbLookUp[MAX_DOD_FLAGS+1][MAX_DOD_FLAGS+1];
 };
 
-typedef enum
+typedef enum : std::uint8_t
 {
 	CS_MAP_DEATHMATCH = 0, // Generic Maps
 	CS_MAP_BOMBDEFUSAL, // Bomb Defusal maps
@@ -793,7 +793,7 @@ public:
 
 #define NEWENUM typedef enum {
 
-typedef enum
+typedef enum : std::uint8_t
 {
 	TF_MAP_DM = 0,
 	TF_MAP_CTF,

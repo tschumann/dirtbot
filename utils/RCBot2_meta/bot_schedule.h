@@ -41,7 +41,7 @@ class CBotTask;
 class CAttackEntityTask;
 class IBotTaskInterrupt;
 
-enum
+enum : std::uint8_t
 {
 	BITS_SCHED_PASS_INT = 1<<0,
 	BITS_SCHED_PASS_FLOAT = 1<<1,
@@ -49,7 +49,7 @@ enum
 	BITS_SCHED_PASS_EDICT = 1<<3
 };
 
-typedef enum
+typedef enum : std::uint8_t
 {
 	SCHED_NONE = 0,
 	SCHED_ATTACK,

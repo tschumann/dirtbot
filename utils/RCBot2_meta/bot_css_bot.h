@@ -31,7 +31,7 @@
 #ifndef __CSS_RCBOT_H__
 #define __CSS_RCBOT_H__
 
-enum
+enum : std::uint8_t
 {
 	CS_TEAM_UNASSIGNED = 0,
 	CS_TEAM_SPECTATOR = 1,
@@ -39,7 +39,7 @@ enum
 	CS_TEAM_COUNTERTERRORIST = 3
 };
 
-enum
+enum : std::uint8_t
 {
 	CS_WEAPON_SLOT_PRIMARY = 0,
 	CS_WEAPON_SLOT_SECONDARY = 1,

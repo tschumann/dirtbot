@@ -49,7 +49,7 @@ const char* LOGLEVEL_ANSI_COLORS[] = {
 #if defined WIN32
 #define FOREGROUND_YELLOW (FOREGROUND_GREEN | FOREGROUND_RED)
 #define FOREGROUND_WHITE  (FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE)
-const DWORD LOGLEVEL_WINCON_COLORS[] = {
+constexpr DWORD LOGLEVEL_WINCON_COLORS[] = {
 	FOREGROUND_RED,
 	FOREGROUND_RED | FOREGROUND_INTENSITY,
 	FOREGROUND_YELLOW,
@@ -69,7 +69,7 @@ const Color LOGLEVEL_CONSOLE_COLORS[] = {
 	{  97, 214, 214, 255 },
 };
 
-enum MessageColorizationMode {
+enum MessageColorizationMode : std::uint8_t {
 	Colorize_None,
 	
 	// ANSI escapes

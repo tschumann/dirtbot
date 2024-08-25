@@ -72,7 +72,7 @@ typedef struct
 	Vector v_ground;
 }edict_wpt_pair_t;
 
-enum
+enum : std::uint8_t
 {
 	DRAWTYPE_EFFECTS = 0,
 	DRAWTYPE_DEBUGENGINE,

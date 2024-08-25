@@ -158,7 +158,7 @@ protected:
 	bool m_bLoadBelief = false;
 };
 
-enum
+enum : std::uint8_t
 {
 	FL_ASTAR_CLOSED = 1,
 	FL_ASTAR_PARENT = 2,
@@ -362,7 +362,7 @@ bool operator<( const AStarNode * A, const AStarNode * B )
 	return A->betterCost(B);
 }*/
 
-enum
+enum : std::uint8_t
 {
 	WPT_SEARCH_AVOID_SENTRIES = 1,
 	WPT_SEARCH_AVOID_SNIPERS = 2,

@@ -40,6 +40,7 @@
 #ifndef __RCBOT2_H__
 #define __RCBOT2_H__
 
+#include <cstdint>
 //#include "cbase.h"
 //#include "baseentity.h"
 #include "toolframework/itoolentity.h"
@@ -89,7 +90,7 @@ extern IEffects *g_pEffects; //Redundant? [APG]RoboCopCL]
 extern IBotManager *g_pBotManager;
 extern CGlobalVars *gpGlobals;
 
-enum
+enum : std::uint8_t
 {
 	GET_HEALTH = 0,
 	GET_TEAM = 1,
@@ -184,7 +185,7 @@ class CWaypoint;
 class CWeapon;
 class IBotNavigator;
 
-enum
+enum : std::uint8_t
 {
 	MOVELOOK_DEFAULT = 0,
 	MOVELOOK_THINK = 1,
