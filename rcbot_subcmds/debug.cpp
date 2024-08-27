@@ -452,8 +452,8 @@ CBotCommandInline SetProp("setprop", CMD_ACCESS_DEBUG, [](CClient *pClient, cons
 								*intdata = std::atoi(args[3]);
 							else if ( strcmp(args[2],"bool")==0 )
 								*booldata = (std::atoi(args[3])==1);
-							else if ( strcmp(args[2],"float")==0 )
-								*floatdata = std::atof(args[3]);
+							else if (strcmp(args[2], "float") == 0)
+								*floatdata = static_cast<float>(std::atof(args[3]));
 						}
 						else
 							CBotGlobals::botMessage(pPlayer,0,"NULL");
@@ -666,7 +666,7 @@ CBotCommandInline DebugMemoryScanCommand("memoryscan", CMD_ACCESS_DEBUG, [](CCli
 	byte *mempoint = reinterpret_cast<byte*>(pent);
 	const byte value = static_cast<byte>(std::atoi(args[1]));
 	const int ivalue = (std::atoi(args[1]));
-	const float fvalue = (atof(args[1]));
+	const float fvalue = static_cast<float>(std::atof(args[1]));
 
 	for (u_MEMSEARCH& stored_offset : stored_offsets) // 2KB search
 	{

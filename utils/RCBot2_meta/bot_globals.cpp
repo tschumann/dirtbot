@@ -673,20 +673,23 @@ inline Vector CBotGlobals :: entityOrigin ( edict_t *pEntity )
 	return vOrigin;
 }*/
 
-void CBotGlobals :: serverSay ( char *fmt, ... )
+void CBotGlobals::serverSay(const char* fmt, ...)
 {
-	va_list argptr; 
+	if (!fmt) return;
+
+	va_list argptr;
+
 	static char string[1024];
 
-	va_start (argptr, fmt);
-	
-	std::strcpy(string,"say \"");
+	va_start(argptr, fmt);
 
-	std::vsprintf (&string[5], fmt, argptr); 
+	std::strcpy(string, "say \"");
 
-	va_end (argptr); 
+	vsnprintf(&string[5], sizeof(string) - 6, fmt, argptr);
 
-	std::strcat(string,"\"");
+	va_end(argptr);
+
+	std::strcat(string, "\"");
 
 	engine->ServerCommand(string);
 }
@@ -885,7 +888,7 @@ void CBotGlobals :: botMessage ( edict_t *pEntity, int iErr, const char *fmt, ..
 	static char string[1024];
 
 	va_start (argptr, fmt);
-	std::vsprintf (string, fmt, argptr); 
+	vsnprintf(string, sizeof(string), fmt, argptr);
 	va_end (argptr); 
 
 	const char *bot_tag = BOT_TAG;

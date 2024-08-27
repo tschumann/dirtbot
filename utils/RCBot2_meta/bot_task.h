@@ -709,8 +709,10 @@ private:
 class CBotTF2EngiLookAfter : public CBotTask
 {
 public:
-	CBotTF2EngiLookAfter ( edict_t *pSentry ) { m_pSentry = pSentry; m_fTime = 0.0f; m_fHitSentry = 0.0f; }
-	
+	CBotTF2EngiLookAfter(edict_t *pSentry)
+    : m_fTime(0.0f), m_fHitSentry(0.0f), m_pSentry(pSentry) {
+	}
+		
 	void execute (CBot *pBot,CBotSchedule *pSchedule) override;
 
 	void debugString ( char *string ) override

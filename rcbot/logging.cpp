@@ -105,46 +105,46 @@ void CBotLogger::Log(LogLevel level, const char* fmt, ...) {
 	if (level > static_cast<LogLevel>(rcbot_loglevel.GetInt())) {
 		return;
 	}
-	
+
 	char buf[1024];
-	
+
 	va_list argptr;
 	va_start(argptr, fmt);
-	vsprintf(buf, fmt, argptr); 
+	vsnprintf(buf, sizeof(buf), fmt, argptr);
 	va_end(argptr);
-	
+
 	switch (GetMessageColorizationMode()) {
-		case Colorize_ANSI:
-			if (level <= LogLevel::WARN) {
-				Warning("%s[RCBot] %s: %s\x1B[0m\n", LOGLEVEL_ANSI_COLORS[level],
-						LOGLEVEL_STRINGS[level], buf);
+	case Colorize_ANSI:
+		if (level <= LogLevel::WARN) {
+			Warning("%s[RCBot] %s: %s\x1B[0m\n", LOGLEVEL_ANSI_COLORS[level],
+				LOGLEVEL_STRINGS[level], buf);
+		} else {
+			Msg("%s[RCBot] %s: %s\x1B[0m\n", LOGLEVEL_ANSI_COLORS[level],
+				LOGLEVEL_STRINGS[level], buf);
+		}
+		break;
+#if defined WIN32
+	case Colorize_WinConsole:
+		HANDLE hConsoleHandle;
+		hConsoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+
+		SetConsoleTextAttribute(hConsoleHandle, LOGLEVEL_WINCON_COLORS[level]);
+
+		Msg("[RCBot] %s: %s\n", LOGLEVEL_STRINGS[level], buf);
+		SetConsoleTextAttribute(hConsoleHandle, FOREGROUND_WHITE);
+		break;
+#endif
+	case Colorize_ClientConsole:
+		extern ICvar* icvar;
+		icvar->ConsoleColorPrintf(LOGLEVEL_CONSOLE_COLORS[level], "[RCBot] %s: %s\n", LOGLEVEL_STRINGS[level], buf);
+		break;
+	case Colorize_None:
+	default:
+		if (level <= LogLevel::WARN) {
+			Warning("[RCBot] %s: %s\n", LOGLEVEL_STRINGS[level], buf);
 			} else {
-				Msg("%s[RCBot] %s: %s\x1B[0m\n", LOGLEVEL_ANSI_COLORS[level],
-						LOGLEVEL_STRINGS[level], buf);
-			}
-			break;
-		#if defined WIN32
-		case Colorize_WinConsole:
-			HANDLE hConsoleHandle;
-			hConsoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-			
-			SetConsoleTextAttribute(hConsoleHandle, LOGLEVEL_WINCON_COLORS[level]);
-			
 			Msg("[RCBot] %s: %s\n", LOGLEVEL_STRINGS[level], buf);
-			SetConsoleTextAttribute(hConsoleHandle, FOREGROUND_WHITE);
-			break;
-		#endif
-		case Colorize_ClientConsole:
-			extern ICvar *icvar;
-			icvar->ConsoleColorPrintf(LOGLEVEL_CONSOLE_COLORS[level], "[RCBot] %s: %s\n", LOGLEVEL_STRINGS[level], buf);
-			break;
-		case Colorize_None:
-		default:
-			if (level <= LogLevel::WARN) {
-				Warning("[RCBot] %s: %s\n", LOGLEVEL_STRINGS[level], buf);
-			} else {
-				Msg("[RCBot] %s: %s\n", LOGLEVEL_STRINGS[level], buf);
-			}
-			break;
+		}
+		break;
 	}
 }

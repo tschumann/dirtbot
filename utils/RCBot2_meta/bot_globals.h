@@ -111,7 +111,7 @@ public:
 		return pEntity && !pEntity->IsFree() && pEntity->GetNetworkable() != nullptr && pEntity->GetIServerEntity() != nullptr && pEntity->m_NetworkSerialNumber != 0;	
 	}
 
-	static void serverSay ( char *fmt, ... );
+	static void serverSay (const char* fmt, ... );
 
 	static bool isAlivePlayer ( edict_t *pEntity );
 

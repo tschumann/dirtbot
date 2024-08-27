@@ -371,7 +371,11 @@ private:
 class CBroadcastFlagDropped : public IBotFunction
 {
 public:
-	CBroadcastFlagDropped (int iTeam, const Vector& origin) { m_iTeam = iTeam; m_vOrigin = origin; }
+	CBroadcastFlagDropped(int iTeam, const Vector& origin)
+		: m_vOrigin(origin), m_iTeam(iTeam)
+	{
+	}
+
 	void execute ( CBot *pBot ) override;
 
 private:
