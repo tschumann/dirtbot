@@ -134,63 +134,63 @@ class CWaypointTypes
 public:
 
 // if you're adding a new waypoint type, don't forget to update CWaypointTypes :: setup()
-	static const int W_FL_NONE           = 0;
-	static const int W_FL_JUMP           = 1 << 0;
-	static const int W_FL_CROUCH         = 1 << 1;
-	static const int W_FL_UNREACHABLE    = 1 << 2;
-	static const int W_FL_LADDER         = 1 << 3;
+	static constexpr int W_FL_NONE           = 0;
+	static constexpr int W_FL_JUMP           = 1 << 0;
+	static constexpr int W_FL_CROUCH         = 1 << 1;
+	static constexpr int W_FL_UNREACHABLE    = 1 << 2;
+	static constexpr int W_FL_LADDER         = 1 << 3;
 	
-	static const int W_FL_FLAG           = 1 << 4;
-	static const int W_FL_RESCUEZONE     = 1 << 4; // Counter-Strike: Source --> Hostage rescue zone
+	static constexpr int W_FL_FLAG           = 1 << 4;
+	static constexpr int W_FL_RESCUEZONE     = 1 << 4; // Counter-Strike: Source --> Hostage rescue zone
 	
-	static const int W_FL_CAPPOINT       = 1 << 5;
-	static const int W_FL_GOAL           = 1 << 5; // Synergy & Counter-Strike: Source --> Map Goal
+	static constexpr int W_FL_CAPPOINT       = 1 << 5;
+	static constexpr int W_FL_GOAL           = 1 << 5; // Synergy & Counter-Strike: Source --> Map Goal
 	
-	static const int W_FL_NOBLU          = 1 << 6;
-	static const int W_FL_NOAXIS         = 1 << 6;
-	static const int W_FL_NOTERRORIST    = 1 << 6; // Counter-Strike: Source --> Terrorists cannot use this waypoint
+	static constexpr int W_FL_NOBLU          = 1 << 6;
+	static constexpr int W_FL_NOAXIS         = 1 << 6;
+	static constexpr int W_FL_NOTERRORIST    = 1 << 6; // Counter-Strike: Source --> Terrorists cannot use this waypoint
 	
-	static const int W_FL_NORED          = 1 << 7;
-	static const int W_FL_NOALLIES       = 1 << 7;
-	static const int W_FL_NOCOUNTERTR    = 1 << 7; // Counter-Strike: Source --> Counter-Terrorists cannot use this waypoint
+	static constexpr int W_FL_NORED          = 1 << 7;
+	static constexpr int W_FL_NOALLIES       = 1 << 7;
+	static constexpr int W_FL_NOCOUNTERTR    = 1 << 7; // Counter-Strike: Source --> Counter-Terrorists cannot use this waypoint
 	
-	static const int W_FL_HEALTH         = 1 << 8;
-	static const int W_FL_OPENS_LATER    = 1 << 9;
+	static constexpr int W_FL_HEALTH         = 1 << 8;
+	static constexpr int W_FL_OPENS_LATER    = 1 << 9;
 	
-	static const int W_FL_ROCKET_JUMP    = 1 << 10;
-	static const int W_FL_BOMB_TO_OPEN   = 1 << 10; // DOD:S
-	static const int W_FL_DOOR           = 1 << 10; // Counter-Strike: Source --> Check for door
+	static constexpr int W_FL_ROCKET_JUMP    = 1 << 10;
+	static constexpr int W_FL_BOMB_TO_OPEN   = 1 << 10; // DOD:S
+	static constexpr int W_FL_DOOR           = 1 << 10; // Counter-Strike: Source --> Check for door
 	
-	static const int W_FL_SNIPER         = 1 << 11;
-	static const int W_FL_AMMO           = 1 << 12;
+	static constexpr int W_FL_SNIPER         = 1 << 11;
+	static constexpr int W_FL_AMMO           = 1 << 12;
 	
-	static const int W_FL_RESUPPLY       = 1 << 13;
-	static const int W_FL_BOMBS_HERE     = 1 << 13;
+	static constexpr int W_FL_RESUPPLY       = 1 << 13;
+	static constexpr int W_FL_BOMBS_HERE     = 1 << 13;
 	
-	static const int W_FL_SENTRY         = 1 << 14;
-	static const int W_FL_MACHINEGUN     = 1 << 14;
+	static constexpr int W_FL_SENTRY         = 1 << 14;
+	static constexpr int W_FL_MACHINEGUN     = 1 << 14;
 	
-	static const int W_FL_DOUBLEJUMP     = 1 << 15;
-	static const int W_FL_PRONE          = 1 << 15;
-	static const int W_FL_TELE_ENTRANCE  = 1 << 16;
-	static const int W_FL_TELE_EXIT      = 1 << 17;
-	static const int W_FL_DEFEND         = 1 << 18;
-	static const int W_FL_AREAONLY       = 1 << 19;
-	static const int W_FL_ROUTE          = 1 << 20;
-	static const int W_FL_WAIT_GROUND    = 1 << 21;
+	static constexpr int W_FL_DOUBLEJUMP     = 1 << 15;
+	static constexpr int W_FL_PRONE          = 1 << 15;
+	static constexpr int W_FL_TELE_ENTRANCE  = 1 << 16;
+	static constexpr int W_FL_TELE_EXIT      = 1 << 17;
+	static constexpr int W_FL_DEFEND         = 1 << 18;
+	static constexpr int W_FL_AREAONLY       = 1 << 19;
+	static constexpr int W_FL_ROUTE          = 1 << 20;
+	static constexpr int W_FL_WAIT_GROUND    = 1 << 21;
 	
-	static const int W_FL_NO_FLAG        = 1 << 22;
-	static const int W_FL_COVER_RELOAD   = 1 << 22; // DOD:S only
-	static const int W_FL_NO_HOSTAGES    = 1 << 22; // Counter-Strike: Source --> Bots escorting hostages cannot use this waypoint
+	static constexpr int W_FL_NO_FLAG        = 1 << 22;
+	static constexpr int W_FL_COVER_RELOAD   = 1 << 22; // DOD:S only
+	static constexpr int W_FL_NO_HOSTAGES    = 1 << 22; // Counter-Strike: Source --> Bots escorting hostages cannot use this waypoint
 	
-	static const int W_FL_LIFT           = 1 << 23;
-	static const int W_FL_FLAGONLY       = 1 << 24;
-	static const int W_FL_FALL           = 1 << 25;
-	static const int W_FL_BREAKABLE      = 1 << 26;
-	static const int W_FL_SPRINT         = 1 << 27;
-	static const int W_FL_TELEPORT_CHEAT = 1 << 28; // teleports bots to the next waypoint (cheat)
-	static const int W_FL_OWNER_ONLY     = 1 << 29; // Only owners of this area can use the waypoint
-	static const int W_FL_USE			 = 1 << 30; // Synergy: Use Button/Door
+	static constexpr int W_FL_LIFT           = 1 << 23;
+	static constexpr int W_FL_FLAGONLY       = 1 << 24;
+	static constexpr int W_FL_FALL           = 1 << 25;
+	static constexpr int W_FL_BREAKABLE      = 1 << 26;
+	static constexpr int W_FL_SPRINT         = 1 << 27;
+	static constexpr int W_FL_TELEPORT_CHEAT = 1 << 28; // teleports bots to the next waypoint (cheat)
+	static constexpr int W_FL_OWNER_ONLY     = 1 << 29; // Only owners of this area can use the waypoint
+	static constexpr int W_FL_USE			 = 1 << 30; // Synergy: Use Button/Door
 	//static const int W_FL_ATTACKPOINT = (1 << 30); // Tactical waypoint -- each squad will go to different attack points and signal others to go
 
 	static void setup ();
@@ -240,9 +240,9 @@ public:
 	//static const int MAX_PATHS = 8;
 	// Waypoint flags (up to 32)
 	
-	static const int WAYPOINT_HEIGHT = 72;
-	static const int WAYPOINT_WIDTH = 8;
-	static const int PATHWAYPOINT_WIDTH = 4;
+	static constexpr int WAYPOINT_HEIGHT = 72;
+	static constexpr int WAYPOINT_WIDTH = 8;
+	static constexpr int PATHWAYPOINT_WIDTH = 4;
 
 	CWaypoint ()
 	{

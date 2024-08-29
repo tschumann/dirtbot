@@ -356,7 +356,12 @@ unsigned int UTIL_FindInDataMap(datamap_t* pMap, const char* name)
 class VEmptyClass {};
 datamap_t* VGetDataDescMap(CBaseEntity* pThisPtr, int offset)
 {
-	void** this_ptr = *reinterpret_cast<void***>(&pThisPtr);
+	// Ensure pThisPtr is not null
+	if (!pThisPtr)
+	{
+		return nullptr;
+	}
+	// Get the vtable from the entity
 	void** vtable = *reinterpret_cast<void***>(pThisPtr);
 	void* vfunc = vtable[offset];
 
@@ -377,8 +382,8 @@ datamap_t* VGetDataDescMap(CBaseEntity* pThisPtr, int offset)
 	u.s.addr = vfunc;
 	u.s.adjustor = 0;
 #endif
-
-	return (reinterpret_cast<VEmptyClass*>(this_ptr)->*u.mfpnew)();
+	// Cast pThisPtr to VEmptyClass* and call the member function pointer
+	return (reinterpret_cast<VEmptyClass*>(pThisPtr)->*u.mfpnew)();
 }
 
 datamap_t* CBaseEntity_GetDataDescMap(CBaseEntity* pEntity)

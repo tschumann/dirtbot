@@ -47,12 +47,12 @@ void CBotGAValues::init()
 	setFitness(0);
 }
 
-CBotGAValues::CBotGAValues(std::vector<float> values)
+CBotGAValues::CBotGAValues(const std::vector<float>& values)
 {
 	clear();
 	setFitness(0);
 
-	setVector(std::move(values));
+	setVector(values);
 }
 
 void CBotGAValues::clear()

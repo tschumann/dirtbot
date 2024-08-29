@@ -38,7 +38,7 @@ class CBotGAValues : public IIndividual
 public:
 	CBotGAValues();
 
-	CBotGAValues( std::vector<float> values );
+	CBotGAValues( const std::vector<float>& values );
 
 	void init ();
 

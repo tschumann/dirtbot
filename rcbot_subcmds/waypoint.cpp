@@ -28,6 +28,8 @@
  *    version.
  */
 
+#include "bot_waypoint.h"
+
 CBotCommandInline WaypointOnCommand("on", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient )
@@ -181,8 +183,7 @@ CBotCommandInline WaypointClearCommand("clear", CMD_ACCESS_WAYPOINT, [](CClient 
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline WaypointGiveTypeCommand("givetype", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs&
-                                                                              args)
+CBotCommandInline WaypointGiveTypeCommand("givetype", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs& args)
 {
 	edict_t *pEntity = pClient->getPlayer();
 
@@ -257,15 +258,20 @@ CBotCommandInline WaypointGiveTypeCommand("givetype", CMD_ACCESS_WAYPOINT, [](CC
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline WaypointDrawTypeCommand("drawtype", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs&
-                                                                              args)
+CBotCommandInline WaypointDrawTypeCommand("drawtype", CMD_ACCESS_WAYPOINT, [](CClient* pClient, const BotCommandArgs& args)
 {
-	if ( pClient )
+	if (pClient)
 	{
-		if ( args[0] && *args[0] )
+		if (args[0] && *args[0])
 		{
-			pClient->setDrawType(std::atoi(args[0]));
-			return COMMAND_ACCESSED;
+			int drawType = std::atoi(args[0]);
+			if (drawType >= 0 && drawType <= std::numeric_limits<unsigned short>::max())
+			{
+				pClient->setDrawType(static_cast<unsigned short>(drawType));
+				return COMMAND_ACCESSED;
+			}
+			// Handle out-of-range value
+			return COMMAND_ERROR;
 		}
 	}
 	return COMMAND_ERROR;
