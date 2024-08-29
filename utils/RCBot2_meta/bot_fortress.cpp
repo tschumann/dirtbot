@@ -3815,7 +3815,7 @@ int CBotFortress :: getSpyDisguiseClass ( int iTeam ) const
 	}
 
 	// choose one of the classes proportional to whatever's on the team
-	return availableClasses[ randomInt(0, availableClasses.size() - 1) ];
+	return availableClasses[randomInt(0, static_cast<int>(availableClasses.size()) - 1)];
 }
 
 bool CBotFortress :: incomingRocket ( float fRange )

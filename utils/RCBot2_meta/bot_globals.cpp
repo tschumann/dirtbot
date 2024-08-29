@@ -262,7 +262,7 @@ edict_t *CBotGlobals :: findPlayerByTruncName ( const char *name )
 // find a player by a truncated name "name".
 // e.g. name = "Jo" might find a player called "John"
 {
-	const unsigned int length = std::strlen(name);
+	const size_t length = std::strlen(name);
 	for( int i = 1; i <= maxClients(); i ++ )
 	{
 		edict_t* pent = INDEXENT(i);
@@ -488,8 +488,8 @@ bool CBotGlobals::initModFolder() {
 	char szGameFolder[512];
 	engine->GetGameDir(szGameFolder, 512);
 
-	const unsigned int iLength = std::strlen(CStrings::getString(szGameFolder));
-	unsigned int pos = iLength - 1;
+	const size_t iLength = std::strlen(CStrings::getString(szGameFolder));
+	size_t pos = iLength - 1;
 
 	while (pos > 0 && szGameFolder[pos] != '\\' && szGameFolder[pos] != '/') {
 		pos--;
@@ -892,8 +892,8 @@ void CBotGlobals :: botMessage ( edict_t *pEntity, int iErr, const char *fmt, ..
 	va_end (argptr); 
 
 	const char *bot_tag = BOT_TAG;
-	const unsigned int len = std::strlen(string);
-	const unsigned int taglen = std::strlen(BOT_TAG);
+	const size_t len = std::strlen(string);
+	const size_t taglen = std::strlen(BOT_TAG);
 	// add tag -- push tag into string
 	for ( unsigned int i = len + taglen; i >= taglen; i -- )
 		string[i] = string[i-taglen];
@@ -933,9 +933,9 @@ bool CBotGlobals :: makeFolders (const char* szFile)
 	unsigned int folderNameSize = 0;
 	szFolderName[0] = 0;
 
-	const unsigned int iLen = std::strlen(szFile);
+	const size_t iLen = std::strlen(szFile);
 
-	unsigned int i = 0;
+	size_t i = 0;
 
 	while ( i < iLen )
 	{

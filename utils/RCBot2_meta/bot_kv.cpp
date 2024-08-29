@@ -12,7 +12,7 @@ void CRCBotKeyValueList::parseFile(std::fstream& fp)
 	char szKey[RCBOT_MAX_KV_LEN];
 	char szValue[RCBOT_MAX_KV_LEN];
 
-	int iLine = 0;
+	size_t iLine = 0;
 
 	// parse profile ini
 	while (fp.getline(buffer, 255))
@@ -22,7 +22,7 @@ void CRCBotKeyValueList::parseFile(std::fstream& fp)
 		if ( buffer[0] == '#' ) // skip comment
 			continue;
 
-		int iLen = std::strlen(buffer);
+		size_t iLen = std::strlen(buffer);
 
 		if ( iLen == 0 )
 			continue;
@@ -35,10 +35,10 @@ void CRCBotKeyValueList::parseFile(std::fstream& fp)
 
 		bool bHaveKey = false;
 
-		int iKi = 0;
-		int iVi = 0;
+		size_t iKi = 0;
+		size_t iVi = 0;
 
-		for ( int iCi = 0; iCi < iLen; iCi ++ )
+		for ( unsigned int iCi = 0; iCi < iLen; iCi ++ )
 		{
 			// ignore spacing
 			if ( buffer[iCi] == ' ' )
@@ -71,7 +71,6 @@ void CRCBotKeyValueList::parseFile(std::fstream& fp)
 		m_KVs.emplace_back(new CRCBotKeyValue(szKey,szValue));
 
 	}
-
 }
 
 CRCBotKeyValueList :: ~CRCBotKeyValueList()

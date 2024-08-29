@@ -32,6 +32,7 @@
 #define __BOT_WEAPONS_H__
 
 #include <vector>
+#include <cstdint>
 
 extern const char *g_szTF2Weapons[];
 
@@ -339,9 +340,7 @@ public:
 
 	bool isShortWeaponName(const char* szWeaponName) const
 	{
-		static ptrdiff_t start;
-
-		start = strlen(m_szWeaponName) - strlen(szWeaponName);
+		const size_t start = strlen(m_szWeaponName) - strlen(szWeaponName);
 
 		if (start < 0)
 			return false;
@@ -839,7 +838,7 @@ private:
 	CBot *m_pBot;
 
 	// checksum mask of weapons bot already has so we know if we need to update or not
-	unsigned int m_iWeaponsSignature;
+	uintptr_t m_iWeaponsSignature;
 
 	// weapons local to the bot only 
 	// (holds ammo/preference etc and link to actual weapon)

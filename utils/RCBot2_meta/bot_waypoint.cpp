@@ -406,7 +406,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBeliefBetweenAreas ( const std::v
 			}
 
 			if ( pWpt == nullptr)
-				pWpt = CWaypoints::getWaypoint(goals[ randomInt(0, goals.size() - 1) ]->getWaypoint());
+				pWpt = CWaypoints::getWaypoint(goals[randomInt(0, static_cast<int>(goals.size()) - 1)]->getWaypoint());
 		}
 	}
 		
@@ -451,7 +451,10 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 				{
 					for ( int j = 1; j <= gpGlobals->maxClients; j ++ )
 					{
-						edict_t *pPlayer = INDEXENT(i);
+						/**
+						* So this was using 'i' instead of 'j' and was basically broken since forever -caxanga334
+						*/
+						edict_t* pPlayer = INDEXENT(j);
 
 						if ( pPlayer != nullptr && !pPlayer->IsFree() && CClassInterface::getTF2Class(pPlayer)==TF_CLASS_SNIPER )
 						{
@@ -470,7 +473,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 				{
 					for ( int j = 1; j <= gpGlobals->maxClients; j ++ )
 					{
-						edict_t *pPlayer = INDEXENT(i);
+						edict_t* pPlayer = INDEXENT(j);
 
 						if ( pPlayer != nullptr && !pPlayer->IsFree() )
 						{
@@ -525,7 +528,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 				{
 					for ( int j = 1; j <= gpGlobals->maxClients; j ++ )
 					{
-						edict_t *pPlayer = INDEXENT(i);
+						edict_t* pPlayer = INDEXENT(j);
 
 						if ( pPlayer != nullptr && !pPlayer->IsFree() && CClassInterface::getTF2Class(pPlayer)==TF_CLASS_SNIPER )
 						{
@@ -541,7 +544,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 				{
 					for ( int j = 1; j <= gpGlobals->maxClients; j ++ )
 					{
-						edict_t *pPlayer = INDEXENT(i);
+						edict_t* pPlayer = INDEXENT(j);
 
 						if ( pPlayer != nullptr && !pPlayer->IsFree() )
 						{
@@ -570,7 +573,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 			}
 
 			if ( pWpt == nullptr)
-				pWpt = goals[ randomInt(0, goals.size() - 1) ];
+				pWpt = goals[randomInt(0, static_cast<int>(goals.size()) - 1)];
 		}
 	}
 		
@@ -2222,14 +2225,14 @@ void CWaypoints :: deletePathsTo ( int iWpt )
 	// this will go into an evil loop unless we do this first
 	// and use a temporary copy as a side effect of performing
 	// a remove will affect the original array
-	for ( int i = 0; i < iNumPathsTo; i ++ ) //TODO: Improve loop [APG]RoboCop[CL]
+	for ( int i = 0; i < iNumPathsTo; i ++ )
 	{
 		pathsTo.emplace_back(pWaypoint->getPathToThisWaypoint(i));
 	}
 
-	iNumPathsTo = pathsTo.size();
+	iNumPathsTo = static_cast<int>(pathsTo.size());
 
-	for ( int i = 0; i < iNumPathsTo; i ++ ) //TODO: Improve loop [APG]RoboCop[CL]
+	for ( int i = 0; i < iNumPathsTo; i ++ )
 	{
 		const int iOther = pathsTo[i];
 
@@ -2738,7 +2741,7 @@ CWaypoint* CWaypoints::randomWaypointGoalNearestArea(int iFlags, int iTeam, int 
 			pWpt = pNav->chooseBestFromBeliefBetweenAreas(goals,bHighDanger,bIgnoreBelief);
 		}
 		else
-			pWpt = CWaypoints::getWaypoint(goals[ randomInt(0, goals.size() - 1) ]->getWaypoint());
+			pWpt = CWaypoints::getWaypoint(goals[randomInt(0, static_cast<int>(goals.size()) - 1)]->getWaypoint());
 
 		//pWpt = goals.Random();
 	}
@@ -2818,7 +2821,7 @@ CWaypoint* CWaypoints::randomWaypointGoalBetweenArea(int iFlags, int iTeam, int 
 			pWpt = pNav->chooseBestFromBeliefBetweenAreas(goals, bHighDanger, bIgnoreBelief);
 		}
 		else
-			pWpt = CWaypoints::getWaypoint(goals[ randomInt(0, goals.size()) ]->getWaypoint());
+			pWpt = CWaypoints::getWaypoint(goals[randomInt(0, static_cast<int>(goals.size()))]->getWaypoint());
 
 		//pWpt = goals.Random();
 	}
@@ -2875,7 +2878,7 @@ CWaypoint *CWaypoints :: randomWaypointGoal ( int iFlags, int iTeam, int iArea, 
 			pWpt = pNav->chooseBestFromBelief(goals, bHighDanger, iSearchFlags);
 		}
 		else
-			pWpt = goals[ randomInt(0, goals.size() - 1) ];
+			pWpt = goals[randomInt(0, static_cast<int>(goals.size()) - 1)];
 	}
 	return pWpt;
 }
@@ -2935,7 +2938,7 @@ bool CWaypoint :: checkReachable ()
 
 int CWaypoint :: numPaths () const
 {
-	return m_thePaths.size();
+	return static_cast<int>(m_thePaths.size());
 }
 
 int CWaypoint :: getPath ( int i ) const
@@ -2983,7 +2986,7 @@ void CWaypoint :: removePathFrom ( int iWaypointIndex )
 
 int CWaypoint :: numPathsToThisWaypoint () const
 {
-	return m_PathsTo.size();
+	return static_cast<int>(m_PathsTo.size());
 }
 
 int CWaypoint :: getPathToThisWaypoint ( int i ) const

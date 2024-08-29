@@ -80,7 +80,7 @@ char *CStrings :: getString ( const char *szString )
 			return szCompString;
 	}
 
-	const unsigned int len = std::strlen(szString);
+	const size_t len = std::strlen(szString);
 
 	char *szNew = new char[len+1];
 

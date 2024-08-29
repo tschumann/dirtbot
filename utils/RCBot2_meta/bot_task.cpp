@@ -1665,7 +1665,7 @@ void CBotInvestigateTask :: execute (CBot *pBot,CBotSchedule *pSchedule)
 			m_iState = !m_iState ? 1 : 0;
 
 			if ( m_iState == 0 )
-				m_iCurPath = randomInt(0,m_InvPoints.size()-1);
+				m_iCurPath = randomInt(0, static_cast<int>(m_InvPoints.size()) - 1);
 		}
 		else
 			pBot->setMoveTo(vPoint);
@@ -3592,7 +3592,7 @@ void CBotTFUseTeleporter :: execute (CBot *pBot,CBotSchedule *pSchedule)
 
 void CBotTFUseTeleporter :: debugString ( char *string )
 {
-	std::sprintf(string, "CBotTFUseTeleporter\nm_pTele = %p", m_pTele.get());
+	snprintf(string, sizeof(string), "CBotTFUseTeleporter\nm_pTele = %p", m_pTele.get());
 }
 
 ///////////////////////////////////////////////////

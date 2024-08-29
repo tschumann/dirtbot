@@ -190,5 +190,5 @@ CBotProfile *CBotProfiles :: getRandomFreeProfile ()
 
 	if ( freeProfiles.empty() )
 		return nullptr;
-	return freeProfiles[ randomInt(0, freeProfiles.size() - 1) ];
+	return freeProfiles[randomInt(0, static_cast<int>(freeProfiles.size()) - 1)];
 }

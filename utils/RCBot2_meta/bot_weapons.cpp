@@ -416,7 +416,7 @@ edict_t* CWeapons::findWeapon(edict_t* pPlayer, const char* pszWeaponName)
 
 bool CBotWeapons::update(bool bOverrideAllFromEngine)
 {
-	unsigned short int iWeaponsSignature = 0x0; // check sum of weapons
+	uintptr_t iWeaponsSignature = 0x0; // check sum of weapons
 	edict_t* pWeapon;
 	
 	const CBaseHandle* m_Weapons = CClassInterface::getWeaponList(m_pBot->getEdict());
@@ -426,7 +426,7 @@ bool CBotWeapons::update(bool bOverrideAllFromEngine)
 	{
 		// create a 'hash' of current weapons
 		pWeapon = m_Weapon_iter == nullptr ? nullptr : INDEXENT(m_Weapon_iter->GetEntryIndex());
-		iWeaponsSignature += reinterpret_cast<uintptr_t>(pWeapon) + (pWeapon == nullptr ? 0 : static_cast<unsigned>(CClassInterface::getWeaponState(pWeapon)));
+		iWeaponsSignature += (reinterpret_cast<uintptr_t>(pWeapon)) + ((pWeapon == nullptr) ? 0 : static_cast<unsigned int>(CClassInterface::getWeaponState(pWeapon)));
 		if (m_Weapon_iter != nullptr) {
 		m_Weapon_iter++;
 		}

@@ -404,7 +404,7 @@ bool CDODFlags::getRandomBombToDefuse  ( Vector *position, int iTeam, edict_t **
 
 	if (!iPossible.empty())
 	{
-		const int selection = iPossible[randomInt(0, iPossible.size() - 1)];
+		const int selection = iPossible[randomInt(0, static_cast<int>(iPossible.size()) - 1)];
 
 		if ( m_pBombs[selection][1] != nullptr)
 		{
@@ -442,7 +442,7 @@ bool CDODFlags:: getRandomBombToDefend ( CBot *pBot, Vector *position, int iTeam
 
 	if (!iPossible.empty())
 	{
-		const int selection = iPossible[randomInt(0, iPossible.size() - 1)];
+		const int selection = iPossible[randomInt(0, static_cast<int>(iPossible.size()) - 1)];
 
 		if ( m_pBombs[selection][1] != nullptr)
 		{
@@ -750,9 +750,9 @@ int CDODMod ::getScore(edict_t *pPlayer)
 
 edict_t *CDODMod :: getBreakable ( CWaypoint *pWpt )
 {
-	const unsigned int size = m_BreakableWaypoints.size();
+	const size_t size = m_BreakableWaypoints.size();
 
-	for (unsigned short int i = 0; i < size; i ++ )
+	for (size_t i = 0; i < size; i++)
 	{
 		if ( m_BreakableWaypoints[i].pWaypoint == pWpt )
 			return m_BreakableWaypoints[i].pEdict;
@@ -763,9 +763,9 @@ edict_t *CDODMod :: getBreakable ( CWaypoint *pWpt )
 
 edict_t *CDODMod :: getBombTarget ( CWaypoint *pWpt )
 {
-	const unsigned int size = m_BombWaypoints.size();
+	const size_t size = m_BombWaypoints.size();
 
-	for (unsigned short int i = 0; i < size; i ++ )
+	for (size_t i = 0; i < size; i++)
 	{
 		if ( m_BombWaypoints[i].pWaypoint == pWpt )
 			return m_BombWaypoints[i].pEdict;
