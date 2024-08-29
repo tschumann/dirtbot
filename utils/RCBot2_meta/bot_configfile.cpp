@@ -147,11 +147,11 @@ void CRCBotTF2UtilFile :: loadConfig()
 		char szFullFilename[512];
 		if ( iFile == BOT_ATT_UTIL )
 		{
-			std::sprintf(szFilename,"attack_util.csv");
+			snprintf(szFilename, sizeof(szFilename), "attack_util.csv");
 		}
 		else
 		{
-			std::sprintf(szFilename,"normal_util.csv");
+			snprintf(szFilename, sizeof(szFilename), "normal_util.csv");
 		}
 
 		CBotGlobals::buildFileName(szFullFilename,szFilename,BOT_CONFIG_FOLDER);

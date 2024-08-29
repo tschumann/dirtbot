@@ -172,7 +172,7 @@ bool CWaypointNavigator :: beliefSave ( bool bOverride )
    // m_iBeliefTeam is the team we've been using -- we might have changed team now
    // so would need to change files if a different team
    // stick to the current team we've been using
-   std::sprintf(mapname,"%s%d",CBotGlobals::getMapName(),m_iBeliefTeam);
+   snprintf(mapname, sizeof(mapname), "%s%d", CBotGlobals::getMapName(), m_iBeliefTeam);
    CBotGlobals::buildFileName(filename,mapname,BOT_WAYPOINT_FOLDER,"rcb",true);
 
    std::fstream bfp = CBotGlobals::openFile(filename, std::fstream::in | std::fstream::binary);
@@ -869,7 +869,7 @@ bool CWaypointNavigator :: workRoute ( Vector vFrom,
 		{
 			char str[64];
 
-			std::sprintf(str,"goal waypoint = %d",m_iGoalWaypoint);
+			snprintf(str, sizeof(str), "goal waypoint = %d", m_iGoalWaypoint);
 
 			CClients::clientDebugMsg(BOT_DEBUG_NAV,str,m_pBot);
 
@@ -1876,7 +1876,7 @@ bool CWaypoints :: load (const char *szMapName)
 		// load author information
 		bfp.read(reinterpret_cast<char*>(&authorinfo), sizeof(CWaypointAuthorInfo));
 
-		std::sprintf(m_szWelcomeMessage,"Waypoints by %s",authorinfo.szAuthor);
+		snprintf(m_szWelcomeMessage, sizeof(m_szWelcomeMessage), "Waypoints by %s", authorinfo.szAuthor);
 
 		if ( authorinfo.szModifiedBy[0] != 0 )
 		{
@@ -1885,7 +1885,7 @@ bool CWaypoints :: load (const char *szMapName)
 		}
 	}
 	else
-		std::sprintf(m_szWelcomeMessage,"Waypoints Loaded");
+		snprintf(m_szWelcomeMessage, sizeof(m_szWelcomeMessage), "Waypoints Loaded");
 
 	const int iSize = header.iNumWaypoints;
 

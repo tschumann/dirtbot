@@ -1545,7 +1545,7 @@ void CBotFortress :: selectTeam ()
 
 	const int team = randomInt(1,2);
 
-	std::sprintf(buffer,"jointeam %d",team);
+	snprintf(buffer, sizeof(buffer), "jointeam %d", team);
 
 	helpers->ClientCommand(m_pEdict,buffer);
 }
@@ -3739,7 +3739,7 @@ void CBotTF2 ::voiceCommand (int cmd)
 
 	vcmd.voicecmd = cmd;
 	
-	std::sprintf(scmd,"voicemenu %d %d",vcmd.b1.v1,vcmd.b1.v2);
+	snprintf(scmd, sizeof(scmd), "voicemenu %d %d", vcmd.b1.v1, vcmd.b1.v2);
 
 	helpers->ClientCommand(m_pEdict,scmd);
 }

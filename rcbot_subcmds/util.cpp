@@ -108,7 +108,9 @@ CBotCommandInline NoClipCommand("noclip", CMD_ACCESS_UTIL, [](CClient *pClient, 
 
 	if ( pEntity )
     {
-		char msg[256];
+	    constexpr size_t bufferSize = 256; // Adjust the buffer size as needed - [APG]RoboCop[CL]
+		char msg[bufferSize];
+
 		byte *movetype = CClassInterface::getMoveTypePointer(pEntity);
 
 		
@@ -122,8 +124,7 @@ CBotCommandInline NoClipCommand("noclip", CMD_ACCESS_UTIL, [](CClient *pClient, 
 		   *movetype &= ~15;
 		   *movetype |= MOVETYPE_WALK;
 	   }
-
-	   std::sprintf(msg,"%s used no_clip %d on self\n",pClient->getName(),((*movetype & 15) == MOVETYPE_NOCLIP));
+	   snprintf(msg, bufferSize, "%s used no_clip %d on self\n", pClient->getName(), ((*movetype & 15) == MOVETYPE_NOCLIP));
            
 	  // CRCBotPlugin::HudTextMessage(pEntity,msg);
 	   CBotGlobals::botMessage(pEntity,0,msg);
@@ -145,14 +146,15 @@ CBotCommandInline GodModeUtilCommand("god", CMD_ACCESS_UTIL, [](CClient *pClient
 
 			if ( playerflags )
 			{
-				char msg[256];
+				constexpr size_t bufferSize = 256; // Adjust the buffer size as needed - [APG]RoboCop[CL]
+				char msg[bufferSize];
 
 				if ( *playerflags & FL_GODMODE )
 					*playerflags &= ~FL_GODMODE;
 				else
 					*playerflags |= FL_GODMODE;
 
-				std::sprintf(msg,"god mode %s",(*playerflags & FL_GODMODE)?"enabled":"disabled");
+				snprintf(msg, bufferSize, "god mode %s", (*playerflags & FL_GODMODE) ? "enabled" : "disabled");
 				
 				//CRCBotPlugin::HudTextMessage(pEntity,msg);
 				CBotGlobals::botMessage(pEntity,0,msg);
@@ -179,14 +181,15 @@ CBotCommandInline NoTouchCommand("notouch", CMD_ACCESS_UTIL, [](CClient *pClient
 
 			if ( playerflags )
 			{
-				char msg[256];
+				constexpr size_t bufferSize = 256; // Adjust the buffer size as needed - [APG]RoboCop[CL]
+				char msg[bufferSize];
 
 				if ( *playerflags & FL_DONTTOUCH )
 					*playerflags &= ~FL_DONTTOUCH;
 				else
 					*playerflags |= FL_DONTTOUCH;
 
-				std::sprintf(msg,"notouch mode %s",(*playerflags & FL_DONTTOUCH)?"enabled":"disabled");
+				snprintf(msg, bufferSize, "notouch mode %s", (*playerflags & FL_DONTTOUCH) ? "enabled" : "disabled");
 				CBotGlobals::botMessage(nullptr,0,msg);
 				//CRCBotPlugin::HudTextMessage(pEntity,msg);
 

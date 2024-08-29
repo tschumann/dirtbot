@@ -217,7 +217,7 @@ void CBot :: runPlayerMove()
 	{
 			char dbg[512];
 
-			std::sprintf(dbg,"m_pButtons = %d/%x, Weapon Select = %d, impulse = %d",cmd.buttons,cmd.buttons,cmd.weaponselect,cmd.impulse);
+			snprintf(dbg, sizeof(dbg), "m_pButtons = %d/%x, Weapon Select = %d, impulse = %d", cmd.buttons, cmd.buttons, cmd.weaponselect, cmd.impulse);
 
 			CClients::clientDebugMsg(BOT_DEBUG_BUTTONS,dbg,this);
 	}
@@ -348,9 +348,9 @@ bool CBot :: createBotFromEdict(edict_t *pEdict, CBotProfile *pProfile)
 		const int iModel = randomInt(1,7);	
 
 		if ( randomInt(0,1) )
-			std::sprintf(szModel,"models/humans/Group03/Male_0%d.mdl",iModel);
+			snprintf(szModel, sizeof(szModel), "models/humans/Group03/Male_0%d.mdl", iModel);
 		else
-			std::sprintf(szModel,"models/humans/Group03/female_0%d.mdl",iModel);
+			snprintf(szModel, sizeof(szModel), "models/humans/Group03/female_0%d.mdl", iModel);
 	}
 
 	m_iDesiredTeam = pProfile->m_iTeam;
@@ -725,7 +725,7 @@ void CBot :: debugMsg ( int iLev, const char *szMsg )
 	{
 		char szMsg2[512];
 
-		std::sprintf(szMsg2,"(%s):%s",m_pPlayerInfo->GetName(),szMsg);
+		snprintf(szMsg2, sizeof(szMsg2), "(%s):%s", m_pPlayerInfo->GetName(), szMsg);
 
 		CClients::clientDebugMsg (iLev,szMsg2,this);
 	}
@@ -3464,7 +3464,7 @@ void CBots :: kickRandomBot (size_t count)
 	while (numBotsKicked < count && !botList.empty()) {
 		char szCommand[512];
 
-		std::sprintf(szCommand, "kickid %d\n", botList.back());
+		snprintf(szCommand, sizeof(szCommand), "kickid %d\n", botList.back());
 		engine->ServerCommand(szCommand);
 		numBotsKicked++;
 		
@@ -3493,7 +3493,7 @@ void CBots :: kickRandomBotOnTeam ( int team )
 		return;
 	}
 
-	std::sprintf(szCommand,"kickid %d\n", botList[ randomInt(0, botList.size() - 1) ]);
+	snprintf(szCommand, sizeof(szCommand), "kickid %d\n", botList[ randomInt(0, botList.size() - 1) ]);
 
 	m_flAddKickBotTime = engine->Time() + 2.0f;
 

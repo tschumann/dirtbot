@@ -1455,7 +1455,7 @@ void CDODBot ::voiceCommand (int cmd)
 
 	vcmd.voicecmd = cmd; //not used? [APG]RoboCop[CL]
 	
-	std::sprintf(scmd,"voice_%s",g_DODVoiceCommands[cmd].pcmd);
+	snprintf(scmd, sizeof(scmd), "voice_%s", g_DODVoiceCommands[cmd].pcmd);
 
 	helpers->ClientCommand(m_pEdict,scmd);
 }
@@ -1464,7 +1464,7 @@ void CDODBot ::signal ( const char *signal ) const
 {
 	char scmd[64];
 
-	std::sprintf(scmd,"signal_%s",signal);
+	snprintf(scmd, sizeof(scmd), "signal_%s", signal);
 
 	helpers->ClientCommand(m_pEdict,scmd);
 }
@@ -3353,7 +3353,7 @@ bool CDODBot :: select_CWeapon ( CWeapon *pWeapon )
 {
 	char cmd[128];
 
-	std::sprintf(cmd,"use %s\n",pWeapon->getWeaponName());
+	snprintf(cmd, sizeof(cmd), "use %s\n", pWeapon->getWeaponName());
 
 	helpers->ClientCommand(m_pEdict,cmd);
 
@@ -3369,7 +3369,7 @@ bool CDODBot :: selectBotWeapon ( CBotWeapon *pBotWeapon )
 		//int id = pSelect->getWeaponIndex();
 		char cmd[128];
 
-		std::sprintf(cmd,"use %s\n",pSelect->getWeaponName());
+		snprintf(cmd, sizeof(cmd), "use %s\n", pSelect->getWeaponName());
 
 		helpers->ClientCommand(m_pEdict,cmd);
 

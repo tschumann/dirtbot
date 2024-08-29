@@ -153,8 +153,10 @@ void CClient :: playSound ( const char *pszSound )
 {
 	if ( isWaypointOn() )
 	{
-		if ( bot_cmd_enable_wpt_sounds.GetBool() )
-			std::sprintf(m_szSoundToPlay,"play \"%s\"",pszSound);
+		if (bot_cmd_enable_wpt_sounds.GetBool())
+		{
+			snprintf(m_szSoundToPlay, sizeof(m_szSoundToPlay), "play \"%s\"", pszSound);
+		}
 	}
 }
 
