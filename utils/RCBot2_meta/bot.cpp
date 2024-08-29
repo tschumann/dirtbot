@@ -378,7 +378,7 @@ bool CBot :: createBotFromEdict(edict_t *pEdict, CBotProfile *pProfile)
 		"pyro", "spy", "engineer"
 	};
 	
-	char cmd[32];
+	char cmd[32]; //conflicts with bot.h `CBotCmd cmd`? [APG]RoboCop[CL]
 	if (m_iDesiredClass >= 0 && static_cast<unsigned>(m_iDesiredClass) < sizeof(classNames)) {
 		snprintf(cmd, sizeof(cmd), "joinclass %s", classNames[m_iDesiredClass]);
 	} else {
@@ -1013,7 +1013,7 @@ void CBot :: think ()
 	// deal with it here
 	if ( m_fNextVoiceCommand < engine->Time() && !m_nextVoicecmd.empty() )
 	{
-		const byte cmd = static_cast<byte>(m_nextVoicecmd.front());
+		const byte cmd = static_cast<byte>(m_nextVoicecmd.front()); //conflicts with bot.h `CBotCmd cmd`? [APG]RoboCop[CL]
 
 		m_fNextVoiceCommand = engine->Time() + randomFloat(0.4f,1.2f);
 		
@@ -1031,7 +1031,7 @@ void CBot :: think ()
 	m_bInitAlive = false;
 }
 
-void CBot :: addVoiceCommand ( int cmd ) 
+void CBot :: addVoiceCommand ( int cmd ) //conflicts with bot.h `CBotCmd cmd`? [APG]RoboCop[CL]
 {
 	if ( bot_use_vc_commands.GetBool() && m_fLastVoiceCommand[cmd] < engine->Time() )
 	{
@@ -1980,7 +1980,7 @@ void CBot :: listenForPlayers ()
 		
 		float fFactor = 0.0f;
 
-		const CBotCmd cmd = p->GetLastUserCommand();
+		const CBotCmd cmd = p->GetLastUserCommand(); //conflicts with bot.h `CBotCmd cmd`? [APG]RoboCop[CL]
 
 		if ( cmd.buttons & IN_ATTACK )
 		{
@@ -2483,7 +2483,7 @@ void CBot :: grenadeThrown ()
 
 }
 
-void CBot::voiceCommand(int cmd)
+void CBot::voiceCommand(int cmd) //conflicts with bot.h `CBotCmd cmd`? [APG]RoboCop[CL]
 {
 	
 }
@@ -2854,7 +2854,7 @@ void CBot :: doLook ()
 		if ( m_iLookTask == LOOK_GROUND )
 			requiredAngles.x = 89.0f;
 
-		const CBotCmd cmd = m_pPlayerInfo->GetLastUserCommand();
+		const CBotCmd cmd = m_pPlayerInfo->GetLastUserCommand(); //conflicts with bot.h `CBotCmd cmd`? [APG]RoboCop[CL]
 
 		m_vViewAngles = cmd.viewangles;
 

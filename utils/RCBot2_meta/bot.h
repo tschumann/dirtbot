@@ -1009,7 +1009,7 @@ protected:
 	float m_fAvoidSideSwitch;
 	float m_fHealClickTime;
 
-	unsigned int m_iSpecialVisibleId;
+	int m_iSpecialVisibleId;
 	float m_fCurrentDanger;
 	float m_fLastHurtTime;
 
