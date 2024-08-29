@@ -247,8 +247,8 @@ void CBroadcastRoundStart :: execute ( CBot *pBot )
 }
 
 CBotFortress :: CBotFortress()
-{ 
-	CBot(); 
+{
+	CBot();
 
 	m_iLastFailSentryWpt = -1;
 	m_iLastFailTeleExitWpt = -1;
@@ -260,7 +260,7 @@ CBotFortress :: CBotFortress()
 	m_fDefendTime = 0.0f;
 	m_fHealFactor = 0.0f;
 	m_fFrenzyTime = 0.0f;
-	
+
 	m_fSpyCloakTime = 0.0f;
 	m_fSpyUncloakTime = 0.0f;
 	m_fLastSeeSpyTime = 0.0f;
@@ -268,7 +268,7 @@ CBotFortress :: CBotFortress()
 	m_fLastSaySpy = 0.0f;
 	m_fPickupTime = 0.0f;
 	m_fLookAfterSentryTime = 0.0f;
-	
+
 	m_bSentryGunVectorValid = false;
 	m_bDispenserVectorValid = false;
 	m_bTeleportExitVectorValid = false;
@@ -278,7 +278,7 @@ CBotFortress :: CBotFortress()
 	m_fUseTeleporterTime = 0.0f;
 	m_fChangeClassTime = 0.0f;
 	m_bCheckClass = false;
-	
+
 	m_fMedicUpdatePosTime = 0.0f;
 	m_fCheckHealTime = 0.0f;
 	m_fDisguiseTime = 0.0f;
@@ -286,35 +286,35 @@ CBotFortress :: CBotFortress()
 	m_fTeleporterEntPlacedTime = 0.0f;
 	m_fTeleporterExtPlacedTime = 0.0f;
 	m_iTeleportedPlayers = 0;
-	
+
 	m_iTeam = 0;
 	m_fWaitTurnSentry = 0.0f;
 	m_fHealingMoveTime = 0.0f;
 	m_fLastSentryEnemyTime = 0.0f;
-	
+
 	m_fSentryPlaceTime = 0.0f;
 	m_iSentryKills = 0.0f;
 	m_fSnipeAttackTime = 0.0f;
 	m_pAmmo = nullptr;
 	m_pHealthkit = nullptr;
-	m_pFlag = nullptr; 
-	m_pHeal = nullptr; 
+	m_pFlag = nullptr;
+	m_pHeal = nullptr;
 	m_fCallMedic = 0.0f;
 	m_fTauntTime = 0.0f;
-	m_fLastKnownFlagTime = 0.0f; 
+	m_fLastKnownFlagTime = 0.0f;
 	m_bHasFlag = false;
-	
-	m_pSentryGun = nullptr; 
-	m_pDispenser = nullptr; 
-	m_pTeleExit = nullptr; 
-	m_pTeleEntrance = nullptr; 
+
+	m_pSentryGun = nullptr;
+	m_pDispenser = nullptr;
+	m_pTeleExit = nullptr;
+	m_pTeleEntrance = nullptr;
 	m_pNearestDisp = nullptr;
 	m_pNearestEnemySentry = nullptr;
 	m_pNearestEnemyTeleporter = nullptr;
 	m_pNearestEnemyDisp = nullptr;
 	m_pNearestPipeGren = nullptr;
 	m_pPrevSpy = nullptr;
-	
+
 	m_fSeeSpyTime = 0.0f;
 	m_bEntranceVectorValid = false;
 	m_pLastCalledMedic = nullptr;
@@ -7715,9 +7715,9 @@ void CBotTF2 :: enemyAtIntel ( Vector vPos, int type, int iArea )
 			//caxanga334: SDK 2013 doesn't like to create a Vector from an int
 			//TODO: Proper fix
 			#if SOURCE_ENGINE == SE_SDK2013 || SOURCE_ENGINE == SE_BMS || SOURCE_ENGINE == SE_TF2
-			const Vector vCapAttacking = Vector(CTeamFortress2Mod::m_ObjectiveResource.getControlPointWaypoint(capindex));
+			const Vector vCapAttacking = Vector(static_cast<vec_t>(CTeamFortress2Mod::m_ObjectiveResource.getControlPointWaypoint(capindex)));
 			#else
-			const Vector vCapAttacking = CTeamFortress2Mod::m_ObjectiveResource.getControlPointWaypoint(capindex);
+			const Vector vCapAttacking = Vector(static_cast<vec_t>(CTeamFortress2Mod::m_ObjectiveResource.getControlPointWaypoint(capindex)));
 			#endif
 
 			if ( distanceFrom(vPos) > distanceFrom(vCapAttacking) )

@@ -117,7 +117,7 @@ int CBotButtons :: getBitMask () const
 
 bool CBotButtons :: canPressButton ( int iButtonId ) const
 {
-	for (CBotButton* const m_theButton : m_theButtons)
+	for (const CBotButton* m_theButton : m_theButtons)
 	{			
 		if (m_theButton->getID() == iButtonId )
 			return m_theButton->canPress(engine->Time());
@@ -132,7 +132,7 @@ void CBotButtons :: add ( CBotButton *theButton )
 
 bool CBotButtons :: holdingButton ( int iButtonId ) const
 {
-	for (CBotButton* const m_theButton : m_theButtons)
+	for (const CBotButton* m_theButton : m_theButtons)
 	{
 		if (m_theButton->getID() == iButtonId )
 			return m_theButton->held(engine->Time());
