@@ -1287,7 +1287,7 @@ void CBotEvents :: executeEvent( void *pEvent, eBotEventType iType )
 	if ( iType != TYPE_IGAMEEVENT )
 		iEventId = pInterface->getInt("eventid");
 
-	for (CBotEvent* const pFound : m_theEvents)
+	for (CBotEvent* pFound : m_theEvents)
 	{
 		// if it has an pEvent id stored just check that
 		//if ( ( iType != TYPE_IGAMEEVENT ) && pFound->hasEventId() )
