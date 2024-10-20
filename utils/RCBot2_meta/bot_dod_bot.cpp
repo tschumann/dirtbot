@@ -427,14 +427,13 @@ void CDODBot :: seeFriendlyDie ( edict_t *pDied, edict_t *pKiller, CWeapon *pWea
 		static CWaypoint *pWpt;
 		//bool bInvestigate = true;
 		//bool bFollow = true;
-		const Vector vecEnemy = CBotGlobals::entityOrigin(pKiller);
-		
+
 		if ( pWeapon )
 		{
 			const DOD_Class pclass = static_cast<DOD_Class>(CClassInterface::getPlayerClassDOD(pKiller));
-
 			if ( (pclass == DOD_CLASS_SNIPER) && pWeapon->isZoomable() )
 			{
+				const Vector vecEnemy = CBotGlobals::entityOrigin(pKiller);
 				if ( (m_LastHearVoiceCommand == DOD_VC_SNIPER) && m_pWeapons->hasWeapon(DOD_WEAPON_FRAG_US) && !m_pWeapons->hasWeapon(DOD_WEAPON_FRAG_GER) )
 					addVoiceCommand(DOD_VC_USE_GRENADE);
 				else
@@ -449,6 +448,7 @@ void CDODBot :: seeFriendlyDie ( edict_t *pDied, edict_t *pKiller, CWeapon *pWea
 			}
 			else if ( (pclass == DOD_CLASS_MACHINEGUNNER) && pWeapon->isDeployable() )
 			{
+				const Vector vecEnemy = CBotGlobals::entityOrigin(pKiller);
 				if ( (m_LastHearVoiceCommand == DOD_VC_MGAHEAD) && m_pWeapons->hasWeapon(DOD_WEAPON_FRAG_US) && !m_pWeapons->hasWeapon(DOD_WEAPON_FRAG_GER) )
 					addVoiceCommand(DOD_VC_USE_GRENADE);
 				else
@@ -471,15 +471,16 @@ void CDODBot :: seeFriendlyDie ( edict_t *pDied, edict_t *pKiller, CWeapon *pWea
 
 			if ( isVisible(pKiller) )
 			{
-				const CWaypointVisibilityTable *pTable = CWaypoints::getVisiblity();
+				const Vector vecEnemy = CBotGlobals::entityOrigin(pKiller);
+
+				const CWaypointVisibilityTable* pTable = CWaypoints::getVisiblity();
+
 				const int iCurrentWaypoint = m_pNavigator->getCurrentWaypointID();
-				const int iEnemyWaypoint = CWaypointLocations::NearestWaypoint(CBotGlobals::entityOrigin(pKiller),100.0f,-1,true,true);
+				const int iEnemyWaypoint = CWaypointLocations::NearestWaypoint(CBotGlobals::entityOrigin(pKiller), 100.0f, -1, true, true);
 
-				if ( (iCurrentWaypoint!=-1) && (iEnemyWaypoint!=-1) && !pTable->GetVisibilityFromTo(iCurrentWaypoint,iEnemyWaypoint) )
+				if ( (iCurrentWaypoint != -1) && (iEnemyWaypoint != -1) && !pTable->GetVisibilityFromTo(iCurrentWaypoint, iEnemyWaypoint) )
 				{
-					//bFollow = false;
-
-					ADD_UTILITY_DATA_VECTOR(BOT_UTIL_COVER_POINT,m_pCurrentWeapon != NULL,0.8f,(reinterpret_cast<unsigned>(pKiller)),(vecEnemy))
+					ADD_UTILITY_DATA_VECTOR(BOT_UTIL_COVER_POINT, m_pCurrentWeapon != NULL, 0.8f, (reinterpret_cast<unsigned>(pKiller)), (vecEnemy))
 				}
 			}
 			/*else if ( CBotGlobals::isPlayer(pDied) )
@@ -488,7 +489,7 @@ void CDODBot :: seeFriendlyDie ( edict_t *pDied, edict_t *pKiller, CWeapon *pWea
 				IPlayerInfo *p = playerinfomanager->GetPlayerInfo(pDied);
 				Vector v;
 				CClassInterface::getVelocity(pDied,&v);
-				
+
 				if ( v.Length() > 0 )
 					v = v / v.Length();
 

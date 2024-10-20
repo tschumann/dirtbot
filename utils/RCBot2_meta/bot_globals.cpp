@@ -51,6 +51,7 @@
 #include <sys/stat.h>
 #include <cmath>
 #include <cstring>
+#include <memory>
 
 //caxanga334: SDK 2013 contains macros for std::min and std::max which causes errors when compiling
 #if SOURCE_ENGINE == SE_SDK2013 || SOURCE_ENGINE == SE_BMS
@@ -193,11 +194,11 @@ bool CBotGlobals::dirExists(const char *path)
 
 void CBotGlobals::readRCBotFolder()
 {
-	KeyValues *mainkv = new KeyValues("Metamod Plugin");
+	std::unique_ptr<KeyValues, void(*)(KeyValues*)> mainkv(new KeyValues("Metamod Plugin"), [](KeyValues* kv) { kv->deleteThis(); });
 
 	if (mainkv->LoadFromFile(filesystem, "addons/metamod/rcbot2.vdf", "MOD")) {
 		char folder[256] = "\0";
-		const char *szRCBotFolder = mainkv->GetString("rcbot2path");
+		const char* szRCBotFolder = mainkv->GetString("rcbot2path");
 
 		if (szRCBotFolder && *szRCBotFolder) {
 			logger->Log(LogLevel::INFO, "RCBot Folder -> trying %s", szRCBotFolder);
@@ -216,8 +217,6 @@ void CBotGlobals::readRCBotFolder()
 			m_szRCBotFolder = CStrings::getString(szRCBotFolder);
 		}
 	}
-
-	mainkv->deleteThis();
 }
 
 float CBotGlobals :: grenadeWillLand (const Vector& vOrigin, const Vector& vEnemy, float fProjSpeed, float fGrenadePrimeTime, float *fAngle )

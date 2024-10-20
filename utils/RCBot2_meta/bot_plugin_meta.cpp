@@ -194,7 +194,7 @@ private:
 ///////////////
 // hud message
 ///////////////
-void RCBotPluginMeta::HudTextMessage(edict_t *pEntity, const char *szMessage)
+void RCBotPluginMeta::HudTextMessage(edict_t* pEntity, const char* szMessage)
 {
 	int msgid = 0;
 	int imsgsize = 0;
@@ -220,12 +220,12 @@ void RCBotPluginMeta::HudTextMessage(edict_t *pEntity, const char *szMessage)
 	// if (!bOK)
 	// return;
 
-	CBotRecipientFilter *filter = new CBotRecipientFilter(pEntity);
+	CBotRecipientFilter filter(pEntity);
 
-	bf_write *buf;
+	bf_write* buf;
 
 	if (hint > 0) {
-		buf = engine->UserMessageBegin(filter, hint);
+		buf = engine->UserMessageBegin(&filter, hint);
 		buf->WriteString(szMessage);
 		engine->MessageEnd();
 	}
@@ -234,18 +234,16 @@ void RCBotPluginMeta::HudTextMessage(edict_t *pEntity, const char *szMessage)
 		char chatline[128];
 		snprintf(chatline, sizeof(chatline), "\x01\x04[RCBot2]\x01 %s\n", szMessage);
 
-		buf = engine->UserMessageBegin(filter, say);
+		buf = engine->UserMessageBegin(&filter, say);
 		buf->WriteString(chatline);
 		engine->MessageEnd();
 	}
-
-	delete filter;
 }
 
 //////////////////////////
 // chat broadcast message
 //////////////////////////
-void RCBotPluginMeta::BroadcastTextMessage(const char *szMessage)
+void RCBotPluginMeta::BroadcastTextMessage(const char* szMessage)
 {
 	int msgid = 0;
 	int imsgsize = 0;
@@ -268,18 +266,15 @@ void RCBotPluginMeta::BroadcastTextMessage(const char *szMessage)
 	if (msgid == 0)
 		return;
 
-	CClientBroadcastRecipientFilter *filter = new CClientBroadcastRecipientFilter();
-
+	CClientBroadcastRecipientFilter filter; // Allocate on stack
 	if (say > 0) {
 		char chatline[128];
 		snprintf(chatline, sizeof(chatline), "\x01\x04[RCBot2]\x01 %s\n", szMessage);
 
-		bf_write* buf = engine->UserMessageBegin(filter, say);
+		bf_write* buf = engine->UserMessageBegin(&filter, say);
 		buf->WriteString(chatline);
 		engine->MessageEnd();
 	}
-
-	delete filter;
 }
 
 void RCBotPluginMeta::Hook_PlayerRunCmd(CUserCmd *ucmd, IMoveHelper *moveHelper)

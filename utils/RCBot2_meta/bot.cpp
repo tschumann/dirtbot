@@ -373,15 +373,16 @@ bool CBot :: createBotFromEdict(edict_t *pEdict, CBotProfile *pProfile)
 	"engineer",	"sniper", "spy",
 	};*/
 	
-	char classNames[32][10] = {
-		"auto", "scout", "sniper", "soldier", "demoman", "medic", "heavy",
-		"pyro", "spy", "engineer"
-	};
-	
-	char cmd[32]; //conflicts with bot.h `CBotCmd cmd`? [APG]RoboCop[CL]
-	if (m_iDesiredClass >= 0 && static_cast<unsigned>(m_iDesiredClass) < sizeof(classNames)) {
+	char cmd[32]; // conflicts with bot.h `CBotCmd cmd`? [APG]RoboCop[CL]
+
+	if (m_iDesiredClass >= 0 && static_cast<unsigned>(m_iDesiredClass) < 10) {
+		char classNames[10][10] = {
+			"auto", "scout", "sniper", "soldier", "demoman", "medic", "heavy",
+			"pyro", "spy", "engineer"
+		};
 		snprintf(cmd, sizeof(cmd), "joinclass %s", classNames[m_iDesiredClass]);
-	} else {
+	}
+	else {
 		snprintf(cmd, sizeof(cmd), "joinclass auto");
 	}
 	

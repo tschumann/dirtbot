@@ -133,7 +133,7 @@ bool CRCBotKeyValueList :: getString ( const char *key, char **val ) const
 	return true;
 }
 
-CRCBotKeyValue :: CRCBotKeyValue ( const char *szKey, char *szValue )
+CRCBotKeyValue :: CRCBotKeyValue ( const char *szKey, const char *szValue )
 {
 	std::strncpy(m_szKey,szKey,RCBOT_MAX_KV_LEN-1);
 	m_szKey[RCBOT_MAX_KV_LEN-1] = 0;

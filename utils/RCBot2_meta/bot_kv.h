@@ -11,7 +11,7 @@ enum : std::uint16_t
 class CRCBotKeyValue
 {
 public:
-	CRCBotKeyValue(const char *szKey, char *szValue);
+	CRCBotKeyValue(const char *szKey, const char *szValue);
 
 	char *getKey ()
 	{
