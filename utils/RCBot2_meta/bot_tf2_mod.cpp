@@ -528,8 +528,8 @@ bool CTeamFortress2Mod ::isBoss ( edict_t *pEntity, float *fFactor )
 			return true;
 		}
 	}
-	else if (CTeamFortress2Mod::isMapType(TF_MAP_CARTRACE) || isMapType(TF_MAP_CART) || isMapType(TF_MAP_KOTH) ||
-		isMapType(TF_MAP_CP) ||	isMapType(TF_MAP_PD) || isMapType(TF_MAP_ARENA) || isMapType(TF_MAP_SD) || isMapType(TF_MAP_DM))
+	else if (CTeamFortress2Mod::isMapType(TF_MAP_CARTRACE) || isMapType(TF_MAP_CART) || isMapType(TF_MAP_KOTH) || isMapType(TF_MAP_PASS)
+		|| isMapType(TF_MAP_CP) || isMapType(TF_MAP_PD) || isMapType(TF_MAP_ARENA) || isMapType(TF_MAP_SD) || isMapType(TF_MAP_DM))
 	{
 		if ( m_pBoss.get() == pEntity )
 			return true;

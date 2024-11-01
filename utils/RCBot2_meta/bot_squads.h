@@ -162,7 +162,7 @@ public:
 
 	void removeMember (const edict_t* pMember);
 
-	bool IsLeader ( edict_t *pLeader )
+	bool IsLeader (const edict_t *pLeader)
 	{
 		return GetLeader() == pLeader;
 	}

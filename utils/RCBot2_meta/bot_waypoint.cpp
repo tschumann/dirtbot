@@ -427,7 +427,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 		{
 			float fBelief = 0.0f;
 			float bBeliefFactor = 1.0f;
-			for (size_t i = 0; i < goals.size(); i ++ )
+			for (CWaypoint* goal : goals)
 			{
 				//bBeliefFactor = 1.0f;
 
@@ -439,7 +439,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 
 						if ( pSentry != nullptr)
 						{
-							if ( goals[i]->distanceFrom(CBotGlobals::entityOrigin(pSentry)) < 200.0f )
+							if (goal->distanceFrom(CBotGlobals::entityOrigin(pSentry)) < 200.0f )
 							{
 								bBeliefFactor *= 0.1f;
 							}
@@ -460,7 +460,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 						{
 							if ( iTeam == 0 || iTeam == CClassInterface::getTeam(pPlayer) )
 							{
-								if ( goals[i]->distanceFrom(CBotGlobals::entityOrigin(pPlayer)) < 200.0f )
+								if (goal->distanceFrom(CBotGlobals::entityOrigin(pPlayer)) < 200.0f )
 								{
 									bBeliefFactor *= 0.1f;
 								}
@@ -479,7 +479,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 						{
 							if ( iTeam == 0 || iTeam == CClassInterface::getTeam(pPlayer) )
 							{
-								if ( goals[i]->distanceFrom(CBotGlobals::entityOrigin(pPlayer)) < 200.0f )
+								if (goal->distanceFrom(CBotGlobals::entityOrigin(pPlayer)) < 200.0f )
 								{
 									bBeliefFactor *= 0.1f;
 								}
@@ -490,11 +490,11 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 
 				if ( bHighDanger )
 				{
-					fBelief += bBeliefFactor * (1.0f + m_fBelief[CWaypoints::getWaypointIndex(goals[i])]);	
+					fBelief += bBeliefFactor * (1.0f + m_fBelief[CWaypoints::getWaypointIndex(goal)]);	
 				}
 				else
 				{
-					fBelief += bBeliefFactor * (1.0f + (MAX_BELIEF - m_fBelief[CWaypoints::getWaypointIndex(goals[i])]));
+					fBelief += bBeliefFactor * (1.0f + (MAX_BELIEF - m_fBelief[CWaypoints::getWaypointIndex(goal)]));
 				}
 			}
 
@@ -502,9 +502,9 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 
 			fBelief = 0.0f;
 			
-			for (size_t i = 0; i < goals.size(); i++)
+			for (CWaypoint* goal : goals)
 			{
-				CWaypoint* pCheck = goals[i];
+				CWaypoint* pCheck = goal;
 
 				bBeliefFactor = 1.0f;
 
@@ -516,7 +516,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 
 						if ( pSentry != nullptr)
 						{
-							if ( goals[i]->distanceFrom(CBotGlobals::entityOrigin(pSentry)) < 200.0f )
+							if (goal->distanceFrom(CBotGlobals::entityOrigin(pSentry)) < 200.0f )
 							{
 								bBeliefFactor *= 0.1f;
 							}
@@ -532,7 +532,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 
 						if ( pPlayer != nullptr && !pPlayer->IsFree() && CClassInterface::getTF2Class(pPlayer)==TF_CLASS_SNIPER )
 						{
-							if ( goals[i]->distanceFrom(CBotGlobals::entityOrigin(pPlayer)) < 200.0f )
+							if (goal->distanceFrom(CBotGlobals::entityOrigin(pPlayer)) < 200.0f )
 							{
 								bBeliefFactor *= 0.1f;
 							}
@@ -548,7 +548,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 
 						if ( pPlayer != nullptr && !pPlayer->IsFree() )
 						{
-							if ( goals[i]->distanceFrom(CBotGlobals::entityOrigin(pPlayer)) < 200.0f )
+							if (goal->distanceFrom(CBotGlobals::entityOrigin(pPlayer)) < 200.0f )
 							{
 								bBeliefFactor *= 0.1f;
 							}
@@ -558,11 +558,11 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 
 				if ( bHighDanger )
 				{
-					fBelief += bBeliefFactor * (1.0f + m_fBelief[CWaypoints::getWaypointIndex(goals[i])]);
+					fBelief += bBeliefFactor * (1.0f + m_fBelief[CWaypoints::getWaypointIndex(goal)]);
 				}
 				else
 				{
-					fBelief += bBeliefFactor * (1.0f + (MAX_BELIEF - m_fBelief[CWaypoints::getWaypointIndex(goals[i])]));
+					fBelief += bBeliefFactor * (1.0f + (MAX_BELIEF - m_fBelief[CWaypoints::getWaypointIndex(goal)]));
 				}
 
 				if ( fSelect <= fBelief )
