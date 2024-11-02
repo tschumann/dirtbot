@@ -625,9 +625,11 @@ CBotWeapon* CBotWeapons::getBestWeapon(edict_t* pEnemy, bool bAllowMelee, bool b
 		}
 	}
 
-	if (bMeleeOnly || bAllowMeleeFallback && (m_theBestWeapon == nullptr && flDist < 400.0f &&
-		std::fabs(vEnemyOrigin.z - m_pBot->getOrigin().z) < static_cast<float>(BOT_JUMP_HEIGHT)))
+	if (bMeleeOnly || (bAllowMeleeFallback && (m_theBestWeapon == nullptr && flDist < 400.0f &&
+		std::fabs(vEnemyOrigin.z - m_pBot->getOrigin().z) < static_cast<float>(BOT_JUMP_HEIGHT))))
+	{
 		m_theBestWeapon = m_FallbackMelee;
+	}
 
 	return m_theBestWeapon;
 }

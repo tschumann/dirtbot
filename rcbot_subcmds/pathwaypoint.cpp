@@ -87,10 +87,8 @@ CBotCommandInline PathWaypointCreate2Command("create2", CMD_ACCESS_WAYPOINT, [](
 	pClient->updateCurrentWaypoint();
 	pClient->setPathTo(pClient->currentWaypoint());
 
-	CWaypoint *pWpt = CWaypoints::getWaypoint(pClient->getPathFrom());
-
 	// valid?
-	if ( pWpt )
+	if ( CWaypoint *pWpt = CWaypoints::getWaypoint(pClient->getPathFrom()) )
 	{
 		pWpt->addPathTo(pClient->getPathTo());
 		pClient->playSound("buttons/button9");

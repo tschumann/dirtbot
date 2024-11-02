@@ -792,7 +792,7 @@ void CBotFortress :: medicCalled(edict_t *pPlayer )
 		return; // nothing to do
 	if ( distanceFrom(pPlayer) > 1024 ) // a bit far away
 		return; // ignore
-	if ( (CBotGlobals::getTeam(pPlayer) == getTeam()) || (CClassInterface::getTF2Class(pPlayer) == TF_CLASS_SPY) && thinkSpyIsEnemy(pPlayer,CTeamFortress2Mod::getSpyDisguise(pPlayer)) )
+	if ((CBotGlobals::getTeam(pPlayer) == getTeam()) || ((CClassInterface::getTF2Class(pPlayer) == TF_CLASS_SPY) && thinkSpyIsEnemy(pPlayer, CTeamFortress2Mod::getSpyDisguise(pPlayer))))
 	{
 		bool bGoto = true;
 
@@ -3252,7 +3252,7 @@ void CBotTF2::modThink()
 			{
 				spyCloak();
 			}
-			else if (bIsCloaked || isDisguised() && !hasEnemy())
+			else if (bIsCloaked || (isDisguised() && !hasEnemy()))
 			{
 				updateCondition(CONDITION_COVERT);
 			}
@@ -4414,7 +4414,7 @@ void CBotTF2 :: getTasks ( unsigned int iIgnore )
 	fGetFlagUtility = 0.5f;
 	fDefendFlagUtility = 0.5f;
 	iTeam = m_iTeam;
-	bHasFlag = hasFlag();
+	bHasFlag = hasFlag(); //TODO: bHasFlag added twice by accident, but which line to choose? [APG]RoboCop[CL]
 	failedlist = nullptr;
 
 	numplayersonteam = CBotGlobals::numPlayersOnTeam(iTeam,false);
@@ -7202,7 +7202,6 @@ void CBotTF2::roundReset(bool bFullReset)
 	m_pNearestPipeGren = nullptr;
 	
 	m_pFlag = nullptr;
-	m_pPrevSpy = nullptr;
 	m_iSentryKills = 0;
 	m_fSentryPlaceTime = 0.0f;
 	m_fDispenserPlaceTime = 0.0f;
@@ -7836,10 +7835,6 @@ CBotTF2::CBotTF2()
 		
 	m_iTrapType = TF_TRAP_TYPE_NONE;
 	m_pLastEnemySentry = MyEHandle(nullptr);
-	m_prevSentryHealth = 0;
-	m_prevDispHealth = 0;
-	m_prevTeleExtHealth = 0;
-	m_prevTeleEntHealth = 0;
 	m_fHealClickTime = 0.0f;
 	m_fCheckHealTime = 0.0f;
 

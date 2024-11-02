@@ -246,7 +246,7 @@ typedef enum : std::uint8_t
 #define CONDITION_SEE_HEAL				CONDITION_SEE_PLAYERTOHELP // TF: medic bot can see his player he wants to heal
 
 ////////////////////////
-#define BLAST_RADIUS 200
+#define BLAST_RADIUS 200.0f
 ///////////////////////
 typedef enum : std::uint8_t
 {

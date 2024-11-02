@@ -342,7 +342,7 @@ float CWaypointNavigator :: getNextYaw ()
 	if ( m_iCurrentWaypoint != -1 )
 		return CWaypoints::getWaypoint(m_iCurrentWaypoint)->getAimYaw();
 
-	return false;
+	return 0.0f;
 }
 
 // best waypoints are those with lowest danger
@@ -913,12 +913,12 @@ bool CWaypointNavigator :: workRoute ( Vector vFrom,
 		m_iLastFailedWpt = -1;
 
 		clearOpenList();
-		Q_memset(paths,0,sizeof(AStarNode)*CWaypoints::MAX_WAYPOINTS);
+		Q_memset(paths, 0, sizeof(AStarNode) * CWaypoints::MAX_WAYPOINTS);
 
-		AStarNode *curr = &paths[m_iCurrentWaypoint];
-		curr->setWaypoint(m_iCurrentWaypoint);
-		curr->setHeuristic(m_pBot->distanceFrom(vTo));
-		open(curr);
+		AStarNode* currentNode = &paths[m_iCurrentWaypoint];
+		currentNode->setWaypoint(m_iCurrentWaypoint);
+		currentNode->setHeuristic(m_pBot->distanceFrom(vTo));
+		open(currentNode);
 	}
 /////////////////////////////////
 	if ( m_iGoalWaypoint == -1 )
@@ -2641,7 +2641,14 @@ void CWaypoints :: autoFix ( bool bAutoFixNonArea )
 	{
 		if ( m_theWaypoints[i].isUsed() && m_theWaypoints[i].getFlags() > 0 )
 		{
-			if ( m_theWaypoints[i].getArea() > iNumCps || bAutoFixNonArea && m_theWaypoints[i].getArea()==0 && m_theWaypoints[i].hasSomeFlags(CWaypointTypes::W_FL_SENTRY|CWaypointTypes::W_FL_DEFEND|CWaypointTypes::W_FL_SNIPER|CWaypointTypes::W_FL_CAPPOINT|CWaypointTypes::W_FL_TELE_EXIT) )
+			if (m_theWaypoints[i].getArea() > iNumCps ||
+				(bAutoFixNonArea &&
+					m_theWaypoints[i].getArea() == 0 &&
+					m_theWaypoints[i].hasSomeFlags(CWaypointTypes::W_FL_SENTRY |
+						CWaypointTypes::W_FL_DEFEND |
+						CWaypointTypes::W_FL_SNIPER |
+						CWaypointTypes::W_FL_CAPPOINT |
+						CWaypointTypes::W_FL_TELE_EXIT)))
 			{
 				m_theWaypoints[i].setArea(CTeamFortress2Mod::m_ObjectiveResource.NearestArea(m_theWaypoints[i].getOrigin()));
 				CBotGlobals::botMessage(nullptr,0,"Changed Waypoint id %d area to (area = %d)",i,m_theWaypoints[i].getArea());

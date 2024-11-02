@@ -142,12 +142,12 @@ bool CTeamFortress2Mod::isMedievalMode()
 	return CClassInterface::TF2_IsMedievalMode(GetGameRules());
 }
 
-bool CTeamFortress2Mod :: checkWaypointForTeam(CWaypoint *pWpt, int iTeam)
+bool CTeamFortress2Mod::checkWaypointForTeam(CWaypoint* pWpt, int iTeam)
 {
-// Returns true if team can go to waypoint
-	return m_bRoundOver || (!pWpt->hasFlag(CWaypointTypes::W_FL_NOBLU)||iTeam!=TF2_TEAM_BLUE)&&(!pWpt->hasFlag(CWaypointTypes::W_FL_NORED)||iTeam!=TF2_TEAM_RED);
+	// Returns true if team can go to waypoint
+	return m_bRoundOver || ((!pWpt->hasFlag(CWaypointTypes::W_FL_NOBLU) || iTeam != TF2_TEAM_BLUE) && (!pWpt->hasFlag(CWaypointTypes::W_FL_NORED) || iTeam != TF2_TEAM_RED));
 }
-	
+
 
 bool CTeamFortress2Mod :: isWaypointAreaValid ( int iWptArea, int iWptFlags )
 {
@@ -772,9 +772,9 @@ void CTeamFortress2Mod :: resetSetupTime ()
 	m_fArenaPointOpenTime = engine->Time() + m_fPointTime;
 }
 
-bool CTeamFortress2Mod::hasRoundStarted ()
+bool CTeamFortress2Mod::hasRoundStarted()
 {
-	return m_bHasRoundStarted || !isMapType(TF_MAP_MVM)&&engine->Time() > m_fRoundTime;
+	return m_bHasRoundStarted || (!isMapType(TF_MAP_MVM) && engine->Time() > m_fRoundTime);
 
 	//return (engine->Time() > m_fRoundTime);
 }

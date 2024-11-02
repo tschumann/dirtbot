@@ -1199,7 +1199,7 @@ void CBot :: updateConditions ()
 
 				// update squad idle condition. If squad is idle, bot can move around a small radius 
 				// around the leader and do what they want, e.g. defend or snipe
-				if ( hasEnemy() || fSpeed > 10.0f && CClassInterface::getMoveType(pLeader) != MOVETYPE_LADDER )
+				if (hasEnemy() || (fSpeed > 10.0f && CClassInterface::getMoveType(pLeader) != MOVETYPE_LADDER))
 				{
 					setSquadIdleTime(engine->Time());
 					removeCondition(CONDITION_SQUAD_IDLE);
@@ -1388,7 +1388,6 @@ void CBot :: spawnInit ()
 	m_bThinkStuck = false;
 	m_pLookEdict = nullptr;
 	m_fLookAroundTime = 0.0f;
-	m_pAvoidEntity = nullptr;
 	m_bLookedForEnemyLast = false;
 	////////////////////////
 	m_iPrevHealth = 0;    // 
@@ -1878,7 +1877,7 @@ void CBot :: updateStatistics ()
 
 		if ( !m_uSquadDetail.b1.said_area_clear && m_StatsCanUse.stats.m_iEnemiesInRange == 0 && m_StatsCanUse.stats.m_iEnemiesVisible == 0 && m_StatsCanUse.stats.m_iTeamMatesInRange > 0)
 		{
-			if ( !inSquad() || isSquadLeader() && (m_fLastSeeEnemy && m_fLastSeeEnemy + 10.0f<engine->Time()) )
+			if (!inSquad() || (isSquadLeader() && (m_fLastSeeEnemy && m_fLastSeeEnemy + 10.0f < engine->Time())))
 				areaClear();
 
 			m_uSquadDetail.b1.said_area_clear = true;

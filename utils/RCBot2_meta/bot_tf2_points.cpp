@@ -240,6 +240,7 @@ int CTFObjectiveResource::getRandomValidPointForTeam ( int team, ePointAttackDef
 	// no points
 	return 0;
 }
+
 void CTeamRoundTimer::reset()
 {
 	CTeamRoundTimer();
@@ -251,6 +252,7 @@ void CTeamRoundTimer::reset()
 		CClassInterface::setupCTeamRoundTimer(this);
 	}
 }
+
 bool CTeamControlPointRound :: isPointInRound ( edict_t *point_pent )
 {
 	for ( int i = 0; i < m_ControlPoints.Count(); i ++ )
@@ -684,7 +686,7 @@ bool CTFObjectiveResource :: updateDefendPoints ( int team )
 							{
 								if ( arr[j].bValid == false )
 								{
-									if ( !pRound || m_pControlPoints[j]&&pRound->isPointInRound(m_pControlPoints[j]) )
+									if (!pRound || (m_pControlPoints[j] && pRound->isPointInRound(m_pControlPoints[j])))
 										arr[j].bValid = true; // this is the next point - move back lads
 								}
 							}

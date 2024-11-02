@@ -162,14 +162,16 @@ class CClientBroadcastRecipientFilter : public IRecipientFilter
 {
 public:
 
-	CClientBroadcastRecipientFilter() {
-		m_iMaxCount = 0;
+	CClientBroadcastRecipientFilter() : m_iMaxCount(0) {
+
+		// Initialize m_iPlayerSlot with a default value, e.g., -1
+		std::fill(std::begin(m_iPlayerSlot), std::end(m_iPlayerSlot), -1);
 
 		for (int i = 0; i < RCBOT_MAXPLAYERS; ++i) {
 			CClient* client = CClients::get(i);
 
 			if (client->isUsed()) {
-				IPlayerInfo *p = playerinfomanager->GetPlayerInfo(client->getPlayer());
+				IPlayerInfo* p = playerinfomanager->GetPlayerInfo(client->getPlayer());
 
 				if (p->IsConnected() && !p->IsFakeClient()) {
 					m_iPlayerSlot[m_iMaxCount] = i;
@@ -536,8 +538,10 @@ bool RCBotPluginMeta::Load(PluginId id, ISmmAPI *ismm, char *error, size_t maxle
 					continue;
 				}
 
-				m_iTargetBots[human_count] = bot_count;
-				logger->Log(LogLevel::INFO, "Bot Quota - Humans: %d, Bots: %d", human_count, bot_count);
+				if (human_count >= 0 && human_count <= RCBOT_MAXPLAYERS) {
+					m_iTargetBots[human_count] = bot_count;
+					logger->Log(LogLevel::INFO, "Bot Quota - Humans: %d, Bots: %d", human_count, bot_count);
+				}
 			}
 		}
 	}
@@ -885,10 +889,9 @@ void RCBotPluginMeta::BotQuotaCheck() {
 		else if (bot_target > bot_count) {
 			const int bot_diff = bot_target - bot_count;
 
-			// ReSharper disable once CppUnreachableCode
 			for (int i = 0; i < bot_diff; ++i) {
 				CBots::createBot("", "", "");
-				break; // Bug-Fix, only add one bot at a time
+				//break; // Bug-Fix, only add one bot at a time
 			}
 
 			notify = true;

@@ -231,7 +231,7 @@ float CBotGlobals :: grenadeWillLand (const Vector& vOrigin, const Vector& vEnem
 
 	if ( fAngle == nullptr)
 	{
-		return false;
+		return 0.0f;
 	}
 	// use angle -- work out time
 	// work out angle
@@ -253,7 +253,7 @@ float CBotGlobals :: grenadeWillLand (const Vector& vOrigin, const Vector& vEnem
 		return std::fabs(ffinaly - vEnemy.z) < BLAST_RADIUS; // ok why not
 	}
 
-	return false;
+	return 0.0f;
 }
 
 // TODO :: put in CClients ?
