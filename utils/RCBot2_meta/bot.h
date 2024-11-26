@@ -666,10 +666,11 @@ public:
 
 	void tapButton ( int iButton ) const;
 
-    int getAmmo ( int iIndex ) const
-    { if ( !m_iAmmo ) return 0;
-	    if ( iIndex == -1 ) return 0;
-	    return m_iAmmo[iIndex]; }
+	int getAmmo(size_t iIndex) const {
+		if (!m_iAmmo) return 0;
+		if (iIndex == static_cast<size_t>(-1)) return 0;
+		return m_iAmmo[iIndex];
+	}
 
     void lookAtEdict ( edict_t *pEdict ) { m_pLookEdict = pEdict; }
 
@@ -1092,7 +1093,7 @@ public:
 
 	static void runPlayerMoveAll ();
 
-	static CBot *get ( int iIndex ) { return m_Bots[iIndex]; }
+	static CBot* get(size_t iIndex) { return m_Bots[iIndex]; }
 	static CBot *get ( edict_t *pPlayer ) { return m_Bots[slotOfEdict(pPlayer)]; }
 	int levelInit(); //TODO: Not implemented [APG]RoboCop[CL]
 

@@ -356,7 +356,7 @@ void CBotMenu::render(CClient* pClient)
 
 	const char* pszCaption = getCaption(pClient, color);
 
-#if SOURCE_ENGINE == SE_TF2
+#if SOURCE_ENGINE == SE_TF2 || SOURCE_ENGINE == SE_HL2DM 
 	debugoverlay->AddScreenTextOverlay(0.135f, 0.4f, 0, fUpdateTime, color.r, color.g, color.b, color.a, pszCaption);
 	debugoverlay->AddScreenTextOverlay(0.135f, 0.4f, 1, fUpdateTime, color.r, color.g, color.b, color.a, "----------------");
 #else
