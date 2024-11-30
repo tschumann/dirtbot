@@ -144,9 +144,9 @@ void CBotTF2FunctionEnemyAtIntel :: execute (CBot *pBot)
 		static_cast<CBotTF2*>(pBot)->teamFlagPickup();
 }
 
-void CBotTF2 :: hearVoiceCommand ( edict_t *pPlayer, byte cmd )
+void CBotTF2 :: hearVoiceCommand ( edict_t *pPlayer, byte voiceCmd )
 {
-	switch ( cmd )
+	switch ( voiceCmd )
 	{
 	case TF_VC_SPY:
 		// someone shouted spy, HACK the bot to think they saw a spy here too
@@ -1618,7 +1618,7 @@ bool CBotFortress :: waitForFlag ( Vector *vOrigin, float *fWait, bool bFindFlag
 
 	if ( seeFlag(false) != nullptr)
 	{
-		edict_t* m_pFlag = seeFlag(false);
+		//edict_t* m_pFlag = seeFlag(false);
 
 		if ( CBotGlobals::entityIsValid(m_pFlag) )
 		{
@@ -1671,7 +1671,7 @@ bool CBotTF2 :: hurt ( edict_t *pAttacker, int iHealthNow, bool bDontHide )
 
 	if (( m_iClass != TF_CLASS_MEDIC ) || (!m_pHeal) )
 	{
-		if ( CBot::hurt(pAttacker,iHealthNow,true) )
+		if (CBotFortress::hurt(pAttacker,iHealthNow,true) )
 		{
 			if( m_bIsBeingHealed || m_bCanBeUbered )
 			{
@@ -2483,7 +2483,7 @@ void CBotFortress :: callMedic ()
 
 bool CBotTF2 :: canGotoWaypoint (Vector vPrevWaypoint, CWaypoint *pWaypoint, CWaypoint *pPrev)
 {
-	if ( CBot::canGotoWaypoint(vPrevWaypoint,pWaypoint,pPrev) )
+	if (CBotFortress::canGotoWaypoint(vPrevWaypoint,pWaypoint,pPrev) )
 	{
 		static edict_t *pSentry;
 		if ( pWaypoint->hasFlag(CWaypointTypes::W_FL_OWNER_ONLY) )
@@ -3494,7 +3494,7 @@ bool CBotTF2::canAvoid(edict_t *pEntity)
 
 bool CBotTF2 :: wantToInvestigateSound ()
 {
-	if ( !CBot::wantToInvestigateSound() )
+	if ( !CBotFortress::wantToInvestigateSound() )
 		return false;
 	if ( CTeamFortress2Mod::TF2_IsPlayerInvuln(m_pEdict) )
 		return false;
@@ -3738,12 +3738,12 @@ bool CBotFortress :: wantToFollowEnemy ()
 	return CBot::wantToFollowEnemy();
 }
 
-void CBotTF2 ::voiceCommand (int cmd)
+void CBotTF2 ::voiceCommand (byte voiceCmd)
 {
 	char scmd[64];
 	u_VOICECMD vcmd;
 
-	vcmd.voicecmd = cmd;
+	vcmd.voicecmd = voiceCmd;
 	
 	snprintf(scmd, sizeof(scmd), "voicemenu %d %d", vcmd.b1.v1, vcmd.b1.v2);
 
@@ -3754,7 +3754,7 @@ bool CBotTF2 ::checkStuck()
 {
 	if ( !CTeamFortress2Mod::isAttackDefendMap() || (CTeamFortress2Mod::hasRoundStarted() || (getTeam()==TF2_TEAM_RED)) )
 	{
-		if ( CBot::checkStuck() )
+		if (CBotFortress::checkStuck() )
 		{
 			checkStuckonSpy();
 
@@ -4046,7 +4046,7 @@ void CBotTF2 :: checkBeingHealed ()
 // Preconditions :  Current weapon is Medigun
 //					pPlayer is not NULL
 //
-bool CBotTF2::healPlayer()
+bool CBotTF2::healPlayer(edict_t* pPlayer, edict_t* pPrevPlayer)
 {
 	static CBotWeapon *pWeap;
 	static IPlayerInfo *p;
@@ -4156,7 +4156,7 @@ bool CBotTF2::healPlayer()
 
 	m_bIncreaseSensitivity = true;
 
-	const edict_t *pPlayer = nullptr;
+	//const edict_t *pPlayer = nullptr;
 
 		// Find the player I'm currently healing
 		for ( int i = 1; i <= gpGlobals->maxClients; i++ )
@@ -4416,11 +4416,10 @@ void CBotTF2 :: getTasks ( unsigned int iIgnore )
 	fResupplyDist = 1.0f;
 	fHealthDist = 1.0f;
 	fAmmoDist = 1.0f;
-	bHasFlag = false;
 	fGetFlagUtility = 0.5f;
 	fDefendFlagUtility = 0.5f;
 	iTeam = m_iTeam;
-	bHasFlag = hasFlag(); //TODO: bHasFlag added twice by accident, but which line to choose? [APG]RoboCop[CL]
+	bHasFlag = hasFlag();
 	failedlist = nullptr;
 
 	numplayersonteam = CBotGlobals::numPlayersOnTeam(iTeam,false);
@@ -5078,10 +5077,11 @@ bool CBotTF2 :: canDeployStickies ()
 	return false;
 }
 
-#define STICKY_INIT			0
-#define STICKY_SELECTWEAP	1
-#define STICKY_RELOAD		2
-#define STICKY_FACEVECTOR   3
+constexpr int STICKY_INIT = 0;
+constexpr int STICKY_SELECTWEAP = 1;
+constexpr int STICKY_RELOAD = 2;
+constexpr int STICKY_FACEVECTOR = 3;
+
 #define IN_RANGE(x,low,high) (((x)>(low))&&((x)<(high)))
 
 // returns true when finished
@@ -6590,7 +6590,7 @@ bool CBotTF2 :: executeAction ( CBotUtility *util )//eBotAction id, CWaypoint *p
 
 void CBotTF2 :: touchedWpt ( CWaypoint *pWaypoint , int iNextWaypoint, int iPrevWaypoint )
 {
-	CBot::touchedWpt(pWaypoint);
+	CBotFortress::touchedWpt(pWaypoint, iNextWaypoint, iPrevWaypoint);
 
 	if ( canGotoWaypoint (getOrigin(), pWaypoint) )
 	{
@@ -6681,7 +6681,7 @@ void CBotTF2 :: modAim ( edict_t *pEntity, Vector &v_origin, Vector *v_desired_o
 
 	pWp = getCurrentWeapon();
 
-	CBot::modAim(pEntity,v_origin,v_desired_offset,v_size,fDist,fDist2D);
+	CBotFortress::modAim(pEntity,v_origin,v_desired_offset,v_size,fDist,fDist2D);
 
 	if ( pWp )
 	{
@@ -7504,7 +7504,7 @@ bool CBotTF2 :: isEnemy ( edict_t *pEdict,bool bCheckWeapons )
 	// "FrenzyTime" is the time it takes for the bot to check out where he got hurt
 	else if ( (m_iClass != TF_CLASS_SPY) || (m_fFrenzyTime > engine->Time()) )	
 	{
-		static short int iEnemyTeam;
+		static int iEnemyTeam;
 		iEnemyTeam = CTeamFortress2Mod::getEnemyTeam(getTeam());
 
 		// don't attack sentries if spy, just sap them
@@ -7823,8 +7823,8 @@ void CBotTF2 :: sapperDestroyed ( edict_t *pSapper ) const
 	m_pSchedules->freeMemory();
 }
 
-CBotTF2::CBotTF2() 
-{ 
+CBotTF2::CBotTF2(): m_nextVoicecmd()
+{
 	CBotFortress();
 	//m_nextVoicecmd();
 	m_iMvMUpdateTime = 0;
@@ -7835,7 +7835,7 @@ CBotTF2::CBotTF2()
 	m_fTeleporterEntPlacedTime = 0.0f;
 	m_fTeleporterExtPlacedTime = 0.0f;
 	m_iTeleportedPlayers = 0;
-	
+
 	m_fDoubleJumpTime = 0.0f;
 	m_fSpySapTime = 0.0f;
 	m_iCurrentDefendArea = 0;
@@ -7848,7 +7848,7 @@ CBotTF2::CBotTF2()
 	m_pPushPayloadBomb = nullptr;
 	m_pRedPayloadBomb = nullptr;
 	m_pBluePayloadBomb = nullptr;
-		
+
 	m_iTrapType = TF_TRAP_TYPE_NONE;
 	m_pLastEnemySentry = MyEHandle(nullptr);
 	m_fHealClickTime = 0.0f;
@@ -7869,8 +7869,8 @@ CBotTF2::CBotTF2()
 	m_fCarryTime = 0.0f;
 	m_fCheckNextCarrying = 0.0f;
 	m_fUseBuffItemTime = 0.0f;
-		
-	m_fAttackPointTime  = 0.0f; // used in cart maps
+
+	m_fAttackPointTime = 0.0f; // used in cart maps
 
 	m_prevSentryHealth = 0;
 	m_prevDispHealth = 0;
@@ -7885,7 +7885,7 @@ CBotTF2::CBotTF2()
 	for (float& m_fClassDisguiseFit : m_fClassDisguiseFitness)
 		m_fClassDisguiseFit = 1.0f;
 
-	std::memset(m_fClassDisguiseTime,0,sizeof(float)*10);
+	std::memset(m_fClassDisguiseTime, 0, sizeof(float) * 10);
 }
 
 void CBotTF2 ::init(bool bVarInit)

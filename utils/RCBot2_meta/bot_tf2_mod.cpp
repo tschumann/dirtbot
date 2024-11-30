@@ -390,6 +390,12 @@ bool CTeamFortress2Mod :: TF2_IsPlayerOnFire(edict_t *pPlayer)
 	return (pcond & TF2_PLAYER_ONFIRE) == TF2_PLAYER_ONFIRE;
 }
 
+//TODO: Experimental [APG]RoboCop[CL]
+int CTeamFortress2Mod::numPlayersOnTeam(int iTeam, bool bAliveOnly)
+{
+	return 0;
+}
+
 int CTeamFortress2Mod ::numClassOnTeam( int iTeam, int iClass )
 {
 	int num = 0;
@@ -800,6 +806,12 @@ bool CTeamFortress2Mod :: isAmmo (const edict_t* pEntity)
 	szClassname = pEntity->GetClassName();
 
 	return std::strcmp(szClassname,"tf_ammo_pack")==0 || std::strncmp(szClassname,"item_ammopack",13)==0;
+}
+
+//TODO: Experimental [APG]RoboCop[CL]
+int CTeamFortress2Mod::getArea()
+{
+	return 0;
 }
 
 bool CTeamFortress2Mod :: isPayloadBomb ( edict_t *pEntity, int iTeam )

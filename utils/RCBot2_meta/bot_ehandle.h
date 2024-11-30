@@ -94,7 +94,7 @@ public:
 
 	// bool operator == (intptr_t a)
 	// {
-	// 	return (get() == reinterpret_cast<edict_t *>(a));
+	// 	return (reinterpret_cast<int>(get()) == a);
 	// }
 
 	bool operator == ( edict_t *pent )
