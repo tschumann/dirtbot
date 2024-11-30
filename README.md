@@ -40,6 +40,17 @@ Download the latest MetaMod: Source from https://www.sourcemm.net/downloads.php?
 Copy the `addons` directory from the .zip and paste it in `release/dirtbot/Half-Life 2 Deathmatch/hl2mp/`
 
 
+Getting latest RCBot2
+---------------------
+
+```
+# create a new remote that points to RCBot2
+git remote add rcbot2 https://github.com/APGRoboCop/rcbot2
+# pull and merge the latest changes from RCBot2
+git pull rcbot2 master
+```
+
+
 License
 -------
 
