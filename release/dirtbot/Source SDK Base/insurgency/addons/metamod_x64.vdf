@@ -1,5 +1,5 @@
 "Plugin"
 {
-	"file"	"addons/metamod/bin/win64/server"
+	"file"	"../insurgency/addons/metamod/bin/win64/server"
 }
 
