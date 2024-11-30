@@ -33,7 +33,7 @@
 
 #include "bot_waypoint.h"
 
-const int g_iMaxVisibilityByte = CWaypoints::MAX_WAYPOINTS*CWaypoints::MAX_WAYPOINTS/8; // divide by 8 bits, need byte number
+constexpr int g_iMaxVisibilityByte = CWaypoints::MAX_WAYPOINTS*CWaypoints::MAX_WAYPOINTS/8; // divide by 8 bits, need byte number
 
 typedef struct
 {
@@ -160,7 +160,7 @@ private:
 	bool bWorkVisibility;
 	unsigned short int iCurFrom;
 	unsigned short int iCurTo;
-	static const int WAYPOINT_VIS_TICKS = 64;
+	static constexpr int WAYPOINT_VIS_TICKS = 64;
 	unsigned char *m_VisTable;
 	float m_fNextShowMessageTime;
 	int m_iPrevPercent;

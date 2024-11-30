@@ -172,7 +172,7 @@ bool CWaypointNavigator :: beliefSave ( bool bOverride )
    // m_iBeliefTeam is the team we've been using -- we might have changed team now
    // so would need to change files if a different team
    // stick to the current team we've been using
-   std::sprintf(mapname,"%s%d",CBotGlobals::getMapName(),m_iBeliefTeam);
+   snprintf(mapname, sizeof(mapname), "%s%d", CBotGlobals::getMapName(), m_iBeliefTeam);
    CBotGlobals::buildFileName(filename,mapname,BOT_WAYPOINT_FOLDER,"rcb",true);
 
    std::fstream bfp = CBotGlobals::openFile(filename, std::fstream::in | std::fstream::binary);
@@ -342,7 +342,7 @@ float CWaypointNavigator :: getNextYaw ()
 	if ( m_iCurrentWaypoint != -1 )
 		return CWaypoints::getWaypoint(m_iCurrentWaypoint)->getAimYaw();
 
-	return false;
+	return 0.0f;
 }
 
 // best waypoints are those with lowest danger
@@ -406,7 +406,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBeliefBetweenAreas ( const std::v
 			}
 
 			if ( pWpt == nullptr)
-				pWpt = CWaypoints::getWaypoint(goals[ randomInt(0, goals.size() - 1) ]->getWaypoint());
+				pWpt = CWaypoints::getWaypoint(goals[randomInt(0, static_cast<int>(goals.size()) - 1)]->getWaypoint());
 		}
 	}
 		
@@ -427,7 +427,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 		{
 			float fBelief = 0.0f;
 			float bBeliefFactor = 1.0f;
-			for (size_t i = 0; i < goals.size(); i ++ )
+			for (CWaypoint* goal : goals)
 			{
 				//bBeliefFactor = 1.0f;
 
@@ -439,7 +439,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 
 						if ( pSentry != nullptr)
 						{
-							if ( goals[i]->distanceFrom(CBotGlobals::entityOrigin(pSentry)) < 200.0f )
+							if (goal->distanceFrom(CBotGlobals::entityOrigin(pSentry)) < 200.0f )
 							{
 								bBeliefFactor *= 0.1f;
 							}
@@ -451,13 +451,16 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 				{
 					for ( int j = 1; j <= gpGlobals->maxClients; j ++ )
 					{
-						edict_t *pPlayer = INDEXENT(i);
+						/**
+						* So this was using 'i' instead of 'j' and was basically broken since forever -caxanga334
+						*/
+						edict_t* pPlayer = INDEXENT(j);
 
 						if ( pPlayer != nullptr && !pPlayer->IsFree() && CClassInterface::getTF2Class(pPlayer)==TF_CLASS_SNIPER )
 						{
 							if ( iTeam == 0 || iTeam == CClassInterface::getTeam(pPlayer) )
 							{
-								if ( goals[i]->distanceFrom(CBotGlobals::entityOrigin(pPlayer)) < 200.0f )
+								if (goal->distanceFrom(CBotGlobals::entityOrigin(pPlayer)) < 200.0f )
 								{
 									bBeliefFactor *= 0.1f;
 								}
@@ -470,13 +473,13 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 				{
 					for ( int j = 1; j <= gpGlobals->maxClients; j ++ )
 					{
-						edict_t *pPlayer = INDEXENT(i);
+						edict_t* pPlayer = INDEXENT(j);
 
 						if ( pPlayer != nullptr && !pPlayer->IsFree() )
 						{
 							if ( iTeam == 0 || iTeam == CClassInterface::getTeam(pPlayer) )
 							{
-								if ( goals[i]->distanceFrom(CBotGlobals::entityOrigin(pPlayer)) < 200.0f )
+								if (goal->distanceFrom(CBotGlobals::entityOrigin(pPlayer)) < 200.0f )
 								{
 									bBeliefFactor *= 0.1f;
 								}
@@ -487,11 +490,11 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 
 				if ( bHighDanger )
 				{
-					fBelief += bBeliefFactor * (1.0f + m_fBelief[CWaypoints::getWaypointIndex(goals[i])]);	
+					fBelief += bBeliefFactor * (1.0f + m_fBelief[CWaypoints::getWaypointIndex(goal)]);	
 				}
 				else
 				{
-					fBelief += bBeliefFactor * (1.0f + (MAX_BELIEF - m_fBelief[CWaypoints::getWaypointIndex(goals[i])]));
+					fBelief += bBeliefFactor * (1.0f + (MAX_BELIEF - m_fBelief[CWaypoints::getWaypointIndex(goal)]));
 				}
 			}
 
@@ -499,9 +502,9 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 
 			fBelief = 0.0f;
 			
-			for (size_t i = 0; i < goals.size(); i++)
+			for (CWaypoint* goal : goals)
 			{
-				CWaypoint* pCheck = goals[i];
+				CWaypoint* pCheck = goal;
 
 				bBeliefFactor = 1.0f;
 
@@ -513,7 +516,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 
 						if ( pSentry != nullptr)
 						{
-							if ( goals[i]->distanceFrom(CBotGlobals::entityOrigin(pSentry)) < 200.0f )
+							if (goal->distanceFrom(CBotGlobals::entityOrigin(pSentry)) < 200.0f )
 							{
 								bBeliefFactor *= 0.1f;
 							}
@@ -525,11 +528,11 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 				{
 					for ( int j = 1; j <= gpGlobals->maxClients; j ++ )
 					{
-						edict_t *pPlayer = INDEXENT(i);
+						edict_t* pPlayer = INDEXENT(j);
 
 						if ( pPlayer != nullptr && !pPlayer->IsFree() && CClassInterface::getTF2Class(pPlayer)==TF_CLASS_SNIPER )
 						{
-							if ( goals[i]->distanceFrom(CBotGlobals::entityOrigin(pPlayer)) < 200.0f )
+							if (goal->distanceFrom(CBotGlobals::entityOrigin(pPlayer)) < 200.0f )
 							{
 								bBeliefFactor *= 0.1f;
 							}
@@ -541,11 +544,11 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 				{
 					for ( int j = 1; j <= gpGlobals->maxClients; j ++ )
 					{
-						edict_t *pPlayer = INDEXENT(i);
+						edict_t* pPlayer = INDEXENT(j);
 
 						if ( pPlayer != nullptr && !pPlayer->IsFree() )
 						{
-							if ( goals[i]->distanceFrom(CBotGlobals::entityOrigin(pPlayer)) < 200.0f )
+							if (goal->distanceFrom(CBotGlobals::entityOrigin(pPlayer)) < 200.0f )
 							{
 								bBeliefFactor *= 0.1f;
 							}
@@ -555,11 +558,11 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 
 				if ( bHighDanger )
 				{
-					fBelief += bBeliefFactor * (1.0f + m_fBelief[CWaypoints::getWaypointIndex(goals[i])]);
+					fBelief += bBeliefFactor * (1.0f + m_fBelief[CWaypoints::getWaypointIndex(goal)]);
 				}
 				else
 				{
-					fBelief += bBeliefFactor * (1.0f + (MAX_BELIEF - m_fBelief[CWaypoints::getWaypointIndex(goals[i])]));
+					fBelief += bBeliefFactor * (1.0f + (MAX_BELIEF - m_fBelief[CWaypoints::getWaypointIndex(goal)]));
 				}
 
 				if ( fSelect <= fBelief )
@@ -570,7 +573,7 @@ CWaypoint *CWaypointNavigator :: chooseBestFromBelief ( const std::vector<CWaypo
 			}
 
 			if ( pWpt == nullptr)
-				pWpt = goals[ randomInt(0, goals.size() - 1) ];
+				pWpt = goals[randomInt(0, static_cast<int>(goals.size()) - 1)];
 		}
 	}
 		
@@ -869,7 +872,7 @@ bool CWaypointNavigator :: workRoute ( Vector vFrom,
 		{
 			char str[64];
 
-			std::sprintf(str,"goal waypoint = %d",m_iGoalWaypoint);
+			snprintf(str, sizeof(str), "goal waypoint = %d", m_iGoalWaypoint);
 
 			CClients::clientDebugMsg(BOT_DEBUG_NAV,str,m_pBot);
 
@@ -910,12 +913,12 @@ bool CWaypointNavigator :: workRoute ( Vector vFrom,
 		m_iLastFailedWpt = -1;
 
 		clearOpenList();
-		Q_memset(paths,0,sizeof(AStarNode)*CWaypoints::MAX_WAYPOINTS);
+		Q_memset(paths, 0, sizeof(AStarNode) * CWaypoints::MAX_WAYPOINTS);
 
-		AStarNode *curr = &paths[m_iCurrentWaypoint];
-		curr->setWaypoint(m_iCurrentWaypoint);
-		curr->setHeuristic(m_pBot->distanceFrom(vTo));
-		open(curr);
+		AStarNode* currentNode = &paths[m_iCurrentWaypoint];
+		currentNode->setWaypoint(m_iCurrentWaypoint);
+		currentNode->setHeuristic(m_pBot->distanceFrom(vTo));
+		open(currentNode);
 	}
 /////////////////////////////////
 	if ( m_iGoalWaypoint == -1 )
@@ -1884,7 +1887,7 @@ bool CWaypoints :: load (const char *szMapName)
 		// load author information
 		bfp.read(reinterpret_cast<char*>(&authorinfo), sizeof(CWaypointAuthorInfo));
 
-		std::sprintf(m_szWelcomeMessage,"Waypoints by %s",authorinfo.szAuthor);
+		snprintf(m_szWelcomeMessage, sizeof(m_szWelcomeMessage), "Waypoints by %s", authorinfo.szAuthor);
 
 		if ( authorinfo.szModifiedBy[0] != 0 )
 		{
@@ -1893,7 +1896,7 @@ bool CWaypoints :: load (const char *szMapName)
 		}
 	}
 	else
-		std::sprintf(m_szWelcomeMessage,"Waypoints Loaded");
+		snprintf(m_szWelcomeMessage, sizeof(m_szWelcomeMessage), "Waypoints Loaded");
 
 	const int iSize = header.iNumWaypoints;
 
@@ -2230,14 +2233,14 @@ void CWaypoints :: deletePathsTo ( int iWpt )
 	// this will go into an evil loop unless we do this first
 	// and use a temporary copy as a side effect of performing
 	// a remove will affect the original array
-	for ( int i = 0; i < iNumPathsTo; i ++ ) //TODO: Improve loop [APG]RoboCop[CL]
+	for ( int i = 0; i < iNumPathsTo; i ++ )
 	{
 		pathsTo.emplace_back(pWaypoint->getPathToThisWaypoint(i));
 	}
 
-	iNumPathsTo = pathsTo.size();
+	iNumPathsTo = static_cast<int>(pathsTo.size());
 
-	for ( int i = 0; i < iNumPathsTo; i ++ ) //TODO: Improve loop [APG]RoboCop[CL]
+	for ( int i = 0; i < iNumPathsTo; i ++ )
 	{
 		const int iOther = pathsTo[i];
 
@@ -2646,7 +2649,14 @@ void CWaypoints :: autoFix ( bool bAutoFixNonArea )
 	{
 		if ( m_theWaypoints[i].isUsed() && m_theWaypoints[i].getFlags() > 0 )
 		{
-			if ( m_theWaypoints[i].getArea() > iNumCps || bAutoFixNonArea && m_theWaypoints[i].getArea()==0 && m_theWaypoints[i].hasSomeFlags(CWaypointTypes::W_FL_SENTRY|CWaypointTypes::W_FL_DEFEND|CWaypointTypes::W_FL_SNIPER|CWaypointTypes::W_FL_CAPPOINT|CWaypointTypes::W_FL_TELE_EXIT) )
+			if (m_theWaypoints[i].getArea() > iNumCps ||
+				(bAutoFixNonArea &&
+					m_theWaypoints[i].getArea() == 0 &&
+					m_theWaypoints[i].hasSomeFlags(CWaypointTypes::W_FL_SENTRY |
+						CWaypointTypes::W_FL_DEFEND |
+						CWaypointTypes::W_FL_SNIPER |
+						CWaypointTypes::W_FL_CAPPOINT |
+						CWaypointTypes::W_FL_TELE_EXIT)))
 			{
 				m_theWaypoints[i].setArea(CTeamFortress2Mod::m_ObjectiveResource.NearestArea(m_theWaypoints[i].getOrigin()));
 				CBotGlobals::botMessage(nullptr,0,"Changed Waypoint id %d area to (area = %d)",i,m_theWaypoints[i].getArea());
@@ -2746,7 +2756,7 @@ CWaypoint* CWaypoints::randomWaypointGoalNearestArea(int iFlags, int iTeam, int 
 			pWpt = pNav->chooseBestFromBeliefBetweenAreas(goals,bHighDanger,bIgnoreBelief);
 		}
 		else
-			pWpt = CWaypoints::getWaypoint(goals[ randomInt(0, goals.size() - 1) ]->getWaypoint());
+			pWpt = CWaypoints::getWaypoint(goals[randomInt(0, static_cast<int>(goals.size()) - 1)]->getWaypoint());
 
 		//pWpt = goals.Random();
 	}
@@ -2826,7 +2836,7 @@ CWaypoint* CWaypoints::randomWaypointGoalBetweenArea(int iFlags, int iTeam, int 
 			pWpt = pNav->chooseBestFromBeliefBetweenAreas(goals, bHighDanger, bIgnoreBelief);
 		}
 		else
-			pWpt = CWaypoints::getWaypoint(goals[ randomInt(0, goals.size()) ]->getWaypoint());
+			pWpt = CWaypoints::getWaypoint(goals[randomInt(0, static_cast<int>(goals.size()))]->getWaypoint());
 
 		//pWpt = goals.Random();
 	}
@@ -2883,7 +2893,7 @@ CWaypoint *CWaypoints :: randomWaypointGoal ( int iFlags, int iTeam, int iArea, 
 			pWpt = pNav->chooseBestFromBelief(goals, bHighDanger, iSearchFlags);
 		}
 		else
-			pWpt = goals[ randomInt(0, goals.size() - 1) ];
+			pWpt = goals[randomInt(0, static_cast<int>(goals.size()) - 1)];
 	}
 	return pWpt;
 }
@@ -2943,7 +2953,7 @@ bool CWaypoint :: checkReachable ()
 
 int CWaypoint :: numPaths () const
 {
-	return m_thePaths.size();
+	return static_cast<int>(m_thePaths.size());
 }
 
 int CWaypoint :: getPath ( int i ) const
@@ -2991,7 +3001,7 @@ void CWaypoint :: removePathFrom ( int iWaypointIndex )
 
 int CWaypoint :: numPathsToThisWaypoint () const
 {
-	return m_PathsTo.size();
+	return static_cast<int>(m_PathsTo.size());
 }
 
 int CWaypoint :: getPathToThisWaypoint ( int i ) const
@@ -3021,9 +3031,9 @@ bool CWaypoint :: addPathTo ( int iWaypointIndex )
 Vector CWaypoint :: applyRadius () const
 {
 	if ( m_fRadius > 0 )
-		return Vector(randomFloat(-m_fRadius,m_fRadius),randomFloat(m_fRadius,m_fRadius),0);
+		return {randomFloat(-m_fRadius,m_fRadius),randomFloat(m_fRadius,m_fRadius),0};
 
-	return Vector(0,0,0);
+	return {0,0,0};
 }
 
 void CWaypoint :: removePathTo ( int iWaypointIndex )

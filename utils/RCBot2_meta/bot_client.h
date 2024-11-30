@@ -37,12 +37,12 @@
 //#include "bot_ehandle.h"
 #include "bot_waypoint.h"
 
-enum
+enum : std::uint8_t
 {
 	MAX_STORED_AUTOWAYPOINT = 5
 };
 
-typedef enum eWptCopyType
+typedef enum eWptCopyType : std::uint8_t
 {
 	WPT_COPY_NONE = 0,
 	WPT_COPY_COPY,
@@ -318,7 +318,8 @@ public:
 	}
 
 	bool autoWaypointOn () const { return m_bAutoWaypoint; }
-	void autoEventWaypoint ( int iType, float fRadius, bool bAtOtherOrigin = false, int iTeam = 0, const Vector& vOrigin = Vector(0,0,0), bool bIgnoreTeam = false, bool bAutoType = false );
+	void autoEventWaypoint (int iType, float fRadius, bool bAtOtherOrigin = false, int iTeam = 0, const Vector& vOrigin = Vector(0, 0, 0), bool
+	                        bIgnoreTeam = false, bool bAutoType = false);
 	void giveMessage(const char*msg, float fTime=0.1f);
 private:
 	edict_t *m_pPlayer;

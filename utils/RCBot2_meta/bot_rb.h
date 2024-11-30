@@ -67,7 +67,7 @@ private:
 	bool m_bVal;
 };
 
-typedef enum 
+typedef enum : std::uint8_t
 {
 	OP_NONE = 0,
 	OP_PRE_NORM,

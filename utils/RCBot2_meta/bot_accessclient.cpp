@@ -85,7 +85,7 @@ void CAccessClients :: showUsers ( edict_t *pEntity )
 	if ( m_Clients.empty() )
 		logger->Log(LogLevel::DEBUG, "showUsers() : No users to show");
 
-	for (CAccessClient* const pPlayer : m_Clients)
+	for (const CAccessClient* pPlayer : m_Clients)
 	{
 		const CClient* pClient = CClients::findClientBySteamID(pPlayer->getSteamID());
 		
@@ -139,9 +139,9 @@ void CAccessClients :: load ()
 			if ( buffer[0] == '#' )
 				continue;
 
-			const unsigned int len = std::strlen(buffer);
+			const size_t len = std::strlen(buffer);
 
-			unsigned int i = 0;
+			size_t i = 0;
 
 			while (( i < len ) && ((buffer[i] == '\"') || (buffer[i] == ' ')))
 				i++;
@@ -211,7 +211,7 @@ void CAccessClients :: save ()
 
 void CAccessClients :: checkClientAccess ( CClient *pClient )
 {
-	for (CAccessClient* const pAC : m_Clients)
+	for (const CAccessClient* pAC : m_Clients)
 	{
 		if ( pAC->isForSteamID(pClient->getSteamID()) )
 			pAC->giveAccessToClient(pClient);

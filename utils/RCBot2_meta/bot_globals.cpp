@@ -51,6 +51,7 @@
 #include <sys/stat.h>
 #include <cmath>
 #include <cstring>
+#include <memory>
 
 //caxanga334: SDK 2013 contains macros for std::min and std::max which causes errors when compiling
 #if SOURCE_ENGINE == SE_SDK2013 || SOURCE_ENGINE == SE_BMS
@@ -193,11 +194,11 @@ bool CBotGlobals::dirExists(const char *path)
 
 void CBotGlobals::readRCBotFolder()
 {
-	KeyValues *mainkv = new KeyValues("Metamod Plugin");
+	std::unique_ptr<KeyValues, void(*)(KeyValues*)> mainkv(new KeyValues("Metamod Plugin"), [](KeyValues* kv) { kv->deleteThis(); });
 
 	if (mainkv->LoadFromFile(filesystem, "addons/metamod/rcbot2.vdf", "MOD")) {
 		char folder[256] = "\0";
-		const char *szRCBotFolder = mainkv->GetString("rcbot2path");
+		const char* szRCBotFolder = mainkv->GetString("rcbot2path");
 
 		if (szRCBotFolder && *szRCBotFolder) {
 			logger->Log(LogLevel::INFO, "RCBot Folder -> trying %s", szRCBotFolder);
@@ -216,8 +217,6 @@ void CBotGlobals::readRCBotFolder()
 			m_szRCBotFolder = CStrings::getString(szRCBotFolder);
 		}
 	}
-
-	mainkv->deleteThis();
 }
 
 float CBotGlobals :: grenadeWillLand (const Vector& vOrigin, const Vector& vEnemy, float fProjSpeed, float fGrenadePrimeTime, float *fAngle )
@@ -236,7 +235,7 @@ float CBotGlobals :: grenadeWillLand (const Vector& vOrigin, const Vector& vEnem
 
 	if ( fAngle == nullptr)
 	{
-		return false;
+		return 0.0f;
 	}
 	// use angle -- work out time
 	// work out angle
@@ -258,7 +257,7 @@ float CBotGlobals :: grenadeWillLand (const Vector& vOrigin, const Vector& vEnem
 		return std::fabs(ffinaly - vEnemy.z) < BLAST_RADIUS; // ok why not
 	}
 
-	return false;
+	return 0.0f;
 }
 
 // TODO :: put in CClients ?
@@ -266,7 +265,7 @@ edict_t *CBotGlobals :: findPlayerByTruncName ( const char *name )
 // find a player by a truncated name "name".
 // e.g. name = "Jo" might find a player called "John"
 {
-	const unsigned int length = std::strlen(name);
+	const size_t length = std::strlen(name);
 	for( int i = 1; i <= maxClients(); i ++ )
 	{
 		edict_t* pent = INDEXENT(i);
@@ -492,8 +491,8 @@ bool CBotGlobals::initModFolder() {
 	char szGameFolder[512];
 	engine->GetGameDir(szGameFolder, 512);
 
-	const unsigned int iLength = std::strlen(CStrings::getString(szGameFolder));
-	unsigned int pos = iLength - 1;
+	const size_t iLength = std::strlen(CStrings::getString(szGameFolder));
+	size_t pos = iLength - 1;
 
 	while (pos > 0 && szGameFolder[pos] != '\\' && szGameFolder[pos] != '/') {
 		pos--;
@@ -677,20 +676,23 @@ inline Vector CBotGlobals :: entityOrigin ( edict_t *pEntity )
 	return vOrigin;
 }*/
 
-void CBotGlobals :: serverSay ( char *fmt, ... )
+void CBotGlobals::serverSay(const char* fmt, ...)
 {
-	va_list argptr; 
+	if (!fmt) return;
+
+	va_list argptr;
+
 	static char string[1024];
 
-	va_start (argptr, fmt);
-	
-	std::strcpy(string,"say \"");
+	va_start(argptr, fmt);
 
-	std::vsprintf (&string[5], fmt, argptr); 
+	std::strcpy(string, "say \"");
 
-	va_end (argptr); 
+	vsnprintf(&string[5], sizeof(string) - 6, fmt, argptr);
 
-	std::strcat(string,"\"");
+	va_end(argptr);
+
+	std::strcat(string, "\"");
 
 	engine->ServerCommand(string);
 }
@@ -889,12 +891,12 @@ void CBotGlobals :: botMessage ( edict_t *pEntity, int iErr, const char *fmt, ..
 	static char string[1024];
 
 	va_start (argptr, fmt);
-	std::vsprintf (string, fmt, argptr); 
+	vsnprintf(string, sizeof(string), fmt, argptr);
 	va_end (argptr); 
 
 	const char *bot_tag = BOT_TAG;
-	const unsigned int len = std::strlen(string);
-	const unsigned int taglen = std::strlen(BOT_TAG);
+	const size_t len = std::strlen(string);
+	const size_t taglen = std::strlen(BOT_TAG);
 	// add tag -- push tag into string
 	for ( unsigned int i = len + taglen; i >= taglen; i -- )
 		string[i] = string[i-taglen];
@@ -934,9 +936,9 @@ bool CBotGlobals :: makeFolders (const char* szFile)
 	unsigned int folderNameSize = 0;
 	szFolderName[0] = 0;
 
-	const unsigned int iLen = std::strlen(szFile);
+	const size_t iLen = std::strlen(szFile);
 
-	unsigned int i = 0;
+	size_t i = 0;
 
 	while ( i < iLen )
 	{
@@ -992,7 +994,7 @@ Vector CBotGlobals:: getVelocity ( edict_t *pPlayer )
 	if ( pClient )
 		return pClient->getVelocity();
 
-	return Vector(0,0,0);
+	return {0,0,0};
 }
 
 /**

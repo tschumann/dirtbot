@@ -153,8 +153,10 @@ void CClient :: playSound ( const char *pszSound )
 {
 	if ( isWaypointOn() )
 	{
-		if ( bot_cmd_enable_wpt_sounds.GetBool() )
-			std::sprintf(m_szSoundToPlay,"play \"%s\"",pszSound);
+		if (bot_cmd_enable_wpt_sounds.GetBool())
+		{
+			snprintf(m_szSoundToPlay, sizeof(m_szSoundToPlay), "play \"%s\"", pszSound);
+		}
 	}
 }
 
@@ -1133,16 +1135,16 @@ CClient *CClients :: findClientBySteamID (const char* szSteamID)
 	return nullptr;
 }
 
-void CClients::clientDebugMsg(CBot *pBot, int iLev, const char *fmt, ... )
+void CClients::clientDebugMsg(CBot* pBot, int iLev, const char* fmt, ...)
 {
-	va_list argptr; 
+	va_list argptr;
 	static char string[1024];
 
-	va_start (argptr, fmt);
-	std::vsprintf (string, fmt, argptr); 
-	va_end (argptr); 
+	va_start(argptr, fmt);
+	vsnprintf(string, sizeof(string), fmt, argptr);
+	va_end(argptr);
 
-	clientDebugMsg(iLev,string,pBot);
+	clientDebugMsg(iLev, string, pBot);
 }
 
 const char *g_szDebugTags[15] =

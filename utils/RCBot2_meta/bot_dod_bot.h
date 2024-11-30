@@ -31,7 +31,7 @@
 #ifndef __DOD_RCBOT_H__
 #define __DOD_RCBOT_H__
 
-enum
+enum : std::uint8_t
 {
 	TEAM_ALLIES = 2,
 	TEAM_AXIS = 3
@@ -57,9 +57,9 @@ private:
 	int m_iEvent;
 };
 
-typedef enum
+typedef enum : std::uint8_t
 {
-   DOD_VC_GOGOGO = 0,
+	DOD_VC_GOGOGO = 0,
 	DOD_VC_YES = 1,
 	DOD_VC_DROPWEAP = 2,
     DOD_VC_HOLD = 3,
@@ -95,7 +95,7 @@ typedef struct
 	const char *pcmd;
 }eDODVoiceCommand_t;
 
-typedef enum
+typedef enum : std::uint8_t
 {
 	DOD_CLASS_RIFLEMAN = 1,
 	DOD_CLASS_ASSAULT = 2,
@@ -105,14 +105,14 @@ typedef enum
 	DOD_CLASS_ROCKET = 6
 }DOD_Class;
 
-enum
+enum : std::uint8_t
 {
 	DOD_BOMB_STATE_UNAVAILABLE = 0,
 	DOD_BOMB_STATE_AVAILABLE = 1,
 	DOD_BOMB_STATE_ACTIVE = 2
 };
 
-enum
+enum : std::uint8_t
 {
 	DOD_BOMB_EXPLODED = 0,
 	DOD_BOMB_DEFUSE = 1,

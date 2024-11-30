@@ -37,7 +37,7 @@
 #include <stdexcept>
 #endif
 
-CPropertyVarBase::CPropertyVarBase()
+CPropertyVarBase::CPropertyVarBase(): m_type()
 {
 	m_initialized = false;
 }

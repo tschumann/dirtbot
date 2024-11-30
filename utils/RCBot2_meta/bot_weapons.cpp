@@ -249,7 +249,7 @@ WeaponsData_t TF2Weaps[] =
 		{TF2_SLOT_PRMRY, TF2_WEAPON_BOW, "tf_weapon_compound_bow", WEAP_FL_SCOPE | WEAP_FL_PRIM_ATTACK | WEAP_FL_PROJECTILE, 400, 2500, 1, 3, 1875},
 		{TF2_SLOT_SCNDR,TF2_WEAPON_JAR,		"tf_weapon_jar",	WEAP_FL_NONE,0,180,0,1,0},
 		{TF2_SLOT_MELEE,TF2_WEAPON_BAT_FISH,		"tf_weapon_bat_fish",	WEAP_FL_PRIM_ATTACK | WEAP_FL_MELEE | WEAP_FL_UNDERWATER,0,180,0,1,0},
-		{TF2_SLOT_PRMRY,TF2_WEAPON_DIRECTHIT,		"tf_weapon_rocketlauncher_directhit",	WEAP_FL_PRIM_ATTACK | WEAP_FL_EXPLOSIVE | WEAP_FL_UNDERWATER,BLAST_RADIUS,4096,1,3,TF2_ROCKETSPEED * 1.8},
+		{TF2_SLOT_PRMRY,TF2_WEAPON_DIRECTHIT,		"tf_weapon_rocketlauncher_directhit",	WEAP_FL_PRIM_ATTACK | WEAP_FL_EXPLOSIVE | WEAP_FL_UNDERWATER,BLAST_RADIUS,4096,1,3,static_cast<float>(TF2_ROCKETSPEED) * 1.8f},
 		{TF2_SLOT_MELEE,TF2_WEAPON_SWORD,		"tf_weapon_sword",	WEAP_FL_PRIM_ATTACK | WEAP_FL_MELEE | WEAP_FL_UNDERWATER,0,190,0,1,0},
 		{TF2_SLOT_MELEE,TF2_WEAPON_KATANA,		"tf_weapon_katana",	WEAP_FL_PRIM_ATTACK | WEAP_FL_MELEE | WEAP_FL_UNDERWATER,0,210,0,1,0},
 		{TF2_SLOT_PRMRY, TF2_WEAPON_COWMANGLER, "tf_weapon_particle_cannon", WEAP_FL_KILLPIPEBOMBS | WEAP_FL_PRIM_ATTACK | WEAP_FL_UNDERWATER, 0, 1500, 1, 2, TF2_ROCKETSPEED },
@@ -416,7 +416,7 @@ edict_t* CWeapons::findWeapon(edict_t* pPlayer, const char* pszWeaponName)
 
 bool CBotWeapons::update(bool bOverrideAllFromEngine)
 {
-	unsigned short int iWeaponsSignature = 0x0; // check sum of weapons
+	uintptr_t iWeaponsSignature = 0x0; // check sum of weapons
 	edict_t* pWeapon;
 	
 	const CBaseHandle* m_Weapons = CClassInterface::getWeaponList(m_pBot->getEdict());
@@ -426,7 +426,7 @@ bool CBotWeapons::update(bool bOverrideAllFromEngine)
 	{
 		// create a 'hash' of current weapons
 		pWeapon = m_Weapon_iter == nullptr ? nullptr : INDEXENT(m_Weapon_iter->GetEntryIndex());
-		iWeaponsSignature += reinterpret_cast<uintptr_t>(pWeapon) + (pWeapon == nullptr ? 0 : static_cast<unsigned>(CClassInterface::getWeaponState(pWeapon)));
+		iWeaponsSignature += (reinterpret_cast<uintptr_t>(pWeapon)) + ((pWeapon == nullptr) ? 0 : static_cast<unsigned int>(CClassInterface::getWeaponState(pWeapon)));
 		if (m_Weapon_iter != nullptr) {
 		m_Weapon_iter++;
 		}
@@ -625,9 +625,11 @@ CBotWeapon* CBotWeapons::getBestWeapon(edict_t* pEnemy, bool bAllowMelee, bool b
 		}
 	}
 
-	if (bMeleeOnly || bAllowMeleeFallback && (m_theBestWeapon == nullptr && flDist < 400.0f &&
-		std::fabs(vEnemyOrigin.z - m_pBot->getOrigin().z) < BOT_JUMP_HEIGHT))
+	if (bMeleeOnly || (bAllowMeleeFallback && (m_theBestWeapon == nullptr && flDist < 400.0f &&
+		std::fabs(vEnemyOrigin.z - m_pBot->getOrigin().z) < static_cast<float>(BOT_JUMP_HEIGHT))))
+	{
 		m_theBestWeapon = m_FallbackMelee;
+	}
 
 	return m_theBestWeapon;
 }

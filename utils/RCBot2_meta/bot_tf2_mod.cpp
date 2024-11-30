@@ -144,12 +144,12 @@ bool CTeamFortress2Mod::isMedievalMode()
 	return CClassInterface::TF2_IsMedievalMode(GetGameRules());
 }
 
-bool CTeamFortress2Mod :: checkWaypointForTeam(CWaypoint *pWpt, int iTeam)
+bool CTeamFortress2Mod::checkWaypointForTeam(CWaypoint* pWpt, int iTeam)
 {
-// Returns true if team can go to waypoint
-	return m_bRoundOver || (!pWpt->hasFlag(CWaypointTypes::W_FL_NOBLU)||iTeam!=TF2_TEAM_BLUE)&&(!pWpt->hasFlag(CWaypointTypes::W_FL_NORED)||iTeam!=TF2_TEAM_RED);
+	// Returns true if team can go to waypoint
+	return m_bRoundOver || ((!pWpt->hasFlag(CWaypointTypes::W_FL_NOBLU) || iTeam != TF2_TEAM_BLUE) && (!pWpt->hasFlag(CWaypointTypes::W_FL_NORED) || iTeam != TF2_TEAM_RED));
 }
-	
+
 
 bool CTeamFortress2Mod :: isWaypointAreaValid ( int iWptArea, int iWptFlags )
 {
@@ -259,36 +259,32 @@ void CTeamFortress2Mod :: mapInit ()
 	m_iCapturePointWptID = -1;
 	m_iFlagPointWptID = -1;
 
-	if ( std::strncmp(szmapname,"ctf_",4) == 0 )
+	if (std::strncmp(szmapname, "ctf_", 4) == 0 || std::strncmp(szmapname, "stt_", 4) == 0 || std::strncmp(szmapname, "quake_turbine", 13) == 0 || std::strncmp(szmapname, "cp_dustcity", 11) == 0 || std::strncmp(szmapname, "pass_", 5) == 0 || std::strncmp(szmapname, "pd_", 3) == 0 || std::strncmp(szmapname, "od_", 3) == 0) // For the future gamemode "Stop That Tank". Quake Turbine is CTF. - RussiaTails
 		m_MapType = TF_MAP_CTF; // capture the flag
-	else if ( std::strncmp(szmapname,"cp_",3) == 0 )
+	else if (std::strncmp(szmapname, "cp_", 3) == 0 || std::strncmp(szmapname, "cqt_", 4) == 0 || std::strncmp(szmapname, "conquest_", 9) == 0 || std::strncmp(szmapname, "dom_", 4) == 0 || std::strncmp(szmapname, "2koth_", 6) == 0 || std::strncmp(szmapname, "ctf_chouhen", 11) == 0 || std::strncmp(szmapname, "ctf_haarp", 9) == 0) // Conquest, 2koth and DOM works fine as CP_. - RussiaTails
 		m_MapType = TF_MAP_CP; // control point
-	else if ( std::strncmp(szmapname,"tc_",3) == 0 )
+	else if (std::strncmp(szmapname, "tc_", 3) == 0)
 		m_MapType = TF_MAP_TC; // territory control
-	else if ( std::strncmp(szmapname,"pl_",3) == 0 )
+	else if (std::strncmp(szmapname, "pl_", 3) == 0 || std::strncmp(szmapname, "tow_", 4) == 0) // Tug of War works fine as Payload - RussiaTails
 		m_MapType = TF_MAP_CART; // pipeline
-	else if ( std::strncmp(szmapname,"plr_",4) == 0 )
+	else if (std::strncmp(szmapname, "plr_", 4) == 0 || std::strncmp(szmapname, "arena_tinyrock", 14) == 0 || std::strncmp(szmapname, "arena_hailstone", 15) == 0) // to make bots push payloads on these maps. - RussiaTails
 		m_MapType = TF_MAP_CARTRACE; // pipeline racing
-	else if ( std::strncmp(szmapname,"arena_",6) == 0 || std::strncmp(szmapname,"vsh_",4) == 0 ) // pongo1321
+	else if (std::strncmp(szmapname, "arena_", 6) == 0 || std::strncmp(szmapname, "vsh_", 4) == 0)  // pongo1321
 		m_MapType = TF_MAP_ARENA; // arena mode (also fallback for VS Saxton Hale gamemode)
 	//else if ( std::strncmp(szmapname,"arena_",6) == 0 )
 	//	m_MapType = TF_MAP_ARENA; // arena mode
-	else if ( std::strncmp(szmapname,"koth_",5) == 0 )
+	else if (std::strncmp(szmapname, "koth_", 5) == 0 || std::strncmp(szmapname, "ctk_", 4) == 0)  // Control the Keep works almost the same as KOTH. - RussiaTails
 		m_MapType = TF_MAP_KOTH; // king of the hill
-	else if ( std::strncmp(szmapname,"sd_",3) == 0 )
+	else if (std::strncmp(szmapname, "sd_", 3) == 0 || std::strncmp(szmapname, "sdr_", 4) == 0)  // Object Destruction and Special Delivery Race (I dunno why it's named like this when it works as a usual sd_) works the same as SD_. - RussiaTails
 		m_MapType = TF_MAP_SD; // special delivery
-	else if ( std::strncmp(szmapname,"tr_",3) == 0 )
+	else if (std::strncmp(szmapname, "tr_", 3) == 0)
 		m_MapType = TF_MAP_TR; // training mode
-	else if ( std::strncmp(szmapname,"mvm_",4) == 0 )
+	else if (std::strncmp(szmapname, "mvm_", 4) == 0)
 		m_MapType = TF_MAP_MVM; // mann vs machine
-	else if ( std::strncmp(szmapname,"rd_",3) == 0 )
+	else if (std::strncmp(szmapname, "rd_", 3) == 0)
 		m_MapType = TF_MAP_RD; // robot destruction
-	else if ( std::strncmp(szmapname,"pd_",3) == 0 )
-		m_MapType = TF_MAP_PD; // player destruction
 	else if (std::strncmp(szmapname, "zi_", 3) == 0)
 		m_MapType = TF_MAP_ZI; // Zombie Infection //TODO: add support for those gamemodes [APG]RoboCop[CL]
-	else if (std::strncmp(szmapname, "pass_", 5) == 0)
-		m_MapType = TF_MAP_PASS; // PASS Time
 	else
 		m_MapType = TF_MAP_DM; // deathmatch //TODO: to prevent bots from idling in their spawns by giving them basic tasks [APG]RoboCop[CL]
 
@@ -534,8 +530,8 @@ bool CTeamFortress2Mod ::isBoss ( edict_t *pEntity, float *fFactor )
 			return true;
 		}
 	}
-	else if (CTeamFortress2Mod::isMapType(TF_MAP_CARTRACE) || isMapType(TF_MAP_CART) || isMapType(TF_MAP_KOTH) ||
-		isMapType(TF_MAP_CP) ||	isMapType(TF_MAP_PD) || isMapType(TF_MAP_ARENA) || isMapType(TF_MAP_SD) || isMapType(TF_MAP_DM))
+	else if (CTeamFortress2Mod::isMapType(TF_MAP_CARTRACE) || isMapType(TF_MAP_CART) || isMapType(TF_MAP_KOTH) || isMapType(TF_MAP_PASS)
+		|| isMapType(TF_MAP_CP) || isMapType(TF_MAP_PD) || isMapType(TF_MAP_ARENA) || isMapType(TF_MAP_SD) || isMapType(TF_MAP_DM))
 	{
 		if ( m_pBoss.get() == pEntity )
 			return true;
@@ -778,9 +774,9 @@ void CTeamFortress2Mod :: resetSetupTime ()
 	m_fArenaPointOpenTime = engine->Time() + m_fPointTime;
 }
 
-bool CTeamFortress2Mod::hasRoundStarted ()
+bool CTeamFortress2Mod::hasRoundStarted()
 {
-	return m_bHasRoundStarted || !isMapType(TF_MAP_MVM)&&engine->Time() > m_fRoundTime;
+	return m_bHasRoundStarted || (!isMapType(TF_MAP_MVM) && engine->Time() > m_fRoundTime);
 
 	//return (engine->Time() > m_fRoundTime);
 }

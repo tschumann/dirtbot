@@ -37,7 +37,7 @@
 
 //#include <stack>
 
-enum
+enum : std::uint16_t
 {
 	TF2_ROCKETSPEED = 1100,
 	TF2_GRENADESPEED = 1065,
@@ -49,7 +49,7 @@ class CBotWeapon;
 class CWaypoint;
 class CBotUtility;
 
-enum
+enum : std::uint8_t
 {
 	TF2_SLOT_PRMRY = 0,	// primary
 	TF2_SLOT_SCNDR = 1,	// secondary
@@ -62,27 +62,27 @@ enum
 	TF2_SLOT_MAX = 8
 };
 
-enum
+enum : std::uint8_t
 {
 	TF2_TEAM_BLUE = 3,
 	TF2_TEAM_RED = 2
 };
 
-enum
+enum : std::uint8_t
 {
 	RESIST_BULLETS = 0,
 	RESIST_EXPLO = 1,
 	RESIST_FIRE = 2
 };
 
-enum
+enum : std::uint8_t
 {
 	TF2_SENTRY_LEVEL1_HEALTH = 150,
 	TF2_SENTRY_LEVEL2_HEALTH = 180,
 	TF2_SENTRY_LEVEL3_HEALTH = 216
 };
 
-enum
+enum : std::uint8_t
 {
 	TF2_DISPENSER_LEVEL1_HEALTH = 150,
 	TF2_DISPENSER_LEVEL2_HEALTH = 180,
@@ -214,7 +214,7 @@ enum
 
 //#define TF2_SPY_FOV_KNIFEATTACK 90.0f
 
-typedef enum
+typedef enum : std::uint8_t
 {
 	TF_VC_MEDIC = 0,
 	TF_VC_INCOMING = 1,
@@ -244,7 +244,7 @@ typedef enum
 }eTFVoiceCMD;
 
 
-typedef enum
+typedef enum : std::uint8_t
 {
 	TF_TRAP_TYPE_NONE,
 	TF_TRAP_TYPE_WPT,
@@ -272,7 +272,7 @@ typedef enum
 	TF_CLASS_MAX = 10
 }TF_Class;*/
 
-typedef enum
+typedef enum : std::uint8_t
 {
 	TF_CLASS_UNDEFINED = 0,
 	TF_CLASS_SCOUT,
@@ -304,7 +304,7 @@ typedef enum
 	ENGI_SENTRY,
 	ENGI_SAPPER
 }eEngiBuild;*/
-typedef enum
+typedef enum : std::uint8_t
 {
 	ENGI_DISP = 0,
 	ENGI_TELE,
@@ -314,7 +314,7 @@ typedef enum
 	ENGI_ENTRANCE,
 }eEngiBuild;
 
-typedef enum
+typedef enum : std::uint8_t
 {
 	ENGI_BUILD,
 	ENGI_DESTROY
@@ -371,7 +371,11 @@ private:
 class CBroadcastFlagDropped : public IBotFunction
 {
 public:
-	CBroadcastFlagDropped (int iTeam, const Vector& origin) { m_iTeam = iTeam; m_vOrigin = origin; }
+	CBroadcastFlagDropped(int iTeam, const Vector& origin)
+		: m_vOrigin(origin), m_iTeam(iTeam)
+	{
+	}
+
 	void execute ( CBot *pBot ) override;
 
 private:
@@ -410,7 +414,7 @@ private:
 	const char *m_szName;
 };
 
-enum
+enum : std::uint8_t
 {
 	EVENT_FLAG_PICKUP = 0,
 	EVENT_CAPPOINT = 1

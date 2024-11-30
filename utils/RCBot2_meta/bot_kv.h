@@ -1,7 +1,7 @@
 #ifndef __RCBOT_KEY_VAL__
 #define __RCBOT_KEY_VAL__
 
-enum
+enum : std::uint16_t
 {
 	RCBOT_MAX_KV_LEN = 256
 };
@@ -11,7 +11,7 @@ enum
 class CRCBotKeyValue
 {
 public:
-	CRCBotKeyValue(const char *szKey, char *szValue);
+	CRCBotKeyValue(const char *szKey, const char *szValue);
 
 	char *getKey ()
 	{

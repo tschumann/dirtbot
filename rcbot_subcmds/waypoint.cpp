@@ -28,6 +28,8 @@
  *    version.
  */
 
+#include "bot_waypoint.h"
+
 CBotCommandInline WaypointOnCommand("on", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs& args)
 {
 	if ( pClient )
@@ -61,7 +63,7 @@ CBotCommandInline WaypointDeleteCommand("delete", CMD_ACCESS_WAYPOINT, [](CClien
 	{
 		if ( args[0] && *args[0] )
 		{
-			const float radius = atof(args[0]);
+			const float radius = static_cast<float>(std::atof(args[0]));
 
 			if ( radius > 0 )
 			{
@@ -181,8 +183,7 @@ CBotCommandInline WaypointClearCommand("clear", CMD_ACCESS_WAYPOINT, [](CClient 
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline WaypointGiveTypeCommand("givetype", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs&
-                                                                              args)
+CBotCommandInline WaypointGiveTypeCommand("givetype", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs& args)
 {
 	edict_t *pEntity = pClient->getPlayer();
 
@@ -257,15 +258,20 @@ CBotCommandInline WaypointGiveTypeCommand("givetype", CMD_ACCESS_WAYPOINT, [](CC
 	return COMMAND_ACCESSED;
 });
 
-CBotCommandInline WaypointDrawTypeCommand("drawtype", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs&
-                                                                              args)
+CBotCommandInline WaypointDrawTypeCommand("drawtype", CMD_ACCESS_WAYPOINT, [](CClient* pClient, const BotCommandArgs& args)
 {
-	if ( pClient )
+	if (pClient)
 	{
-		if ( args[0] && *args[0] )
+		if (args[0] && *args[0])
 		{
-			pClient->setDrawType(std::atoi(args[0]));
-			return COMMAND_ACCESSED;
+			int drawType = std::atoi(args[0]);
+			if (drawType >= 0 && drawType <= std::numeric_limits<unsigned short>::max())
+			{
+				pClient->setDrawType(static_cast<unsigned short>(drawType));
+				return COMMAND_ACCESSED;
+			}
+			// Handle out-of-range value
+			return COMMAND_ERROR;
 		}
 	}
 	return COMMAND_ERROR;
@@ -328,7 +334,7 @@ CBotCommandInline WaypointSetRadiusCommand("setradius", 0, [](CClient *pClient, 
 	{
 		CWaypoint *pWpt = CWaypoints::getWaypoint(pClient->currentWaypoint());
 
-		pWpt->setRadius(atof(args[0]));
+		pWpt->setRadius(static_cast<float>(std::atof(args[0])));
 	}
 	else
 		return COMMAND_ERROR;
@@ -633,7 +639,7 @@ CBotCommandInline WaypointShowVisCommand("showvis", 0, [](CClient *pClient, cons
 	{
 		CWaypoint *pWpt = CWaypoints::getWaypoint(pClient->currentWaypoint());
 
-		const float ftime = (args[0] && *args[0]) ? atof(args[0]) : 5.0f;
+		const float ftime = (args[0] && *args[0]) ? static_cast<float>(std::atof(args[0])) : 5.0f;
 
 		if ( pWpt )
 		{

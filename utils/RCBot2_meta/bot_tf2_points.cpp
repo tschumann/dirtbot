@@ -240,6 +240,7 @@ int CTFObjectiveResource::getRandomValidPointForTeam ( int team, ePointAttackDef
 	// no points
 	return 0;
 }
+
 void CTeamRoundTimer::reset()
 {
 	CTeamRoundTimer();
@@ -251,6 +252,7 @@ void CTeamRoundTimer::reset()
 		CClassInterface::setupCTeamRoundTimer(this);
 	}
 }
+
 bool CTeamControlPointRound :: isPointInRound ( edict_t *point_pent )
 {
 	for ( int i = 0; i < m_ControlPoints.Count(); i ++ )
@@ -581,7 +583,7 @@ bool CTFObjectiveResource :: updateDefendPoints ( int team )
 			int iNumPrevPointsAvail = 0;
 
 			// Check this points prevous points
-			for (int j : arr[i].iPrev)
+			for (const int j : arr[i].iPrev)
 			{
 				if (j != -1 )
 				{
@@ -620,7 +622,7 @@ bool CTFObjectiveResource :: updateDefendPoints ( int team )
 
 				if ( arr[j].bPrev )
 				{
-					for (int k : arr[j].iPrev)
+					for (const int k : arr[j].iPrev)
 					{
 						if (k == i )
 						{
@@ -688,7 +690,7 @@ bool CTFObjectiveResource :: updateDefendPoints ( int team )
 							{
 								if ( arr[j].bValid == false )
 								{
-									if ( !pRound || m_pControlPoints[j]&&pRound->isPointInRound(m_pControlPoints[j]) )
+									if (!pRound || (m_pControlPoints[j] && pRound->isPointInRound(m_pControlPoints[j])))
 										arr[j].bValid = true; // this is the next point - move back lads
 								}
 							}
@@ -939,7 +941,7 @@ bool CTFObjectiveResource :: updateAttackPoints ( int team )
 
 				if ( arr[j].bPrev )
 				{
-					for (int k : arr[j].iPrev)
+					for (const int k : arr[j].iPrev)
 					{
 						if (k == i )
 						{

@@ -217,7 +217,7 @@ void CBot :: runPlayerMove()
 	{
 			char dbg[512];
 
-			std::sprintf(dbg,"m_pButtons = %d/%x, Weapon Select = %d, impulse = %d",cmd.buttons,cmd.buttons,cmd.weaponselect,cmd.impulse);
+			snprintf(dbg, sizeof(dbg), "m_pButtons = %d/%x, Weapon Select = %d, impulse = %d", cmd.buttons, cmd.buttons, cmd.weaponselect, cmd.impulse);
 
 			CClients::clientDebugMsg(BOT_DEBUG_BUTTONS,dbg,this);
 	}
@@ -348,9 +348,9 @@ bool CBot :: createBotFromEdict(edict_t *pEdict, CBotProfile *pProfile)
 		const int iModel = randomInt(1,7);	
 
 		if ( randomInt(0,1) )
-			std::sprintf(szModel,"models/humans/Group03/Male_0%d.mdl",iModel);
+			snprintf(szModel, sizeof(szModel), "models/humans/Group03/Male_0%d.mdl", iModel);
 		else
-			std::sprintf(szModel,"models/humans/Group03/female_0%d.mdl",iModel);
+			snprintf(szModel, sizeof(szModel), "models/humans/Group03/female_0%d.mdl", iModel);
 	}
 
 	m_iDesiredTeam = pProfile->m_iTeam;
@@ -373,15 +373,16 @@ bool CBot :: createBotFromEdict(edict_t *pEdict, CBotProfile *pProfile)
 	"engineer",	"sniper", "spy",
 	};*/
 	
-	char classNames[32][10] = {
-		"auto", "scout", "sniper", "soldier", "demoman", "medic", "heavy",
-		"pyro", "spy", "engineer"
-	};
-	
-	char cmd[32];
-	if (m_iDesiredClass >= 0 && static_cast<unsigned>(m_iDesiredClass) < sizeof(classNames)) {
+	char cmd[32]; // conflicts with bot.h `CBotCmd cmd`? [APG]RoboCop[CL]
+
+	if (m_iDesiredClass >= 0 && static_cast<unsigned>(m_iDesiredClass) < 10) {
+		char classNames[10][10] = {
+			"auto", "scout", "sniper", "soldier", "demoman", "medic", "heavy",
+			"pyro", "spy", "engineer"
+		};
 		snprintf(cmd, sizeof(cmd), "joinclass %s", classNames[m_iDesiredClass]);
-	} else {
+	}
+	else {
 		snprintf(cmd, sizeof(cmd), "joinclass auto");
 	}
 	
@@ -725,7 +726,7 @@ void CBot :: debugMsg ( int iLev, const char *szMsg )
 	{
 		char szMsg2[512];
 
-		std::sprintf(szMsg2,"(%s):%s",m_pPlayerInfo->GetName(),szMsg);
+		snprintf(szMsg2, sizeof(szMsg2), "(%s):%s", m_pPlayerInfo->GetName(), szMsg);
 
 		CClients::clientDebugMsg (iLev,szMsg2,this);
 	}
@@ -1013,7 +1014,7 @@ void CBot :: think ()
 	// deal with it here
 	if ( m_fNextVoiceCommand < engine->Time() && !m_nextVoicecmd.empty() )
 	{
-		const byte cmd = static_cast<byte>(m_nextVoicecmd.front());
+		const byte cmd = static_cast<byte>(m_nextVoicecmd.front()); //conflicts with bot.h `CBotCmd cmd`? [APG]RoboCop[CL]
 
 		m_fNextVoiceCommand = engine->Time() + randomFloat(0.4f,1.2f);
 		
@@ -1031,7 +1032,7 @@ void CBot :: think ()
 	m_bInitAlive = false;
 }
 
-void CBot :: addVoiceCommand ( int cmd ) 
+void CBot :: addVoiceCommand ( int cmd ) //conflicts with bot.h `CBotCmd cmd`? [APG]RoboCop[CL]
 {
 	if ( bot_use_vc_commands.GetBool() && m_fLastVoiceCommand[cmd] < engine->Time() )
 	{
@@ -1198,7 +1199,7 @@ void CBot :: updateConditions ()
 
 				// update squad idle condition. If squad is idle, bot can move around a small radius 
 				// around the leader and do what they want, e.g. defend or snipe
-				if ( hasEnemy() || fSpeed > 10.0f && CClassInterface::getMoveType(pLeader) != MOVETYPE_LADDER )
+				if (hasEnemy() || (fSpeed > 10.0f && CClassInterface::getMoveType(pLeader) != MOVETYPE_LADDER))
 				{
 					setSquadIdleTime(engine->Time());
 					removeCondition(CONDITION_SQUAD_IDLE);
@@ -1387,7 +1388,6 @@ void CBot :: spawnInit ()
 	m_bThinkStuck = false;
 	m_pLookEdict = nullptr;
 	m_fLookAroundTime = 0.0f;
-	m_pAvoidEntity = nullptr;
 	m_bLookedForEnemyLast = false;
 	////////////////////////
 	m_iPrevHealth = 0;    // 
@@ -1877,7 +1877,7 @@ void CBot :: updateStatistics ()
 
 		if ( !m_uSquadDetail.b1.said_area_clear && m_StatsCanUse.stats.m_iEnemiesInRange == 0 && m_StatsCanUse.stats.m_iEnemiesVisible == 0 && m_StatsCanUse.stats.m_iTeamMatesInRange > 0)
 		{
-			if ( !inSquad() || isSquadLeader() && (m_fLastSeeEnemy && m_fLastSeeEnemy + 10.0f<engine->Time()) )
+			if (!inSquad() || (isSquadLeader() && (m_fLastSeeEnemy && m_fLastSeeEnemy + 10.0f < engine->Time())))
 				areaClear();
 
 			m_uSquadDetail.b1.said_area_clear = true;
@@ -1980,7 +1980,7 @@ void CBot :: listenForPlayers ()
 		
 		float fFactor = 0.0f;
 
-		const CBotCmd cmd = p->GetLastUserCommand();
+		const CBotCmd cmd = p->GetLastUserCommand(); //conflicts with bot.h `CBotCmd cmd`? [APG]RoboCop[CL]
 
 		if ( cmd.buttons & IN_ATTACK )
 		{
@@ -2488,7 +2488,7 @@ void CBot :: grenadeThrown ()
 
 }
 
-void CBot::voiceCommand(int cmd)
+void CBot::voiceCommand(int cmd) //conflicts with bot.h `CBotCmd cmd`? [APG]RoboCop[CL]
 {
 	
 }
@@ -2859,7 +2859,7 @@ void CBot :: doLook ()
 		if ( m_iLookTask == LOOK_GROUND )
 			requiredAngles.x = 89.0f;
 
-		const CBotCmd cmd = m_pPlayerInfo->GetLastUserCommand();
+		const CBotCmd cmd = m_pPlayerInfo->GetLastUserCommand(); //conflicts with bot.h `CBotCmd cmd`? [APG]RoboCop[CL]
 
 		m_vViewAngles = cmd.viewangles;
 
@@ -3469,7 +3469,7 @@ void CBots :: kickRandomBot (size_t count)
 	while (numBotsKicked < count && !botList.empty()) {
 		char szCommand[512];
 
-		std::sprintf(szCommand, "kickid %d\n", botList.back());
+		snprintf(szCommand, sizeof(szCommand), "kickid %d\n", botList.back());
 		engine->ServerCommand(szCommand);
 		numBotsKicked++;
 		
@@ -3498,7 +3498,7 @@ void CBots :: kickRandomBotOnTeam ( int team )
 		return;
 	}
 
-	std::sprintf(szCommand,"kickid %d\n", botList[ randomInt(0, botList.size() - 1) ]);
+	snprintf(szCommand, sizeof(szCommand), "kickid %d\n", botList[ randomInt(0, botList.size() - 1) ]);
 
 	m_flAddKickBotTime = engine->Time() + 2.0f;
 

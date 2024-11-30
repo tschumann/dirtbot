@@ -36,7 +36,7 @@
 
 class CClient;
 
-typedef enum
+typedef enum : std::uint8_t
 {
 	COMMAND_NOT_FOUND,     // command not found
 	COMMAND_ACCESSED,      // okay
@@ -46,7 +46,7 @@ typedef enum
 
 #define NEED_ARG(x) if ( !(x) || !*(x) ) return COMMAND_ERROR;
 
-enum
+enum : std::uint8_t
 {
 	CMD_ACCESS_NONE = 0,
 	CMD_ACCESS_WAYPOINT = 1<<0,
@@ -97,7 +97,7 @@ public:
 	// execute command
 	// we pass byval / copy the argument list so they can be pushed / shifted without
 	// affecting the original list
-	virtual eBotCommandResult execute(CClient *pClient, BotCommandArgs args);
+	virtual eBotCommandResult execute(CClient* pClient, const BotCommandArgs& args);
 
 	bool hasAccess ( CClient *pClient ) const;
 
@@ -118,9 +118,10 @@ protected:
 class CBotCommandInline : public CBotCommand
 {
 public:
-	CBotCommandInline(const char* cmd, int iAccessLevel, const BotCommandCallback& callback, const char* help = nullptr) : CBotCommand(cmd, iAccessLevel, help), m_Callback(callback) {}
+	CBotCommandInline(const char* cmd, int iAccessLevel, BotCommandCallback callback, const char* help = nullptr) : CBotCommand(cmd, iAccessLevel, help), m_Callback(std::move(
+		callback)) {}
 	
-	eBotCommandResult execute(CClient *pClient, BotCommandArgs args) override;
+	eBotCommandResult execute(CClient* pClient, const BotCommandArgs& args) override;
 	
 	BotCommandCallback m_Callback;
 };
@@ -130,7 +131,7 @@ class CBotSubcommands : public CBotCommand
 public:
 	CBotSubcommands(const char* cmd, int iAccessLevel, const std::vector<CBotCommand*>& subcommands) : CBotCommand(cmd, iAccessLevel, nullptr), m_theCommands{subcommands} {}
 	
-	eBotCommandResult execute(CClient *pClient, BotCommandArgs args) override;
+	eBotCommandResult execute(CClient* pClient, const BotCommandArgs& args) override;
 	
 	void printCommand(edict_t *pPrintTo, int indent = 0) override;
 	void printHelp(edict_t *pPrintTo) override;

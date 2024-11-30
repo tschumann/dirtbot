@@ -301,6 +301,7 @@
     <ClInclude Include="bot_const.h" />
     <ClInclude Include="bot_coop.h" />
     <ClInclude Include="bot_css_bot.h" />
+    <ClInclude Include="bot_css_buying.h" />
     <ClInclude Include="bot_cvars.h" />
     <ClInclude Include="bot_dod_bot.h" />
     <ClInclude Include="bot_ehandle.h" />
@@ -308,6 +309,7 @@
     <ClInclude Include="bot_fortress.h" />
     <ClInclude Include="bot_ga.h" />
     <ClInclude Include="bot_ga_ind.h" />
+    <ClInclude Include="bot_ga_nn_const.h" />
     <ClInclude Include="bot_genclass.h" />
     <ClInclude Include="bot_getprop.h" />
     <ClInclude Include="bot_globals.h" />
@@ -342,6 +344,7 @@
     <ClInclude Include="bot_wpt_dist.h" />
     <ClInclude Include="bot_zombie.h" />
     <ClInclude Include="engine_wrappers.h" />
+    <ClInclude Include="logging.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\alliedmodders\hl2sdk-tf2\lib\public\mathlib.lib" />

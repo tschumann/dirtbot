@@ -59,7 +59,7 @@ extern IVDebugOverlay *debugoverlay;
 // temporarily declared at the bottom
 // CBotSubcommands *CBotGlobals :: m_pCommands;
 
-eBotCommandResult CBotCommandInline::execute(CClient *pClient, BotCommandArgs args) {
+eBotCommandResult CBotCommandInline::execute(CClient* pClient, const BotCommandArgs& args) {
 	// fire off callback function
 	return m_Callback(pClient, args);
 }
@@ -152,37 +152,37 @@ bool CBotCommand :: isCommand ( const char *szCommand ) const
 	return FStrEq(szCommand,m_szCommand);
 }
 
-eBotCommandResult CBotCommand::execute(CClient *pClient, BotCommandArgs args) {
+eBotCommandResult CBotCommand::execute(CClient* pClient, const BotCommandArgs& args) {
 	return COMMAND_NOT_FOUND;
 }
 
-eBotCommandResult CBotSubcommands::execute(CClient *pClient, BotCommandArgs args) {
-	const char* subcmd = args[0];
-	args.pop_front();
-	
+eBotCommandResult CBotSubcommands::execute(CClient* pClient, const BotCommandArgs& args) {
+	BotCommandArgs mutableArgs = args; // Make a mutable copy
+	const char* subcmd = mutableArgs[0];
+	mutableArgs.pop_front();
+
 	for (CBotCommand* const cmd : m_theCommands) {
 		if (!cmd->isCommand(subcmd)) {
 			continue;
 		}
-		
+
 		if (pClient && !cmd->hasAccess(pClient)) {
 			return COMMAND_REQUIRE_ACCESS;
 		}
-		
-		if (!pClient && !cmd->canbeUsedDedicated()){
+		if (!pClient && !cmd->canbeUsedDedicated()) {
 			CBotGlobals::botMessage(nullptr, 0, "Sorry, this command cannot be used on a dedicated server");
 			return COMMAND_ERROR;
 		}
-		
+
 		// shift arguments and call
-		const eBotCommandResult result = cmd->execute(pClient, args);
+		const eBotCommandResult result = cmd->execute(pClient, mutableArgs);
 		if (result == COMMAND_ERROR) {
-			cmd->printHelp(pClient? pClient->getPlayer() : nullptr);
+			cmd->printHelp(pClient ? pClient->getPlayer() : nullptr);
 		}
 		return COMMAND_ACCESSED;
 	}
-	
-	printHelp(pClient? pClient->getPlayer() : nullptr);
+
+	printHelp(pClient ? pClient->getPlayer() : nullptr);
 	return COMMAND_NOT_FOUND;
 }
 

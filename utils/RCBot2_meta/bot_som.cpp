@@ -128,7 +128,7 @@ void CSom :: display () const
 {
 	//printf("\nDisplaying...\n");
 
-	for (CSomNeuron* const m_Neuron : m_Neurons)
+	for (const CSomNeuron* m_Neuron : m_Neurons)
 	{
 		//printf("%d -- ",i);
 		m_Neuron->displayWeights();

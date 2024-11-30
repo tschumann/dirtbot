@@ -40,6 +40,7 @@
 #ifndef __RCBOT2_H__
 #define __RCBOT2_H__
 
+#include <cstdint>
 //#include "cbase.h"
 //#include "baseentity.h"
 #include "toolframework/itoolentity.h"
@@ -89,7 +90,7 @@ extern IEffects *g_pEffects; //Redundant? [APG]RoboCopCL]
 extern IBotManager *g_pBotManager;
 extern CGlobalVars *gpGlobals;
 
-enum
+enum : std::uint8_t
 {
 	GET_HEALTH = 0,
 	GET_TEAM = 1,
@@ -184,7 +185,7 @@ class CWaypoint;
 class CWeapon;
 class IBotNavigator;
 
-enum
+enum : std::uint8_t
 {
 	MOVELOOK_DEFAULT = 0,
 	MOVELOOK_THINK = 1,
@@ -665,10 +666,11 @@ public:
 
 	void tapButton ( int iButton ) const;
 
-    int getAmmo ( int iIndex ) const
-    { if ( !m_iAmmo ) return 0;
-	    if ( iIndex == -1 ) return 0;
-	    return m_iAmmo[iIndex]; }
+	int getAmmo(size_t iIndex) const {
+		if (!m_iAmmo) return 0;
+		if (iIndex == static_cast<size_t>(-1)) return 0;
+		return m_iAmmo[iIndex];
+	}
 
     void lookAtEdict ( edict_t *pEdict ) { m_pLookEdict = pEdict; }
 
@@ -1008,7 +1010,7 @@ protected:
 	float m_fAvoidSideSwitch;
 	float m_fHealClickTime;
 
-	unsigned int m_iSpecialVisibleId;
+	int m_iSpecialVisibleId;
 	float m_fCurrentDanger;
 	float m_fLastHurtTime;
 
@@ -1091,7 +1093,7 @@ public:
 
 	static void runPlayerMoveAll ();
 
-	static CBot *get ( int iIndex ) { return m_Bots[iIndex]; }
+	static CBot* get(size_t iIndex) { return m_Bots[iIndex]; }
 	static CBot *get ( edict_t *pPlayer ) { return m_Bots[slotOfEdict(pPlayer)]; }
 	int levelInit(); //TODO: Not implemented [APG]RoboCop[CL]
 

@@ -1270,24 +1270,25 @@ void CBotEvents :: freeMemory ()
 	m_theEvents.clear();
 }
 
-void CBotEvents :: executeEvent( void *pEvent, eBotEventType iType )
+void CBotEvents::executeEvent(void* pEvent, eBotEventType iType)
 {
 	int iEventId = -1;
 
-	IBotEventInterface *pInterface = nullptr;
+	std::unique_ptr<IBotEventInterface> pInterface;
 
-	if ( iType == TYPE_KEYVALUES )
-		pInterface = new CGameEventInterface1(static_cast<KeyValues*>(pEvent));
-	else if ( iType == TYPE_IGAMEEVENT )
-		pInterface = new CGameEventInterface2(static_cast<IGameEvent*>(pEvent));
+	if (iType == TYPE_KEYVALUES)
+		pInterface = std::make_unique<CGameEventInterface1>(static_cast<KeyValues*>(pEvent));
 
-	if ( pInterface == nullptr)
+	else if (iType == TYPE_IGAMEEVENT)
+		pInterface = std::make_unique<CGameEventInterface2>(static_cast<IGameEvent*>(pEvent));
+
+	if (pInterface == nullptr)
 		return;
 
-	if ( iType != TYPE_IGAMEEVENT )
+	if (iType != TYPE_IGAMEEVENT)
 		iEventId = pInterface->getInt("eventid");
 
-	for (CBotEvent* const pFound : m_theEvents)
+	for (CBotEvent* pFound : m_theEvents)
 	{
 		// if it has an pEvent id stored just check that
 		//if ( ( iType != TYPE_IGAMEEVENT ) && pFound->hasEventId() )
@@ -1301,13 +1302,11 @@ void CBotEvents :: executeEvent( void *pEvent, eBotEventType iType )
 			// set pEvent id for quick checking
 			pFound->setEventId(iEventId);
 
-			pFound->setActivator(userid>=0?CBotGlobals::playerByUserId(userid): nullptr);
+			pFound->setActivator(userid >= 0 ? CBotGlobals::playerByUserId(userid) : nullptr);
 
-			pFound->execute(pInterface);
+			pFound->execute(pInterface.get());
 
 			break;
 		}
 	}
-
-	delete pInterface;
 }

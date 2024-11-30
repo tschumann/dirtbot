@@ -33,7 +33,7 @@
 
 #include <vector>
 
-enum
+enum : std::uint8_t
 {
 	MAX_STRINGS_HASH = 26
 };

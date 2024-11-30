@@ -63,18 +63,18 @@ class CWaypointLocations
 {
 public:
 
-	static const int REACHABLE_RANGE = 400;
+	static constexpr int REACHABLE_RANGE = 400;
 
 	// max map size is 32768
-	static const int HALF_MAX_MAP_SIZE = 16384; // need to know half (negative + positive halves = max)
+	static constexpr int HALF_MAX_MAP_SIZE = 16384; // need to know half (negative + positive halves = max)
 	/*
 	// want bucket spacing of 256 units
 	static const int MAX_WPT_BUCKETS = 128;
 	*/
 	// want bucket spacing of 512 units
-	static const int MAX_WPT_BUCKETS = 64;
+	static constexpr int MAX_WPT_BUCKETS = 64;
 
-	static const int BUCKET_SPACING = HALF_MAX_MAP_SIZE*2/MAX_WPT_BUCKETS;
+	static constexpr int BUCKET_SPACING = HALF_MAX_MAP_SIZE*2/MAX_WPT_BUCKETS;
 
 	static unsigned char g_iFailedWaypoints [ CWaypoints::MAX_WAYPOINTS ];
 	

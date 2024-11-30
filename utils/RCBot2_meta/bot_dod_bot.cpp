@@ -431,14 +431,13 @@ void CDODBot :: seeFriendlyDie ( edict_t *pDied, edict_t *pKiller, CWeapon *pWea
 		static CWaypoint *pWpt;
 		//bool bInvestigate = true;
 		//bool bFollow = true;
-		const Vector vecEnemy = CBotGlobals::entityOrigin(pKiller);
-		
+
 		if ( pWeapon )
 		{
 			const DOD_Class pclass = static_cast<DOD_Class>(CClassInterface::getPlayerClassDOD(pKiller));
-
 			if ( (pclass == DOD_CLASS_SNIPER) && pWeapon->isZoomable() )
 			{
+				const Vector vecEnemy = CBotGlobals::entityOrigin(pKiller);
 				if ( (m_LastHearVoiceCommand == DOD_VC_SNIPER) && m_pWeapons->hasWeapon(DOD_WEAPON_FRAG_US) && !m_pWeapons->hasWeapon(DOD_WEAPON_FRAG_GER) )
 					addVoiceCommand(DOD_VC_USE_GRENADE);
 				else
@@ -453,6 +452,7 @@ void CDODBot :: seeFriendlyDie ( edict_t *pDied, edict_t *pKiller, CWeapon *pWea
 			}
 			else if ( (pclass == DOD_CLASS_MACHINEGUNNER) && pWeapon->isDeployable() )
 			{
+				const Vector vecEnemy = CBotGlobals::entityOrigin(pKiller);
 				if ( (m_LastHearVoiceCommand == DOD_VC_MGAHEAD) && m_pWeapons->hasWeapon(DOD_WEAPON_FRAG_US) && !m_pWeapons->hasWeapon(DOD_WEAPON_FRAG_GER) )
 					addVoiceCommand(DOD_VC_USE_GRENADE);
 				else
@@ -475,15 +475,16 @@ void CDODBot :: seeFriendlyDie ( edict_t *pDied, edict_t *pKiller, CWeapon *pWea
 
 			if ( isVisible(pKiller) )
 			{
-				const CWaypointVisibilityTable *pTable = CWaypoints::getVisiblity();
+				const Vector vecEnemy = CBotGlobals::entityOrigin(pKiller);
+
+				const CWaypointVisibilityTable* pTable = CWaypoints::getVisiblity();
+
 				const int iCurrentWaypoint = m_pNavigator->getCurrentWaypointID();
-				const int iEnemyWaypoint = CWaypointLocations::NearestWaypoint(CBotGlobals::entityOrigin(pKiller),100.0f,-1,true,true);
+				const int iEnemyWaypoint = CWaypointLocations::NearestWaypoint(CBotGlobals::entityOrigin(pKiller), 100.0f, -1, true, true);
 
-				if ( (iCurrentWaypoint!=-1) && (iEnemyWaypoint!=-1) && !pTable->GetVisibilityFromTo(iCurrentWaypoint,iEnemyWaypoint) )
+				if ( (iCurrentWaypoint != -1) && (iEnemyWaypoint != -1) && !pTable->GetVisibilityFromTo(iCurrentWaypoint, iEnemyWaypoint) )
 				{
-					//bFollow = false;
-
-					ADD_UTILITY_DATA_VECTOR(BOT_UTIL_COVER_POINT,m_pCurrentWeapon != NULL,0.8f,(reinterpret_cast<unsigned>(pKiller)),(vecEnemy))
+					ADD_UTILITY_DATA_VECTOR(BOT_UTIL_COVER_POINT, m_pCurrentWeapon != NULL, 0.8f, (reinterpret_cast<unsigned>(pKiller)), (vecEnemy))
 				}
 			}
 			/*else if ( CBotGlobals::isPlayer(pDied) )
@@ -492,7 +493,7 @@ void CDODBot :: seeFriendlyDie ( edict_t *pDied, edict_t *pKiller, CWeapon *pWea
 				IPlayerInfo *p = playerinfomanager->GetPlayerInfo(pDied);
 				Vector v;
 				CClassInterface::getVelocity(pDied,&v);
-				
+
 				if ( v.Length() > 0 )
 					v = v / v.Length();
 
@@ -1111,7 +1112,7 @@ void CDODBot :: chooseClass ( bool bIsChangingClass )
 			}
 		}
 
-		for (float fClassFit : fClassFitness)
+		for (const float fClassFit : fClassFitness)
 			fTotalFitness += fClassFit;
 
 		const float fRandom = randomFloat(0, fTotalFitness);
@@ -1459,7 +1460,7 @@ void CDODBot ::voiceCommand (int cmd)
 
 	vcmd.voicecmd = cmd; //not used? [APG]RoboCop[CL]
 	
-	std::sprintf(scmd,"voice_%s",g_DODVoiceCommands[cmd].pcmd);
+	snprintf(scmd, sizeof(scmd), "voice_%s", g_DODVoiceCommands[cmd].pcmd);
 
 	helpers->ClientCommand(m_pEdict,scmd);
 }
@@ -1468,7 +1469,7 @@ void CDODBot ::signal ( const char *signal ) const
 {
 	char scmd[64];
 
-	std::sprintf(scmd,"signal_%s",signal);
+	snprintf(scmd, sizeof(scmd), "signal_%s", signal);
 
 	helpers->ClientCommand(m_pEdict,scmd);
 }
@@ -2091,7 +2092,7 @@ bool CDODBot :: executeAction ( CBotUtility *util )
 	case BOT_UTIL_SNIPE_POINT:
 		// find sniper point facing the enemy
 		{
-			edict_t* pEnemy = reinterpret_cast<edict_t*>(intData);
+			edict_t* pEnemy = reinterpret_cast<edict_t*>(util->getIntData());
 
 			Vector vEnemyOrigin = CBotGlobals::entityOrigin(pEnemy);
 
@@ -3083,10 +3084,10 @@ void CDODBot :: getTasks (unsigned int iIgnore)
 		{
 			//caxanga334: SDK 2013 doesn't like to create a Vector from an int
 			//TODO: Proper fix
-			#if SOURCE_ENGINE == SE_SDK2013 || SOURCE_ENGINE == SE_BMS || SOURCE_ENGINE == SE_TF2 || SOURCE_ENGINE == SE_EPISODEONE
+			#if SOURCE_ENGINE == SE_SDK2013 || SOURCE_ENGINE == SE_BMS || SOURCE_ENGINE == SE_EPISODEONE
 			iFlagID = CDODMod::m_Flags.findNearestObjective(Vector(m_pSquad->GetFormationPosition(m_pEdict),0,0));
 			#else
-			iFlagID = CDODMod::m_Flags.findNearestObjective(m_pSquad->GetFormationPosition(m_pEdict));
+			iFlagID = CDODMod::m_Flags.findNearestObjective(Vector(static_cast<vec_t>(m_pSquad->GetFormationPosition(m_pEdict))));
 			#endif
 			m_pNearestFlag = CDODMod::m_Flags.getFlagByID(iFlagID);
 
@@ -3361,7 +3362,7 @@ bool CDODBot :: select_CWeapon ( CWeapon *pWeapon )
 {
 	char cmd[128];
 
-	std::sprintf(cmd,"use %s\n",pWeapon->getWeaponName());
+	snprintf(cmd, sizeof(cmd), "use %s\n", pWeapon->getWeaponName());
 
 	helpers->ClientCommand(m_pEdict,cmd);
 
@@ -3377,7 +3378,7 @@ bool CDODBot :: selectBotWeapon ( CBotWeapon *pBotWeapon )
 		//int id = pSelect->getWeaponIndex();
 		char cmd[128];
 
-		std::sprintf(cmd,"use %s\n",pSelect->getWeaponName());
+		snprintf(cmd, sizeof(cmd), "use %s\n", pSelect->getWeaponName());
 
 		helpers->ClientCommand(m_pEdict,cmd);
 
@@ -3490,9 +3491,9 @@ void CDODBot :: modAim ( edict_t *pEntity, Vector &v_origin,
 					const float fTime = fDist2D/pWp->getProjectileSpeed();
 				//TODO: Improve on the floating point precision conversion [APG]RoboCop[CL]
 #if SOURCE_ENGINE > SE_DARKMESSIAH
-				v_desired_offset->z = std::pow(2, fTime) * (sv_gravity.GetFloat() * rcbot_projectile_tweak.GetFloat());// - (getOrigin().z - v_origin.z);
+					v_desired_offset->z = static_cast<float>(std::pow(2, fTime)) * (sv_gravity.GetFloat() * rcbot_projectile_tweak.GetFloat());// - (getOrigin().z - v_origin.z);
 #else
-				v_desired_offset->z = std::pow(2, fTime) * (sv_gravity->GetFloat() * rcbot_projectile_tweak.GetFloat());
+					v_desired_offset->z = std::pow(2, fTime) * (sv_gravity->GetFloat() * rcbot_projectile_tweak.GetFloat());
 #endif
 			}
 			//v_desired_offset->z += (distanceFrom(pEntity) * (randomFloat(0.05,0.15)*m_pProfile->m_fAimSkill));
@@ -3502,7 +3503,7 @@ void CDODBot :: modAim ( edict_t *pEntity, Vector &v_origin,
 	// if I know the enemy is near a smoke grenade i'll fire randomly into the cloud
 	if ( m_pNearestSmokeToEnemy )
 	{
-		static short int iSlot;
+		static int iSlot;
 		iSlot = ENTINDEX(pEntity)-1;
 
 		if (( iSlot >= 0 ) && ( iSlot < RCBOT_MAXPLAYERS ))

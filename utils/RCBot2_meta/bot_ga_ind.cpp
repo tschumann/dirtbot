@@ -47,12 +47,12 @@ void CBotGAValues::init()
 	setFitness(0);
 }
 
-CBotGAValues::CBotGAValues(std::vector<float> values)
+CBotGAValues::CBotGAValues(const std::vector<float>& values)
 {
 	clear();
 	setFitness(0);
 
-	setVector(std::move(values));
+	setVector(values);
 }
 
 void CBotGAValues::clear()
@@ -63,7 +63,7 @@ void CBotGAValues::clear()
 // crossover with other individual
 void CBotGAValues::crossOver(IIndividual* other)
 {
-	const unsigned int iPoint = randomInt(0, m_theValues.size());
+	const unsigned int iPoint = randomInt(0, static_cast<int>(m_theValues.size()));
 	float fTemp;
 
 	CBotGAValues* vother = static_cast<CBotGAValues*>(other);
@@ -125,9 +125,9 @@ IIndividual* CBotGAValues::copy()
 	return individual;
 }
 
-void CBotGAValues::setVector(std::vector<float> values)
+void CBotGAValues::setVector(const std::vector<float>& values)
 {
-	for (float& value : values)
+	for (const float& value : values)
 		m_theValues.emplace_back(value);
 }
 

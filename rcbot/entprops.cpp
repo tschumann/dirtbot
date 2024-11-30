@@ -51,7 +51,7 @@ public:
 	fieldtype_t fieldType;
 };
 
-enum PropEntType
+enum PropEntType : std::uint8_t
 {
 	PropEnt_Unknown,
 	PropEnt_Handle,
@@ -1489,7 +1489,7 @@ Vector CBotEntProp::GetEntPropVector(int entity, PropType proptype, char *prop, 
 	if (!IndexToAThings(entity, &pEntity, &pEdict))
 	{
 		logger->Log(LogLevel::ERROR, "Entity %d (%d) is invalid", sm_gamehelpers->ReferenceToIndex(entity), entity);
-		return Vector(0,0,0);
+		return {0,0,0};
 	}
 
 	switch (proptype)
@@ -1501,7 +1501,7 @@ Vector CBotEntProp::GetEntPropVector(int entity, PropType proptype, char *prop, 
 		if ((pMap = sm_gamehelpers->GetDataMap(pEntity)) == nullptr)
 		{
 			logger->Log(LogLevel::ERROR, "Could not retrieve datamap for %s", pEdict->GetClassName());
-			return Vector(0,0,0);
+			return {0,0,0};
 		}
 
 		SourceMod::sm_datatable_info_t dinfo;
@@ -1510,7 +1510,7 @@ Vector CBotEntProp::GetEntPropVector(int entity, PropType proptype, char *prop, 
 		{
 			const char *classname = sm_gamehelpers->GetEntityClassname(pEntity);
 			logger->Log(LogLevel::ERROR, "Property \"%s\" not found (entity %d/%s)", prop, entity, (classname ? classname : ""));
-			return Vector(0,0,0);
+			return {0,0,0};
 		}
 
 		td = dinfo.prop;
@@ -1518,7 +1518,7 @@ Vector CBotEntProp::GetEntPropVector(int entity, PropType proptype, char *prop, 
 		if (td->fieldType != FIELD_VECTOR && td->fieldType != FIELD_POSITION_VECTOR)
 		{
 			logger->Log(LogLevel::ERROR, "Data field %s is not a vector (%d != [%d,%d])", prop, td->fieldType, FIELD_VECTOR, FIELD_POSITION_VECTOR);
-			return Vector(0,0,0);
+			return {0,0,0};
 		}
 
 		CHECK_SET_PROP_DATA_OFFSET(Vector(0,0,0))
@@ -1529,7 +1529,7 @@ Vector CBotEntProp::GetEntPropVector(int entity, PropType proptype, char *prop, 
 			if (pVariant->fieldType != FIELD_VECTOR && pVariant->fieldType != FIELD_POSITION_VECTOR)
 			{
 				logger->Log(LogLevel::ERROR, "Variant value for %s is not vector (%d)", prop, pVariant->fieldType);
-				return Vector(0,0,0);
+				return {0,0,0};
 			}
 		}
 
@@ -1540,7 +1540,7 @@ Vector CBotEntProp::GetEntPropVector(int entity, PropType proptype, char *prop, 
 		if (!FindSendProp(&info, pEntity, prop, entity))
 		{
 			logger->Log(LogLevel::ERROR, "Failed to look up \"%s\" property.", prop);
-			return Vector(0,0,0);
+			return {0,0,0};
 		}
 
 		offset = info.actual_offset;
@@ -1553,7 +1553,7 @@ Vector CBotEntProp::GetEntPropVector(int entity, PropType proptype, char *prop, 
 	
 	default:
 		logger->Log(LogLevel::ERROR, "Invalid PropType %d", proptype);
-		return Vector(0,0,0);
+		return {0,0,0};
 		//break;
 	}
 
@@ -2281,13 +2281,13 @@ Vector CBotEntProp::GetEntDataVector(int entity, int offset)
 	if (!pEntity)
 	{
 		logger->Log(LogLevel::ERROR, "Entity %d (%d) is invalid", sm_gamehelpers->ReferenceToIndex(entity), entity);
-		return Vector(0,0,0);
+		return {0,0,0};
 	}
 
 	if (offset <= 0 || offset > 32768)
 	{
 		logger->Log(LogLevel::ERROR, "Offset %d is invalid", offset);
-		return Vector(0,0,0);
+		return {0,0,0};
 	}
 
 	Vector *v = reinterpret_cast<Vector*>(reinterpret_cast<uint8_t*>(pEntity) + offset);
@@ -2542,7 +2542,7 @@ Vector CBotEntProp::GameRules_GetPropVector(char *prop, int element) const
 	if (!pGameRules || !grclassname || !strcmp(grclassname, ""))
 	{
 		logger->Log(LogLevel::ERROR, "Gamerules lookup failed");
-		return Vector(0,0,0);
+		return {0,0,0};
 	}
 
 	int elementCount = 1; //Unused? [APG]RoboCop[CL]

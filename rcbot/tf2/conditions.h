@@ -30,7 +30,9 @@
 #ifndef __RCBOT2_TF2_CONDITIONS_H__
 #define __RCBOT2_TF2_CONDITIONS_H__
 
-typedef enum
+#include <cstdint>
+
+typedef enum : std::uint8_t
 {
 	TFCond_Slowed = 0, //0: Revving Minigun, Sniper Rifle. Gives zoomed/revved pose
 	TFCond_Zoomed, //1: Sniper Rifle zooming

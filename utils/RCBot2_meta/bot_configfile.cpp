@@ -86,10 +86,9 @@ void CBotConfigFile :: load ()
 
 void CBotConfigFile :: doNextCommand ()
 {
-	char cmd[64] = {};
-
 	if ( m_fNextCommandTime < engine->Time() && m_iCmd < m_Commands.size() )
 	{
+		char cmd[64] = {};
 		snprintf(cmd, sizeof cmd, "%s\n", m_Commands[m_iCmd]);
 		engine->ServerCommand(cmd);
 
@@ -101,10 +100,9 @@ void CBotConfigFile :: doNextCommand ()
 
 void CBotConfigFile :: executeCommands ()
 {
-	char cmd[64] = {};
-
 	while ( m_iCmd < m_Commands.size() )
 	{
+		char cmd[64] = {};
 		snprintf(cmd, sizeof cmd, "%s\n", m_Commands[m_iCmd]);
 		engine->ServerCommand(cmd);
 
@@ -149,11 +147,11 @@ void CRCBotTF2UtilFile :: loadConfig()
 		char szFullFilename[512];
 		if ( iFile == BOT_ATT_UTIL )
 		{
-			std::sprintf(szFilename,"attack_util.csv");
+			snprintf(szFilename, sizeof(szFilename), "attack_util.csv");
 		}
 		else
 		{
-			std::sprintf(szFilename,"normal_util.csv");
+			snprintf(szFilename, sizeof(szFilename), "normal_util.csv");
 		}
 
 		CBotGlobals::buildFileName(szFullFilename,szFilename,BOT_CONFIG_FOLDER);

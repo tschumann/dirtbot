@@ -700,7 +700,7 @@ public:
 	void execute ( IBotEventInterface *pEvent ) override;
 };
 
-typedef enum
+typedef enum : std::uint8_t
 {
 	TYPE_KEYVALUES = 0,
 	TYPE_IGAMEEVENT = 1

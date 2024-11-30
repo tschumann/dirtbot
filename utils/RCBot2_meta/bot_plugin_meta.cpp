@@ -169,14 +169,16 @@ class CClientBroadcastRecipientFilter : public IRecipientFilter
 {
 public:
 
-	CClientBroadcastRecipientFilter() {
-		m_iMaxCount = 0;
+	CClientBroadcastRecipientFilter() : m_iMaxCount(0) {
+
+		// Initialize m_iPlayerSlot with a default value, e.g., -1
+		std::fill(std::begin(m_iPlayerSlot), std::end(m_iPlayerSlot), -1);
 
 		for (int i = 0; i < RCBOT_MAXPLAYERS; ++i) {
 			CClient* client = CClients::get(i);
 
 			if (client->isUsed()) {
-				IPlayerInfo *p = playerinfomanager->GetPlayerInfo(client->getPlayer());
+				IPlayerInfo* p = playerinfomanager->GetPlayerInfo(client->getPlayer());
 
 				if (p->IsConnected() && !p->IsFakeClient()) {
 					m_iPlayerSlot[m_iMaxCount] = i;
@@ -201,7 +203,7 @@ private:
 ///////////////
 // hud message
 ///////////////
-void RCBotPluginMeta::HudTextMessage(edict_t *pEntity, const char *szMessage)
+void RCBotPluginMeta::HudTextMessage(edict_t* pEntity, const char* szMessage)
 {
 	int msgid = 0;
 	int imsgsize = 0;
@@ -227,12 +229,12 @@ void RCBotPluginMeta::HudTextMessage(edict_t *pEntity, const char *szMessage)
 	// if (!bOK)
 	// return;
 
-	CBotRecipientFilter *filter = new CBotRecipientFilter(pEntity);
+	CBotRecipientFilter filter(pEntity);
 
-	bf_write *buf;
+	bf_write* buf;
 
 	if (hint > 0) {
-		buf = engine->UserMessageBegin(filter, hint);
+		buf = engine->UserMessageBegin(&filter, hint);
 		buf->WriteString(szMessage);
 		engine->MessageEnd();
 	}
@@ -241,18 +243,16 @@ void RCBotPluginMeta::HudTextMessage(edict_t *pEntity, const char *szMessage)
 		char chatline[128];
 		snprintf(chatline, sizeof(chatline), "\x01\x04[RCBot2]\x01 %s\n", szMessage);
 
-		buf = engine->UserMessageBegin(filter, say);
+		buf = engine->UserMessageBegin(&filter, say);
 		buf->WriteString(chatline);
 		engine->MessageEnd();
 	}
-
-	delete filter;
 }
 
 //////////////////////////
 // chat broadcast message
 //////////////////////////
-void RCBotPluginMeta::BroadcastTextMessage(const char *szMessage)
+void RCBotPluginMeta::BroadcastTextMessage(const char* szMessage)
 {
 	int msgid = 0;
 	int imsgsize = 0;
@@ -275,18 +275,15 @@ void RCBotPluginMeta::BroadcastTextMessage(const char *szMessage)
 	if (msgid == 0)
 		return;
 
-	CClientBroadcastRecipientFilter *filter = new CClientBroadcastRecipientFilter();
-
+	CClientBroadcastRecipientFilter filter; // Allocate on stack
 	if (say > 0) {
 		char chatline[128];
 		snprintf(chatline, sizeof(chatline), "\x01\x04[RCBot2]\x01 %s\n", szMessage);
 
-		bf_write* buf = engine->UserMessageBegin(filter, say);
+		bf_write* buf = engine->UserMessageBegin(&filter, say);
 		buf->WriteString(chatline);
 		engine->MessageEnd();
 	}
-
-	delete filter;
 }
 
 void RCBotPluginMeta::Hook_PlayerRunCmd(CUserCmd *ucmd, IMoveHelper *moveHelper)
@@ -559,8 +556,10 @@ bool RCBotPluginMeta::Load(PluginId id, ISmmAPI *ismm, char *error, size_t maxle
 					continue;
 				}
 
-				m_iTargetBots[human_count] = bot_count;
-				logger->Log(LogLevel::INFO, "Bot Quota - Humans: %d, Bots: %d", human_count, bot_count);
+				if (human_count >= 0 && human_count <= RCBOT_MAXPLAYERS) {
+					m_iTargetBots[human_count] = bot_count;
+					logger->Log(LogLevel::INFO, "Bot Quota - Humans: %d, Bots: %d", human_count, bot_count);
+				}
 			}
 		}
 	}
@@ -910,10 +909,9 @@ void RCBotPluginMeta::BotQuotaCheck() {
 		else if (bot_target > bot_count) {
 			const int bot_diff = bot_target - bot_count;
 
-			// ReSharper disable once CppUnreachableCode
 			for (int i = 0; i < bot_diff; ++i) {
 				CBots::createBot("", "", "");
-				break; // Bug-Fix, only add one bot at a time
+				//break; // Bug-Fix, only add one bot at a time
 			}
 
 			notify = true;

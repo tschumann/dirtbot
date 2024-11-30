@@ -36,7 +36,7 @@
 
 #define SQUAD_DEFAULT_SPREAD 80.0f// say 50 units between each member...?
 
-enum eSquadForm
+enum eSquadForm : std::uint8_t
 {
 	SQUAD_FORM_NONE = 0,
 	SQUAD_FORM_WEDGE,
@@ -47,7 +47,7 @@ enum eSquadForm
 	SQUAD_FORM_VEE
 };
 
-enum eCombatType
+enum eCombatType : std::uint8_t
 {
 	COMBAT_NONE = 0,
 	COMBAT_STEALTH,
@@ -56,7 +56,7 @@ enum eCombatType
 	COMBAT_PRONE
 };
 
-enum eTacticType
+enum eTacticType : std::uint8_t
 {
 	TACTIC_FREE = 0,
 	TACTIC_IDLE,
@@ -162,7 +162,7 @@ public:
 
 	void removeMember (const edict_t* pMember);
 
-	bool IsLeader ( edict_t *pLeader )
+	bool IsLeader (const edict_t *pLeader)
 	{
 		return GetLeader() == pLeader;
 	}

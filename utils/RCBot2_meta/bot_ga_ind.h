@@ -38,7 +38,7 @@ class CBotGAValues : public IIndividual
 public:
 	CBotGAValues();
 
-	CBotGAValues( std::vector<float> values );
+	CBotGAValues( const std::vector<float>& values );
 
 	void init ();
 
@@ -52,7 +52,7 @@ public:
 	// sub classes return their class with own values
 	IIndividual *copy () override;
 
-	void setVector (std::vector<float> values);
+	void setVector (const std::vector<float>& values);
 
 	float get ( int iIndex ) const;
 

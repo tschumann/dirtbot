@@ -3,7 +3,7 @@
 
 #include "bot_waypoint.h"
 
-enum
+enum : std::uint8_t
 {
 	WPT_DIST_VER = 0x03
 };

@@ -327,7 +327,7 @@ void CCSSBot::selectModel() const
 void CCSSBot::say(const char *message)
 {
 	char buffer[256];
-	std::sprintf(buffer, "say \"%s\"", message);
+	snprintf(buffer, sizeof(buffer), "say \"%s\"", message);
 	helpers->ClientCommand(m_pEdict,buffer);
 }
 
@@ -340,7 +340,7 @@ void CCSSBot::say(const char *message)
 void CCSSBot::sayteam(const char *message)
 {
 	char buffer[256];
-	std::sprintf(buffer, "say_team \"%s\"", message);
+	snprintf(buffer, sizeof(buffer), "say_team \"%s\"", message);
 	helpers->ClientCommand(m_pEdict,buffer);
 }
 

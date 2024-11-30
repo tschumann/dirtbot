@@ -3,7 +3,7 @@
 
 // gone for the american spelling of 'colour' :)
 
-enum
+enum : std::uint8_t
 {
 	WAYPOINT_ALPHA = 200
 };

@@ -51,15 +51,15 @@ CBotProfile :: CBotProfile (const CBotProfile &other)
 
 CBotProfile :: CBotProfile (
 		const char *szName, 
-		const char *szModel, 
-		int iTeam, 
-		int iVisionTicks, 
-		int iPathTicks, 
-		int iVisionTicksClients,
-		int iSensitivity,
-		float fBraveness,
-		float fAimSkill,
-		int iClass )
+		const char *szModel,
+		const int iTeam,
+		const int iVisionTicks,
+		const int iPathTicks,
+		const int iVisionTicksClients,
+		const int iSensitivity,
+		const float fBraveness,
+		const float fAimSkill,
+		const int iClass )
 { 
 	m_iVisionTicksClients = iVisionTicksClients;
 	m_iSensitivity = iSensitivity;
@@ -113,7 +113,7 @@ void CBotProfiles :: setupProfiles ()
 	{
 		char szId[4];
 		char filename[512];
-		std::sprintf(szId,"%d",iId);
+		snprintf(szId, sizeof(szId), "%d", iId);
 		CBotGlobals::buildFileName(filename,szId,BOT_PROFILE_FOLDER,BOT_CONFIG_EXTENSION);
 
 		std::fstream fp = CBotGlobals::openFile(filename, std::fstream::in);
@@ -190,5 +190,5 @@ CBotProfile *CBotProfiles :: getRandomFreeProfile ()
 
 	if ( freeProfiles.empty() )
 		return nullptr;
-	return freeProfiles[ randomInt(0, freeProfiles.size() - 1) ];
+	return freeProfiles[randomInt(0, static_cast<int>(freeProfiles.size()) - 1)];
 }

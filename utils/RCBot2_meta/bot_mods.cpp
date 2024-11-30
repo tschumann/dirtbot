@@ -85,7 +85,7 @@ void CBotMods::parseFile()
 		if (buffer[0] == '#')
 			continue;
 
-		unsigned int len = std::strlen(buffer);
+		size_t len = std::strlen(buffer);
 
 		if (len == 0)
 			continue;
@@ -93,8 +93,8 @@ void CBotMods::parseFile()
 		if (buffer[len - 1] == '\n')
 			buffer[--len] = 0;
 
-		unsigned int i = 0;
-		unsigned int j = 0;
+		size_t i = 0;
+		size_t j = 0;
 
 		while (i < len && buffer[i] != '=')
 		{

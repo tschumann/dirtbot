@@ -299,7 +299,7 @@ private:
 	float m_fNextAttack;
 };
 
-enum
+enum : std::uint8_t
 {
 	TASK_TF2_DEMO_STATE_LAY_BOMB = 0,
 	TASK_TF2_DEMO_STATE_RUN_UP = 1
@@ -437,7 +437,7 @@ private:
 
 };
 
-enum
+enum : std::uint8_t
 {
 	CHARGER_HEALTH = 0,
 	CHARGER_ARMOR = 1
@@ -709,8 +709,10 @@ private:
 class CBotTF2EngiLookAfter : public CBotTask
 {
 public:
-	CBotTF2EngiLookAfter ( edict_t *pSentry ) { m_pSentry = pSentry; m_fTime = 0.0f; m_fHitSentry = 0.0f; }
-	
+	CBotTF2EngiLookAfter(edict_t *pSentry)
+    : m_fTime(0.0f), m_fHitSentry(0.0f), m_pSentry(pSentry) {
+	}
+		
 	void execute (CBot *pBot,CBotSchedule *pSchedule) override;
 
 	void debugString ( char *string ) override

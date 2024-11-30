@@ -32,6 +32,7 @@
 #define __BOT_WEAPONS_H__
 
 #include <vector>
+#include <cstdint>
 
 extern const char *g_szTF2Weapons[];
 
@@ -54,7 +55,7 @@ typedef struct
 	float m_fProjSpeed;
 }WeaponsData_t;
 
-enum 
+enum : std::uint8_t
 {
 	TF2_WEAPON_BAT = 0,
 	TF2_WEAPON_BOTTLE, //1
@@ -147,7 +148,7 @@ enum
 	TF2_WEAPON_MAX
 };
 */
-enum
+enum : std::uint8_t
 {
 	HL2DM_WEAPON_PISTOL = 0,
 	HL2DM_WEAPON_CROWBAR,
@@ -164,7 +165,7 @@ enum
 	HL2DM_WEAPON_MAX
 };
 
-enum
+enum : std::uint8_t
 {
 	DOD_WEAPON_AMERKNIFE = 0,
 	DOD_WEAPON_SPADE,
@@ -194,7 +195,7 @@ enum
 	DOD_WEAPON_MAX
 };
 
-enum
+enum : std::uint8_t
 {
 	SYN_WEAPON_PISTOL = 0,
 	SYN_WEAPON_CROWBAR,
@@ -216,7 +217,7 @@ enum
 	SYN_WEAPON_MAX
 };
 
-enum
+enum : std::uint8_t
 {
 	CS_WEAPON_KNIFE = 0,
 	CS_WEAPON_USP,
@@ -339,9 +340,7 @@ public:
 
 	bool isShortWeaponName(const char* szWeaponName) const
 	{
-		static ptrdiff_t start;
-
-		start = strlen(m_szWeaponName) - strlen(szWeaponName);
+		const size_t start = strlen(m_szWeaponName) - strlen(szWeaponName);
 
 		if (start < 0)
 			return false;
@@ -583,7 +582,7 @@ private:
 	static std::vector<CWeapon*> m_theWeapons;
 };
 
-enum
+enum : std::uint8_t
 {
 	AMMO_PRIM = 1,
 	AMMO_SEC = 2
@@ -839,7 +838,7 @@ private:
 	CBot *m_pBot;
 
 	// checksum mask of weapons bot already has so we know if we need to update or not
-	unsigned int m_iWeaponsSignature;
+	uintptr_t m_iWeaponsSignature;
 
 	// weapons local to the bot only 
 	// (holds ammo/preference etc and link to actual weapon)
