@@ -31,6 +31,9 @@
 #ifndef __RCBOT_TASK_H__
 #define __RCBOT_TASK_H__
 
+void getGrenadeAngle(double v, double g, double desx, double desy, float* fa1, float* fa2);
+float getGrenadeZ(edict_t* pShooter, edict_t* pTarget, const Vector& vOrigin, const Vector& vTarget, float fInitialSpeed);
+
 class CBot;
 class CBotSquad;
 class CBotSchedule;

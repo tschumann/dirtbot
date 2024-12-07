@@ -75,7 +75,9 @@ binary.sources += [
   '../outsourced/outsourced.cpp',
 
   'test_bot.cpp',
+  'test_bot_commands.cpp',
   'test_bot_mtrand.cpp',
+  'test_bot_task.cpp',
   'test_bot_waypoint.cpp',
 
   "../utils/RCBot2_meta/bot.cpp",
