@@ -8,23 +8,45 @@ Push-Location $wd
 New-Item -ItemType Directory -Force -Path build/
 Set-Location -Path build/
 
+Write-Output "------------------------------------"
+Write-Output "Building for Half-Life 2: Deathmatch"
+Write-Output "------------------------------------"
+
 # build the project with tests
 # TODO: get rid of hard-coded paths
-python ../configure.py -s hl2dm --mms-path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/metamod-source/ --sm-path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/sourcemod/ --hl2sdk-root C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/ --enable-tests
+python ../configure.py -s hl2dm --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --enable-tests
 ambuild
+
+Write-Output "-----------------------------------"
+Write-Output "Testing for Half-Life 2: Deathmatch"
+Write-Output "-----------------------------------"
 
 # add the engine's bin directory to the path because the tests depend on tier0.dll and vstdlib.dll (use dumpbin /IMPORTS)
 # TODO: get rid of hard-coded paths
-$env:Path += ";C:\Program Files (x86)\Steam\steamapps\common\Half-Life 2 Deathmatch\bin"
+$env:Path = "C:\Program Files (x86)\Steam\steamapps\common\Half-Life 2 Deathmatch\bin;" + $env:Path
 tests/testrunner/testrunner.exe
 
 # TODO: why isn't tests/testrunner/testrunner.exe being deleted?
 Remove-Item -Path tests -Recurse -Force
 
+Write-Output "-------------------------------------"
+Write-Output "Building for Half-Life 2: Episode One"
+Write-Output "-------------------------------------"
+
 # build the project with tests
 # TODO: get rid of hard-coded paths
 # TODO: build the project with tests
-python ../configure.py -s episode1 --mms-path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/metamod-source/ --sm-path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/sourcemod/ --hl2sdk-root C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/
+python ../configure.py -s episode1 --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --enable-tests
 ambuild
 
-# TODO: update outsourced to compile with episode1
+Write-Output "------------------------------------"
+Write-Output "Testing for Half-Life 2: Episode One"
+Write-Output "------------------------------------"
+
+# add the engine's bin directory to the path because the tests depend on tier0.dll and vstdlib.dll (use dumpbin /IMPORTS)
+# TODO: get rid of hard-coded paths
+$env:Path = "C:\Program Files (x86)\Steam\steamapps\common\Source SDK Base\bin;" + $env:Path
+tests/testrunner/testrunner.exe
+
+# TODO: why isn't tests/testrunner/testrunner.exe being deleted?
+Remove-Item -Path tests -Recurse -Force
