@@ -898,7 +898,7 @@ void CBotGlobals :: botMessage ( edict_t *pEntity, int iErr, const char *fmt, ..
 	const size_t len = std::strlen(string);
 	const size_t taglen = std::strlen(BOT_TAG);
 	// add tag -- push tag into string
-	for ( unsigned int i = len + taglen; i >= taglen; i -- )
+	for ( size_t i = len + taglen; i >= taglen; i -- )
 		string[i] = string[i-taglen];
 
 	string[len+taglen+1] = 0;

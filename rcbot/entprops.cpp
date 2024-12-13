@@ -1763,7 +1763,7 @@ bool CBotEntProp::SetEntPropVector(int entity, PropType proptype, char *prop, co
 /// @param len 
 /// @param element Element # (starting from 0) if property is an array.
 /// @return Value at the given property offset.
-char *CBotEntProp::GetEntPropString(int entity, PropType proptype, char *prop, int maxlen, int *len, int element)
+char *CBotEntProp::GetEntPropString(int entity, PropType proptype, char *prop, int maxlen, size_t *len, int element)
 {
 	edict_t *pEdict;
 	CBaseEntity *pEntity;
@@ -2336,7 +2336,7 @@ bool CBotEntProp::SetEntDataVector(int entity, int offset, const Vector& value, 
 /// @param maxlen Maximum length of output string buffer.
 /// @param len Number of non-null bytes written.
 /// @return String pointer at the given memory location.
-char *CBotEntProp::GetEntDataString(int entity, int offset, int maxlen, int *len)
+char *CBotEntProp::GetEntDataString(int entity, int offset, int maxlen, size_t *len)
 {
 	CBaseEntity *pEntity = GetEntity(entity);
 
@@ -2557,7 +2557,7 @@ Vector CBotEntProp::GameRules_GetPropVector(char *prop, int element) const
 /// @param maxlen Maximum length of output string buffer.
 /// @param element Element # (starting from 0) if property is an array.
 /// @return Value at the given property offset.
-char *CBotEntProp::GameRules_GetPropString(char *prop, int *len, int maxlen, int element) const
+char *CBotEntProp::GameRules_GetPropString(char *prop, size_t *len, int maxlen, int element) const
 {
 	int offset;
 	int bit_count; //Unused? [APG]RoboCop[CL]

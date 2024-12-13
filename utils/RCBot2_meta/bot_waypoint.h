@@ -213,7 +213,7 @@ public:
 
 	static CWaypointType *getTypeByIndex ( unsigned int iIndex );
 
-	static unsigned int getNumTypes ();
+	static std::size_t getNumTypes ();
 
 	static CWaypointType *getTypeByFlags ( int iFlags );
 

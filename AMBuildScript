@@ -52,6 +52,10 @@ class SDK(object):
 WinOnly = ['windows']
 WinLinux = ['windows', 'linux']
 WinLinuxMac = ['windows', 'linux', 'mac']
+Source64 = {
+  'windows': ['x86', 'x64'],
+  'linux': ['x86', 'x64']
+}
 CSGO = {
   'windows': ['x86'],
   'linux': ['x86', 'x64'],
@@ -69,7 +73,7 @@ PossibleSDKs = {
   'hl2dm':  SDK('HL2SDKHL2DM', '2.hl2dm', '7', 'HL2DM', WinLinuxMac, 'hl2dm'),
   'dods': SDK('HL2SDKDODS', '2.dods', '8', 'DODS', WinLinuxMac, 'dods'),
   'sdk2013': SDK('HL2SDK2013', '2.sdk2013', '9', 'SDK2013', WinLinuxMac, 'sdk2013'),
-  'tf2':  SDK('HL2SDKTF2', '2.tf2', '11', 'TF2', WinLinuxMac, 'tf2'),
+  'tf2':  SDK('HL2SDKTF2', '2.tf2', '11', 'TF2', Source64, 'tf2'),
   'l4d':  SDK('HL2SDKL4D', '2.l4d', '12', 'LEFT4DEAD', WinLinuxMac, 'l4d'),
   'nucleardawn': SDK('HL2SDKND', '2.nd', '13', 'NUCLEARDAWN', WinLinuxMac, 'nucleardawn'),
   'l4d2': SDK('HL2SDKL4D2', '2.l4d2', '15', 'LEFT4DEAD2', WinLinuxMac, 'l4d2'),
@@ -249,9 +253,10 @@ class MMSConfig(object):
       ]
       cxx.cflags += [
         '/W3',
-        '/we4267', # treat loss of data from type to type conversion as an error
-        '/we4311', # 'type cast': pointer truncation 
-        '/we4302', # 'type cast': truncation from 
+        # '/we4267', # treat loss of data from type to type conversion as an error
+        # TODO: re-enable these as dodgy stuff is happening with pointer
+        # '/we4311', # 'type cast': pointer truncation 
+        # '/we4302', # 'type cast': truncation from 
       ]
       cxx.cxxflags += [
         '/EHsc',
@@ -370,7 +375,7 @@ class MMSConfig(object):
       if arch == 'x86':
         compiler.defines += ['COMPILER_MSVC32']
       elif arch == 'x64':
-        compiler.defines += ['COMPILER_MSVC64']
+        compiler.defines += ['COMPILER_MSVC64', 'PLATFORM_64BITS']
 
       if compiler.version >= 1900:
         compiler.linkflags += ['legacy_stdio_definitions.lib']

@@ -1013,7 +1013,7 @@ void CDODBot :: touchedWpt ( CWaypoint *pWaypoint, int iNextWaypoint, int iPrevW
 
 			if (!m_InvisPaths.empty())
 			{
-				int iCheck = randomInt(0,m_InvisPaths.size()-1);
+				int iCheck = randomInt(0,(int)m_InvisPaths.size()-1);
 
 				iCheck = m_InvisPaths[iCheck];
 

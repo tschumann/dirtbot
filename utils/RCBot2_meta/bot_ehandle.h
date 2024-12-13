@@ -92,10 +92,10 @@ public:
 		return nullptr;
 	}
 
-	bool operator == (intptr_t a)
-	{
-		return (int(get()) == a);
-	}
+	// bool operator == (intptr_t a)
+	// {
+	// 	return (get() == reinterpret_cast<edict_t *>(a));
+	// }
 
 	bool operator == ( edict_t *pent )
 	{

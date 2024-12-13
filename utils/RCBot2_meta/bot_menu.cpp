@@ -115,7 +115,7 @@ CWaypointFlagMenu::CWaypointFlagMenu(CBotMenu* pPrev)
 	// 8. More...
 	// 9. Go Back
 
-	const unsigned int iNumTypes = CWaypointTypes::getNumTypes();
+	const size_t iNumTypes = CWaypointTypes::getNumTypes();
 
 	int iNumAdded = 0;
 
@@ -431,7 +431,7 @@ CWaypointFlagShowMenu::CWaypointFlagShowMenu(CBotMenu* pParent)
 	// 8. More...
 	// 9. Go Back
 
-	const unsigned int iNumTypes = CWaypointTypes::getNumTypes();
+	const size_t iNumTypes = CWaypointTypes::getNumTypes();
 	int iNumAdded = 0;
 
 	CBotMenu* pCurrent = this;
