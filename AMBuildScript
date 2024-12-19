@@ -12,7 +12,10 @@ proj_c_flags = [
   '-Wno-logical-op-parentheses',
   '-Wno-return-stack-address',
   '-Wno-null-dereference',
-  '-Wno-implicit-const-int-float-conversion'
+  '-Wno-implicit-const-int-float-conversion',
+  # TODO: get rid of these - fixes for Linux not compiling
+  '-Wno-narrowing',
+  '-fpermissive'
 ]
 proj_c_flags_opt = [
   '-O2',

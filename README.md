@@ -10,17 +10,31 @@ git submodule init
 git submodule update --init --recursive
 ```
 
+Installation
+------------
+
+Linux:
+```
+sudo pip3 install --break-system-packages alliedmodders/ambuild/
+```
+
+Windows:
+```
+pip install  alliedmodders/ambuild/
+```
+
 
 Compiling
 ---------
 
+Linux:
 ```
-mkdir build/
-cd build/
-python ../configure.py -s hl2dm --mms-path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/metamod-source/ --sm-path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/sourcemod/ --hl2sdk-root C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/
-python ../configure.py -s tf2 --mms-path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/metamod-source/ --sm-path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/sourcemod/ --hl2sdk-root C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/
-python ../configure.py -s episode1 --mms-path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/metamod-source/ --sm-path C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/sourcemod/ --hl2sdk-root C:/Users/schum/Documents/GitHub/dirtbot/alliedmodders/
-ambuild
+./build.sh
+```
+
+Windows:
+```
+./build.ps1
 ```
 
 

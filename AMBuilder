@@ -188,14 +188,23 @@ for sdk_name in MMS.sdks:
           cxx.Dep(os.path.join(lib_folder, 'tier2.a')),
           cxx.Dep(os.path.join(lib_folder, 'tier3.a')),
         ]
+      elif sdk.name in ['episode1']:
+        cxx.postlink += [
+          cxx.Dep(os.path.join(lib_folder, 'mathlib_i486.a'))
+        ]
       else:
         cxx.postlink += [
           cxx.Dep(os.path.join(lib_folder, 'mathlib_i486.a')),
           cxx.Dep(os.path.join(lib_folder, 'tier2_i486.a')),
           cxx.Dep(os.path.join(lib_folder, 'tier3_i486.a')),
         ]
+
+      if sdk.name not in ['episode1']:
+        cxx.postlink += [
+          'libvstdlib_srv.so'
+        ]
+
       cxx.postlink += [
-        'libvstdlib_srv.so',
         '-lm',
         '-ldl',
         '-lpthread'
