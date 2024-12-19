@@ -39,3 +39,6 @@
 [submodule "outsourced"]
 	path = outsourced
 	url = https://github.com/tschumann/outsourced
+[submodule "alliedmodders/ambuild"]
+	path = alliedmodders/ambuild
+	url = https://github.com/alliedmodders/ambuild
