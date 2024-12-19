@@ -2,10 +2,6 @@
 	path = alliedmodders/hl2sdk-bms
 	url = https://github.com/alliedmodders/hl2sdk
 
-[submodule "alliedmodders/hl2sdk-css"]
-	path = alliedmodders/hl2sdk-css
-	url = https://github.com/alliedmodders/hl2sdk
-
 [submodule "alliedmodders/hl2sdk-dods"]
 	path = alliedmodders/hl2sdk-dods
 	url = https://github.com/alliedmodders/hl2sdk
