@@ -10,8 +10,6 @@ folder_list = [
   'addons/metamod',
   'addons/rcbot2/bin',
   'addons/rcbot2/config',
-  # 'addons/rcbot2/launcher',
-  # 'addons/rcbot2/manual',
   'addons/rcbot2/profiles',
   'addons/rcbot2/waypoints',
 ]
