@@ -35,6 +35,14 @@
 #include "bot_ga.h"
 #include "bot_globals.h"
 
+#include <random>
+
+#include <algorithm> // For std::min
+#undef min           // Undefine macro if it exists
+#undef max           // Undefine macro if it exists
+
+#include "logging.h"
+
 const int CGA::g_iDefaultMaxPopSize = 16;
 const float CGA::g_fCrossOverRate = 0.7f;
 const float CGA::g_fMutateRate = 0.1f;

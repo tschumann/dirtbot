@@ -914,7 +914,7 @@ void CTeamFortress2Mod :: teleporterBuilt ( edict_t *pOwner, eEngiBuild type, ed
 	if ( type != ENGI_TELE ) //(type != ENGI_ENTRANCE) && (type != ENGI_EXIT) )
 		return;
 
-	const short int iIndex = ENTINDEX(pOwner)-1;//short not necessary? [APG]RoboCop[CL]
+	const int iIndex = ENTINDEX(pOwner) - 1;
 
 	if ( iIndex < 0 || iIndex > gpGlobals->maxClients )
 		return;
@@ -1006,7 +1006,7 @@ bool CTeamFortress2Mod::buildingNearby (int iTeam, const Vector& vOrigin)
 //get the building
 edict_t *CTeamFortress2Mod::getBuilding (eEngiBuild object, const edict_t* pOwner)
 {
-	static short int i;//short not necessary? [APG]RoboCop[CL]
+	static int i;
 	static tf_tele_t *tele; //tele not used [APG]RoboCop[CL]
 
 	//index = ENTINDEX(pOwner)-1;
@@ -1119,9 +1119,9 @@ edict_t *CTeamFortress2Mod :: nearestDispenser (const Vector& vOrigin, int team)
 
 void CTeamFortress2Mod::sapperPlaced(const edict_t* pOwner, eEngiBuild type, edict_t* pSapper)
 {
-	static short int index;//short not necessary? [APG]RoboCop[CL]
+	static int index;
 	
-	index = ENTINDEX(pOwner)-1;
+	index = ENTINDEX(pOwner) - 1;
 
 	if ( index>=0 && index<RCBOT_MAXPLAYERS )
 	{
@@ -1369,9 +1369,9 @@ void CTeamFortress2Mod :: roundReset ()
 
 void CTeamFortress2Mod::sentryBuilt(const edict_t* pOwner, eEngiBuild type, edict_t* pBuilding)
 {
-	static short int index;//short not necessary? [APG]RoboCop[CL]
+	static int index;
 
-	index = ENTINDEX(pOwner)-1;
+	index = ENTINDEX(pOwner) - 1;
 
 	if ( index>=0 && index<RCBOT_MAXPLAYERS )
 	{
@@ -1406,7 +1406,7 @@ bool CTeamFortress2Mod::isSentryGun (edict_t *pEdict )
 
 void CTeamFortress2Mod::dispenserBuilt(const edict_t* pOwner, eEngiBuild type, edict_t* pBuilding)
 {
-	static short int index;//short not necessary? [APG]RoboCop[CL]
+	static int index;
 
 	index = ENTINDEX(pOwner)-1;
 

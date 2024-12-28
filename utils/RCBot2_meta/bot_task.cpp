@@ -52,6 +52,10 @@
 #include "bot_waypoint_visibility.h"
 #include "bot_synergy.h"
 
+#include <algorithm> // For std::min
+#undef min           // Undefine macro if it exists
+#undef max           // Undefine macro if it exists
+
 #ifdef WIN32
 #undef min
 #undef max

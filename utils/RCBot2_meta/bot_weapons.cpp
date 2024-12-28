@@ -84,7 +84,27 @@ const static char* g_szHL2DMWeapons[] =
 	"weapon_physcannon"
 };
 
-const static char* g_szSYNWeapons[] =
+//TODO: Add Black Mesa weapons support [APG]RoboCop[CL]
+static const char* g_szBMSWeapons[] =
+{
+	"weapon_357",
+	"weapon_assassin_glock",
+	"weapon_crossbow",
+	"weapon_crowbar",
+	"weapon_frag",
+	"weapon_glock",
+	"weapon_gluon",
+	"weapon_hivehand",
+	"weapon_mp5",
+	"weapon_rpg",
+	"weapon_satchel",
+	"weapon_shotgun",
+	"weapon_snark",
+	"weapon_tau",
+	"weapon_tripmine",
+};
+
+static const char* g_szSYNWeapons[] =
 {
 	"weapon_pistol", // 0
 	"weapon_crowbar",
@@ -197,6 +217,29 @@ WeaponsData_t HL2DMWeaps[] =
 };
 
 //SENTRYGUN ID = 34
+//TODO: Add Black Mesa weapons support [APG]RoboCop[CL]
+WeaponsData_t BMSWeaps[] =
+{
+	/*
+		slot, id , weapon name, flags, min dist, max dist, ammo index, preference
+	*/
+		{2,BMS_WEAPON_GLOCK,		g_szBMSWeapons[0],	WEAP_FL_PRIM_ATTACK | WEAP_FL_UNDERWATER,0,1000,-1,1,0},
+		{1,BMS_WEAPON_CROWBAR,	g_szBMSWeapons[1],	WEAP_FL_PRIM_ATTACK | WEAP_FL_MELEE | WEAP_FL_UNDERWATER,0,128,-1,1,0},
+		{2,BMS_WEAPON_PYTHON,		g_szBMSWeapons[2],	WEAP_FL_PRIM_ATTACK,0,768,-1,2,0},
+		{3,BMS_WEAPON_MP5,		g_szBMSWeapons[3],	WEAP_FL_PRIM_ATTACK | WEAP_FL_SEC_ATTACK,0,1400,-1,2,0},
+		//Chaingun?
+		{3,BMS_WEAPON_CROSSBOW,	g_szBMSWeapons[5],	WEAP_FL_PRIM_ATTACK | WEAP_FL_SCOPE | WEAP_FL_UNDERWATER,0,2000,-1,2,0},
+		{3,BMS_WEAPON_SHOTGUN,	g_szBMSWeapons[6],	WEAP_FL_PRIM_ATTACK,0,768,-1,2,0},
+		{4,BMS_WEAPON_RPG,		g_szBMSWeapons[7],	WEAP_FL_PROJECTILE | WEAP_FL_EXPLOSIVE | WEAP_FL_PRIM_ATTACK | WEAP_FL_UNDERWATER,400,2000,-1,3,1000.0f},
+		{4,BMS_WEAPON_TAU,		g_szBMSWeapons[8],	WEAP_FL_PRIM_ATTACK | WEAP_FL_SEC_ATTACK,0,1400,-1,3,0},
+		{4,BMS_WEAPON_GLUON,		g_szBMSWeapons[9],	WEAP_FL_PRIM_ATTACK | WEAP_FL_SEC_ATTACK,0,1400,-1,3,0},
+		//Hornetgun?
+		{5,BMS_WEAPON_HANDGRENADE,		g_szBMSWeapons[11],	WEAP_FL_GRENADE | WEAP_FL_EXPLOSIVE,0,180,-1,1,0},
+		//Tripmine?
+		{5,BMS_WEAPON_SATCHEL,		g_szBMSWeapons[13],	WEAP_FL_EXPLOSIVE,0,180,-1,1,0},
+		//Snark?
+		{ 0, 0, "\0", 0, 0, 0, 0, 0, 0 }//signal last weapon
+};
 
 WeaponsData_t TF2Weaps[] =
 {
