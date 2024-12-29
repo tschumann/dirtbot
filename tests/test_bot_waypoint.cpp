@@ -5,8 +5,6 @@
 // $NoKeywords: $
 //================================================================================
 
-#include <gtest/gtest.h>
-
 #include "base_test.h"
 #include "bot_waypoint.h"
 #include "bot_wpt_color.h"

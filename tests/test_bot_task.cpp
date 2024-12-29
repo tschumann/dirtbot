@@ -5,8 +5,6 @@
 // $NoKeywords: $
 //================================================================================
 
-#include <gtest/gtest.h>
-
 #include <cmath>
 
 #include "base_test.h"

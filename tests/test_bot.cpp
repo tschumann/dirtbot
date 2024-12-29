@@ -5,7 +5,6 @@
 // $NoKeywords: $
 //================================================================================
 
-#include <gtest/gtest.h>
 #include <memory>
 
 #include "base_test.h"

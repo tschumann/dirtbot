@@ -5,8 +5,6 @@
 // $NoKeywords: $
 //================================================================================
 
-#include <gtest/gtest.h>
-
 #include "base_test.h"
 #include "bot.h"
 #include "bot_globals.h"
