@@ -41,7 +41,7 @@ class SDK(object):
 
     # By default, nothing supports x64.
     if type(platform) is list:
-      self.platformSpec = {p: ['x86'] for p in platform}
+      self.platformSpec = {p: [builder.options.target_arch] for p in platform}
     else:
       self.platformSpec = platform
 
@@ -125,7 +125,7 @@ def SetArchFlags(compiler, arch, platform):
   elif compiler.like('msvc'):
     if arch == 'x86':
       compiler.linkflags += ['/MACHINE:X86']
-    elif arch == 'x64':
+    elif arch == 'x64' or arch == 'x86_64':
       compiler.linkflags += ['/MACHINE:X64']
 
 def AppendArchSuffix(binary, name, arch):
@@ -377,8 +377,8 @@ class MMSConfig(object):
       compiler.defines += ['COMPILER_MSVC']
       if arch == 'x86':
         compiler.defines += ['COMPILER_MSVC32']
-      elif arch == 'x64':
-        compiler.defines += ['COMPILER_MSVC64', 'PLATFORM_64BITS']
+      elif arch == 'x64' or arch == 'x86_64':
+        compiler.defines += ['COMPILER_MSVC64', 'PLATFORM_64BITS', '_WIN64']
 
       if compiler.version >= 1900:
         compiler.linkflags += ['legacy_stdio_definitions.lib']
@@ -487,7 +487,7 @@ class MMSConfig(object):
       for lib in libs:
         if arch == 'x86':
           lib_path = os.path.join(sdk.path, 'lib', 'public', lib) + '.lib'
-        elif arch == 'x64':
+        elif arch == 'x64' or arch == 'x86_64':
           lib_path = os.path.join(sdk.path, 'lib', 'public', 'win64', lib) + '.lib'
         binary.compiler.linkflags.append(binary.Dep(lib_path))
 

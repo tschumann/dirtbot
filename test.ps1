@@ -8,13 +8,22 @@ Push-Location $wd
 New-Item -ItemType Directory -Force -Path build/
 Set-Location -Path build/
 
+Write-Output "----------------------------"
+Write-Output "Building for Team Fortress 2"
+Write-Output "----------------------------"
+
+# build the project with tests
+python ../configure.py -s tf2 --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --enable-tests --target-arch x64
+ambuild
+
+# TODO: run the tests
+
 Write-Output "------------------------------------"
 Write-Output "Building for Half-Life 2: Deathmatch"
 Write-Output "------------------------------------"
 
 # build the project with tests
-# TODO: get rid of hard-coded paths
-python ../configure.py -s hl2dm --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --enable-tests
+python ../configure.py -s hl2dm --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --enable-tests --target-arch x86
 ambuild
 
 Write-Output "-----------------------------------"
@@ -34,9 +43,7 @@ Write-Output "Building for Half-Life 2: Episode One"
 Write-Output "-------------------------------------"
 
 # build the project with tests
-# TODO: get rid of hard-coded paths
-# TODO: build the project with tests
-python ../configure.py -s episode1 --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --enable-tests
+python ../configure.py -s episode1 --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --enable-tests --target-arch x86
 ambuild
 
 Write-Output "------------------------------------"
