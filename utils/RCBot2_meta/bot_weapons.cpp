@@ -39,7 +39,7 @@
 #include <cmath>
 #include <cstring>
 
-const static char* g_szDODWeapons[] =
+const char* g_szDODWeapons[] =
 {
 	"weapon_amerknife",
 	"weapon_spade",
@@ -429,7 +429,7 @@ CBotWeapons::CBotWeapons(CBot* pBot)
 	m_iWeaponsSignature = 0x0;
 }
 
-edict_t* CWeapons::findWeapon(edict_t* pPlayer, const char* pszWeaponName)
+edict_t* CWeapons::findWeapon(edict_t* pPlayer, const char* szWeaponName)
 {
 	const CBaseHandle* m_Weapons = CClassInterface::getWeaponList(pPlayer);
 	const CBaseHandle* m_Weapon_iter = m_Weapons;
@@ -440,7 +440,7 @@ edict_t* CWeapons::findWeapon(edict_t* pPlayer, const char* pszWeaponName)
 		edict_t* pWeapon = INDEXENT(m_Weapon_iter->GetEntryIndex());
 
 		// TODO get familiar with validity of handles / edicts
-		if (pWeapon && !pWeapon->IsFree() && std::strcmp(pWeapon->GetClassName(), pszWeaponName) == 0)
+		if (pWeapon && !pWeapon->IsFree() && std::strcmp(pWeapon->GetClassName(), szWeaponName) == 0)
 			return pWeapon;
 
 		m_Weapon_iter++;
@@ -596,7 +596,7 @@ bool CBotWeapons ::update ( bool bOverrideAllFromEngine )
 	return false;
 }*/
 
-CBotWeapon* CBotWeapons::getBestWeapon(edict_t* pEnemy, bool bAllowMelee, bool bAllowMeleeFallback, bool bMeleeOnly, bool bExplosivesOnly, bool bIgnorePrimaryMinimum)
+CBotWeapon* CBotWeapons::getBestWeapon(edict_t* pEnemy, const bool bAllowMelee, const bool bAllowMeleeFallback, const bool bMeleeOnly, const bool bExplosivesOnly, const bool bIgnorePrimaryMinimum)
 {
 	CBotWeapon* m_theBestWeapon = nullptr;
 	CBotWeapon* m_FallbackMelee = nullptr;
@@ -669,7 +669,7 @@ CBotWeapon* CBotWeapons::getBestWeapon(edict_t* pEnemy, bool bAllowMelee, bool b
 	return m_theBestWeapon;
 }
 
-void CBotWeapon::setWeaponEntity(edict_t* pent, bool bOverrideAmmoTypes)
+void CBotWeapon::setWeaponEntity(edict_t* pent, const bool bOverrideAmmoTypes)
 {
 	m_pEnt = pent;
 	m_iClip1 = CClassInterface::getWeaponClip1Pointer(pent);
@@ -685,7 +685,7 @@ void CBotWeapon::setWeaponEntity(edict_t* pent, bool bOverrideAmmoTypes)
 	setWeaponIndex(ENTINDEX(m_pEnt));
 }
 
-CBotWeapon* CBotWeapons::addWeapon(CWeapon* pWeaponInfo, int iId, edict_t* pent, bool bOverrideAll)
+CBotWeapon* CBotWeapons::addWeapon(CWeapon* pWeaponInfo, const int iId, edict_t* pent, const bool bOverrideAll)
 {
 	m_theWeapons[iId].setHasWeapon(true);
 	m_theWeapons[iId].setWeapon(pWeaponInfo);
@@ -827,7 +827,7 @@ void CWeapons::loadWeapons(const char* szWeaponListName, const WeaponsData_t* pD
 
 		CBotGlobals::buildFileName(szFilename, "weapons", BOT_CONFIG_FOLDER, "ini", false);
 
-		if (kv->LoadFromFile(filesystem, szFilename, nullptr))
+		if (kv)
 		{
 			if (kv->LoadFromFile(filesystem, szFilename, nullptr))
 			{
@@ -934,7 +934,7 @@ CBotWeapon* CBotWeapons::getPrimaryWeapon()
 	return pBest;
 }
 
-CBotWeapon* CBotWeapons::getActiveWeapon(const char* szWeaponName, edict_t* pWeaponUpdate, bool bOverrideAmmoTypes)
+CBotWeapon* CBotWeapons::getActiveWeapon(const char* szWeaponName, edict_t* pWeaponUpdate, const bool bOverrideAmmoTypes)
 {
 	CBotWeapon* toReturn = nullptr;
 
@@ -1006,7 +1006,7 @@ public:
 class CGetWeapID : public IWeaponFunc
 {
 public:
-	CGetWeapID(int iId)
+	CGetWeapID(const int iId)
 	{
 		m_iId = iId;
 		m_pFound = nullptr;
