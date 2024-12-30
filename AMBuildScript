@@ -8,11 +8,12 @@ proj_c_flags = [
   '-Wno-switch',
   '-Wno-format',
   '-Wno-format-security',
-  '-Wno-unknown-attributes',
-  '-Wno-logical-op-parentheses',
-  '-Wno-return-stack-address',
   '-Wno-null-dereference',
-  '-Wno-implicit-const-int-float-conversion',
+  # NOTE: disabled these because gcc 13 says they don't exist
+  # '-Wno-unknown-attributes',
+  # '-Wno-logical-op-parentheses',
+  # '-Wno-return-stack-address',
+  # '-Wno-implicit-const-int-float-conversion',
   # TODO: get rid of these - fixes for Linux not compiling
   '-Wno-narrowing',
   '-fpermissive'
@@ -229,7 +230,7 @@ class MMSConfig(object):
           '-D__linux__',
         ]
       # apple clang <-> llvm clang version correspondence is just a guess as there is no way to figure it out for real
-      if (cxx.version >= 'gcc-4.7' or cxx.version >= 'clang-3.0' or cxx.version >= 'apple-clang-5.1'):
+      if ((cxx.version >= 'gcc-4.7' and cxx.version < 'gcc-13.0') or cxx.version >= 'clang-3.0' or cxx.version >= 'apple-clang-5.1'):
         cxx.cflags += [
           '-Wno-delete-non-virtual-dtor',
           '-Wno-unused-private-field',
