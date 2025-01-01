@@ -34,8 +34,12 @@
 #include "bot_strings.h"
 #include "bot_client.h"
 
-// List of all timers
-CProfileTimer CProfileTimers :: m_Timers[PROFILING_TIMERS] = 
+#include <chrono>
+#include <string>
+#include <algorithm>
+
+ // List of all timers
+CProfileTimer CProfileTimers::m_Timers[PROFILING_TIMERS] =
 {
 CProfileTimer("CBots::botThink()"), // BOTS_THINK_TIMER
 CProfileTimer("CBot::think()"), // BOT_THINK_TIMER
@@ -47,15 +51,15 @@ CProfileTimer("updateVisibles()") // BOT_VISION_TIMER
 float CProfileTimers::m_fNextUpdate = 0;
 
 // Nuke this on x64
-#if !defined(PLATFORM_64BITS)
+/*#if !defined(PLATFORM_64BITS)
 
 // if windows USE THE QUERYPERFORMANCECOUNTER
 #ifdef _WIN32
 inline unsigned __int64 RDTSC()
-	{
-			_asm    _emit 0x0F
-			_asm    _emit 0x31
-	}
+{
+    _asm    _emit 0x0F
+    _asm    _emit 0x31
+}
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #else
@@ -64,69 +68,47 @@ inline unsigned __int64 RDTSC()
 //    __asm__ volatile (".byte 0x0f, 0x31" : "=A" ());
 //    {
 //    }
-   extern __inline__ unsigned long long int rdtsc()
-   {
-	 unsigned long long int x;
-	 __asm__ volatile (".byte 0x0f, 0x31" : "=A" (x));
-	 return x;
-   }
-#endif
-
-#endif
-
-CProfileTimer :: CProfileTimer (const char *szFunction)
+extern __inline__ unsigned long long int rdtsc()
 {
-	m_szFunction = CStrings::getString(szFunction);
-	m_min = 9999999999;
-	m_max = 0;
-	m_average = 2;
-	m_iInvoked = 0;
-	m_overall = 0;
-	start_cycle = 0;
-	end_cycle = 0;
-	m_last = 0;
+    unsigned long long int x;
+    __asm__ volatile (".byte 0x0f, 0x31" : "=A" (x));
+    return x;
+}
+#endif
+
+#endif*/
+
+CProfileTimer::CProfileTimer(const char* szFunction)
+    : start_cycle(0),
+    end_cycle(0),
+    m_average(0),
+    m_min(std::numeric_limits<unsigned long long>::max()),
+    m_max(0),
+    m_last(0),
+    m_overall(0),
+    m_szFunction(CStrings::getString(szFunction)),
+    m_iInvoked(0)
+{
 }
 
 // "Begin" Timer i.e. update time
 void CProfileTimer :: Start()
 {
-// TODO: Proper x64 fix
-#if !defined(PLATFORM_64BITS)
-
-#ifdef _WIN32
-	QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&start_cycle));
-#else
-		start_cycle = rdtsc();
-#endif
-
-#endif
-
+    start_cycle = std::chrono::high_resolution_clock::now().time_since_epoch().count();
 }
 // Stop Timer, work out min/max values and set invoked
 void CProfileTimer :: Stop()
 {
-#if !defined(PLATFORM_64BITS)
+    end_cycle = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+    m_last = end_cycle - start_cycle;
 
-#ifdef _WIN32
-	//unsigned __int64 end_cycle;
-	QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&end_cycle));
-#else
-	//unsigned long long end_cycle;
-	end_cycle = rdtsc();
-#endif
+    if (m_last > m_max)
+        m_max = m_last;
+    if (m_iInvoked == 0 || m_last < m_min)
+        m_min = m_last;
 
-	m_last = end_cycle - start_cycle;
-
-	if ( m_last > m_max )
-		m_max = m_last;
-	if ( m_iInvoked==0 || m_last < m_min )
-		m_min = m_last;
-
-	m_overall = m_overall + m_last;
-
-	m_iInvoked ++;
-
-#endif
+    m_overall += m_last;
+    m_iInvoked++;
 }
 
 
@@ -190,13 +172,10 @@ void CProfileTimers::updateAndDisplay()
 			// next update in 1 second
 			m_fNextUpdate = engine->Time() + 1.0f;
 
-			CClients::clientDebugMsg(BOT_DEBUG_PROFILE,"|----------------PROFILING---UPDATE---------------------------------|");
-			CClients::clientDebugMsg(BOT_DEBUG_PROFILE,"|------name------|---overall---|---min----|---max----|----avg---|-prct-|");
-
-			for ( i = 0; i < PROFILING_TIMERS; i ++ )
-			{
-				m_Timers[i].print(&highest);
-			}
-		}
-	}
+            for (CProfileTimer& m_Timer : m_Timers)
+            {
+                m_Timer.print(&highest);
+            }
+        }
+    }
 }
