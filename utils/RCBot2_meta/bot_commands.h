@@ -99,7 +99,7 @@ public:
 	// affecting the original list
 	virtual eBotCommandResult execute(CClient* pClient, const BotCommandArgs& args);
 
-	bool hasAccess ( CClient *pClient ) const;
+	bool hasAccess ( const CClient *pClient ) const;
 
 	virtual void printCommand ( edict_t *pPrintTo, int indent = 0);
 
