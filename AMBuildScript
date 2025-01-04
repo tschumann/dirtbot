@@ -210,15 +210,7 @@ class MMSConfig(object):
         '-fPIC',
         '-fno-exceptions',
         '-fno-rtti',
-        '-mmmx',
-        '-msse',
-        '-msse2',
-        '-msse3',
-        '-mssse3',
-        '-msse4',
-        '-msse4a',
-        '-msse4.1',
-        '-msse4.2',
+        '-march=core2',
         '-fno-strict-aliasing',
       ]
 

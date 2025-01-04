@@ -12,7 +12,7 @@ pushd build
 python3 ../configure.py -s tf2 --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --target-arch x64
 ambuild
 
-cp "rcbot.2.tf2.x64/rcbot.2.tf2.so" "../release/dirtbot/Team Fortress 2/tf/addons/rcbot2/bin"
+cp "rcbot.2.tf2.x64/rcbot.2.tf2.so" "../release/dirtbot/Team Fortress 2/tf/addons/rcbot2/bin/x64"
 cp "loader/RCBot2Meta.x64.x64/RCBot2Meta.x64.so" "../release/dirtbot/Team Fortress 2/tf/addons/rcbot2/bin"
 
 python3 ../configure.py -s hl2dm --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --target-arch x86
