@@ -832,7 +832,7 @@ void RCBotPluginMeta::Hook_GameFrame(bool simulating)
 #ifdef _DEBUG
 		if ( CClients::clientsDebugging(BOT_DEBUG_PROFILE) )
 		{
-			CProfileTimers::updateAndDisplay();
+			// CProfileTimers::updateAndDisplay();
 		}
 #endif
 
@@ -945,7 +945,7 @@ bool RCBotPluginMeta::Hook_LevelInit(const char *pMapName,
 
 	CWaypointDistances::reset();
 
-	CProfileTimers::reset();
+	// CProfileTimers::reset();
 
 	CWaypoints::init();
 	CWaypoints::load();

@@ -31,7 +31,7 @@ sourceFiles = [
   "utils/RCBot2_meta/bot_navmesh.cpp",
   "utils/RCBot2_meta/bot_perceptron.cpp",
   "utils/RCBot2_meta/bot_profile.cpp",
-  "utils/RCBot2_meta/bot_profiling.cpp",
+  # "utils/RCBot2_meta/bot_profiling.cpp",
   "utils/RCBot2_meta/bot_schedule.cpp",
   "utils/RCBot2_meta/bot_tf2_points.cpp",
   "utils/RCBot2_meta/bot_som.cpp",
