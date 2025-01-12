@@ -13,9 +13,19 @@ Push-Location $wd
 New-Item -ItemType Directory -Force -Path build/
 Set-Location -Path build/
 
-Write-Output "----------------------------"
-Write-Output "Building for Team Fortress 2"
-Write-Output "----------------------------"
+Write-Output "----------------------------------"
+Write-Output "Building for Team Fortress 2 (x86)"
+Write-Output "----------------------------------"
+
+# build the project with tests
+python ../configure.py -s tf2 --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --enable-tests --target-arch x86
+ambuild
+
+# TODO: run the tests
+
+Write-Output "----------------------------------"
+Write-Output "Building for Team Fortress 2 (x64)"
+Write-Output "----------------------------------"
 
 # build the project with tests
 python ../configure.py -s tf2 --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --enable-tests --target-arch x64
@@ -23,17 +33,17 @@ ambuild
 
 # TODO: run the tests
 
-Write-Output "------------------------------------"
-Write-Output "Building for Half-Life 2: Deathmatch"
-Write-Output "------------------------------------"
+Write-Output "------------------------------------------"
+Write-Output "Building for Half-Life 2: Deathmatch (x86)"
+Write-Output "------------------------------------------"
 
 # build the project with tests
 python ../configure.py -s hl2dm --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --enable-tests --target-arch x86
 ambuild
 
-Write-Output "-----------------------------------"
-Write-Output "Testing for Half-Life 2: Deathmatch"
-Write-Output "-----------------------------------"
+Write-Output "-----------------------------------------"
+Write-Output "Testing for Half-Life 2: Deathmatch (x86)"
+Write-Output "-----------------------------------------"
 
 # add the engine's bin directory to the path because the tests depend on tier0.dll and vstdlib.dll (use dumpbin /IMPORTS)
 # TODO: get rid of hard-coded paths
@@ -43,17 +53,27 @@ tests/testrunner/testrunner.exe
 # TODO: why isn't tests/testrunner/testrunner.exe being deleted?
 Remove-Item -Path tests -Recurse -Force
 
-Write-Output "-------------------------------------"
-Write-Output "Building for Half-Life 2: Episode One"
-Write-Output "-------------------------------------"
+Write-Output "------------------------------------------"
+Write-Output "Building for Half-Life 2: Deathmatch (x64)"
+Write-Output "------------------------------------------"
+
+# build the project with tests
+python ../configure.py -s hl2dm --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --enable-tests --target-arch x64
+ambuild
+
+# TODO: run the tests
+
+Write-Output "-------------------------------------------"
+Write-Output "Building for Half-Life 2: Episode One (x86)"
+Write-Output "-------------------------------------------"
 
 # build the project with tests
 python ../configure.py -s episode1 --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --enable-tests --target-arch x86
 ambuild
 
-Write-Output "------------------------------------"
-Write-Output "Testing for Half-Life 2: Episode One"
-Write-Output "------------------------------------"
+Write-Output "------------------------------------------"
+Write-Output "Testing for Half-Life 2: Episode One (x86)"
+Write-Output "------------------------------------------"
 
 # add the engine's bin directory to the path because the tests depend on tier0.dll and vstdlib.dll (use dumpbin /IMPORTS)
 # TODO: get rid of hard-coded paths
