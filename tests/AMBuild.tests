@@ -18,6 +18,7 @@
 #
 
 # TODO: there is a bit of duplication from AMBuilder - can they be combined? or can one inherit from the other?
+# TODO: some sort of test like https://github.com/borzh/botrix/blob/master/test/main.cpp?
 
 import os
 
