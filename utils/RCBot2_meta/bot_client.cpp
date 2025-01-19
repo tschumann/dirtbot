@@ -345,8 +345,9 @@ void CClient :: think ()
 			{
 				m_bSentWelcomeMessage = true;
 
-				giveMessage(CStrings::getString(BOT_WELCOME_MESSAGE));
+				// giveMessage(CStrings::getString(BOT_WELCOME_MESSAGE));
 
+				// TODO: probably want to display this all the time - not just if the welcome message is enabled
 				giveMessage(CStrings::getString(CWaypoints::getWelcomeMessage()),5.0f);
 			}
 		}
