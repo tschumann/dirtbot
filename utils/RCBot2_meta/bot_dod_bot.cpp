@@ -2322,9 +2322,17 @@ bool CDODBot :: executeAction ( CBotUtility *util )
 			if ( inSquad() && !isSquadLeader() )
 			{
 				edict_t *pSquadLeader = m_pSquad->GetLeader();
-				Vector vSquadLeaderOrigin = CBotGlobals::entityOrigin(pSquadLeader);
 
-				iFlagID = CDODMod::m_Flags.findNearestObjective(vSquadLeaderOrigin);
+				if( pSquadLeader != NULL )
+				{
+					Vector vSquadLeaderOrigin = CBotGlobals::entityOrigin(pSquadLeader);
+
+					iFlagID = CDODMod::m_Flags.findNearestObjective(vSquadLeaderOrigin);
+				}
+				else
+				{
+					iFlagID = -1;
+				}
 
 				if ( iFlagID == -1 )
 				{
