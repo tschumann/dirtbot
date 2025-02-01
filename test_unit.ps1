@@ -114,3 +114,7 @@ Write-Output "------------------------------------------"
 # add the engine's bin directory to the path because the tests depend on tier0.dll and vstdlib.dll (use dumpbin /IMPORTS)
 $env:Path = "$steamappspath\common\Source SDK Base\bin;" + $env:Path
 tests/testrunner/testrunner.exe
+
+# delete this because building without tests fails if it's here
+# TODO: why isn't tests/testrunner/testrunner.exe being deleted?
+Remove-Item -Path tests -Recurse -Force
