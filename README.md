@@ -62,7 +62,7 @@ Download the latest MetaMod: Source from https://www.sourcemm.net/downloads.php?
 
 Copy the `addons` directory from the .zip and paste it in `release/dirtbot/Half-Life 2 Deathmatch/hl2mp/`
 
-Note that for Episode One based games that the path in metamod.vdf is incorrect and needs ../gamedir/ appended to it.
+Note that for Source 2006/Episode One based games that the path in metamod.vdf is incorrect and needs ../gamedir/ prepended to it.
 
 
 License
