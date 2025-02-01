@@ -204,7 +204,8 @@ for sdk_name in MMS.sdks:
             cxx.Dep(os.path.join(lib_folder, 'tier3_i486.a')),
           ]
 
-      if sdk.name not in ['episode1']:
+      # ugh, inconsistency - the engine branch is referred to as both ep2 and orangebox
+      if sdk.name not in ['episode1'] and sdk.name not in ['orangebox']:
         cxx.postlink += [
           'libvstdlib_srv.so'
         ]
