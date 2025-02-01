@@ -38,6 +38,8 @@ Write-Output ""
 Write-Output "=================================="
 Write-Output ""
 
+
+
 Write-Output "----------------------------------"
 Write-Output "Building for Team Fortress 2 (x64)"
 Write-Output "----------------------------------"
@@ -57,6 +59,8 @@ tests/testrunner/testrunner.exe
 Write-Output ""
 Write-Output "=================================="
 Write-Output ""
+
+
 
 Write-Output "------------------------------------------"
 Write-Output "Building for Half-Life 2: Deathmatch (x86)"
@@ -78,6 +82,8 @@ Write-Output ""
 Write-Output "=================================="
 Write-Output ""
 
+
+
 Write-Output "------------------------------------------"
 Write-Output "Building for Half-Life 2: Deathmatch (x64)"
 Write-Output "------------------------------------------"
@@ -98,6 +104,39 @@ tests/testrunner/testrunner.exe
 Write-Output ""
 Write-Output "=================================="
 Write-Output ""
+
+
+
+# TODO: delete this until tests are enabled for these engine branches
+Remove-Item -Path tests -Recurse -Force
+
+Write-Output "----------------------------------"
+Write-Output "Building for Source SDK 2013 (x86)"
+Write-Output "----------------------------------"
+
+# TODO: build the project with tests
+python ../configure.py -s sdk2013 --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --target-arch x86
+ambuild
+
+Write-Output ""
+Write-Output "=================================="
+Write-Output ""
+
+
+
+Write-Output "-------------------------------------------"
+Write-Output "Building for Half-Life 2: Episode Two (x86)"
+Write-Output "-------------------------------------------"
+
+# TODO: build the project with tests
+python ../configure.py -s ep2 --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --target-arch x86
+ambuild
+
+Write-Output ""
+Write-Output "=================================="
+Write-Output ""
+
+
 
 Write-Output "-------------------------------------------"
 Write-Output "Building for Half-Life 2: Episode One (x86)"

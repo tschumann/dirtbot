@@ -153,11 +153,28 @@ bool CBotHelper::isBrushEntity( edict_t *pEntity )
 /// @return Entity index/reference or INVALID_EHANDLE_INDEX if none is found
 int CBotHelper::FindEntityByClassname(int start,const char *classname)
 {
-#if SOURCE_ENGINE > SE_DARKMESSIAH
+#if SOURCE_ENGINE == SE_ORANGEBOX
+	// TODO: test this
+	CBaseEntity *pEntity = (CBaseEntity *)servertools->NextEntity(GetEntity(start));
+
+	while( pEntity != NULL )
+	{
+		edict_t *pEdict = BaseEntityToEdict(pEntity);
+
+		if( !strcmp(pEdict->GetClassName(), classname) )
+		{
+			return sm_gamehelpers->EntityToBCompatRef(pEntity);
+		}
+
+		pEntity = (CBaseEntity *)servertools->NextEntity(GetEntity(start));
+	}
+
+	return INVALID_EHANDLE_INDEX;
+#elif SOURCE_ENGINE > SE_DARKMESSIAH
 	CBaseEntity *pEntity = servertools->FindEntityByClassname(GetEntity(start), classname);
 	return sm_gamehelpers->EntityToBCompatRef(pEntity);
 #else
-	return 0;
+	return INVALID_EHANDLE_INDEX;
 #endif
 }
 
@@ -165,11 +182,12 @@ int CBotHelper::FindEntityByClassname(int start,const char *classname)
 /// @return Entity index/reference or INVALID_EHANDLE_INDEX if none is found
 int CBotHelper::FindEntityInSphere(int start, const Vector& center, float radius)
 {
-#if SOURCE_ENGINE > SE_DARKMESSIAH
+#if SOURCE_ENGINE > SE_ORANGEBOX
 	CBaseEntity *pEntity = servertools->FindEntityInSphere(GetEntity(start), center, radius);
 	return sm_gamehelpers->EntityToBCompatRef(pEntity);
 #else
-	return 0;
+	// TODO: get something working here
+	return INVALID_EHANDLE_INDEX;
 #endif
 }
 

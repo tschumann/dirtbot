@@ -1183,8 +1183,7 @@ void CTeamFortress2Mod::sapperDestroyed(edict_t *pOwner,eEngiBuild type, edict_t
 
 void CTeamFortress2Mod::updatePointMaster()
 {
-#if SOURCE_ENGINE > SE_DARKMESSIAH
-	if ( m_PointMasterResource.get() == nullptr)
+#if SOURCE_ENGINE > SE_ORANGEBOX
 	{
 		edict_t *pMaster = CClassInterface::FindEntityByClassnameNearest(Vector(0,0,0),"team_control_point_master",65535);
 

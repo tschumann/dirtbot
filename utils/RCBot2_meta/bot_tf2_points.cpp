@@ -273,7 +273,7 @@ bool CTeamControlPointRound :: isPointInRound ( edict_t *point_pent )
 
 CTeamControlPointRound *CTeamControlPointMaster:: getCurrentRound ( )
 {
-#if SOURCE_ENGINE > SE_DARKMESSIAH
+#if SOURCE_ENGINE > SE_ORANGEBOX
 	if ( m_iCurrentRoundIndex == -1 )
 		return nullptr;
 

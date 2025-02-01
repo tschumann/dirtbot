@@ -28,6 +28,7 @@
  *    version.
  */
 
+#include <climits>
 #include "bot_waypoint.h"
 
 CBotCommandInline WaypointOnCommand("on", CMD_ACCESS_WAYPOINT, [](CClient *pClient, const BotCommandArgs& args)
@@ -265,7 +266,7 @@ CBotCommandInline WaypointDrawTypeCommand("drawtype", CMD_ACCESS_WAYPOINT, [](CC
 		if (args[0] && *args[0])
 		{
 			int drawType = std::atoi(args[0]);
-			if (drawType >= 0 && drawType <= std::numeric_limits<unsigned short>::max())
+			if (drawType >= 0 && drawType <= USHRT_MAX)
 			{
 				pClient->setDrawType(static_cast<unsigned short>(drawType));
 				return COMMAND_ACCESSED;
