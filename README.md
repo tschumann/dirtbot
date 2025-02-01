@@ -50,6 +50,12 @@ In the console type `rcbot addbot`
 Testing
 -------
 
+Linux
+```
+./test_unit.sh
+```
+
+Windows:
 ```
 ./test_unit.ps1
 ```

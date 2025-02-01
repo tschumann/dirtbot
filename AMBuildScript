@@ -208,7 +208,8 @@ class MMSConfig(object):
       cxx.cflags += proj_c_flags
       cxx.cflags += [ # todo: what is the difference between cflags and cxxflags
         '-fPIC',
-        '-fno-exceptions',
+        # TODO: why is this needed when compiling tests? there are exceptions in the base code
+        # '-fno-exceptions',
         '-fno-rtti',
         '-march=core2',
         '-fno-strict-aliasing',
