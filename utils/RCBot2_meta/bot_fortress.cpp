@@ -7369,14 +7369,18 @@ bool CBotTF2 :: isEnemy ( edict_t *pEdict,bool bCheckWeapons )
 	{
 		if ( CBotGlobals::getTeam(pEdict) != getTeam() )
 		{
-			//TODO: To prevent bots from shooting at ghost players - like in plr_hightower_event Hell Zone [APG]RoboCop[CL]
-			//if (CTF2Conditions::TF2_IsPlayerInCondition(engine->IndexOfEdict(pEdict), TFCond_UberchargedHidden))
-			//	// Don't attack MvM bots who are inside spawn.
-			//	return false;
+			//TODO: To prevent bots from shooting at ghost players - like in plr_hightower_event Hell Zone [APG]RoboCop[CL] -> RE: I don't know why this code was disabled when it works fine with bots. Bots ignore anyone who has 77th and 51th tf2 conditions - RussiaTails
+			if (CTF2Conditions::TF2_IsPlayerInCondition(edictIndex, TFCond_UberchargedHidden))
+			return false; // Don't attack MvM bots who are inside spawn.
+						
+			if (CTF2Conditions::TF2_IsPlayerInCondition(edictIndex, TFCond_HalloweenGhostMode))
+			return false; // Don't attack Ghost Players
+			if (pEdict != nullptr && CBotGlobals::entityIsValid(pEdict)) {
 
-			//if (CTF2Conditions::TF2_IsPlayerInCondition(engine->IndexOfEdict(pEdict), TFCond_HalloweenGhostMode))
-			//	// Don't attack Ghost Players
-			//	return false;
+				if (pEdict != nullptr && CBotGlobals::entityIsValid(pEdict)) {
+					const int edictIndex = engine->IndexOfEdict(pEdict);
+					}
+			}
 			
 			if ( m_iClass == TF_CLASS_SPY )	
 			{
