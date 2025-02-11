@@ -251,12 +251,11 @@ public:
 		//m_iId = -1;
 	}
 
-	CWaypoint(const Vector& vOrigin, int iFlags = 0, int iYaw = 0)
+	CWaypoint(const Vector& vOrigin, const int iFlags = 0, const int iYaw = 0)
+		: m_vOrigin(vOrigin), m_iFlags(iFlags)
 	{
 		m_thePaths.clear();
 		init();
-		m_iFlags = iFlags;
-		m_vOrigin = vOrigin;
 		m_bUsed = true;
 		setAim(iYaw);
 		m_fNextCheckGroundTime = 0.0f;

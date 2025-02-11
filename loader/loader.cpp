@@ -273,51 +273,51 @@ DLL_EXPORT METAMOD_PLUGIN *CreateInterface_MMS(const MetamodVersionInfo *mvi, co
 			break;
 		}
 	case SOURCE_ENGINE_HL2DM:
+	{
+		filename = FILENAME_1_6_HL2DM;
+		break;
+	}
+	case SOURCE_ENGINE_DODS:
+	{
+		filename = FILENAME_1_6_DODS;
+		break;
+	}
+	case SOURCE_ENGINE_SDK2013:
+	{
+		filename = FILENAME_1_6_SDK2013;
+		break;
+	}
+	case SOURCE_ENGINE_BMS:
+	{
+		const char* gamedir = mvi->GetGameDir();
+		if (strcmp(gamedir, "bms") == 0)
+		{
+			filename = FILENAME_1_6_BMS;
+		}
+		break;
+	}
+	case SOURCE_ENGINE_TF2:
+	{
+		filename = FILENAME_1_6_TF2;
+		break;
+	}
+	case SOURCE_ENGINE_ORANGEBOXVALVE_DEPRECATED:
+	{
+		const char *gamedir = mvi->GetGameDir();
+		if (strcmp(gamedir, "tf") == 0)
+		{
+			filename = FILENAME_1_6_TF2;
+		}
+		else if (strcmp(gamedir, "dod") == 0)
+		{
+			filename = FILENAME_1_6_DODS;
+		}
+		else if (strcmp(gamedir, "hl2mp") == 0)
 		{
 			filename = FILENAME_1_6_HL2DM;
 			break;
 		}
-	case SOURCE_ENGINE_DODS:
-		{
-			filename = FILENAME_1_6_DODS;
-			break;
-		}
-	case SOURCE_ENGINE_SDK2013:
-		{
-			filename = FILENAME_1_6_SDK2013;
-			break;
-		}
-	case SOURCE_ENGINE_BMS:
-		{
-			filename = FILENAME_1_6_BMS;
-			break;
-		}
-	case SOURCE_ENGINE_TF2:
-		{
-			filename = FILENAME_1_6_TF2;
-			break;
-		}
-	case SOURCE_ENGINE_ORANGEBOXVALVE_DEPRECATED:
-		{
-			const char *gamedir = mvi->GetGameDir();
-			if (strcmp(gamedir, "tf") == 0)
-			{
-				filename = FILENAME_1_6_TF2;
-			}
-			else if (strcmp(gamedir, "dod") == 0)
-			{
-				filename = FILENAME_1_6_DODS;
-			}
-			else if (strcmp(gamedir, "hl2mp") == 0)
-			{
-				filename = FILENAME_1_6_HL2DM;
-			}
-			else
-			{
-				return nullptr;
-			}
-			break;
-		}
+	}
 	case SOURCE_ENGINE_BLADE:
 		{
 			filename = FILENAME_1_6_BLADE;
