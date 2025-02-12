@@ -222,7 +222,8 @@ void CBotTF2MedicHeal::execute(CBot *pBot,CBotSchedule *pSchedule)
 
 ///////////
 
-CBotTF2ShootLastEnemyPosition :: CBotTF2ShootLastEnemyPosition  (const Vector& vPosition, edict_t *pEnemy, const Vector& m_vVelocity )
+CBotTF2ShootLastEnemyPosition::CBotTF2ShootLastEnemyPosition(const Vector& vPosition, edict_t* pEnemy,
+															 const Vector& m_vVelocity) : m_pEnemy(pEnemy), m_vPosition(vPosition)
 {
 	const float len = m_vVelocity.Length();
 
@@ -304,7 +305,7 @@ void CBotTF2ShootLastEnemyPosition ::  execute (CBot *pBot,CBotSchedule *pSchedu
 
 }
 
-void CBotTF2ShootLastEnemyPosition :: debugString ( char *string )
+void CBotTF2ShootLastEnemyPosition :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CBotTF2ShootLastEnemyPosition\nm_vPosition = (%0.4f,%0.4f,%0.4f)",m_vPosition.x,m_vPosition.y,m_vPosition.z);
 }
@@ -354,7 +355,7 @@ void CBotTF2WaitHealthTask :: execute (CBot *pBot,CBotSchedule *pSchedule)
 	}
 }
 
-void CBotTF2WaitHealthTask :: debugString ( char *string )
+void CBotTF2WaitHealthTask :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CBotTF2WaitHealthTask\nm_vOrigin = (%0.4f,%0.4f,%0.4f)",m_vOrigin.x,m_vOrigin.y,m_vOrigin.z);
 }
@@ -401,21 +402,22 @@ void CBotTF2WaitFlagTask :: execute (CBot *pBot,CBotSchedule *pSchedule)
 	}
 }
 
-void CBotTF2WaitFlagTask :: debugString ( char *string )
+void CBotTF2WaitFlagTask :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CBotTF2WaitFlagTask\nm_vOrigin = (%0.4f,%0.4f,%0.4f)",m_vOrigin.x,m_vOrigin.y,m_vOrigin.z);
 }
 //////////
-CBotDODBomb :: CBotDODBomb ( int iBombType, int iBombID, edict_t *pBomb, const Vector& vPosition, int iPrevOwner )
+CBotDODBomb::CBotDODBomb(const int iBombType, const int iBombID, edict_t* m_pBomb, const Vector& vPosition,
+						 const int iPrevOwner) : m_vOrigin(vPosition)
 {
 	m_iType = iBombType;
 	m_iBombID = iBombID; 
 	m_fTime = 0.0f;
 
 	if ( m_iBombID == -1 )
-		m_iBombID = CDODMod::m_Flags.getBombID(pBomb);
+		m_iBombID = CDODMod::m_Flags.getBombID(m_pBomb);
 
-	m_pBombTarget = pBomb;
+	m_pBombTarget = m_pBomb;
 	m_vOrigin = vPosition;
 	m_iPrevTeam = iPrevOwner;
 }
@@ -515,7 +517,7 @@ void CBotDODBomb :: execute (CBot *pBot,CBotSchedule *pSchedule)
 	}
 }
 
-void CBotDODBomb :: debugString ( char *string )
+void CBotDODBomb :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CBotDODBomb\nm_iType = %d\nm_iBombID = %d\nm_fTime = %0.2f\nm_iPrevTeam = %d",m_iType, m_iBombID,m_fTime,m_iPrevTeam);
 }
@@ -548,7 +550,7 @@ void CDODWaitForGrenadeTask :: execute (CBot *pBot,CBotSchedule *pSchedule)
 	}
 }
 
-void CDODWaitForGrenadeTask :: debugString ( char *string )
+void CDODWaitForGrenadeTask :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CDODWaitForGrenadeTask");
 }
@@ -612,7 +614,7 @@ void CDODWaitForBombTask :: execute (CBot *pBot,CBotSchedule *pSchedule)
 	pBot->setLookAtTask(LOOK_EDICT);
 }
 
-void CDODWaitForBombTask :: debugString ( char *string )
+void CDODWaitForBombTask :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CDODWaitForBombTask");
 }
@@ -708,7 +710,7 @@ void CBotDODAttackPoint :: execute (CBot *pBot,CBotSchedule *pSchedule)
 	}
 }
 
-void CBotDODAttackPoint :: debugString ( char *string )
+void CBotDODAttackPoint :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string, "CBotDODAttackPoint\nm_iFlagID = %d\n m_vOrigin = (%0.1f,%0.1f,%0.1f,radius = %0.1f)", m_iFlagID,
 			m_vOrigin.x, m_vOrigin.y, m_vOrigin.z, m_fRadius);
@@ -809,7 +811,7 @@ void CBotTF2AttackPoint :: execute (CBot *pBot,CBotSchedule *pSchedule)
 	}
 }
 
-void CBotTF2AttackPoint :: debugString ( char *string )
+void CBotTF2AttackPoint :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CBotTF2AttackPoint (%d,%0.1f,%0.1f,%0.1f,%d)",m_iArea,m_vOrigin.x,m_vOrigin.y,m_vOrigin.z,m_iRadius);
 }
@@ -837,7 +839,7 @@ void CBotWaitTask::execute ( CBot *pBot, CBotSchedule *pSchedule )
 	}
 }
 
-void CBotWaitTask::debugString(char *string)
+void CBotWaitTask::debugString(char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CBotWaitTask (%.1f)",m_ftime - engine->Time());
 }
@@ -891,7 +893,7 @@ void CBotTF2PushPayloadBombTask :: execute (CBot *pBot,CBotSchedule *pSchedule)
 	}
 }
 
-void CBotTF2PushPayloadBombTask :: debugString ( char *string )
+void CBotTF2PushPayloadBombTask :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CBotTF2PushPayloadBombTask (%0.1f,%0.1f,%0.1f)",m_vOrigin.x,m_vOrigin.y,m_vOrigin.z);
 }
@@ -936,7 +938,7 @@ void CBotTF2DefendPayloadBombTask :: execute (CBot *pBot,CBotSchedule *pSchedule
 
 }
 
-void CBotTF2DefendPayloadBombTask :: debugString ( char *string )
+void CBotTF2DefendPayloadBombTask :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CBotTF2DefendPayloadBombTask (%0.1f,%0.1f,%0.1f)",m_vOrigin.x,m_vOrigin.y,m_vOrigin.z);
 }
@@ -998,7 +1000,7 @@ void CBotTF2DefendPoint :: execute (CBot *pBot,CBotSchedule *pSchedule)
 	}
 }
 
-void CBotTF2DefendPoint :: debugString ( char *string )
+void CBotTF2DefendPoint :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string, "CBotTF2DefendPoint\nm_iArea=%d\nm_vOrigin=(%0.1f,%0.1f,%0.1f,%d)", m_iArea, 
 		m_vOrigin.x, m_vOrigin.y, m_vOrigin.z, m_iRadius);
@@ -1055,7 +1057,7 @@ void CBotTF2UpgradeBuilding :: execute (CBot *pBot,CBotSchedule *pSchedule)
 		fail();
 }
 
-void CBotTF2UpgradeBuilding:: debugString ( char *string )
+void CBotTF2UpgradeBuilding:: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CBotTF2UpgradeBuilding");
 }
@@ -1327,7 +1329,7 @@ void CBotTF2WaitAmmoTask :: execute (CBot *pBot,CBotSchedule *pSchedule)
 	}
 }
 
-void CBotTF2WaitAmmoTask :: debugString ( char *string )
+void CBotTF2WaitAmmoTask :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CBotTF2WaitAmmoTask");
 }
@@ -1390,7 +1392,7 @@ void CBotTaskEngiPickupBuilding :: execute (CBot *pBot,CBotSchedule *pSchedule)
 	else
 		pBot->setMoveTo(CBotGlobals::entityOrigin(m_pBuilding));
 }
-void CBotTaskEngiPickupBuilding :: debugString ( char *string )
+void CBotTaskEngiPickupBuilding :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CBotTaskEngiPickupBuilding");
 }
@@ -1451,7 +1453,7 @@ void CBotTaskEngiPlaceBuilding :: execute (CBot *pBot,CBotSchedule *pSchedule)
 			pBot->primaryAttack();
 	}
 }
-void CBotTaskEngiPlaceBuilding :: debugString ( char *string )
+void CBotTaskEngiPlaceBuilding :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CBotTaskEngiPlaceBuilding");
 }
@@ -1994,7 +1996,7 @@ void CBotTFEngiBuildTask :: execute (CBot *pBot,CBotSchedule *pSchedule)
 	}
 }
 
-void CBotTFEngiBuildTask :: debugString ( char *string )
+void CBotTFEngiBuildTask :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CBotTFEngiBuildTask (%d,%0.4f,%0.4f,%0.4f)",m_iObject,m_vOrigin.x,m_vOrigin.y,m_vOrigin.z);
 }
@@ -2066,7 +2068,7 @@ CFindPathTask :: CFindPathTask ( edict_t *pEdict )
 	m_bGetPassedIntAsWaypointId = false;
 }
 
-void CFindPathTask :: debugString ( char *string )
+void CFindPathTask :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CFindPathTask\n m_iInt = %d\n m_vVector = (%0.4f,%0.4f,%0.4f)",m_iInt,m_vVector.x,m_vVector.y,m_vVector.z);
 }
@@ -2381,7 +2383,7 @@ void CTF2_TauntTask :: execute ( CBot *pBot, CBotSchedule *pSchedule )
 	}
 }
 
-void CTF2_TauntTask :: debugString ( char *string )
+void CTF2_TauntTask :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CTF2_TauntTask");
 }
@@ -2394,7 +2396,7 @@ void CMoveToTask :: init ()
 	//m_pEdict = NULL;
 }
 
-void CMoveToTask :: debugString ( char *string )
+void CMoveToTask :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CMoveToTask\nm_vVector =(%0.4f,%0.4f,%0.4f)",m_vVector.x,m_vVector.y,m_vVector.z);	
 }
@@ -2487,7 +2489,7 @@ void CBotTFRocketJump :: execute (CBot *pBot,CBotSchedule *pSchedule)
 	}
 }
 
-void CBotTFRocketJump :: debugString ( char *string )
+void CBotTFRocketJump :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CBotTFRocketJump");
 }
@@ -2517,7 +2519,7 @@ void CBotTFDoubleJump ::execute (CBot *pBot,CBotSchedule *pSchedule)
 	}
 }
 
-void CBotTFDoubleJump :: debugString ( char *string )
+void CBotTFDoubleJump :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CbotTFDoublejump");
 }
@@ -2732,7 +2734,7 @@ void CSpyCheckAir :: execute ( CBot *pBot, CBotSchedule *pSchedule )
 	
 }
 
-void CSpyCheckAir :: debugString (char *string)
+void CSpyCheckAir :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CSpyCheckAir: checking for spies");
 }
@@ -3521,7 +3523,7 @@ void CBotTF2SpySap :: execute (CBot *pBot,CBotSchedule *pSchedule)
 
 }
 
-void CBotTF2SpySap :: debugString ( char *string )
+void CBotTF2SpySap :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CBotTF2SpySap");
 }
@@ -3601,9 +3603,9 @@ void CBotTFUseTeleporter :: execute (CBot *pBot,CBotSchedule *pSchedule)
 	}
 }
 
-void CBotTFUseTeleporter :: debugString ( char *string )
+void CBotTFUseTeleporter::debugString(char* string, size_t bufferSize)
 {
-	snprintf(string, sizeof(string), "CBotTFUseTeleporter\nm_pTele = %p", m_pTele.get());
+	snprintf(string, bufferSize, "CBotTFUseTeleporter\nm_pTele = %p", m_pTele.get());
 }
 
 ///////////////////////////////////////////////////
@@ -3613,7 +3615,7 @@ CAttackEntityTask :: CAttackEntityTask ( edict_t *pEdict )
 	m_pEdict = pEdict;
 }
 
-void CAttackEntityTask :: debugString ( char *string )
+void CAttackEntityTask :: debugString (char* string, size_t bufferSize)
 {
 	int id = -1;
 
@@ -3686,7 +3688,7 @@ void CThrowGrenadeTask ::init()
 	m_fTime = 0.0f;
 }
 
-void CThrowGrenadeTask::debugString(char *string)
+void CThrowGrenadeTask::debugString(char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CThrowGrenadeTask\nm_vLoc =(%0.4f,%0.4f,%0.4f)\nfTime = %0.4f",m_vLoc.x,m_vLoc.y,m_vLoc.z,m_fTime);	
 }
@@ -3876,7 +3878,7 @@ void CBotInvestigateHidePoint:: execute (CBot *pBot,CBotSchedule *pSchedule)
 	}
 }
 
-void CBotInvestigateHidePoint::debugString ( char *string )
+void CBotInvestigateHidePoint::debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CBotInvestigateHidePoint");
 }
@@ -4024,7 +4026,7 @@ void CCSSEngageEnemyTask::execute(CBot *pBot, CBotSchedule *pSchedule)
 	}
 }
 
-void CCSSEngageEnemyTask::debugString(char *string)
+void CCSSEngageEnemyTask::debugString(char* string, size_t bufferSize)
 {
 	const edict_t *pEnemy = engine->PEntityOfEntIndex(m_hEnemy.GetEntryIndex());
 	std::sprintf(string,"CSS Engage Enemy\n%s", pEnemy ? pEnemy->GetClassName() : "null");
@@ -4229,13 +4231,13 @@ void CFollowTask::execute ( CBot *pBot, CBotSchedule *pSchedule )
 		complete();
 }
 
-void CFollowTask::debugString ( char *string )
+void CFollowTask::debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CFollowTask\nm_pFollow =(%s)",engine->GetPlayerNetworkIDString(m_pFollow));
 }
 ////////////////////////////////////////////////
 
-void CDODDropAmmoTask :: debugString ( char *string )
+void CDODDropAmmoTask :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CDODDropAmmoTask");
 }
@@ -4295,7 +4297,7 @@ void CCrouchHideTask :: init ()
 	m_fHideTime = 0.0f;
 }
 
-void CCrouchHideTask :: debugString ( char *string )
+void CCrouchHideTask :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CCrouchHideTask\nm_pHideFrom =(%s)",engine->GetPlayerNetworkIDString(m_pHideFrom));
 }
@@ -4362,7 +4364,7 @@ CHideTask :: CHideTask(const Vector& vHideFrom )
 	m_vHideFrom = vHideFrom;
 }
 
-void CHideTask :: debugString ( char *string )
+void CHideTask :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CHideTask\nm_vHideFrom =(%0.4f,%0.4f,%0.4f)",m_vHideFrom.x,m_vHideFrom.y,m_vHideFrom.z);	
 }
@@ -4562,7 +4564,8 @@ void CBotTF2DemomanPipeJump :: execute (CBot *pBot,CBotSchedule *pSchedule)
 }
 
 //////////////////////////////////////////
-CBotTF2DemomanPipeEnemy :: CBotTF2DemomanPipeEnemy ( CBotWeapon *pPipeLauncher, const Vector& vEnemy, edict_t *pEnemy )
+CBotTF2DemomanPipeEnemy::CBotTF2DemomanPipeEnemy(CBotWeapon* pPipeLauncher, const Vector& vEnemy,
+												 edict_t* pEnemy) : m_vEnemy(vEnemy), m_vAim(vEnemy)
 {
 	m_vEnemy = vEnemy;
 	m_pEnemy = MyEHandle(pEnemy);
@@ -4706,7 +4709,9 @@ void CBotTF2DemomanPipeEnemy :: execute (CBot *pBot,CBotSchedule *pSchedule)
 
 
 //////////////////////////////////////////
-CBotTF2DemomanPipeTrap :: CBotTF2DemomanPipeTrap ( eDemoTrapType type, const Vector& vStand, const Vector& vLoc, const Vector& vSpread, bool bAutoDetonate, int wptarea )
+CBotTF2DemomanPipeTrap::CBotTF2DemomanPipeTrap(const eDemoTrapType type, const Vector& vStand, const Vector& vLoc,
+											   const Vector& vSpread, const bool bAutoDetonate, const int wptarea)
+												: m_vPoint(vLoc), m_vStand(vStand), m_vLocation(vLoc), m_vSpread(vSpread)
 {
 	m_vPoint = vLoc;
 	m_vLocation = vLoc;
@@ -5111,7 +5116,7 @@ void CBotTF2AttackSentryGunTask::execute (CBot *pBot,CBotSchedule *pSchedule)
 	}
 }
 
-void CBotTF2AttackSentryGunTask::debugString ( char *string )
+void CBotTF2AttackSentryGunTask::debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string,"CBotTF2AttackSentryGunTask");
 }
@@ -5267,7 +5272,8 @@ void CBotFollowSquadLeader :: execute (CBot *pBot,CBotSchedule *pSchedule)
 }
 ////////////////////////////////////////////////////
 
-CBotDODSnipe :: CBotDODSnipe ( CBotWeapon *pWeaponToUse, const Vector& vOrigin, float fYaw, bool bUseZ, float z, int iWaypointType )
+CBotDODSnipe::CBotDODSnipe(CBotWeapon* pWeaponToUse, const Vector& vOrigin, const float fYaw, const bool bUseZ, const float z,
+						   const int iWaypointType) : m_vOrigin(vOrigin)
 {
 	m_fEnemyTime = 0.0f;
 	m_fTime = 0.0f;
@@ -5283,7 +5289,7 @@ CBotDODSnipe :: CBotDODSnipe ( CBotWeapon *pWeaponToUse, const Vector& vOrigin, 
 	m_fTimeout = 0.0f;
 }
 
-void CBotDODSnipe :: debugString ( char *string )
+void CBotDODSnipe :: debugString (char* string, size_t bufferSize)
 {
 	std::sprintf(string, "CBotDODSnipe\nm_fTime = %0.2f\npWeaponToUse = %s\nm_bUseZ = %s\nm_z = %0.2f", m_fTime,
 			m_pWeaponToUse->getWeaponInfo()->getWeaponName(), m_bUseZ ? "true" : "false", m_z);
@@ -5462,7 +5468,8 @@ void CBotDODSnipe :: execute (CBot *pBot,CBotSchedule *pSchedule)
 
 //////////////////////////
 
-CBotHL2DMSnipe :: CBotHL2DMSnipe ( CBotWeapon *pWeaponToUse, const Vector& vOrigin, float fYaw, bool bUseZ, float z, int iWaypointType )
+CBotHL2DMSnipe::CBotHL2DMSnipe(CBotWeapon* pWeaponToUse, const Vector& vOrigin, const float fYaw, const bool bUseZ, const float z,
+							   const int iWaypointType) : m_vOrigin(vOrigin)
 {
 	m_fEnemyTime = 0.0f;
 	m_fTime = 0.0f;
@@ -5477,7 +5484,7 @@ CBotHL2DMSnipe :: CBotHL2DMSnipe ( CBotWeapon *pWeaponToUse, const Vector& vOrig
 	m_iWaypointType = iWaypointType;
 }
 
-void CBotHL2DMSnipe::debugString(char* string) //Unstable? [APG]RoboCop[CL]
+void CBotHL2DMSnipe::debugString(char* string, size_t bufferSize) //Unstable? [APG]RoboCop[CL]
 {
 	std::sprintf(string, "CBotHL2DMSnipe\nm_fTime = %0.2f\npWeaponToUse = %s\nm_bUseZ = %s\nm_z = %0.2f", m_fTime,
 			m_pWeaponToUse->getWeaponInfo()->getWeaponName(), m_bUseZ ? "true" : "false", m_z);
@@ -5660,7 +5667,7 @@ void CBotSynDisarmMineTask::execute(CBot *pBot,CBotSchedule *pSchedule)
 	}
 }
 
-void CBotSynDisarmMineTask::debugString(char *string)
+void CBotSynDisarmMineTask::debugString(char* string, size_t bufferSize)
 {
 	std::sprintf(string, "CBotSynDisarmMineTask\nPos: (%0.4f,%0.4f,%0.4f)\nDistance: %.2f\nTime Set: %s", m_vMinePos.x,
 			m_vMinePos.y, m_vMinePos.z, m_fDist, m_bTimeSet ? "true" : "false");
