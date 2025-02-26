@@ -3820,7 +3820,7 @@ int CBotFortress :: getSpyDisguiseClass ( int iTeam ) const
 	}
 
 	// choose one of the classes proportional to whatever's on the team
-	return availableClasses[randomInt(0, static_cast<int>(availableClasses.size()) - 1)];
+	return availableClasses[static_cast<std::size_t>(randomInt(0, static_cast<int>(availableClasses.size()) - 1))];
 }
 
 bool CBotFortress :: incomingRocket ( float fRange )
@@ -5042,8 +5042,10 @@ void CBotTF2 :: getTasks ( unsigned int iIgnore )
 
 				do
 				{
-					CClients::clientDebugMsg(this,BOT_DEBUG_UTIL,"%s = %0.3f",g_szUtils[next->getId()],next->getUtility(),this);
-				}while ( (++i<10) && ((next = utils.nextBest()) != nullptr) );
+					CClients::clientDebugMsg(this, BOT_DEBUG_UTIL, "%s = %0.3f, this = %p", g_szUtils[next->getId()], next->getUtility(), static_cast<void*>(this));
+				}
+
+				while ( (++i<10) && ((next = utils.nextBest()) != nullptr) );
 
 				CClients::clientDebugMsg(this,BOT_DEBUG_UTIL,"----END---- getTasks(%s) ----END----",m_szBotName);
 			}

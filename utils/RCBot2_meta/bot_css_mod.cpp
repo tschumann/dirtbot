@@ -320,7 +320,8 @@ edict_t *CCounterStrikeSourceMod::getRandomHostage()
 
     if(!temp.empty())
     {   
-        return INDEXENT(temp.at(randomInt(0, temp.size() - 1)).GetEntryIndex());
+        return INDEXENT(temp.at(randomInt(0, static_cast<int>(temp.size() - 1))).GetEntryIndex());
     }
+
     return nullptr;
 }

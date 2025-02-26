@@ -1073,7 +1073,7 @@ class CBots
 public:
 	static void botThink ();
 
-	static CBot *getBotPointer ( edict_t *pEdict );
+	static CBot *getBotPointer ( const edict_t *pEdict );
 	static CBot *getBot ( int slot );
 
 	static void freeMapMemory ();
@@ -1113,8 +1113,13 @@ public:
 
 	static void runPlayerMoveAll ();
 
-	static CBot* get(size_t iIndex) { return m_Bots[iIndex]; }
-	static CBot *get ( edict_t *pPlayer ) { return m_Bots[slotOfEdict(pPlayer)]; }
+	static CBot* get(const size_t iIndex) { return m_Bots[iIndex]; }
+
+	static CBot* get(const edict_t* pPlayer)
+	{
+		return m_Bots[static_cast<size_t>(slotOfEdict(pPlayer))];
+	}
+
 	static int levelInit(); //TODO: Not implemented? [APG]RoboCop[CL]
 
 private:

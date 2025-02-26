@@ -297,5 +297,5 @@ CCreateGameRulesObject::CCreateGameRulesObject(CRCBotKeyValueList &list, void *p
 void **CCreateGameRulesObject::getGameRules() const
 {
 	char *addr = static_cast<char*>(m_func);
-	return *reinterpret_cast<void ***>(addr + rcbot_gamerules_offset.GetInt());
+	return *reinterpret_cast<void***>(addr + static_cast<uintptr_t>(rcbot_gamerules_offset.GetInt()));
 }

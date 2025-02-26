@@ -370,7 +370,7 @@ void CBotMenu::render(CClient* pClient)
 		debugoverlay->ScreenPosition(0.5f, 0.5f, screen);
 		debugoverlay->ScreenPosition(point,screen);*/
 
-	for (unsigned int i = 0; i < m_MenuItems.size(); i++)
+	for (size_t i = 0; i < m_MenuItems.size(); i++)
 	{
 		CBotMenuItem* item = m_MenuItems[i];
 

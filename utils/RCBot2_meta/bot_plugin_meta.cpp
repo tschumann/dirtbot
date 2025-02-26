@@ -61,6 +61,7 @@
 #include <cstring>
 
 #include <build_info.h>
+#include <sourcehook.h>
 
 #if defined SM_EXT
 #include "rcbot/entprops.h"

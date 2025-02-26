@@ -70,19 +70,15 @@ void CBotGAValues::crossOver(IIndividual* other)
 
 	unsigned int i;
 
-	for (i = 0; i < iPoint; i++)
-	{
-		fTemp = get(i);
-		set(i, vother->get(i));
-		vother->set(i, fTemp);
-	}
+    for (std::size_t i = 0; i < static_cast<std::size_t>(iPoint); i++)
+    {
+        std::swap(m_theValues[i], vother->m_theValues[i]);
+    }
 
-	for (i = iPoint; i < m_theValues.size(); i++)
-	{
-		fTemp = vother->get(i);
-		vother->set(i, get(i));
-		set(i, fTemp);
-	}
+    for (std::size_t i = iPoint; i < m_theValues.size(); i++)
+    {
+        std::swap(m_theValues[i], vother->m_theValues[i]);
+    }
 }
 
 // mutate some values
@@ -101,12 +97,12 @@ void CBotGAValues::mutate()
 
 float CBotGAValues::get(int iIndex) const
 {
-	return m_theValues[iIndex];
+    return m_theValues[static_cast<size_t>(iIndex)];
 }
 
 void CBotGAValues::set(int iIndex, float fVal)
 {
-	m_theValues[iIndex] = fVal;
+    m_theValues[static_cast<size_t>(iIndex)] = fVal;
 }
 
 void CBotGAValues::addRnd()

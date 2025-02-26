@@ -384,10 +384,10 @@ std::vector<CWeapon*> CWeapons::m_theWeapons;
 int CBotWeapon::getAmmo(const CBot* pBot, int type) const
 {
 	if (type == AMMO_PRIM)
-		return pBot->getAmmo(m_pWeaponInfo->getAmmoIndex1());
+		return pBot->getAmmo(static_cast<size_t>(m_pWeaponInfo->getAmmoIndex1()));
 
 	if (type == AMMO_SEC)
-		return pBot->getAmmo(m_pWeaponInfo->getAmmoIndex2());
+		return pBot->getAmmo(static_cast<size_t>(m_pWeaponInfo->getAmmoIndex2()));
 
 	return 0;
 }
@@ -463,7 +463,9 @@ bool CBotWeapons::update(bool bOverrideAllFromEngine)
 	{
 		// create a 'hash' of current weapons
 		pWeapon = m_Weapon_iter == nullptr ? nullptr : INDEXENT(m_Weapon_iter->GetEntryIndex());
-		iWeaponsSignature += (reinterpret_cast<uintptr_t>(pWeapon)) + ((pWeapon == nullptr) ? 0 : static_cast<unsigned int>(CClassInterface::getWeaponState(pWeapon)));
+		iWeaponsSignature += reinterpret_cast<uintptr_t>(pWeapon) +
+			static_cast<uintptr_t>(pWeapon == nullptr ? 0 : static_cast<unsigned>(CClassInterface::getWeaponState(pWeapon)));
+
 		if (m_Weapon_iter != nullptr) {
 			m_Weapon_iter++;
 		}

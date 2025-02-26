@@ -50,6 +50,7 @@
 
 #include <cmath>
 #include <cstring>
+#include <cstdint>
 
 const char *g_DODClassCmd[2][6] = 
 { {"cls_garand","cls_tommy","cls_bar","cls_spring","cls_30cal","cls_bazooka"},
@@ -447,8 +448,20 @@ void CDODBot :: seeFriendlyDie ( edict_t *pDied, edict_t *pKiller, CWeapon *pWea
 				//m_pNavigator->belief
 				m_fCurrentDanger += 100.0f; // sniper danger
 				//bInvestigate = false;
+
 				// Find Hide Spot
-				ADD_UTILITY_DATA_VECTOR(BOT_UTIL_SNIPE_POINT,!hasEnemy() && (m_iClass == DOD_CLASS_SNIPER) && getSniperRifle() && !getSniperRifle()->outOfAmmo(this),1.0f,reinterpret_cast<unsigned>(pKiller),vecEnemy)
+#if defined(_WIN64) || defined(__x86_64__) || defined(__amd64__)
+				ADD_UTILITY_DATA_VECTOR(BOT_UTIL_SNIPE_POINT,
+					!hasEnemy() && (m_iClass == DOD_CLASS_SNIPER) && getSniperRifle() && !
+					getSniperRifle()->outOfAmmo(this), 1.0f, static_cast<uint32_t>(reinterpret_cast<uintptr_t>(pKiller) & 0xFFFFFFFF),
+					vecEnemy)
+#else
+				ADD_UTILITY_DATA_VECTOR(BOT_UTIL_SNIPE_POINT,
+					!hasEnemy() && (m_iClass == DOD_CLASS_SNIPER) && getSniperRifle() && !
+					getSniperRifle()->outOfAmmo(this), 1.0f, static_cast<uint32_t>(reinterpret_cast<uintptr_t>(pKiller)),
+					vecEnemy)
+#endif
+
 			}
 			else if ( (pclass == DOD_CLASS_MACHINEGUNNER) && pWeapon->isDeployable() )
 			{
@@ -464,7 +477,20 @@ void CDODBot :: seeFriendlyDie ( edict_t *pDied, edict_t *pKiller, CWeapon *pWea
 				m_fCurrentDanger = MAX_BELIEF; // machine gun danger
 				//bInvestigate = false;
 
-				ADD_UTILITY_DATA_VECTOR(BOT_UTIL_SNIPE_POINT,!hasEnemy() && (m_iClass == DOD_CLASS_SNIPER) && getSniperRifle() && !getSniperRifle()->outOfAmmo(this),1.0f,reinterpret_cast<unsigned>(pKiller),vecEnemy)
+#if defined(_WIN64) || defined(__x86_64__) || defined(__amd64__)
+				ADD_UTILITY_DATA_VECTOR(BOT_UTIL_SNIPE_POINT,
+					!hasEnemy() && (m_iClass == DOD_CLASS_SNIPER) && getSniperRifle() && !getSniperRifle()->outOfAmmo(this),
+					1.0f,
+					static_cast<uint32_t>(reinterpret_cast<uintptr_t>(pKiller) & 0xFFFFFFFF),
+					vecEnemy)
+#else
+				ADD_UTILITY_DATA_VECTOR(BOT_UTIL_SNIPE_POINT,
+					!hasEnemy() && (m_iClass == DOD_CLASS_SNIPER) && getSniperRifle() && !getSniperRifle()->outOfAmmo(this),
+					1.0f,
+					reinterpret_cast<uint32_t>(pKiller),
+					vecEnemy)
+#endif
+
 				//ADD_UTILITY_DATA_VECTOR(BOT_UTIL_MOVEUP_MG,!hasEnemy() && (m_iClass == DOD_CLASS_MACHINEGUNNER) && getMG() && !getMG()->outOfAmmo(this),1.0f,1,vecEnemy);
 			}
 			else
@@ -484,7 +510,8 @@ void CDODBot :: seeFriendlyDie ( edict_t *pDied, edict_t *pKiller, CWeapon *pWea
 
 				if ( (iCurrentWaypoint != -1) && (iEnemyWaypoint != -1) && !pTable->GetVisibilityFromTo(iCurrentWaypoint, iEnemyWaypoint) )
 				{
-					ADD_UTILITY_DATA_VECTOR(BOT_UTIL_COVER_POINT, m_pCurrentWeapon != NULL, 0.8f, (reinterpret_cast<unsigned>(pKiller)), (vecEnemy))
+					ADD_UTILITY_DATA_VECTOR(BOT_UTIL_COVER_POINT, m_pCurrentWeapon != NULL, 0.8f,
+						reinterpret_cast<uintptr_t>(pKiller), vecEnemy);
 				}
 			}
 			/*else if ( CBotGlobals::isPlayer(pDied) )
@@ -581,7 +608,12 @@ void CDODBot :: seeFriendlyDie ( edict_t *pDied, edict_t *pKiller, CWeapon *pWea
 
 			if ( !m_pSchedules->isCurrentSchedule(SCHED_INVESTIGATE_NOISE) )
 			{
-				ADD_UTILITY_DATA_VECTOR(BOT_UTIL_INVESTIGATE_POINT,!m_pSchedules->hasSchedule(SCHED_DEPLOY_MACHINE_GUN)&&!m_pSchedules->hasSchedule(SCHED_SNIPE),0.5f,reinterpret_cast<unsigned>(pDied),m_vListenPosition)
+				ADD_UTILITY_DATA_VECTOR(
+					BOT_UTIL_INVESTIGATE_POINT,
+					!m_pSchedules->hasSchedule(SCHED_DEPLOY_MACHINE_GUN) && !m_pSchedules->hasSchedule(SCHED_SNIPE), 0.5f,
+					static_cast<uint32_t>(reinterpret_cast<uintptr_t>(pDied)), // Explicit truncation
+					m_vListenPosition
+				);
 
 				//m_pSchedules->removeSchedule(SCHED_INVESTIGATE_NOISE);
 				//m_pSchedules->addFront(new CBotInvestigateNoiseSched(CBotGlobals::entityOrigin(pDied),m_vListenPosition));
@@ -2092,7 +2124,11 @@ bool CDODBot :: executeAction ( CBotUtility *util )
 	case BOT_UTIL_SNIPE_POINT:
 		// find sniper point facing the enemy
 		{
-			edict_t* pEnemy = reinterpret_cast<edict_t*>(util->getIntData());
+#if defined(_WIN64) || defined(__x86_64__) || defined(__amd64__)
+		edict_t* pEnemy = reinterpret_cast<edict_t*>(static_cast<uintptr_t>(util->getIntData()));
+#else
+		edict_t* pEnemy = reinterpret_cast<edict_t*>(util->getIntData());
+#endif
 
 			Vector vEnemyOrigin = CBotGlobals::entityOrigin(pEnemy);
 

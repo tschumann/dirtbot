@@ -121,7 +121,7 @@ void CSom::input(std::vector<std::vector<float>>* inputs, int epochs)// Experime
 
 CSomNeuron *CSom :: input ( std::vector < std::vector <float> > *inputs )
 {
-	return inputOne(&(*inputs)[randomInt(0,static_cast<int>(inputs->size())-1)]);
+	return inputOne(&(*inputs)[static_cast<size_t>(randomInt(0, static_cast<int>(inputs->size()) - 1))]);
 }
 
 void CSom :: display () const
@@ -138,7 +138,7 @@ void CSom :: display () const
 
 void CSomNeuron :: update (const std::vector<float>* inputs, float inf)
 {
-	for ( unsigned int i = 0; i < inputs->size(); i ++ )
+	for ( size_t i = 0; i < inputs->size(); i ++ )
 	{
 		const float change = (*inputs)[i] - fWeights[i];
 
@@ -173,7 +173,7 @@ float CSomNeuron :: distance (const std::vector<float>* inputs) const
 {
 	float dist = 0;
 
-	for ( unsigned int i = 0; i < inputs->size(); i ++ )
+	for ( size_t i = 0; i < inputs->size(); i ++ )
 	{
 		const float comp = fWeights[i] - (*inputs)[i];
 		

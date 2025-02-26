@@ -28,6 +28,12 @@
  */
 
 #include "entprops.h"
+
+#include <am-string.h>
+#include <IGameConfigs.h>
+#include <IGameHelpers.h>
+#include <IPlayerHelpers.h>
+
 #include "bot_sm_ext.h"
 #include "logging.h"
 #include "helper.h"
@@ -411,7 +417,8 @@ int CBotEntProp::GetEntProp(int entity, PropType proptype, char *prop, int size,
 
 		if (td->fieldType == FIELD_CUSTOM && (td->flags & FTYPEDESC_OUTPUT) == FTYPEDESC_OUTPUT)
 		{
-			const variant_t* pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
+			const variant_t* pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + static_cast<intptr_t>(offset));
+
 			if ((bit_count = MatchTypeDescAsInteger(pVariant->fieldType, 0)) == 0)
 			{
 				logger->Log(LogLevel::ERROR, "Variant value for %s is not an integer (%d)", prop, pVariant->fieldType);
@@ -461,25 +468,27 @@ int CBotEntProp::GetEntProp(int entity, PropType proptype, char *prop, int size,
 
 	if (bit_count >= 17)
 	{
-		return *reinterpret_cast<int32_t*>(reinterpret_cast<uint8_t*>(pEntity) + offset);
+		return *reinterpret_cast<int32_t*>(reinterpret_cast<uint8_t*>(pEntity) + static_cast<size_t>(offset));
 	}
+
 	if (bit_count >= 9)
 	{
 		if (is_unsigned)
 		{
-			return *reinterpret_cast<uint16_t*>(reinterpret_cast<uint8_t*>(pEntity) + offset);
+			return *reinterpret_cast<uint16_t*>(reinterpret_cast<uint8_t*>(pEntity) + static_cast<size_t>(offset));
 		}
-		return *reinterpret_cast<int16_t*>(reinterpret_cast<uint8_t*>(pEntity) + offset);
+		return *reinterpret_cast<int16_t*>(reinterpret_cast<uint8_t*>(pEntity) + static_cast<size_t>(offset));
 	}
+
 	if (bit_count >= 2)
 	{
 		if (is_unsigned)
 		{
-			return *(reinterpret_cast<uint8_t*>(pEntity) + offset);
+			return *(reinterpret_cast<uint8_t*>(pEntity) + static_cast<size_t>(offset));
 		}
-		return *reinterpret_cast<int8_t*>(reinterpret_cast<uint8_t*>(pEntity) + offset);
+		return *reinterpret_cast<int8_t*>(reinterpret_cast<uint8_t*>(pEntity) + static_cast<size_t>(offset));
 	}
-	return reinterpret_cast<bool*>(reinterpret_cast<uint8_t*>(pEntity) + offset) ? 1 : 0;
+	return reinterpret_cast<bool*>(reinterpret_cast<uint8_t*>(pEntity) + static_cast<size_t>(offset)) ? 1 : 0;
 }
 
 /// @brief Retrieves an integer pointer in an entity's property.
@@ -538,7 +547,7 @@ int *CBotEntProp::GetEntPropPointer(int entity, PropType proptype, char *prop, i
 
 		if (td->fieldType == FIELD_CUSTOM && (td->flags & FTYPEDESC_OUTPUT) == FTYPEDESC_OUTPUT)
 		{
-			const variant_t* pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + offset);
+			const variant_t* pVariant = reinterpret_cast<variant_t*>(reinterpret_cast<intptr_t>(pEntity) + static_cast<size_t>(offset));
 			if ((bit_count = MatchTypeDescAsInteger(pVariant->fieldType, 0)) == 0)
 			{
 				logger->Log(LogLevel::ERROR, "Variant value for %s is not an integer (%d)", prop, pVariant->fieldType);

@@ -850,7 +850,7 @@ void CTF2PointStartCapture :: execute ( IBotEventInterface *pEvent )
 
 	if ( cappers )
 	{
-		int i = 0;
+		std::size_t i = 0; // Use std::size_t for the index type [APG]RoboCop[CL]
 
 		while ( cappers[i] != 0 )
 		{

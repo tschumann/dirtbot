@@ -96,6 +96,11 @@ public:
 	// {
 	// 	return (reinterpret_cast<int>(get()) == a);
 	// }
+	// below from 29f6b0b1 (Adding some 64-bit support)
+	// bool operator == (const intptr_t a)
+	// {
+	// 	return (reinterpret_cast<uintptr_t>(get()) == static_cast<uintptr_t>(a));
+	// }
 
 	bool operator == ( edict_t *pent )
 	{
