@@ -419,8 +419,8 @@ private:
 class CWaypoints
 {
 public:
-	static constexpr int MAX_WAYPOINTS = 1024;
-	static constexpr int WAYPOINT_VERSION = 4; // waypoint version 4 add author information
+	static constexpr int MAX_WAYPOINTS = 2048;
+	static constexpr int WAYPOINT_VERSION = 5; // waypoint version 5 add author information
 
 	static constexpr int W_FILE_FL_VISIBILITY = 1;
 
