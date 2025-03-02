@@ -279,6 +279,8 @@ void CTeamFortress2Mod :: mapInit ()
 		m_MapType = TF_MAP_SD; // special delivery
 	else if (std::strncmp(szmapname, "tr_", 3) == 0)
 		m_MapType = TF_MAP_TR; // training mode
+	else if (std::strncmp(szmapname, "cppl_", 5) == 0)
+		m_MapType = TF_MAP_CPPL; // CP+PL maps
 	else if (std::strncmp(szmapname, "mvm_", 4) == 0 || std::strncmp(szmapname, "gd_", 3) == 0 || std::strncmp(szmapname, "stt_", 4) == 0) // gd is MvM Guardian, for now there are only two maps exist with this prefix. Moved stt to mvm to make bots attack a tank - RussiaTails
 		m_MapType = TF_MAP_MVM; // mann vs machine
 	else if (std::strncmp(szmapname, "rd_", 3) == 0)
