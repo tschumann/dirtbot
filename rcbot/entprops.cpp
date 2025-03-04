@@ -1474,6 +1474,8 @@ bool CBotEntProp::SetEntPropEnt(int entity, PropType proptype, char *prop, int o
 			*reinterpret_cast<edict_t**>(reinterpret_cast<uint8_t*>(pEntity) + offset) = pOtherEdict;
 			break;
 		}
+	//case PropEnt_Unknown:
+	//	break;
 	}
 
 	return true;
