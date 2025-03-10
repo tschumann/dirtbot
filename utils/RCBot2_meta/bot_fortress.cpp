@@ -7496,6 +7496,11 @@ bool CBotTF2 :: isEnemy ( edict_t *pEdict,bool bCheckWeapons )
 			else
 				bValid = true;
 		}
+		if (CTeamFortress2Mod::isMapType(TF_MAP_GG))
+		{
+			if (CBotGlobals::getTeam(pEdict) == getTeam())
+				return true;
+		}
 	}
 	// TODO: to allow bots to properly attack RD Robots [APG]RoboCop[CL]
 	else if ( CTeamFortress2Mod::isMapType(TF_MAP_RD) && !std::strcmp(pEdict->GetClassName(),"tf_robot_destruction_robot") && (CClassInterface::getTeam(pEdict) != m_iTeam) )
