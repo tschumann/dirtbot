@@ -830,6 +830,7 @@ typedef enum : std::uint8_t
 	TF_MAP_ZI, // Scream Fortress XV (Oct 9th, 2023) update for Zombie Infection maps - [APG]RoboCop[CL]
 	TF_MAP_PASS, //TODO: add support for those gamemodes [APG]RoboCop[CL]
 	TF_MAP_CPPL, // CP+PL Hybrid maps - RussiaTails
+	TF_MAP_GG, // GunGame maps - RussiaTails
 	TF_MAP_MAX
 }eTFMapType;
 
