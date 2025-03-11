@@ -120,6 +120,19 @@ public:
 		return m_CombatType == COMBAT_CROUCH;
 	}
 
+	// Returns true if the squad leader entity is valid. False if not. -caxanga334
+	bool IsSquadLeaderValid()
+	{
+		edict_t* pLeader = m_pLeader.get();
+
+		if (!pLeader || pLeader->IsFree() || pLeader->GetIServerEntity() == nullptr)
+		{
+			return false;
+		}
+
+		return true;
+	}
+
 	edict_t *GetLeader ()
 	{
 		return m_pLeader.get();

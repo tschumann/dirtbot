@@ -37,6 +37,7 @@
 #include "bot_globals.h"
 #include "bot_squads.h"
 #include "bot_getprop.h"
+#include "rcbot/logging.h"
 
 #include <algorithm>
 #include <cstring>
@@ -293,12 +294,18 @@ void CBotSquad::ChangeLeader ()
 
 Vector CBotSquad :: GetFormationVector (const edict_t* pEdict)
 {
-	Vector vBase; 
+	Vector vBase;
 	Vector v_forward;
 	Vector v_right;
 	const trace_t *tr = CBotGlobals::getTraceResult();
 
 	edict_t *pLeader = GetLeader();
+
+	if (!pLeader || pLeader->IsFree() || pLeader->GetIServerEntity() == nullptr)
+	{
+		logger->Log(LogLevel::DEBUG, "Trying to get squad formation vector with a NULL squad leader! Alert a programmer! edict_t *pLeader == %p", pLeader);
+		return vec3_origin;
+	}
 
 	const int iPosition = GetFormationPosition(pEdict);
 	const Vector vLeaderOrigin = CBotGlobals::entityOrigin(pLeader);

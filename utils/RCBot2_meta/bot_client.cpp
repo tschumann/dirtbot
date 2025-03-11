@@ -30,6 +30,7 @@
  */
 #include "bot.h"
 #include "bot_cvars.h"
+#include "bot_squads.h"
 
 #include "bot_client.h"
 #include "bot_waypoint_locations.h"
@@ -41,7 +42,6 @@
 #include "bot_menu.h"
 // autowaypoint
 #include "bot_getprop.h"
-#include "bot_waypoint_locations.h"
 //#include "bot_hooks.h"
 #include "in_buttons.h"
 #include "bot_plugin_meta.h"
@@ -1024,6 +1024,18 @@ void CClient :: clientDisconnected ()
 	{
 		if ( pBot->inUse() )
 		{
+			// If this bot is in a squad and is a squad leader, destroy the squad -caxanga334
+			// Prevents crashes since RCBot2 tries to read the squad leader in some places without NULL checks.
+			if (pBot->inSquad() && pBot->isSquadLeader())
+			{
+				CBotSquad* squad = CBotSquads::FindSquadByLeader(m_pPlayer);
+
+				if (squad)
+				{
+					CBotSquads::RemoveSquad(squad);
+				}
+			}
+
 			// free bots memory and other stuff
 			pBot->freeAllMemory();
 		}
