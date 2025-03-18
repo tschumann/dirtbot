@@ -123,7 +123,7 @@ bool CTeamFortress2Mod::isSuddenDeath()
 {
 #if SOURCE_ENGINE > SE_DARKMESSIAH
 	// Bot weapon Randomizer -- leonardo
-	if (!mp_stalemate_enable.IsValid() || !mp_stalemate_enable.GetBool() || isMapType(TF_MAP_ARENA))
+	if (!mp_stalemate_enable.IsValid() || !mp_stalemate_enable.GetBool() || isMapType(TF_MAP_ARENA) || isMapType(TF_MAP_SAXTON))
 		return false;
 
 	void *pGameRules = GetGameRules();
@@ -269,10 +269,12 @@ void CTeamFortress2Mod :: mapInit ()
 		m_MapType = TF_MAP_CART; // pipeline
 	else if (std::strncmp(szmapname, "plr_", 4) == 0 || std::strncmp(szmapname, "arena_tinyrock", 14) == 0 || std::strncmp(szmapname, "arena_hailstone", 15) == 0) // to make bots push payloads on these maps. - RussiaTails
 		m_MapType = TF_MAP_CARTRACE; // pipeline racing
-	else if (std::strncmp(szmapname, "arena_", 6) == 0 || std::strncmp(szmapname, "vsh_", 4) == 0)  // pongo1321
-		m_MapType = TF_MAP_ARENA; // arena mode (also fallback for VS Saxton Hale gamemode)
-	//else if ( std::strncmp(szmapname,"arena_",6) == 0 )
-	//	m_MapType = TF_MAP_ARENA; // arena mode
+	else if (std::strncmp(szmapname, "arena_", 6) == 0 )  // pongo1321
+		m_MapType = TF_MAP_ARENA; // arena mode
+	else if (std::strncmp(szmapname, "vsh_", 4) == 0 )
+		m_MapType = TF_MAP_SAXTON; // versus saxton hale mode
+	else if (std::strncmp(szmapname, "pipeball_", 9) == 0)
+		m_MapType = TF_MAP_PIPEBALL; // pipeball
 	else if (std::strncmp(szmapname, "koth_", 5) == 0 || std::strncmp(szmapname, "ctk_", 4) == 0)  // Control the Keep works almost the same as KOTH. - RussiaTails
 		m_MapType = TF_MAP_KOTH; // king of the hill
 	else if (std::strncmp(szmapname, "sd_", 3) == 0 || std::strncmp(szmapname, "sdr_", 4) == 0)  // Object Destruction and Special Delivery Race (I dunno why it's named like this when it works as a usual sd_) works the same as SD_. - RussiaTails
@@ -542,7 +544,7 @@ bool CTeamFortress2Mod ::isBoss ( edict_t *pEntity, float *fFactor )
 		}
 	}
 	else if (CTeamFortress2Mod::isMapType(TF_MAP_CARTRACE) || isMapType(TF_MAP_CART) || isMapType(TF_MAP_KOTH) || isMapType(TF_MAP_PASS)
-		|| isMapType(TF_MAP_CP) || isMapType(TF_MAP_PD) || isMapType(TF_MAP_ARENA) || isMapType(TF_MAP_SD) || isMapType(TF_MAP_DM))
+		|| isMapType(TF_MAP_CP) || isMapType(TF_MAP_PD) || isMapType(TF_MAP_ARENA) || isMapType(TF_MAP_SAXTON) || isMapType(TF_MAP_SD) || isMapType(TF_MAP_DM))
 	{
 		if ( m_pBoss.get() == pEntity )
 			return true;
@@ -554,6 +556,27 @@ bool CTeamFortress2Mod ::isBoss ( edict_t *pEntity, float *fFactor )
 			return true;
 		}
 		
+	}
+	else if (CTeamFortress2Mod::isMapType(TF_MAP_PIPEBALL))
+	{
+		if (m_pBoss.get() == pEntity)
+			return true;
+		if (std::strcmp(pEntity->GetClassName(), "tf_zombie") == 0 ||
+			std::strcmp(pEntity->GetClassName(), "func_physbox") == 0 ||
+			std::strcmp(pEntity->GetClassName(), "base_boss") == 0)
+		{
+			m_pBoss = pEntity;
+			return true;
+		}
+		if (isTankBoss(pEntity))
+		{
+			if (fFactor != nullptr)
+				*fFactor = 200.0f;
+
+			m_pBoss = pEntity;
+			return true;
+		}
+
 	}
 	else if ( CTeamFortress2Mod::isMapType(TF_MAP_MVM) )
 	{
@@ -691,6 +714,10 @@ edict_t *CTeamFortress2Mod :: getTeleporterExit ( edict_t *pTele )
 // check if the entity is a health kit
 bool CTeamFortress2Mod :: isHealthKit (const edict_t* pEntity)
 {
+	if (CTeamFortress2Mod::isMapType(TF_MAP_SAXTON))
+	{
+		return false;
+	}
 	return std::strncmp(pEntity->GetClassName(),"item_healthkit",14)==0;
 }
 
