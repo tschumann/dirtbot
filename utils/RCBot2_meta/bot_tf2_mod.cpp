@@ -714,7 +714,7 @@ edict_t *CTeamFortress2Mod :: getTeleporterExit ( edict_t *pTele )
 // check if the entity is a health kit
 bool CTeamFortress2Mod :: isHealthKit (const edict_t* pEntity)
 {
-	if (CTeamFortress2Mod::isMapType(TF_MAP_SAXTON))
+	if (CTeamFortress2Mod::isMapType(TF_MAP_SAXTON) || isMapType(TF_MAP_ZI))
 	{
 		return false;
 	}
