@@ -40,6 +40,8 @@
 #ifndef __RCBOT2_H__
 #define __RCBOT2_H__
 
+class CBasePlayer;
+
 #include <cstdint>
 //#include "cbase.h"
 //#include "baseentity.h"

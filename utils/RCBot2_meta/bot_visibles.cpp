@@ -260,8 +260,13 @@ void CBotVisibles::updateVisibles()
     else
 		iMaxClientTicks = m_pBot->getProfile()->m_iVisionTicksClients; // bot_visrevs_clients.GetInt();
 
+#ifndef max
     iMaxTicks = std::max(iMaxTicks, 2);
     iMaxClientTicks = std::max(iMaxClientTicks, 1);
+#else
+	iMaxTicks = max(iMaxTicks, 2);
+    iMaxClientTicks = max(iMaxClientTicks, 1);
+#endif
 
 #ifdef _DEBUG
     CProfileTimer* timer = CProfileTimers::getTimer(BOT_VISION_TIMER);
@@ -307,7 +312,11 @@ void CBotVisibles::updateVisibles()
             break;
     }
 
+#ifndef min
     iMaxTicks = std::min(iMaxTicks, m_iMaxIndex);
+#else
+	iMaxTicks = min(iMaxTicks, m_iMaxIndex);
+#endif
 
     if (m_iCurPlayer >= m_iCurrentIndex)
         return;
