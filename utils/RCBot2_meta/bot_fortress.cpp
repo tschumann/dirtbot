@@ -7027,6 +7027,16 @@ bool CBotTF2 :: handleAttack ( CBotWeapon *pWeapon, edict_t *pEnemy )
 			else if (( pEnemy == m_NearestEnemyRocket.get() ) || ( pEnemy == m_pNearestPipeGren.get() ))
 				return false; // don't attack the rocket anymore
 		}
+		
+		if (CTeamFortress2Mod::isMapType(TF_MAP_ZI) && m_iTeam == TF2_TEAM_BLUE)
+		{
+			setMoveTo(CBotGlobals::entityOrigin(pEnemy));
+			//setLookAt(m_vAimVector);
+			setLookAtTask(LOOK_ENEMY);
+			// dontAvoid my enemy
+			m_fAvoidTime = engine->Time() + 1.0f;
+			secondaryAttack();
+		}
 
 		if (m_iClass == TF_CLASS_SNIPER && pWeapon->isProjectile())
 		{
