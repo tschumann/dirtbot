@@ -6,6 +6,7 @@
 #include "bot_getprop.h"
 #include "bot_cvars.h"
 #include "datamap.h"
+#include "rcbot/rb-platform.h"
 
 #include <cstring>
 
@@ -413,7 +414,18 @@ void CClassInterface:: init ()
 		DEFINE_GETPROP(GETPROP_TF2_NUMHEALERS,"CTFPlayer","m_nNumHealers",0);
 		DEFINE_GETPROP(GETPROP_TF2_CONDITIONS,"CTFPlayer","m_nPlayerCond",0);
 		DEFINE_GETPROP(GETPROP_VELOCITY,"CBasePlayer","m_vecVelocity[0]",0);
-		DEFINE_GETPROP(GETPROP_TF2CLASS,"CTFPlayer","m_PlayerClass",4);
+#if defined(RCBOT_ARCH_X64)
+		/*
+		* The offset is 8 on x86-64 and 4 on x86
+		* Table: m_PlayerClass (offset 10016) (type DT_TFPlayerClassShared)
+		*  Member: m_iClass (offset 8) (type integer) (bits 4) (Unsigned)
+		*/
+
+		DEFINE_GETPROP(GETPROP_TF2CLASS, "CTFPlayer", "m_PlayerClass", 8);
+#else
+		DEFINE_GETPROP(GETPROP_TF2CLASS, "CTFPlayer", "m_PlayerClass", 4);
+#endif // RCBOT_ARCH_X86
+
 		DEFINE_GETPROP(GETPROP_TF2SPYMETER,"CTFPlayer","m_flCloakMeter",0);
 		DEFINE_GETPROP(GETPROP_TF2SPYDISGUISED_TEAM,"CTFPlayer","m_nDisguiseTeam",0);
 		DEFINE_GETPROP(GETPROP_TF2SPYDISGUISED_CLASS,"CTFPlayer","m_nDisguiseClass",0);
