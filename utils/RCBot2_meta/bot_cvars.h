@@ -38,6 +38,7 @@ extern ConVar rcbot_enemyshoot_gravgun_fov;
 extern ConVar rcbot_wptplace_width;
 extern ConVar rcbot_wpt_autoradius;
 extern ConVar rcbot_wpt_autotype;
+extern ConVar rcbot_wpt_autotype_detection_range;
 extern ConVar rcbot_move_sentry_time;
 extern ConVar rcbot_move_sentry_kpm;
 extern ConVar rcbot_smoke_time;

@@ -18,6 +18,7 @@
 
 #include "filesystem.h"
 #include "interface.h"
+#include "IStaticPropMgr.h"
 
 #ifdef __linux__
 #include "shake.h"    //bir3yk
@@ -105,6 +106,7 @@ IVDebugOverlay *debugoverlay = nullptr;
 IServerGameEnts *servergameents = nullptr; // for accessing the server game entities
 IServerGameDLL *servergamedll = nullptr;
 IServerTools *servertools = nullptr;
+IStaticPropMgrServer* staticpropmgr = nullptr;
 
 RCBotPluginMeta g_RCBotPluginMeta;
 
@@ -344,6 +346,7 @@ bool RCBotPluginMeta::Load(PluginId id, ISmmAPI *ismm, char *error, size_t maxle
 	GET_V_IFACE_CURRENT(GetEngineFactory, gameevents, IGameEventManager2, INTERFACEVERSION_GAMEEVENTSMANAGER2);
 	GET_V_IFACE_CURRENT(GetEngineFactory, helpers, IServerPluginHelpers, INTERFACEVERSION_ISERVERPLUGINHELPERS);
 	GET_V_IFACE_CURRENT(GetEngineFactory, icvar, ICvar, CVAR_INTERFACE_VERSION);
+	GET_V_IFACE_CURRENT(GetEngineFactory, staticpropmgr, IStaticPropMgrServer, INTERFACEVERSION_STATICPROPMGR_SERVER);
 
 	GET_V_IFACE_ANY(GetEngineFactory, filesystem, IFileSystem, FILESYSTEM_INTERFACE_VERSION)
 

@@ -47,6 +47,7 @@ ConVar rcbot_enemyshoot_gravgun_fov("rcbot_enemyshoot_gravgun_fov", "0.98", 0, "
 ConVar rcbot_wptplace_width("rcbot_wpt_width", "48", 0, "width of the player, automatic paths won't connect unless there is enough space for a player");
 ConVar rcbot_wpt_autoradius("rcbot_wpt_autoradius", "0", 0, "every waypoint added is given this radius, 0 = no radius");
 ConVar rcbot_wpt_autotype("rcbot_wpt_autotype", "1", 0, "If 1, types will be automatically added to waypoints when they are added (only for resupply/health/capture/flag etc)\nIf 2: types will autoamtically be added even if the waypoint is cut/paste");
+ConVar rcbot_wpt_autotype_detection_range("rcbot_wpt_autotype_detection_range", "80", 0, "Maximum distance between entities and a waypoint for automatic type detection.");
 ConVar rcbot_move_sentry_time("rcbot_move_sentry_time", "120", 0, "seconds for bots to start thinking about moving sentries");
 ConVar rcbot_move_sentry_kpm("rcbot_move_sentry_kpm", "1", 0, "kpm = kills per minute, if less than this, bots will think about moving the sentry");
 ConVar rcbot_smoke_time("rcbot_smoke_time", "10", 0, "seconds a smoke grenade stays active");

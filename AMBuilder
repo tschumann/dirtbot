@@ -59,6 +59,7 @@ sourceFiles = [
   "rcbot/entprops.cpp",
   "rcbot/propvar.cpp",
   "rcbot/math_fix.cpp",
+  "rcbot/utils.cpp",
   "rcbot/tf2/conditions.cpp",
 ]
 

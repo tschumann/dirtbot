@@ -56,6 +56,7 @@
 #include "bot_wpt_dist.h"
 
 #include "rcbot/logging.h"
+#include "rcbot/utils.h"
 
 #include <cmath>
 #include <cstring>
@@ -2329,6 +2330,8 @@ int CWaypoints :: addWaypoint ( CClient *pClient, const char *type1, const char 
 	if ( pPlayer->GetFlags() & FL_DUCKING )
 		iFlags |= CWaypoint::W_FL_CROUCH;		*/
 
+	float maxRange = rcbot_wpt_autotype_detection_range.GetFloat();
+	maxRange = clamp(maxRange, 80.0f, 512.0f); // clamp the variable to sane values
 
 	if ( rcbot_wpt_autotype.GetInt() && (!bUseTemplate || rcbot_wpt_autotype.GetInt()==2) )
 	{
@@ -2340,25 +2343,34 @@ int CWaypoints :: addWaypoint ( CClient *pClient, const char *type1, const char 
 				iFlags |= CWaypointTypes::W_FL_CROUCH;
 		}
 
-		for ( int i = 0; i < gpGlobals->maxEntities; i ++ )
+		for (int i = 0; i < gpGlobals->maxEntities; i++)
 		{
-			edict_t* pEdict = INDEXENT(i);
+			edict_t* pEdict = rcbot2utils::EdictOfIndex(i);
 
-			if ( pEdict )
+			if (rcbot2utils::IsValidEdict(pEdict))
 			{
-				if ( !pEdict->IsFree() )
+				const float rangeToOrigin = (rcbot2utils::GetEntityOrigin(pEdict) - vWptOrigin).Length();
+				const float rangeToCenter = (rcbot2utils::GetWorldSpaceCenter(pEdict) - vWptOrigin).Length(); // for brush entities
+				const float fDistance = MathUtils::minimum(rangeToOrigin, rangeToCenter); // select the smallest between the two distances
+
+				if (fDistance <= maxRange)
 				{
-					if ( pEdict->m_pNetworkable && pEdict->GetIServerEntity() )
+					fMaxDistance = MathUtils::maximum(fDistance, fMaxDistance);
+
+					pCurrentMod->addWaypointFlags(pClient->getPlayer(), pEdict, &iFlags, &iArea, &fMaxDistance);
+				}
+				else
+				{
+					// distances are unreliable for brush entities, also do a bounds check if the distance above failed
+					Vector vWptTop = vWptOrigin;
+					vWptTop.z += CWaypoint::WAYPOINT_HEIGHT;
+
+					if (rcbot2utils::PointIsWithinTrigger(pEdict, vWptOrigin) || rcbot2utils::PointIsWithinTrigger(pEdict, vWptTop))
 					{
-						const float fDistance = (CBotGlobals::entityOrigin(pEdict) - vWptOrigin).Length();
+						// Waypoint origin collides with a entity bound
+						fMaxDistance = MathUtils::maximum(fDistance, fMaxDistance);
 
-						if ( fDistance <= 80.0f )
-						{
-							if ( fDistance > fMaxDistance )
-								fMaxDistance = fDistance;
-
-							pCurrentMod->addWaypointFlags(pClient->getPlayer(),pEdict,&iFlags,&iArea,&fMaxDistance);
-						}
+						pCurrentMod->addWaypointFlags(pClient->getPlayer(), pEdict, &iFlags, &iArea, &fMaxDistance);
 					}
 				}
 			}

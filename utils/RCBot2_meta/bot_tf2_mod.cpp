@@ -1180,6 +1180,15 @@ void CTeamFortress2Mod:: addWaypointFlags (edict_t *pPlayer, edict_t *pEdict, in
 				*iFlags |= CWaypointTypes::W_FL_NOBLU;
 		}
 	}
+	else if (std::strcmp(pEdict->GetClassName(), "func_regenerate") == 0) // the actual resupply locker entity
+	{
+		*iFlags |= CWaypointTypes::W_FL_RESUPPLY;
+
+		if (CTeamFortress2Mod::getTeam(pPlayer) == TF2_TEAM_BLUE)
+			*iFlags |= CWaypointTypes::W_FL_NORED;
+		else if (CTeamFortress2Mod::getTeam(pPlayer) == TF2_TEAM_RED)
+			*iFlags |= CWaypointTypes::W_FL_NOBLU;
+	}
 	// do this in the event code
 	/*else if ( std::strcmp(pEdict->GetClassName(),"item_teamflag") == 0 )
 	{

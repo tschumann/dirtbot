@@ -225,6 +225,7 @@
     <ClCompile Include="..\..\rcbot\math_fix.cpp" />
     <ClCompile Include="..\..\rcbot\propvar.cpp" />
     <ClCompile Include="..\..\rcbot\tf2\conditions.cpp" />
+    <ClCompile Include="..\..\rcbot\utils.cpp" />
     <ClCompile Include="..\..\rcbot_subcmds\config.cpp" />
     <ClCompile Include="..\..\rcbot_subcmds\debug.cpp" />
     <ClCompile Include="..\..\rcbot_subcmds\pathwaypoint.cpp" />
@@ -288,7 +289,9 @@
     <ClInclude Include="..\..\rcbot\helper.h" />
     <ClInclude Include="..\..\rcbot\logging.h" />
     <ClInclude Include="..\..\rcbot\propvar.h" />
+    <ClInclude Include="..\..\rcbot\rb-platform.h" />
     <ClInclude Include="..\..\rcbot\tf2\conditions.h" />
+    <ClInclude Include="..\..\rcbot\utils.h" />
     <ClInclude Include="..\..\sm_ext\bot_sm_ext.h" />
     <ClInclude Include="..\..\sm_ext\bot_sm_natives.h" />
     <ClInclude Include="..\..\sm_ext\smsdk_config.h" />

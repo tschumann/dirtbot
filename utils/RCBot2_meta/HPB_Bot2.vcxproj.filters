@@ -218,6 +218,9 @@
     <ClCompile Include="bot_black_mesa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\rcbot\utils.cpp">
+      <Filter>Source Files\rcbot</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bot.h">
@@ -408,6 +411,12 @@
     </ClInclude>
     <ClInclude Include="bot_black_mesa.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\rcbot\rb-platform.h">
+      <Filter>Source Files\rcbot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\rcbot\utils.h">
+      <Filter>Source Files\rcbot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
