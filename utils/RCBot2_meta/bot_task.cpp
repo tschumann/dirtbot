@@ -4244,15 +4244,17 @@ void CDODDropAmmoTask :: debugString (char* string, size_t bufferSize)
 
 void CDODDropAmmoTask :: execute (CBot *pBot,CBotSchedule *pSchedule)
 {
-	const Vector vOrigin = CBotGlobals::entityOrigin(m_pPlayer.get());
+	edict_t* pPlayer = m_pPlayer.get();
 
-	if ( m_pPlayer.get() == nullptr)
+	if (!pPlayer)
 	{
 		fail();
 		return;
 	}
 
-	if ( !CBotGlobals::entityIsAlive(m_pPlayer) )
+	const Vector vOrigin = CBotGlobals::entityOrigin(pPlayer);
+
+	if (!CBotGlobals::entityIsAlive(pPlayer))
 	{
 		fail();
 		return;
@@ -4264,14 +4266,14 @@ void CDODDropAmmoTask :: execute (CBot *pBot,CBotSchedule *pSchedule)
 
 	if ( pBot->isFacing(vOrigin) )
 	{
-		if ( !pBot->isVisible(m_pPlayer) )
+		if (!pBot->isVisible(m_pPlayer))
 		{
 			fail();
 			return;
 		}
 	}
 
-	if ( pBot->distanceFrom(m_pPlayer) < 200.0f && pBot->isFacing(vOrigin) )
+	if (pBot->distanceFrom(pPlayer) < 200.0f && pBot->isFacing(vOrigin))
 	{
 		CDODBot *pDODBot = static_cast<CDODBot*>(pBot);
 		pDODBot->dropAmmo();
