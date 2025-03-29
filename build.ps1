@@ -39,16 +39,17 @@ Write-Output "------------------------------------------"
 python ../configure.py -s hl2dm --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --target-arch x86
 ambuild
 
-Copy-Item -Path "rcbot.2.hl2dm\rcbot.2.hl2dm.dll" -Destination "..\release\dirtbot\Half-Life 2 Deathmatch\hl2mp\addons\rcbot2\bin"
-Copy-item -Path "loader\RCBot2Meta\RCBot2Meta.dll" -Destination "..\release\dirtbot\Half-Life 2 Deathmatch\hl2mp\addons\rcbot2\bin"
-Copy-item -Path "..\package\config\" -Destination "..\release\dirtbot\Half-Life 2 Deathmatch\hl2mp\addons\rcbot2\" -Recurse -Force
-
 Write-Output "------------------------------------------"
 Write-Output "Building for Half-Life 2: Deathmatch (x64)"
 Write-Output "------------------------------------------"
 
 python ../configure.py -s hl2dm --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --target-arch x64
 ambuild
+
+Copy-Item -Path "rcbot.2.hl2dm.x64\rcbot.2.hl2dm.dll" -Destination "..\release\dirtbot\Half-Life 2 Deathmatch\hl2mp\addons\rcbot2\bin\x64"
+# TODO: an extra .x64 is being added somewhere
+Copy-item -Path "loader\RCBot2Meta.x64.x64\RCBot2Meta.x64.dll" -Destination "..\release\dirtbot\Half-Life 2 Deathmatch\hl2mp\addons\rcbot2\bin"
+Copy-item -Path "..\package\config\" -Destination "..\release\dirtbot\Half-Life 2 Deathmatch\hl2mp\addons\rcbot2\" -Recurse -Force
 
 Write-Output "-------------------------------------------"
 Write-Output "Building for Half-Life 2: Episode One (x86)"
