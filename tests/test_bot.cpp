@@ -23,3 +23,13 @@ TEST(CBot, kill) {
 	delete engine;
 	delete helpers;
 }
+
+TEST(MathUtils, minimum) {
+	EXPECT_EQ(1, MathUtils::minimum(1, 2));
+	EXPECT_EQ(1, MathUtils::minimum(2, 1));
+}
+
+TEST(MathUtils, maximum) {
+	EXPECT_EQ(2, MathUtils::maximum(1, 2));
+	EXPECT_EQ(2, MathUtils::maximum(2, 1));
+}

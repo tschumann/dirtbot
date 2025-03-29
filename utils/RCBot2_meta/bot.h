@@ -80,6 +80,20 @@ class CBasePlayer;
 #define MAX_VOICE_CMDS 32
 #define MIN_WPT_TOUCH_DIST 16.0f
 
+class MathUtils
+{
+public:
+	template <typename T> static T maximum(T x, T y)
+	{
+		return (x > y) ? x : y;
+	}
+
+	template <typename T> static T minimum(T x, T y)
+	{
+		return (x < y) ? x : y;
+	}
+};
+
 // Interfaces from the engine
 extern IVEngineServer *engine;  // helper functions (messaging clients, loading content, making entities, running commands, etc)
 extern IFileSystem *filesystem;  // file I/O 
@@ -1048,6 +1062,10 @@ protected:
 	bool m_bIncreaseSensitivity; 
 	float m_fSpawnTime;
 	bool m_bWantToInvestigateSound;
+
+	float m_fEnemyAimLerp;
+	float m_fEnemyAimLerpTime;
+	Vector m_vEnemyAimLerpVelocity;
 };
 
 class CBots
