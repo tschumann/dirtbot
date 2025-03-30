@@ -6,7 +6,6 @@
 #include "bot_getprop.h"
 #include "bot_cvars.h"
 #include "datamap.h"
-#include "rcbot/rb-platform.h"
 
 #include <cstring>
 
