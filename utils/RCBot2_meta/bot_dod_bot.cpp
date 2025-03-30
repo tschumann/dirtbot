@@ -450,9 +450,10 @@ void CDODBot :: seeFriendlyDie ( edict_t *pDied, edict_t *pKiller, CWeapon *pWea
 				//bInvestigate = false;
 
 				// Find Hide Spot
+				// utility data is int32_t, casting as uintptr will crash on x64. -caxanga334
 				ADD_UTILITY_DATA_VECTOR(BOT_UTIL_SNIPE_POINT,
 					!hasEnemy() && (m_iClass == DOD_CLASS_SNIPER) && getSniperRifle() && !
-					getSniperRifle()->outOfAmmo(this), 1.0f, reinterpret_cast<uintptr_t>(pKiller),
+					getSniperRifle()->outOfAmmo(this), 1.0f, engine->IndexOfEdict(pKiller),
 					vecEnemy)
 
 			}
@@ -472,7 +473,7 @@ void CDODBot :: seeFriendlyDie ( edict_t *pDied, edict_t *pKiller, CWeapon *pWea
 
 				ADD_UTILITY_DATA_VECTOR(BOT_UTIL_SNIPE_POINT,
 					!hasEnemy() && (m_iClass == DOD_CLASS_SNIPER) && getSniperRifle() && !getSniperRifle()->outOfAmmo(this),
-					1.0f, reinterpret_cast<uintptr_t>(pKiller), vecEnemy)
+					1.0f, engine->IndexOfEdict(pKiller), vecEnemy)
 
 				//ADD_UTILITY_DATA_VECTOR(BOT_UTIL_MOVEUP_MG,!hasEnemy() && (m_iClass == DOD_CLASS_MACHINEGUNNER) && getMG() && !getMG()->outOfAmmo(this),1.0f,1,vecEnemy);
 			}
@@ -594,7 +595,7 @@ void CDODBot :: seeFriendlyDie ( edict_t *pDied, edict_t *pKiller, CWeapon *pWea
 				ADD_UTILITY_DATA_VECTOR(
 					BOT_UTIL_INVESTIGATE_POINT,
 					!m_pSchedules->hasSchedule(SCHED_DEPLOY_MACHINE_GUN) && !m_pSchedules->hasSchedule(SCHED_SNIPE), 0.5f,
-					static_cast<uint32_t>(reinterpret_cast<uintptr_t>(pDied)), // Explicit truncation
+					engine->IndexOfEdict(pDied), // Explicit truncation
 					m_vListenPosition
 				);
 
@@ -2096,22 +2097,36 @@ bool CDODBot :: executeAction ( CBotUtility *util )
 	switch ( util->getId() )
 	{
 	case  BOT_UTIL_INVESTIGATE_POINT:
+	{
+		edict_t* edict = engine->PEntityOfEntIndex(util->getIntData());
+ 
+ 		if (!edict || edict->IsFree() || edict->GetIServerEntity() == nullptr)
+ 		{
+ 			return false;
+ 		}
+
 		m_pSchedules->removeSchedule(SCHED_INVESTIGATE_NOISE);
 		m_pSchedules->addFront(new CBotInvestigateNoiseSched(
 			CBotGlobals::entityOrigin(reinterpret_cast<edict_t*>(intData)), util->getVectorData()));
 		return true;
+	}
 	case BOT_UTIL_COVER_POINT:
+	{
+		edict_t* edict = engine->PEntityOfEntIndex(util->getIntData());
+ 
+ 		if (!edict || edict->IsFree() || edict->GetIServerEntity() == nullptr)
+ 		{
+ 			return false;
+ 		}
+
 		m_pSchedules->removeSchedule(SCHED_CROUCH_AND_HIDE);
 		m_pSchedules->addFront(new CCrouchHideSched(reinterpret_cast<edict_t*>(intData)));
 		return true;
+	}
 	case BOT_UTIL_SNIPE_POINT:
 		// find sniper point facing the enemy
 		{
-#if defined(_WIN64) || defined(__x86_64__) || defined(__amd64__)
-		edict_t* pEnemy = reinterpret_cast<edict_t*>(static_cast<uintptr_t>(util->getIntData()));
-#else
-		edict_t* pEnemy = reinterpret_cast<edict_t*>(util->getIntData());
-#endif
+			edict_t* pEnemy = engine->PEntityOfEntIndex(util->getIntData());
 
 			Vector vEnemyOrigin = CBotGlobals::entityOrigin(pEnemy);
 
