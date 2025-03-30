@@ -450,17 +450,10 @@ void CDODBot :: seeFriendlyDie ( edict_t *pDied, edict_t *pKiller, CWeapon *pWea
 				//bInvestigate = false;
 
 				// Find Hide Spot
-#if defined(_WIN64) || defined(__x86_64__) || defined(__amd64__)
 				ADD_UTILITY_DATA_VECTOR(BOT_UTIL_SNIPE_POINT,
 					!hasEnemy() && (m_iClass == DOD_CLASS_SNIPER) && getSniperRifle() && !
-					getSniperRifle()->outOfAmmo(this), 1.0f, static_cast<uint32_t>(reinterpret_cast<uintptr_t>(pKiller) & 0xFFFFFFFF),
+					getSniperRifle()->outOfAmmo(this), 1.0f, reinterpret_cast<uintptr_t>(pKiller),
 					vecEnemy)
-#else
-				ADD_UTILITY_DATA_VECTOR(BOT_UTIL_SNIPE_POINT,
-					!hasEnemy() && (m_iClass == DOD_CLASS_SNIPER) && getSniperRifle() && !
-					getSniperRifle()->outOfAmmo(this), 1.0f, static_cast<uint32_t>(reinterpret_cast<uintptr_t>(pKiller)),
-					vecEnemy)
-#endif
 
 			}
 			else if ( (pclass == DOD_CLASS_MACHINEGUNNER) && pWeapon->isDeployable() )
@@ -477,19 +470,9 @@ void CDODBot :: seeFriendlyDie ( edict_t *pDied, edict_t *pKiller, CWeapon *pWea
 				m_fCurrentDanger = MAX_BELIEF; // machine gun danger
 				//bInvestigate = false;
 
-#if defined(_WIN64) || defined(__x86_64__) || defined(__amd64__)
 				ADD_UTILITY_DATA_VECTOR(BOT_UTIL_SNIPE_POINT,
 					!hasEnemy() && (m_iClass == DOD_CLASS_SNIPER) && getSniperRifle() && !getSniperRifle()->outOfAmmo(this),
-					1.0f,
-					static_cast<uint32_t>(reinterpret_cast<uintptr_t>(pKiller) & 0xFFFFFFFF),
-					vecEnemy)
-#else
-				ADD_UTILITY_DATA_VECTOR(BOT_UTIL_SNIPE_POINT,
-					!hasEnemy() && (m_iClass == DOD_CLASS_SNIPER) && getSniperRifle() && !getSniperRifle()->outOfAmmo(this),
-					1.0f,
-					reinterpret_cast<uint32_t>(pKiller),
-					vecEnemy)
-#endif
+					1.0f, reinterpret_cast<uintptr_t>(pKiller), vecEnemy)
 
 				//ADD_UTILITY_DATA_VECTOR(BOT_UTIL_MOVEUP_MG,!hasEnemy() && (m_iClass == DOD_CLASS_MACHINEGUNNER) && getMG() && !getMG()->outOfAmmo(this),1.0f,1,vecEnemy);
 			}
