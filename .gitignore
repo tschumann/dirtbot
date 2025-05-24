@@ -29,6 +29,7 @@ utils/RCBot2_meta/Release_NonHomeFolder
 .vscode/
 *.code-workspace
 
+release/dirtbot/Black Mesa/bms/addons/rcbot2/config/
 release/dirtbot/Half-Life 2 Deathmatch/hl2mp/addons/rcbot2/config/
 release/dirtbot/Source SDK Base/insurgency/addons/rcbot2/config/
 release/dirtbot/Source SDK Base 2007/insurgency/addons/rcbot2/config/

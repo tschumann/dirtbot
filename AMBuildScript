@@ -479,9 +479,9 @@ class MMSConfig(object):
       if sdk.name == 'bms':
         libs.append('mathlib')
       for lib in libs:
-        if arch == 'x86' and (sdk.name == 'episode1' or sdk.name == 'orangebox' or sdk.name == 'sdk2013'):
+        if arch == 'x86' and (sdk.name == 'episode1' or sdk.name == 'orangebox' or sdk.name == 'sdk2013' or sdk.name == 'bms'):
           lib_path = os.path.join(sdk.path, 'lib', 'public', lib) + '.lib'
-        if arch == 'x86' and sdk.name != 'episode1' and sdk.name != 'orangebox' and sdk.name != 'sdk2013':
+        if arch == 'x86' and sdk.name != 'episode1' and sdk.name != 'orangebox' and sdk.name != 'sdk2013' and sdk.name != 'bms':
           lib_path = os.path.join(sdk.path, 'lib', 'public', 'x86', lib) + '.lib'
         elif arch == 'x64' or arch == 'x86_64':
           lib_path = os.path.join(sdk.path, 'lib', 'public', 'x64', lib) + '.lib'
@@ -568,9 +568,9 @@ class MMSConfig(object):
       if sdk.name == 'bms':
         libs.append('mathlib')
       for lib in libs:
-        if arch == 'x86' and (sdk.name == 'episode1' or sdk.name == 'orangebox' or sdk.name == 'sdk2013'):
+        if arch == 'x86' and (sdk.name == 'episode1' or sdk.name == 'orangebox' or sdk.name == 'sdk2013' or sdk.name == 'bms'):
           lib_path = os.path.join(sdk.path, 'lib', 'public', lib) + '.lib'
-        if arch == 'x86' and sdk.name != 'episode1' and sdk.name != 'orangebox' and sdk.name != 'sdk2013':
+        if arch == 'x86' and sdk.name != 'episode1' and sdk.name != 'orangebox' and sdk.name != 'sdk2013' and sdk.name != 'bms':
           lib_path = os.path.join(sdk.path, 'lib', 'public', 'x86', lib) + '.lib'
         elif arch == 'x64':
           lib_path = os.path.join(sdk.path, 'lib', 'public', 'x64', lib) + '.lib'
