@@ -90,6 +90,7 @@ typedef enum : std::uint8_t
 	BOTTYPE_SYN,
 	BOTTYPE_BMS,
 	BOTTYPE_INSURGENCY,
+	BOTTYPE_AGEOFCHIVALRY,
 	BOTTYPE_MAX
 }eBotType;
 
@@ -781,6 +782,15 @@ public:
 	CInsurgencyMod()
 	{
 		setup("insurgency", MOD_INSURGENCY, BOTTYPE_INSURGENCY, "INSURGENCY");
+	}
+};
+
+class CAgeOfChivalryMod : public CBotMod
+{
+public:
+	CAgeOfChivalryMod()
+	{
+		setup("ageofchivalry", MOD_AGEOFCHIVALRY, BOTTYPE_AGEOFCHIVALRY, "AGEOFCHIVALRY");
 	}
 };
 

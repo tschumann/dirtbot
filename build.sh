@@ -46,6 +46,17 @@ python3 ../configure.py -s hl2dm --mms-path $wd/alliedmodders/metamod-source/ --
 ambuild
 
 echo "-------------------------------------------"
+echo "Building for Half-Life 2: Episode Two (x86)"
+echo "-------------------------------------------"
+
+python3 ../configure.py -s ep2 --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --target-arch x86
+ambuild
+
+cp "rcbot.2.ep2/rcbot.2.ep2.so" "../release/dirtbot/Source SDK Base 2007/ageofchivalry/addons/rcbot2/bin"
+cp "loader/RCBot2Meta_i486/RCBot2Meta_i486.so" "../release/dirtbot/Source SDK Base 2007/ageofchivalry/addons/rcbot2/bin"
+cp -r "../package/config/" "../release/dirtbot/Source SDK Base 2007/ageofchivalry/addons/rcbot2/"
+
+echo "-------------------------------------------"
 echo "Building for Half-Life 2: Episode One (x86)"
 echo "-------------------------------------------"
 

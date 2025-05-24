@@ -251,6 +251,7 @@ void CBotMods::readMods()
 
 	m_Mods.emplace_back(new CHLDMSourceMod());
 	m_Mods.emplace_back(new CInsurgencyMod());
+	m_Mods.emplace_back(new CAgeOfChivalryMod());
 
 	// Look for extra MODs
 
