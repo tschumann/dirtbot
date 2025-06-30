@@ -36,8 +36,9 @@ binary = MMS.Program(builder, 'testrunner')
 compiler = binary.compiler
 compiler.includes += [
   os.path.join(builder.sourcePath),
-  os.path.join(builder.sourcePath, 'versioning'),
+  os.path.join(builder.sourcePath, 'rcbot'),
   os.path.join(builder.sourcePath, 'utils', 'RCBot2_meta'),
+  os.path.join(builder.sourcePath, 'versioning'),
   os.path.join(builder.sourcePath, 'googletest', 'googletest', 'include'),
   os.path.join(builder.sourcePath, 'outsourced'),
 ]
@@ -68,7 +69,6 @@ if compiler.like('msvc'):
 if builder.target.platform == 'linux':
   compiler.linkflags.append('-ldl')
 compiler.linkflags.append(libgtest.binary)
-# compiler.linkflags.append(MMS.libamtl)
 
 binary.sources += [
   'main.cpp',
@@ -80,6 +80,7 @@ binary.sources += [
   'test_bot_mtrand.cpp',
   'test_bot_task.cpp',
   'test_bot_waypoint.cpp',
+  'test_utils.cpp',
 
   "../utils/RCBot2_meta/bot.cpp",
   "../utils/RCBot2_meta/bot_accessclient.cpp",

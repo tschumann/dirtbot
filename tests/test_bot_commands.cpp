@@ -11,7 +11,8 @@
 #include "bot_commands.h"
 #include "outsourced.h"
 
-TEST(CBotSubcommands, printCommand) {
+TEST(CBotSubcommands, printCommand)
+{
 	engine = new outsourced::FakeVEngineServer();
 
     CBotGlobals::m_pCommands->printCommand(engine->CreateEdict(), 0);
@@ -20,6 +21,7 @@ TEST(CBotSubcommands, printCommand) {
 	EXPECT_EQ("[RCBot] [rcbot]", outsourced::gEngine.clientPrintf.substr(0, 15));
 }
 
-TEST(CBotSubcommands, isContainer) {
+TEST(CBotSubcommands, isContainer)
+{
     EXPECT_EQ(true, CBotGlobals::m_pCommands->isContainer());
 }

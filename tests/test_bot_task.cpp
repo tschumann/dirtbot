@@ -11,7 +11,8 @@
 #include "bot.h"
 #include "bot_task.h"
 
-TEST(CBotTask, getGrenadeAngle) {
+TEST(CBotTask, getGrenadeAngle)
+{
     float fa1 = 0.0;
 	float fa2 = 0.0;
 

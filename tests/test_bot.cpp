@@ -11,7 +11,8 @@
 #include "bot.h"
 #include "outsourced.h"
 
-TEST(CBot, kill) {
+TEST(CBot, kill)
+{
 	helpers = new outsourced::FakeServerPluginHelpers();
 	engine = new outsourced::FakeVEngineServer();
 	
@@ -24,12 +25,14 @@ TEST(CBot, kill) {
 	delete helpers;
 }
 
-TEST(MathUtils, minimum) {
+TEST(MathUtils, minimum)
+{
 	EXPECT_EQ(1, MathUtils::minimum(1, 2));
 	EXPECT_EQ(1, MathUtils::minimum(2, 1));
 }
 
-TEST(MathUtils, maximum) {
+TEST(MathUtils, maximum)
+{
 	EXPECT_EQ(2, MathUtils::maximum(1, 2));
 	EXPECT_EQ(2, MathUtils::maximum(2, 1));
 }

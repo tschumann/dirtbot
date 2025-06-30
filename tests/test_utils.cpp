@@ -1,14 +1,15 @@
 //========= Copyright © 2008-2024, Team Sandpit, All rights reserved. ============
 //
-// Purpose: Bot mtrand tests
+// Purpose: Bot utils tests
 //
 // $NoKeywords: $
 //================================================================================
 
 #include "base_test.h"
-#include "bot_mtrand.h"
+#include "bot.h"
+#include "utils.h"
 
-TEST(mtrand, randomInt)
+TEST(rcbot2utils, IsValidEdict)
 {
-    EXPECT_EQ(0, randomInt(0, 0));
+    EXPECT_EQ(false, rcbot2utils::IsValidEdict(nullptr));
 }
