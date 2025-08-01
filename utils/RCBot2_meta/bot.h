@@ -1111,16 +1111,12 @@ public:
 
 	static void botFunction ( IBotFunction *function );
 
-	static void runPlayerMoveAll ();
-
 	static CBot* get(const size_t iIndex) { return m_Bots[iIndex]; }
 
 	static CBot* get(const edict_t* pPlayer)
 	{
 		return m_Bots[static_cast<size_t>(slotOfEdict(pPlayer))];
 	}
-
-	static int levelInit(); //TODO: Not implemented? [APG]RoboCop[CL]
 
 private:
 	static CBot **m_Bots;

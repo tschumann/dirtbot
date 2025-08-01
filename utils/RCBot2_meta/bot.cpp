@@ -3338,26 +3338,6 @@ CBot *CBots :: findBotByProfile ( CBotProfile *pProfile )
 	return nullptr;
 }
 
-void CBots :: runPlayerMoveAll ()
-{
-	static CBot *pBot;
-	for ( short int i = 0; i < RCBOT_MAXPLAYERS; i ++ )
-	{
-		pBot = m_Bots[i];
-
-		if ( pBot->inUse() )
-		{
-			pBot->runPlayerMove();
-		}
-	}
-}
-
-//TODO: Experimental [APG]RoboCop[CL]
-int CBots::levelInit()
-{
-	return 0;
-}
-
 #define CHECK_STRING(str) (((str)==NULL)?"NULL":(str))
 
 void CBots :: botThink ()
