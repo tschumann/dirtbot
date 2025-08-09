@@ -85,7 +85,6 @@ public:
 	RoundState GameRules_GetRoundState() const;
 
 private:
-	bool IsNetworkedEntity(CBaseEntity *pEntity);
 	edict_t *BaseEntityToEdict(CBaseEntity *pEntity);
 	bool FindSendProp(SourceMod::sm_sendprop_info_t *info, CBaseEntity *pEntity, char *prop, int entity);
 	int MatchTypeDescAsInteger(_fieldtypes type, int flags);

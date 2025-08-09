@@ -45,7 +45,6 @@
 #include "bot_menu.h"
 #include "bot_getprop.h"
 #include "bot_event.h"
-#include "bot_profiling.h"
 #include "bot_wpt_dist.h"
 #include "bot_squads.h"
 #include "bot_accessclient.h"

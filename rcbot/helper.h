@@ -49,8 +49,6 @@ public:
 	int FindEntityByClassname(int start, const char *classname);
 	int FindEntityInSphere(int start, const Vector& center, float radius);
 	int FindEntityByNetClass(int start, const char *classname);
-	bool PointWithinViewAngle(Vector const &vecSrcPosition, Vector const &vecTargetPosition, Vector const &vecLookDirection, float flCosHalfFOV);
-	float GetForwardViewCone(float angle);
 
 private:
 	bool isBoundsDefinedInEntitySpace( edict_t *pEntity )

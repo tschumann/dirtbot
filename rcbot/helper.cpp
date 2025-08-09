@@ -224,34 +224,3 @@ int CBotHelper::FindEntityByNetClass(int start, const char *classname)
 
 	return INVALID_EHANDLE_INDEX;
 }
-
-/// @brief check if a point is in the field of a view of an object. supports up to 180 degree fov.
-/// @param vecSrcPosition Source position of the view.
-/// @param vecTargetPosition Point to check if within view angle.
-/// @param vecLookDirection The direction to look towards.  Note that this must be a forward angle vector.
-/// @param flCosHalfFOV The width of the forward view cone as a dot product result.
-/// @return True if the point is within view from the source position at the specified FOV.
-/// @note https://github.com/ValveSoftware/source-sdk-2013/blob/beaae8ac45a2f322a792404092d4482065bef7ef/sp/src/public/mathlib/vector.h#L462-L477
-bool CBotHelper::PointWithinViewAngle(Vector const &vecSrcPosition, Vector const &vecTargetPosition, Vector const &vecLookDirection, float flCosHalfFOV)
-{
-	const Vector vecDelta = vecTargetPosition - vecSrcPosition;
-	const float cosDiff = DotProduct( vecLookDirection, vecDelta );
-
-	if ( cosDiff < 0 ) 
-		return false;
-
-	const float flLen2 = vecDelta.LengthSqr();
-
-	// a/sqrt(b) > c  == a^2 > b * c ^2
-	return ( cosDiff * cosDiff > flLen2 * flCosHalfFOV * flCosHalfFOV );
-	
-}
-
-/// @brief Calculates the width of the forward view cone as a dot product result from the given angle.
-/// This manually calculates the value of CBaseCombatCharacter's `m_flFieldOfView` data property.
-/// @param angle The FOV value in degree
-/// @return Width of the forward view cone as a dot product result
-float CBotHelper::GetForwardViewCone(float angle)
-{
-	return cosf(DEG2RAD(angle) / 2.0f);
-}

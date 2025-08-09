@@ -180,12 +180,7 @@ class CRCBotEventListener : public IGameEventListener2
 	void Event( IGameEvent *pevent );
 };
 
-//extern IVDebugOverlay *debugoverlay;
-
 class CBotButtons;
-class CBotGAValues;
-//class CBotMemoryNode;
-//class CBotMemoryPop;
 class CBotNeuralNet;
 class CBotProfile;
 class CBotSchedules;

@@ -36,7 +36,6 @@
 #include "bot_globals.h"
 #include "bot_profile.h"
 #include "bot_client.h"
-#include "bot_profiling.h"
 #include "bot_getprop.h"
 
 #include "ndebugoverlay.h"

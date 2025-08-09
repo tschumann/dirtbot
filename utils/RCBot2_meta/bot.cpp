@@ -79,7 +79,6 @@
 #include "bot_mtrand.h"
 
 #include "bot_getprop.h"
-#include "bot_profiling.h"
 
 #include "rcbot/logging.h"
 

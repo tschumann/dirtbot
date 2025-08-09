@@ -284,22 +284,6 @@ void CBotEntProp::Init(bool reset)
 	logger->Log(LogLevel::DEBUG, "CBotEntProp::Init done");
 }
 
-/// @brief Checks if the given entity is a networked entity
-/// @param pEntity Entity to check
-/// @return true if the entity is networked, false otherwise
-bool CBotEntProp::IsNetworkedEntity(CBaseEntity *pEntity)
-{
-	IServerUnknown *pUnk = reinterpret_cast<IServerUnknown*>(pEntity);
-	const IServerNetworkable *pNet = pUnk->GetNetworkable();
-
-	if (!pNet)
-	{
-		return false;
-	}
-
-	return true;
-}
-
 bool CBotEntProp::FindSendProp(SourceMod::sm_sendprop_info_t *info, CBaseEntity *pEntity, char *prop, int entity)
 {
 	IServerUnknown *pUnk = reinterpret_cast<IServerUnknown*>(pEntity);

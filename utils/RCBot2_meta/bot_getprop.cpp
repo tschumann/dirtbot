@@ -18,37 +18,6 @@ bool CClassInterfaceValue :: m_berror = false;
 
 extern IServerGameDLL *servergamedll;
 
-void UTIL_FindServerClassnamePrint(const char *name_cmd)
-{
-	for (int i = 0; i < gpGlobals->maxEntities; i++)
-	{
-		edict_t* current = engine->PEntityOfEntIndex(i);
-		if (current == nullptr)
-		{
-			continue;
-		}
-
-		IServerNetworkable *network = current->GetNetworkable();
-
-		if (network == nullptr)
-		{
-			continue;
-		}
-
-		ServerClass *sClass = network->GetServerClass();
-		const char *name = sClass->GetName();
-		
-
-		if (std::strcmp(name, name_cmd) == 0)
-		{
-			CBotGlobals::botMessage(nullptr,0,"%s",current->GetClassName());
-			return;
-		}
-	}
-
-	CBotGlobals::botMessage(nullptr,0,"Not found");
-}
-
 void UTIL_FindServerClassPrint(const char *name_cmd)
 {
 	char temp[128];

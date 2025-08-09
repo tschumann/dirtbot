@@ -45,7 +45,6 @@
 #include "bot_hldm_bot.h"
 #include "bot_fortress.h"
 #include "bot_css_bot.h"
-#include "bot_profiling.h"
 #include "bot_getprop.h"
 #include "bot_dod_bot.h"
 #include "bot_squads.h"
