@@ -56,9 +56,12 @@ sourceFiles = [
   "rcbot/math_fix.cpp",
   "rcbot/utils.cpp",
   "rcbot/tf2/conditions.cpp",
+
+  "dirtbot/entity_utils.cpp",
 ]
 
 include_paths = [
+  os.path.join(builder.currentSourcePath, 'dirtbot'),
   os.path.join(builder.currentSourcePath, 'utils', 'RCBot2_meta'),
 ]
 

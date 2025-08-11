@@ -38,6 +38,7 @@
 #include "logging.h"
 #include "helper.h"
 #include "smsdk_config.h"
+#include "entity_utils.h"
 
 // From game/server/variant_t.h, same on all supported games.
 class variant_t
@@ -333,7 +334,7 @@ bool CBotEntProp::IndexToAThings(int num, CBaseEntity **pEntData, edict_t **pEdi
 
 	if (pEdictData)
 	{
-		edict_t *pEdict = BaseEntityToEdict(pEntity);
+		edict_t *pEdict = CEntityUtils::BaseEntityToEdict(pEntity);
 		if (!pEdict || pEdict->IsFree())
 		{
 			pEdict = nullptr;

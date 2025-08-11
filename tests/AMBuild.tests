@@ -36,6 +36,7 @@ binary = MMS.Program(builder, 'testrunner')
 compiler = binary.compiler
 compiler.includes += [
   os.path.join(builder.sourcePath),
+  os.path.join(builder.sourcePath, 'dirtbot'),
   os.path.join(builder.sourcePath, 'rcbot'),
   os.path.join(builder.sourcePath, 'utils', 'RCBot2_meta'),
   os.path.join(builder.sourcePath, 'versioning'),
@@ -133,6 +134,8 @@ binary.sources += [
   "../rcbot/math_fix.cpp",
   "../rcbot/utils.cpp",
   "../rcbot/tf2/conditions.cpp",
+
+  "../dirtbot/entity_utils.cpp",
 
   # "../versioning/build_info.cpp",
 ]

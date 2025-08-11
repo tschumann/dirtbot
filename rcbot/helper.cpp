@@ -37,6 +37,7 @@
 #include <server_class.h>
 
 #include "smsdk_config.h"
+#include "entity_utils.h"
 
 static CBotHelper s_bot_helper;
 CBotHelper *bot_helper = &s_bot_helper;
@@ -73,7 +74,7 @@ bool CBotHelper::IndexToAThings(int num, CBaseEntity **pEntData, edict_t **pEdic
 
 	if (pEdictData)
 	{
-		edict_t *pEdict = BaseEntityToEdict(pEntity);
+		edict_t *pEdict = CEntityUtils::BaseEntityToEdict(pEntity);
 		if (!pEdict || pEdict->IsFree())
 		{
 			pEdict = nullptr;
@@ -161,7 +162,7 @@ int CBotHelper::FindEntityByClassname(int start,const char *classname)
 
 	while( pEntity != NULL )
 	{
-		edict_t *pEdict = BaseEntityToEdict(pEntity);
+		edict_t *pEdict = CEntityUtils::BaseEntityToEdict(pEntity);
 
 		if( !strcmp(pEdict->GetClassName(), classname) )
 		{

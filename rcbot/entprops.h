@@ -85,7 +85,6 @@ public:
 	RoundState GameRules_GetRoundState() const;
 
 private:
-	edict_t *BaseEntityToEdict(CBaseEntity *pEntity);
 	bool FindSendProp(SourceMod::sm_sendprop_info_t *info, CBaseEntity *pEntity, char *prop, int entity);
 	int MatchTypeDescAsInteger(_fieldtypes type, int flags);
 	bool IndexToAThings(int num, CBaseEntity **pEntData, edict_t **pEdictData);
@@ -124,22 +123,6 @@ inline int CBotEntProp::MatchTypeDescAsInteger(_fieldtypes type, int flags)
 	}
 
 	return 0;
-}
-
-/// @brief Converts a CBaseEntity to an edict_t
-/// @param pEntity CBaseEntity pointer
-/// @return edict_t pointer
-inline edict_t *CBotEntProp::BaseEntityToEdict(CBaseEntity *pEntity)
-{
-	IServerUnknown *pUnk = reinterpret_cast<IServerUnknown*>(pEntity);
-	const IServerNetworkable *pNet = pUnk->GetNetworkable();
-
-	if (!pNet)
-	{
-		return nullptr;
-	}
-
-	return pNet->GetEdict();
 }
 
 /// @brief Gets a CBaseEntity from an entity index

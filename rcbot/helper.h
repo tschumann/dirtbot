@@ -42,7 +42,6 @@ class CBotHelper
 public:
 	bool IndexToAThings(int num, CBaseEntity **pEntData, edict_t **pEdictData);
 	CBaseEntity *GetEntity(int entity);
-	edict_t *BaseEntityToEdict(CBaseEntity *pEntity);
 	Vector worldCenter( edict_t *pEntity );
 	bool pointIsWithin( edict_t *pEntity, const Vector &vPoint );
 	bool isBrushEntity( edict_t *pEntity );
@@ -60,22 +59,6 @@ private:
 	static Vector getOBBCenter( edict_t *pEntity );
 	Vector collisionToWorldSpace( const Vector &in, edict_t *pEntity );
 };
-
-/// @brief Converts a CBaseEntity to an edict_t
-/// @param pEntity CBaseEntity pointer
-/// @return edict_t pointer
-inline edict_t *CBotHelper::BaseEntityToEdict(CBaseEntity *pEntity)
-{
-	IServerUnknown *pUnk = reinterpret_cast<IServerUnknown*>(pEntity);
-	const IServerNetworkable *pNet = pUnk->GetNetworkable();
-
-	if (!pNet)
-	{
-		return nullptr;
-	}
-
-	return pNet->GetEdict();
-}
 
 /// @brief Gets a CBaseEntity from an entity index
 /// @param entity Entity/Edict index
