@@ -833,14 +833,6 @@ void RCBotPluginMeta::Hook_GameFrame(bool simulating)
 			CWaypoints::getVisiblity()->workVisibility();
 		}
 
-		// Profiling
-#ifdef _DEBUG
-		if ( CClients::clientsDebugging(BOT_DEBUG_PROFILE) )
-		{
-			// CProfileTimers::updateAndDisplay();
-		}
-#endif
-
 		// Config Commands
 		CBotConfigFile::doNextCommand();
 		currentmod = CBotGlobals::getCurrentMod();

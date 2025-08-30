@@ -943,6 +943,7 @@ void CBot :: think ()
 	}
 	else
 	{
+		// TODO: call setMoveTo here with a random direction to wander around
 		m_fWaypointStuckTime = 0.0f;
 		stopMoving();		
 		setLookAtTask(LOOK_AROUND);
@@ -3345,18 +3346,6 @@ void CBots :: botThink ()
 
 	const bool bBotStop = bot_stop.GetInt() > 0;
 
-#ifdef _DEBUG
-
-	CProfileTimer* CBotsBotThink = CProfileTimers::getTimer(BOTS_THINK_TIMER);
-	CProfileTimer* CBotThink = CProfileTimers::getTimer(BOT_THINK_TIMER);
-
-	if ( CClients::clientsDebugging(BOT_DEBUG_PROFILE) )
-	{
-		CBotsBotThink->Start();
-	}
-
-#endif
-
 	for ( short int i = 0; i < RCBOT_MAXPLAYERS; i ++ )
 	{
 		pBot = m_Bots[i];
@@ -3365,27 +3354,9 @@ void CBots :: botThink ()
 		{
 			if ( !bBotStop )
 			{
-				#ifdef _DEBUG
-
-					if ( CClients::clientsDebugging(BOT_DEBUG_PROFILE) )
-					{
-						CBotThink->Start();
-					}
-
-				#endif				
-
 				pBot->setMoveLookPriority(MOVELOOK_THINK);
 				pBot->think();
 				pBot->setMoveLookPriority(MOVELOOK_EVENT);
-
-				#ifdef _DEBUG
-
-					if ( CClients::clientsDebugging(BOT_DEBUG_PROFILE) )
-					{
-						CBotThink->Stop();
-					}
-
-				#endif
 			}
 			if ( bot_command.GetString() && *bot_command.GetString() )
 			{
@@ -3397,15 +3368,6 @@ void CBots :: botThink ()
 			pBot->runPlayerMove();
 		}
 	}
-
-#ifdef _DEBUG
-
-	if ( CClients::clientsDebugging(BOT_DEBUG_PROFILE) )
-	{
-		CBotsBotThink->Stop();
-	}
-
-#endif
 
 	if ( m_flAddKickBotTime < engine->Time() && needToAddBot() )
 	{
