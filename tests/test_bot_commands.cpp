@@ -19,6 +19,8 @@ TEST(CBotSubcommands, printCommand)
 
 	// it's quite verbose so don't bother checking the whole thing
 	EXPECT_EQ("[RCBot] [rcbot]", outsourced::gEngine.clientPrintf.substr(0, 15));
+
+	delete engine;
 }
 
 TEST(CBotSubcommands, isContainer)
