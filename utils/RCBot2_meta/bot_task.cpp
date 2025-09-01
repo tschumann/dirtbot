@@ -2103,15 +2103,6 @@ void CFindPathTask :: execute ( CBot *pBot, CBotSchedule *pSchedule )
 
 		pBot->m_fWaypointStuckTime = 0;
 
-#ifdef _DEBUG
-		CProfileTimer *timer = CProfileTimers::getTimer(BOT_ROUTE_TIMER);
-
-		if ( CClients::clientsDebugging(BOT_DEBUG_PROFILE) )
-		{
-			timer->Start();
-		}
-#endif
-
 		if ( pNav->workRoute( pBot->getOrigin(),
 							   m_vVector,
 							   &bFail,
@@ -2126,13 +2117,6 @@ void CFindPathTask :: execute ( CBot *pBot, CBotSchedule *pSchedule )
 		}
 		else
 			m_iInt = 1;
-
-#ifdef _DEBUG
-		if ( CClients::clientsDebugging(BOT_DEBUG_PROFILE) )
-		{
-			timer->Stop();
-		}
-#endif
 
 		pBot->debugMsg(BOT_DEBUG_NAV,"Trying to work out route");
 	}

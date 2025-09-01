@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\dirtbot">
+      <UniqueIdentifier>{bd421e4b-3f20-40c3-b8bd-919982575746}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dirtbot">
+      <UniqueIdentifier>{690dced3-3ae8-4221-bdd7-c4823bc39bcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\rcbot">
+      <UniqueIdentifier>{3ad167f7-052e-4f48-926c-d4379ec7f031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\rcbot">
+      <UniqueIdentifier>{d35277e8-59d8-4b3f-b5d8-41ca50493780}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sm_ext">
+      <UniqueIdentifier>{ea1b11b7-d5dd-4a4d-a596-3853eee0ae4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sm_ext">
+      <UniqueIdentifier>{28347268-96dc-4996-b6f2-4fe20ac7604d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RCBot2_meta">
+      <UniqueIdentifier>{b071f855-ee4a-4017-ab3f-7814912ecf02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RCBot2_meta">
+      <UniqueIdentifier>{f547d70f-c5c9-4981-958d-b7d9ce2db4e2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dirtbot\entity_utils.cpp">
+      <Filter>Source Files\dirtbot</Filter>
+    </ClCompile>
+    <ClCompile Include="rcbot\entprops.cpp">
+      <Filter>Source Files\rcbot</Filter>
+    </ClCompile>
+    <ClCompile Include="rcbot\helper.cpp">
+      <Filter>Source Files\rcbot</Filter>
+    </ClCompile>
+    <ClCompile Include="rcbot\logging.cpp">
+      <Filter>Source Files\rcbot</Filter>
+    </ClCompile>
+    <ClCompile Include="rcbot\math_fix.cpp">
+      <Filter>Source Files\rcbot</Filter>
+    </ClCompile>
+    <ClCompile Include="rcbot\utils.cpp">
+      <Filter>Source Files\rcbot</Filter>
+    </ClCompile>
+    <ClCompile Include="sm_ext\bot_sm_ext.cpp">
+      <Filter>Source Files\sm_ext</Filter>
+    </ClCompile>
+    <ClCompile Include="sm_ext\bot_sm_natives.cpp">
+      <Filter>Source Files\sm_ext</Filter>
+    </ClCompile>
+    <ClCompile Include="sm_ext\smsdk_config.cpp">
+      <Filter>Source Files\sm_ext</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_accessclient.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_black_mesa.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_buttons.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_client.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_commands.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_configfile.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_coop.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_css_bot.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_css_buying.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_css_mod.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_cvars.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_dod_bot.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_dod_mod.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_events.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_fortress.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_getprop.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_globals.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_hl1dmsrc.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_hldm_bot.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_kv.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_menu.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_mods.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_mtrand.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_plugin_meta.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_profile.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_schedule.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_sigscan.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_som.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_squads.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_strings.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_synergy.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_synergy_mod.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_task.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_tf2_mod.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_tf2_points.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_utility.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_visibles.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_waypoint.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_waypoint_locations.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_waypoint_visibility.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_weapons.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_wpt_dist.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\RCBot2_meta\bot_zombie.cpp">
+      <Filter>Source Files\RCBot2_meta</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="utils\RCBot2_meta\bot.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_accessclient.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_belief.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_black_mesa.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_buttons.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_client.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_commands.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_configfile.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_const.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_coop.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_css_bot.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_css_buying.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_cvars.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_dod_bot.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_ehandle.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_event.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_fortress.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_genclass.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_getprop.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_globals.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_hl1dmsrc_bot.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_hldm_bot.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_kv.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_menu.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_mods.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_mtrand.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_navigator.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_perceptron.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_plugin_meta.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_profile.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_rb.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_recipients.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_schedule.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_sigscan.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_som.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_squads.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_strings.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_synergy.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_task.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_tf2_points.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_utility.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_visibles.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_waypoint.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_waypoint_locations.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_waypoint_visibility.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_weapons.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_wpt_color.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_wpt_dist.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\bot_zombie.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\engine_wrappers.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\RCBot2_meta\logging.h">
+      <Filter>Header Files\RCBot2_meta</Filter>
+    </ClInclude>
+    <ClInclude Include="dirtbot\entity_utils.h">
+      <Filter>Header Files\dirtbot</Filter>
+    </ClInclude>
+    <ClInclude Include="rcbot\entprops.h">
+      <Filter>Header Files\rcbot</Filter>
+    </ClInclude>
+    <ClInclude Include="rcbot\helper.h">
+      <Filter>Header Files\rcbot</Filter>
+    </ClInclude>
+    <ClInclude Include="rcbot\logging.h">
+      <Filter>Header Files\rcbot</Filter>
+    </ClInclude>
+    <ClInclude Include="rcbot\utils.h">
+      <Filter>Header Files\rcbot</Filter>
+    </ClInclude>
+    <ClInclude Include="sm_ext\bot_sm_ext.h">
+      <Filter>Header Files\sm_ext</Filter>
+    </ClInclude>
+    <ClInclude Include="sm_ext\bot_sm_natives.h">
+      <Filter>Header Files\sm_ext</Filter>
+    </ClInclude>
+    <ClInclude Include="sm_ext\smsdk_config.h">
+      <Filter>Header Files\sm_ext</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

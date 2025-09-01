@@ -1,5 +1,5 @@
-#ifdef WIN32
-#include <Windows.h>
+#ifdef _WIN32
+#include <windows.h>
 #else
 
 #include <cstdint>

@@ -267,15 +267,6 @@ void CBotVisibles::updateVisibles()
     iMaxClientTicks = max(iMaxClientTicks, 1);
 #endif
 
-#ifdef _DEBUG
-    CProfileTimer* timer = CProfileTimers::getTimer(BOT_VISION_TIMER);
-
-    if (CClients::clientsDebugging(BOT_DEBUG_PROFILE))
-    {
-        timer->Start();
-    }
-#endif
-
     iStartPlayerIndex = m_iCurPlayer;
 
     if (m_pBot->moveToIsValid())
@@ -362,13 +353,6 @@ void CBotVisibles::updateVisibles()
 		if (m_iCurrentIndex == iStartIndex)
 			break; // back to where we started
     }
-
-#ifdef _DEBUG
-    if (CClients::clientsDebugging(BOT_DEBUG_PROFILE))
-    {
-        timer->Stop();
-    }
-#endif
 }
 
 bool CBotVisibles::isVisible(const edict_t* pEdict) const

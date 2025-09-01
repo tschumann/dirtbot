@@ -1,36 +1,19 @@
 # Build outputs
 build/
 build_linux/
-utils/RCBot2_meta/Debug
-utils/RCBot2_meta/.vs
-utils/RCBot2_meta/x64
-utils/RCBot2_meta/x64/Release
-utils/RCBot2_meta/x64/Release_NonHomeFolder
-utils/RCBot2_meta/RCBot2Meta
-utils/RCBot2_meta/HPB_Bot2.vcxproj.filters
-utils/RCBot2_meta/Release_NonHomeFolder
 alliedmodders/hl2sdk-proxy-repo
+
+.vs/
+Debug/
+Release/
+x64/
+*.vcxproj.user
 
 # SourceMod compiled plugins
 *.smx
 
-# Misc
-*.ipch
-*.db
-*.suo
-*.user
-apg-load
-*.obj
-*.sbr
-utils/RCBot2_meta/HPB_Bot2.vcxproj.filters
-utils/RCBot2_meta/Release_NonHomeFolder
-
-# Visual Studio code
-.vscode/
-*.code-workspace
-
-release/dirtbot/Black Mesa/bms/addons/rcbot2/config/
-release/dirtbot/Half-Life 2 Deathmatch/hl2mp/addons/rcbot2/config/
-release/dirtbot/Source SDK Base/insurgency/addons/rcbot2/config/
-release/dirtbot/Source SDK Base 2007/insurgency/addons/rcbot2/config/
-release/dirtbot/Team Fortress 2/tf/addons/rcbot2/config/
+dist/dirtbot/Black Mesa/bms/addons/rcbot2/config/
+dist/dirtbot/Half-Life 2 Deathmatch/hl2mp/addons/rcbot2/config/
+dist/dirtbot/Source SDK Base/insurgency/addons/rcbot2/config/
+dist/dirtbot/Source SDK Base 2007/insurgency/addons/rcbot2/config/
+dist/dirtbot/Team Fortress 2/tf/addons/rcbot2/config/

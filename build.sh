@@ -23,9 +23,9 @@ echo "----------------------------------"
 python3 ../configure.py -s tf2 --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --target-arch x64
 ambuild
 
-cp "rcbot.2.tf2.x64/rcbot.2.tf2.so" "../release/dirtbot/Team Fortress 2/tf/addons/rcbot2/bin/x64"
-cp "loader/RCBot2Meta.x64.x64/RCBot2Meta.x64.so" "../release/dirtbot/Team Fortress 2/tf/addons/rcbot2/bin"
-cp -r "../package/config/" "../release/dirtbot/Team Fortress 2/tf/addons/rcbot2/"
+cp "rcbot.2.tf2.x64/rcbot.2.tf2.so" "../dist/dirtbot/Team Fortress 2/tf/addons/rcbot2/bin/x64"
+cp "loader/RCBot2Meta.x64.x64/RCBot2Meta.x64.so" "../dist/dirtbot/Team Fortress 2/tf/addons/rcbot2/bin"
+cp -r "../package/config/" "../dist/dirtbot/Team Fortress 2/tf/addons/rcbot2/"
 
 echo "------------------------------------------"
 echo "Building for Half-Life 2: Deathmatch (x86)"
@@ -41,9 +41,9 @@ echo "------------------------------------------"
 python3 ../configure.py -s hl2dm --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --target-arch x64
 ambuild
 
-cp "rcbot.2.hl2dm.x64/rcbot.2.hl2dm.so" "../release/dirtbot/Half-Life 2 Deathmatch/hl2mp/addons/rcbot2/bin"
-cp "loader/RCBot2Meta.x64.x64/RCBot2Meta.x64.so" "../release/dirtbot/Half-Life 2 Deathmatch/hl2mp/addons/rcbot2/bin"
-cp -r "../package/config/" "../release/dirtbot/Half-Life 2 Deathmatch/hl2mp/addons/rcbot2/"
+cp "rcbot.2.hl2dm.x64/rcbot.2.hl2dm.so" "../dist/dirtbot/Half-Life 2 Deathmatch/hl2mp/addons/rcbot2/bin"
+cp "loader/RCBot2Meta.x64.x64/RCBot2Meta.x64.so" "../dist/dirtbot/Half-Life 2 Deathmatch/hl2mp/addons/rcbot2/bin"
+cp -r "../package/config/" "../dist/dirtbot/Half-Life 2 Deathmatch/hl2mp/addons/rcbot2/"
 
 echo "-----------------------------"
 echo "Building for Black Mesa (x86)"
@@ -52,9 +52,9 @@ echo "-----------------------------"
 python3 ../configure.py -s bms --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --target-arch x86
 ambuild
 
-cp "rcbot.2.bms/rcbot.2.bms.so" "../release/dirtbot/Black Mesa/bms/addons/rcbot2/bin"
-cp "loader/RCBot2Meta_i486/RCBot2Meta_i486.so" "../release/dirtbot/Black Mesa/bms/addons/rcbot2/bin"
-cp -r "../package/config/" "../release/dirtbot/Black Mesa/bms/addons/rcbot2/"
+cp "rcbot.2.bms/rcbot.2.bms.so" "../dist/dirtbot/Black Mesa/bms/addons/rcbot2/bin"
+cp "loader/RCBot2Meta_i486/RCBot2Meta_i486.so" "../dist/dirtbot/Black Mesa/bms/addons/rcbot2/bin"
+cp -r "../package/config/" "../dist/dirtbot/Black Mesa/bms/addons/rcbot2/"
 
 echo "-------------------------------------------"
 echo "Building for Half-Life 2: Episode Two (x86)"
@@ -63,9 +63,9 @@ echo "-------------------------------------------"
 python3 ../configure.py -s ep2 --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --target-arch x86
 ambuild
 
-cp "rcbot.2.ep2/rcbot.2.ep2.so" "../release/dirtbot/Source SDK Base 2007/ageofchivalry/addons/rcbot2/bin"
-cp "loader/RCBot2Meta_i486/RCBot2Meta_i486.so" "../release/dirtbot/Source SDK Base 2007/ageofchivalry/addons/rcbot2/bin"
-cp -r "../package/config/" "../release/dirtbot/Source SDK Base 2007/ageofchivalry/addons/rcbot2/"
+cp "rcbot.2.ep2/rcbot.2.ep2.so" "../dist/dirtbot/Source SDK Base 2007/ageofchivalry/addons/rcbot2/bin"
+cp "loader/RCBot2Meta_i486/RCBot2Meta_i486.so" "../dist/dirtbot/Source SDK Base 2007/ageofchivalry/addons/rcbot2/bin"
+cp -r "../package/config/" "../dist/dirtbot/Source SDK Base 2007/ageofchivalry/addons/rcbot2/"
 
 echo "-------------------------------------------"
 echo "Building for Half-Life 2: Episode One (x86)"
@@ -74,9 +74,9 @@ echo "-------------------------------------------"
 python3 ../configure.py -s episode1 --mms-path $wd/alliedmodders/metamod-source/ --sm-path $wd/alliedmodders/sourcemod/ --hl2sdk-root $wd/alliedmodders/ --target-arch x86
 ambuild
 
-cp "rcbot.2.ep1/rcbot.2.ep1.so" "../release/dirtbot/Source SDK Base/insurgency/addons/rcbot2/bin"
-cp "loader/RCBot2Meta_i486/RCBot2Meta_i486.so" "../release/dirtbot/Source SDK Base/insurgency/addons/rcbot2/bin"
-cp -r "../package/config/" "../release/dirtbot/Source SDK Base/insurgency/addons/rcbot2/"
+cp "rcbot.2.ep1/rcbot.2.ep1.so" "../dist/dirtbot/Source SDK Base/insurgency/addons/rcbot2/bin"
+cp "loader/RCBot2Meta_i486/RCBot2Meta_i486.so" "../dist/dirtbot/Source SDK Base/insurgency/addons/rcbot2/bin"
+cp -r "../package/config/" "../dist/dirtbot/Source SDK Base/insurgency/addons/rcbot2/"
 
 popd
 

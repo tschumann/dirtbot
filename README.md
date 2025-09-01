@@ -11,6 +11,9 @@ git submodule init
 git submodule update --init --recursive
 ```
 
+For Windows development, `dirtbot.sln` has been provided to allow easy navigation of the code in x64 Debug, but not it any other configurations. These builds should not be used either - use the ambuild process instead.
+
+
 Installation
 ------------
 

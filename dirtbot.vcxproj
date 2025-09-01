@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dirtbot\entity_utils.cpp" />
+    <ClCompile Include="rcbot\entprops.cpp" />
+    <ClCompile Include="rcbot\helper.cpp" />
+    <ClCompile Include="rcbot\logging.cpp" />
+    <ClCompile Include="rcbot\math_fix.cpp" />
+    <ClCompile Include="rcbot\utils.cpp" />
+    <ClCompile Include="sm_ext\bot_sm_ext.cpp" />
+    <ClCompile Include="sm_ext\bot_sm_natives.cpp" />
+    <ClCompile Include="sm_ext\smsdk_config.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_accessclient.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_black_mesa.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_buttons.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_client.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_commands.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_configfile.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_coop.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_css_bot.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_css_buying.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_css_mod.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_cvars.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_dod_bot.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_dod_mod.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_events.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_fortress.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_getprop.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_globals.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_hl1dmsrc.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_hldm_bot.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_kv.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_menu.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_mods.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_mtrand.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_plugin_meta.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_profile.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_schedule.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_sigscan.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_som.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_squads.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_strings.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_synergy.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_synergy_mod.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_task.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_tf2_mod.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_tf2_points.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_utility.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_visibles.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_waypoint.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_waypoint_locations.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_waypoint_visibility.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_weapons.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_wpt_dist.cpp" />
+    <ClCompile Include="utils\RCBot2_meta\bot_zombie.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dirtbot\entity_utils.h" />
+    <ClInclude Include="rcbot\entprops.h" />
+    <ClInclude Include="rcbot\helper.h" />
+    <ClInclude Include="rcbot\logging.h" />
+    <ClInclude Include="rcbot\utils.h" />
+    <ClInclude Include="sm_ext\bot_sm_ext.h" />
+    <ClInclude Include="sm_ext\bot_sm_natives.h" />
+    <ClInclude Include="sm_ext\smsdk_config.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_accessclient.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_belief.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_black_mesa.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_buttons.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_client.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_commands.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_configfile.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_const.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_coop.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_css_bot.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_css_buying.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_cvars.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_dod_bot.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_ehandle.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_event.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_fortress.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_genclass.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_getprop.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_globals.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_hl1dmsrc_bot.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_hldm_bot.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_kv.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_menu.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_mods.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_mtrand.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_navigator.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_perceptron.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_plugin_meta.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_profile.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_rb.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_recipients.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_schedule.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_sigscan.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_som.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_squads.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_strings.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_synergy.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_task.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_tf2_points.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_utility.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_visibles.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_waypoint.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_waypoint_locations.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_waypoint_visibility.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_weapons.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_wpt_color.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_wpt_dist.h" />
+    <ClInclude Include="utils\RCBot2_meta\bot_zombie.h" />
+    <ClInclude Include="utils\RCBot2_meta\engine_wrappers.h" />
+    <ClInclude Include="utils\RCBot2_meta\logging.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{7024232c-3f5c-4277-a2b8-cb7e1bec8ac2}</ProjectGuid>
+    <RootNamespace>dirtbot</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;DIRTBOT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;DIRTBOT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;DIRTBOT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);COMPILER_MSVC64;COMPILER_MSVC;RCBOT_MAXPLAYERS=32;SOURCE_ENGINE=7;SE_LEFT4DEAD=12</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>alliedmodders\hl2sdk-hl2dm\public;alliedmodders\hl2sdk-hl2dm\public\engine;alliedmodders\hl2sdk-hl2dm\public\game\server;alliedmodders\hl2sdk-hl2dm\public\mathlib;alliedmodders\hl2sdk-hl2dm\public\tier0;alliedmodders\hl2sdk-hl2dm\public\tier1;alliedmodders\hl2sdk-hl2dm\game\server;alliedmodders\hl2sdk-hl2dm\game\shared;alliedmodders\metamod-source\core;alliedmodders\metamod-source\core\sourcehook;alliedmodders\sourcemod\public;alliedmodders\sourcemod\public\extensions;alliedmodders\sourcemod\sourcepawn\include;alliedmodders\sourcemod\sourcepawn\third_party\amtl;alliedmodders\sourcemod\sourcepawn\third_party\amtl\amtl;dirtbot;rcbot;rcbot_subcmds;sm_ext;utils\RCBot2_meta;.</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;DIRTBOT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
